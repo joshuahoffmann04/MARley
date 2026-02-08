@@ -1574,6 +1574,2067 @@
             "page": 20,
             "section": "§ 24",
             "previous_question": 173,
+            "next_question": 175
+        },
+        {
+            "id": 175,
+            "question": "Gibt es im Masterstudiengang Computer Science Fristen, bis wann bestimmte Module oder Leistungspunkte erbracht werden müssen?",
+            "answer": "Nein, die Studien- und Prüfungsordnung sieht keine Verpflichtung vor, bestimmte Module oder Mindestsummen von Leistungspunkten innerhalb bestimmter Fachsemestergrenzen zu erbringen.",
+            "page": 21,
+            "section": "§ 25",
+            "previous_question": 174,
+            "next_question": 176
+        },
+        {
+            "id": 176,
+            "question": "Wird auf besondere Belastungen von Studierenden Rücksicht genommen?",
+            "answer": "Ja, in Veranstaltungen und Prüfungen wird Rücksicht genommen auf Belastungen durch Schwangerschaft und Kinderbetreuung, Pflege von Angehörigen sowie Behinderung oder chronische Erkrankung.",
+            "page": 21,
+            "section": "§ 26",
+            "previous_question": 175,
+            "next_question": 177
+        },
+        {
+            "id": 177,
+            "question": "Wie muss ich besondere Belastungen wie Schwangerschaft oder Pflegeverantwortung nachweisen?",
+            "answer": "Die Belastung muss rechtzeitig gegenüber der verantwortlichen Person oder dem Prüfungsbüro mit geeigneten Unterlagen nachgewiesen werden. Bei Krankheit kann der Prüfungsausschuss ein amtsärztliches Attest verlangen.",
+            "page": 21,
+            "section": "§ 26",
+            "previous_question": 176,
+            "next_question": 178
+        },
+        {
+            "id": 178,
+            "question": "Welche Mutterschutz- und Elternzeitfristen können in Anspruch genommen werden?",
+            "answer": "Die gesetzlichen Mutterschutzfristen und die Fristen der Elternzeit können in Anspruch genommen werden.",
+            "page": 21,
+            "section": "§ 26",
+            "previous_question": 177,
+            "next_question": 179
+        },
+        {
+            "id": 179,
+            "question": "Was ist ein Nachteilsausgleich bei Prüfungen?",
+            "answer": "Wenn Studierende wegen Behinderung, chronischer Erkrankung, Pflege von Angehörigen, Schwangerschaft oder Kinderbetreuung eine Prüfungsleistung nicht in vorgesehener Form ablegen können, gleicht der Prüfungsausschuss dies durch Maßnahmen wie Verlängerung der Bearbeitungszeit oder andere Gestaltung des Prüfungsverfahrens aus.",
+            "page": 21,
+            "section": "§ 26",
+            "previous_question": 178,
+            "next_question": 180
+        },
+        {
+            "id": 180,
+            "question": "Kann ich im Masterstudiengang Computer Science in Teilzeit studieren?",
+            "answer": "Ja, das Studium kann nach den geltenden gesetzlichen Regelungen als informelles Teilzeitstudium durchgeführt werden. Es besteht jedoch kein Anspruch auf ein besonderes Lehr- und Studienangebot.",
+            "page": 21,
+            "section": "§ 26",
+            "previous_question": 179,
+            "next_question": 181
+        },
+        {
+            "id": 181,
+            "question": "Wird vor Aufnahme eines Teilzeitstudiums eine Studienberatung empfohlen?",
+            "answer": "Ja, eine Studienberatung vor Aufnahme eines informellen Teilzeitstudiums wird dringend empfohlen.",
+            "page": 21,
+            "section": "§ 26",
+            "previous_question": 180,
+            "next_question": 182
+        },
+        {
+            "id": 182,
+            "question": "Was passiert, wenn ich einen Prüfungstermin ohne wichtigen Grund versäume?",
+            "answer": "Die Prüfungsleistung gilt als \"nicht ausreichend\" (0 Punkte) bewertet.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 181,
+            "next_question": 183
+        },
+        {
+            "id": 183,
+            "question": "Was gilt als Versäumnis bei Prüfungen?",
+            "answer": "Als Versäumnis gilt, wenn man einen bindenden Prüfungstermin ohne wichtigen Grund nicht wahrnimmt, ohne wichtigen Grund von einer bereits angetretenen Prüfung zurücktritt oder eine Prüfungsleistung nicht innerhalb der vorgegebenen Bearbeitungszeit erbringt.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 182,
+            "next_question": 184
+        },
+        {
+            "id": 184,
+            "question": "Wie muss ich einen wichtigen Grund für Versäumnis oder Rücktritt nachweisen?",
+            "answer": "Der Grund muss unverzüglich schriftlich angezeigt und glaubhaft gemacht werden. Bei Krankheit ist eine ärztliche Bescheinigung vorzulegen.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 183,
+            "next_question": 185
+        },
+        {
+            "id": 185,
+            "question": "Was geschieht mit bereits erbrachten Prüfungsergebnissen bei einem gerechtfertigten Rücktritt?",
+            "answer": "Die bereits vorliegenden Prüfungsergebnisse werden anerkannt.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 184,
+            "next_question": 186
+        },
+        {
+            "id": 186,
+            "question": "Was passiert bei Täuschung oder Verwendung nicht zugelassener Hilfsmittel?",
+            "answer": "Die betreffende Prüfungsleistung gilt als \"nicht ausreichend\" (0 Punkte) bewertet.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 185,
+            "next_question": 187
+        },
+        {
+            "id": 187,
+            "question": "Was passiert, wenn ich den ordnungsgemäßen Ablauf einer Prüfung störe?",
+            "answer": "Die prüfende oder aufsichtführende Person kann die störende Person von der Fortsetzung der Prüfungsleistung ausschließen. In diesem Fall gilt die Prüfung als \"nicht ausreichend\" (0 Punkte).",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 186,
+            "next_question": 188
+        },
+        {
+            "id": 188,
+            "question": "Kann der Prüfungsausschuss bei schwerwiegenden Täuschungsfällen weitere Maßnahmen ergreifen?",
+            "answer": "Ja, in schwerwiegenden Fällen kann der Prüfungsausschuss die Kandidatin oder den Kandidaten von der Erbringung weiterer Prüfungsleistungen ausschließen, sodass der Prüfungsanspruch im Studiengang erlischt.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 187,
+            "next_question": 189
+        },
+        {
+            "id": 189,
+            "question": "Wie werden Entscheidungen bei Versäumnis, Rücktritt oder Täuschung mitgeteilt?",
+            "answer": "Entscheidungen werden der Kandidatin oder dem Kandidaten unverzüglich schriftlich mitgeteilt, müssen begründet werden und sind mit einer Rechtsbehelfsbelehrung zu versehen.",
+            "page": 21,
+            "section": "§ 27",
+            "previous_question": 188,
+            "next_question": 190
+        },
+        {
+            "id": 190,
+            "question": "Werden alle Module im Masterstudiengang Computer Science mit Punkten bewertet?",
+            "answer": "Nein, die Module \"Project Work Computer Science\" und \"Independent Scientific Practice Computer Science\" werden nicht mit Punkten bewertet.",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 189,
+            "next_question": 191
+        },
+        {
+            "id": 191,
+            "question": "Wie wird die Gesamtbewertung der Masterprüfung berechnet?",
+            "answer": "Die Gesamtbewertung errechnet sich aus dem nach Leistungspunkten gewichteten Mittelwert der Modulbewertungen. Nicht mit Punkten bewertete (unbenotete) Module bleiben unberücksichtigt.",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 190,
+            "next_question": 192
+        },
+        {
+            "id": 192,
+            "question": "Welches Bewertungssystem wird für Prüfungsleistungen verwendet?",
+            "answer": "Es wird ein Bewertungssystem mit 0 bis 15 Punkten verwendet, das mit traditionellen Noten verknüpft ist.",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 191,
+            "next_question": 193
+        },
+        {
+            "id": 193,
+            "question": "Wie viele Punkte entsprechen der Note \"sehr gut\"?",
+            "answer": "15 Punkte entsprechen der Note 0,7, 14 Punkte der Note 1,0 und 13 Punkte der Note 1,3 - alle im Bereich \"sehr gut\".",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 192,
+            "next_question": 194
+        },
+        {
+            "id": 194,
+            "question": "Wie viele Punkte entsprechen der Note \"gut\"?",
+            "answer": "12 Punkte entsprechen 1,7, 11 Punkte 2,0 und 10 Punkte 2,3 - alle im Bereich \"gut\".",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 193,
+            "next_question": 195
+        },
+        {
+            "id": 195,
+            "question": "Wie viele Punkte entsprechen der Note \"befriedigend\"?",
+            "answer": "9 Punkte entsprechen 2,7, 8 Punkte 3,0 und 7 Punkte 3,3 - alle im Bereich \"befriedigend\".",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 194,
+            "next_question": 196
+        },
+        {
+            "id": 196,
+            "question": "Wie viele Punkte entsprechen der Note \"ausreichend\"?",
+            "answer": "6 Punkte entsprechen 3,7 und 5 Punkte 4,0 - beide im Bereich \"ausreichend\".",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 195,
+            "next_question": 197
+        },
+        {
+            "id": 197,
+            "question": "Ab wie vielen Punkten ist eine Prüfung nicht bestanden?",
+            "answer": "Bei 4, 3, 2, 1 oder 0 Punkten gilt die Prüfung als \"nicht ausreichend\" (Note 5,0) und ist nicht bestanden.",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 196,
+            "next_question": 198
+        },
+        {
+            "id": 198,
+            "question": "Wie werden Modulnoten berechnet, die aus mehreren Teilprüfungen bestehen?",
+            "answer": "Die Bewertung errechnet sich aus den mit Leistungspunkten gewichteten Punkten der Teilleistungen. Dezimalstellen werden gerundet: Bei 5 oder größer wird aufgerundet, sonst abgerundet. Werte zwischen 4,5 und 5,0 werden auf 4 Punkte abgerundet.",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 197,
+            "next_question": 199
+        },
+        {
+            "id": 199,
+            "question": "Ab wie vielen Punkten ist eine Prüfung bestanden?",
+            "answer": "Eine mit Punkten bewertete Prüfung ist bestanden, wenn mindestens 5 Punkte erreicht sind.",
+            "page": 22,
+            "section": "§ 28",
+            "previous_question": 198,
+            "next_question": 200
+        },
+        {
+            "id": 200,
+            "question": "Wie wird die Gesamtnote als Dezimalnote ausgedrückt?",
+            "answer": "Die Gesamtpunktzahl wird mit einer Dezimalstelle ausgewiesen. Die Dezimalnote und Bewertung in Worten ergeben sich aus einer Tabelle, die Punktwertebereiche den entsprechenden Noten zuordnet.",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 199,
+            "next_question": 201
+        },
+        {
+            "id": 201,
+            "question": "Welcher Durchschnittspunktwert ergibt die Dezimalnote 1,0?",
+            "answer": "Ein Durchschnittspunktwert von 13,9 bis 14,2 ergibt die Dezimalnote 1,0 (\"sehr gut\").",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 200,
+            "next_question": 202
+        },
+        {
+            "id": 202,
+            "question": "Welcher Durchschnittspunktwert ergibt die Dezimalnote 2,0?",
+            "answer": "Ein Durchschnittspunktwert von 10,9 bis 11,2 ergibt die Dezimalnote 2,0 (\"gut\").",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 201,
+            "next_question": 203
+        },
+        {
+            "id": 203,
+            "question": "Welcher Durchschnittspunktwert ergibt die Dezimalnote 3,0?",
+            "answer": "Ein Durchschnittspunktwert von 7,9 bis 8,2 ergibt die Dezimalnote 3,0 (\"befriedigend\").",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 202,
+            "next_question": 204
+        },
+        {
+            "id": 204,
+            "question": "Welcher Durchschnittspunktwert ergibt die Dezimalnote 4,0?",
+            "answer": "Ein Durchschnittspunktwert von 5,0 bis 5,2 ergibt die Dezimalnote 4,0 (\"ausreichend\").",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 203,
+            "next_question": 205
+        },
+        {
+            "id": 205,
+            "question": "Gibt es auch die Bewertung \"ausgezeichnet\" für die Gesamtnote?",
+            "answer": "Ja, bei einem Durchschnittspunktwert von 14,3 bis 15,0 erhält man eine Dezimalnote zwischen 0,7 und 0,9 mit der Bewertung \"ausgezeichnet\".",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 204,
+            "next_question": 206
+        },
+        {
+            "id": 206,
+            "question": "Welche Module werden für die Gesamtnote berücksichtigt, wenn ich in einem Wahlpflichtbereich mehr Leistungspunkte erwerbe als vorgesehen?",
+            "answer": "Es werden diejenigen Module berücksichtigt, die zuerst abgeschlossen wurden. Bei gleichzeitigem Abschluss im selben Semester zählen die notenbesseren Module.",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 205,
+            "next_question": 207
+        },
+        {
+            "id": 207,
+            "question": "Wie wird ein einzelnes Modul gewichtet, das zu einer Überschreitung der vorgesehenen Leistungspunkte führt?",
+            "answer": "Dieses Modul wird nur mit den Leistungspunkten gewichtet und ausgewiesen, die zum Erreichen der vorgesehenen Leistungspunkte notwendig sind.",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 206,
+            "next_question": 208
+        },
+        {
+            "id": 208,
+            "question": "Was ist eine Einstufungstabelle (\"Grading Table\")?",
+            "answer": "Die Einstufungstabelle zeigt die statistische Verteilung der Abschlussnoten der Absolventinnen und Absolventen der vergangenen vier Semester und wird mit den Abschlussdokumenten ausgehändigt.",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 207,
+            "next_question": 209
+        },
+        {
+            "id": 209,
+            "question": "Wie groß muss die Vergleichskohorte für die Einstufungstabelle mindestens sein?",
+            "answer": "Die Gruppengröße muss mindestens 30 Absolventinnen und Absolventen umfassen. Wird diese in drei bis sechs Semestern nicht erreicht, werden weitere verwandte Studiengänge herangezogen.",
+            "page": 23,
+            "section": "§ 28",
+            "previous_question": 208,
+            "next_question": 210
+        },
+        {
+            "id": 210,
+            "question": "Gibt es im Masterstudiengang Computer Science einen Freiversuch?",
+            "answer": "Nein, ein Freiversuch ist nicht vorgesehen.",
+            "page": 24,
+            "section": "§ 29",
+            "previous_question": 209,
+            "next_question": 211
+        },
+        {
+            "id": 211,
+            "question": "Können bestandene Prüfungen wiederholt werden?",
+            "answer": "Nein, bestandene Prüfungen können nicht wiederholt werden.",
+            "page": 24,
+            "section": "§ 30",
+            "previous_question": 210,
+            "next_question": 212
+        },
+        {
+            "id": 212,
+            "question": "Wie oft können nicht bestandene Prüfungen wiederholt werden?",
+            "answer": "Nicht bestandene Prüfungen können dreimal wiederholt werden.",
+            "page": 24,
+            "section": "§ 30",
+            "previous_question": 211,
+            "next_question": 213
+        },
+        {
+            "id": 213,
+            "question": "Ist ein Wechsel von endgültig nicht bestandenen Wahlpflichtmodulen möglich?",
+            "answer": "Ja, der einmalige Wechsel von bis zu zwei endgültig nicht bestandenen Wahlpflichtmodulen ist zulässig.",
+            "page": 24,
+            "section": "§ 30",
+            "previous_question": 212,
+            "next_question": 214
+        },
+        {
+            "id": 214,
+            "question": "Gelten für die Masterarbeit und Disputation besondere Wiederholungsregelungen?",
+            "answer": "Ja, für Masterarbeit und Disputation gelten die besonderen Regelungen des § 23 Abs. 12 der Allgemeinen Bestimmungen.",
+            "page": 24,
+            "section": "§ 30",
+            "previous_question": 213,
+            "next_question": 215
+        },
+        {
+            "id": 215,
+            "question": "Wann geht der Prüfungsanspruch endgültig verloren?",
+            "answer": "Der Prüfungsanspruch geht verloren, wenn eine Prüfung nach Ausschöpfen aller Wiederholungsversuche nicht bestanden ist (außer bei Modulen gemäß § 30 Abs. 3) oder wenn ein schwerwiegender Täuschungsfall gemäß § 27 Abs. 3 Satz 3 vorliegt.",
+            "page": 24,
+            "section": "§ 31",
+            "previous_question": 214,
+            "next_question": 216
+        },
+        {
+            "id": 216,
+            "question": "Wie wird über das endgültige Nichtbestehen informiert?",
+            "answer": "Über das endgültige Nichtbestehen und den damit verbundenen Verlust des Prüfungsanspruchs wird ein Bescheid erteilt, der mit einer Rechtsbehelfsbelehrung versehen ist.",
+            "page": 24,
+            "section": "§ 31",
+            "previous_question": 215,
+            "next_question": 217
+        },
+        {
+            "id": 217,
+            "question": "Was passiert, wenn Täuschung erst nach Aushändigung des Zeugnisses bekannt wird?",
+            "answer": "Die Note der Prüfung kann berichtigt oder die Masterprüfung kann für \"nicht bestanden\" erklärt werden.",
+            "page": 24,
+            "section": "§ 32",
+            "previous_question": 216,
+            "next_question": 218
+        },
+        {
+            "id": 218,
+            "question": "Was passiert, wenn Zulassungsvoraussetzungen nicht erfüllt waren, dies aber erst nach dem Zeugnis bekannt wird?",
+            "answer": "Wenn die Kandidatin oder der Kandidat nicht täuschen wollte, wird dieser Mangel durch das Bestehen der Prüfung geheilt. Hat die Person die Zulassung durch Täuschung erwirkt, gilt die Modulprüfung als \"nicht ausreichend\" (0 Punkte).",
+            "page": 24,
+            "section": "§ 32",
+            "previous_question": 217,
+            "next_question": 219
+        },
+        {
+            "id": 219,
+            "question": "Erhalte ich vor einer Entscheidung zur Ungültigkeit von Prüfungsleistungen Gelegenheit zur Stellungnahme?",
+            "answer": "Ja, der Kandidatin oder dem Kandidaten ist vor einer Entscheidung Gelegenheit zur Stellungnahme zu geben.",
+            "page": 24,
+            "section": "§ 32",
+            "previous_question": 218,
+            "next_question": 220
+        },
+        {
+            "id": 220,
+            "question": "Was passiert mit meinem Zeugnis, wenn die Masterprüfung für nicht bestanden erklärt wird?",
+            "answer": "Das unrichtige Zeugnis ist einzuziehen und gegebenenfalls ein neues zu erteilen. Mit dem unrichtigen Zeugnis sind auch die Urkunde, das Diploma Supplement sowie das Transcript of Records und der vollständige Leistungsnachweis einzuziehen, wenn die Masterprüfung aufgrund einer Täuschung für \"nicht bestanden\" erklärt wurde.",
+            "page": 24,
+            "section": "§ 32",
+            "previous_question": 219,
+            "next_question": 221
+        },
+        {
+            "id": 221,
+            "question": "Was steht im Masterzeugnis?",
+            "answer": "Im Zeugnis sind die Module mit erzielten Punkten und Leistungspunkten, das Thema der Masterarbeit und deren Punkte sowie die Gesamtbewertung in Punkten und als Benotung angegeben.",
+            "page": 25,
+            "section": "§ 33",
+            "previous_question": 220,
+            "next_question": 222
+        },
+        {
+            "id": 222,
+            "question": "Wie schnell erhalte ich mein Zeugnis nach bestandener Masterprüfung?",
+            "answer": "Das Zeugnis wird unverzüglich, möglichst innerhalb von vier Wochen nach der letzten Prüfungsleistung ausgestellt.",
+            "page": 25,
+            "section": "§ 33",
+            "previous_question": 221,
+            "next_question": 223
+        },
+        {
+            "id": 223,
+            "question": "Wer unterschreibt das Masterzeugnis?",
+            "answer": "Das Zeugnis wird von der oder dem Vorsitzenden des Prüfungsausschusses unterzeichnet.",
+            "page": 25,
+            "section": "§ 33",
+            "previous_question": 222,
+            "next_question": 224
+        },
+        {
+            "id": 224,
+            "question": "Welches Datum trägt das Zeugnis?",
+            "answer": "Das Zeugnis trägt das Datum des Tages, an dem die letzte Prüfungsleistung erbracht worden ist.",
+            "page": 25,
+            "section": "§ 33",
+            "previous_question": 223,
+            "next_question": 225
+        },
+        {
+            "id": 225,
+            "question": "Kann ich eine englischsprachige Übersetzung des Zeugnisses erhalten?",
+            "answer": "Ja, auf Antrag wird zusätzlich eine englischsprachige Übersetzung des Zeugnisses erteilt.",
+            "page": 25,
+            "section": "§ 33",
+            "previous_question": 224,
+            "next_question": 226
+        },
+        {
+            "id": 226,
+            "question": "Was erhalte ich, wenn ich die Masterprüfung endgültig nicht bestanden habe?",
+            "answer": "Auf Antrag wird vom Prüfungsausschuss eine Bescheinigung erteilt, welche die abgelegten Modulprüfungen und deren Noten sowie die Anzahl der erworbenen Leistungspunkte enthält und erkennen lässt, dass die Prüfung endgültig nicht bestanden ist.",
+            "page": 25,
+            "section": "§ 33",
+            "previous_question": 225,
+            "next_question": 227
+        },
+        {
+            "id": 227,
+            "question": "Was erhalte ich gleichzeitig mit dem Zeugnis?",
+            "answer": "Gleichzeitig mit dem Zeugnis erhält man die Masterurkunde mit dem Datum des Zeugnisses.",
+            "page": 25,
+            "section": "§ 34",
+            "previous_question": 226,
+            "next_question": 228
+        },
+        {
+            "id": 228,
+            "question": "Was wird in der Masterurkunde beurkundet?",
+            "answer": "In der Urkunde wird die Verleihung des akademischen Grades beurkundet.",
+            "page": 25,
+            "section": "§ 34",
+            "previous_question": 227,
+            "next_question": 229
+        },
+        {
+            "id": 229,
+            "question": "Wer unterschreibt die Masterurkunde?",
+            "answer": "Die Urkunde wird von der oder dem Vorsitzenden des Prüfungsausschusses und der Dekanin oder dem Dekan unterzeichnet.",
+            "page": 25,
+            "section": "§ 34",
+            "previous_question": 228,
+            "next_question": 230
+        },
+        {
+            "id": 230,
+            "question": "Welches Siegel trägt die Masterurkunde?",
+            "answer": "Die Urkunde wird mit dem Siegel der Philipps-Universität Marburg versehen.",
+            "page": 25,
+            "section": "§ 34",
+            "previous_question": 229,
+            "next_question": 231
+        },
+        {
+            "id": 231,
+            "question": "Kann ich eine englischsprachige Übersetzung der Urkunde bekommen?",
+            "answer": "Ja, auf Antrag wird zusätzlich eine englischsprachige Übersetzung der Urkunde erteilt.",
+            "page": 25,
+            "section": "§ 34",
+            "previous_question": 230,
+            "next_question": 232
+        },
+        {
+            "id": 232,
+            "question": "Was ist ein Diploma Supplement?",
+            "answer": "Das Diploma Supplement ist ein Dokument entsprechend internationalen Vorgaben, das mit Urkunde und Zeugnis ausgestellt wird und zusätzliche Informationen zum Studiengang und zur Qualifikation enthält.",
+            "page": 25,
+            "section": "§ 35",
+            "previous_question": 231,
+            "next_question": 233
+        },
+        {
+            "id": 233,
+            "question": "Wird das Diploma Supplement auch auf Englisch ausgestellt?",
+            "answer": "Ja, es wird zusätzlich eine englischsprachige Übersetzung ausgestellt.",
+            "page": 25,
+            "section": "§ 35",
+            "previous_question": 232,
+            "next_question": 234
+        },
+        {
+            "id": 234,
+            "question": "Welche Anlage erhält das Diploma Supplement?",
+            "answer": "Als Anlage des Diploma Supplements wird eine Einstufungstabelle (\"Grading Table\") ausgehändigt.",
+            "page": 25,
+            "section": "§ 35",
+            "previous_question": 233,
+            "next_question": 235
+        },
+        {
+            "id": 235,
+            "question": "Was ist ein Transcript of Records?",
+            "answer": "Das Transcript of Records ist eine Bescheinigung über bestandene Prüfungen in Form einer Datenabschrift nach dem Standard des ECTS.",
+            "page": 25,
+            "section": "§ 36",
+            "previous_question": 234,
+            "next_question": 236
+        },
+        {
+            "id": 236,
+            "question": "Wann wird mir automatisch ein Transcript of Records ausgestellt?",
+            "answer": "Nach Abschluss des Studiums wird ein Transcript of Records automatisch zusammen mit Zeugnis, Urkunde und Diploma Supplement ausgestellt.",
+            "page": 25,
+            "section": "§ 36",
+            "previous_question": 235,
+            "next_question": 237
+        },
+        {
+            "id": 237,
+            "question": "Kann ich auch während des Studiums ein Transcript of Records erhalten?",
+            "answer": "Ja, es wird auf Antrag eine Bescheinigung über bestandene Prüfungen ausgestellt.",
+            "page": 25,
+            "section": "§ 36",
+            "previous_question": 236,
+            "next_question": 238
+        },
+        {
+            "id": 238,
+            "question": "Was ist ein vollständiger Leistungsnachweis?",
+            "answer": "Ein vollständiger Leistungsnachweis ist eine Bescheinigung über alle im Rahmen des Studiengangs absolvierten Prüfungen, einschließlich Fehlversuchen und Rücktritten.",
+            "page": 25,
+            "section": "§ 36",
+            "previous_question": 237,
+            "next_question": 239
+        },
+        {
+            "id": 239,
+            "question": "Wird der vollständige Leistungsnachweis auch auf Englisch ausgestellt?",
+            "answer": "Ja, es wird auf Antrag zusätzlich eine englischsprachige Übersetzung ausgestellt.",
+            "page": 25,
+            "section": "§ 36",
+            "previous_question": 238,
+            "next_question": 240
+        },
+        {
+            "id": 240,
+            "question": "Habe ich das Recht, Einsicht in meine Prüfungsunterlagen zu nehmen?",
+            "answer": "Ja, auf Antrag wird zeitnah nach Bekanntgabe von Prüfungsergebnissen Einsicht in die Prüfungsunterlagen gewährt.",
+            "page": 26,
+            "section": "§ 37",
+            "previous_question": 239,
+            "next_question": 241
+        },
+        {
+            "id": 241,
+            "question": "In welche Unterlagen kann ich Einsicht nehmen?",
+            "answer": "Einsicht kann genommen werden in die Prüfungsunterlagen einschließlich des Gutachtens der Masterarbeit sowie in die Prüfungsprotokolle.",
+            "page": 26,
+            "section": "§ 37",
+            "previous_question": 240,
+            "next_question": 242
+        },
+        {
+            "id": 242,
+            "question": "Wer bestimmt Ort und Zeit der Einsichtnahme in Prüfungsunterlagen?",
+            "answer": "Der Prüfungsausschuss bestimmt Ort und Zeit der Einsichtnahme.",
+            "page": 26,
+            "section": "§ 37",
+            "previous_question": 241,
+            "next_question": 243
+        },
+        {
+            "id": 243,
+            "question": "Wann tritt diese Studien- und Prüfungsordnung in Kraft?",
+            "answer": "Die Ordnung tritt am Tag nach ihrer Veröffentlichung in den Amtlichen Mitteilungen der Philipps-Universität Marburg in Kraft.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 242,
+            "next_question": 244
+        },
+        {
+            "id": 244,
+            "question": "Für wen gilt diese Studien- und Prüfungsordnung?",
+            "answer": "Die Studien- und Prüfungsordnung gilt für alle Studierenden, die ihr Studium ab dem Wintersemester 2023/2024 aufnehmen.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 243,
+            "next_question": 245
+        },
+        {
+            "id": 245,
+            "question": "Welche alte Prüfungsordnung wird durch diese Ordnung ersetzt?",
+            "answer": "Die Prüfungsordnung vom 28. Oktober 2015 einschließlich der Änderungsfassungen vom 1. Juni 2016 und vom 25. Oktober 2017 tritt außer Kraft.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 244,
+            "next_question": 246
+        },
+        {
+            "id": 246,
+            "question": "Bis wann können Studierende, die vor dem Wintersemester 2023/2024 begonnen haben, nach der alten Prüfungsordnung abschließen?",
+            "answer": "Studierende mit Studienbeginn vor Inkrafttreten dieser Ordnung können die Masterprüfung nach der alten Prüfungsordnung bis spätestens zum Sommersemester 2027 ablegen.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 245,
+            "next_question": 247
+        },
+        {
+            "id": 247,
+            "question": "Kann ich freiwillig auf die neue Studien- und Prüfungsordnung wechseln?",
+            "answer": "Ja, der Prüfungsausschuss kann Regelungen erlassen, die einen freiwilligen Wechsel auf die neue Ordnung begünstigen. Der Wechsel ist schriftlich zu beantragen und unwiderruflich.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 246,
+            "next_question": 248
+        },
+        {
+            "id": 248,
+            "question": "Für wen gilt die zweite Änderungssatzung?",
+            "answer": "Die zweite Änderungssatzung gilt ab Wintersemester 2025/2026 für alle Studierenden im Studiengang Computer Science, mit Ausnahme der Änderungen in § 4 und Anlage 5.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 247,
+            "next_question": 249
+        },
+        {
+            "id": 249,
+            "question": "Werden laufende Modulprüfungsverfahren durch die Änderungssatzung berührt?",
+            "answer": "Nein, abgeschlossene und laufende Modulprüfungsverfahren werden nicht berührt. Module, die vor dem Wintersemester 2025/2026 begonnen wurden, sind nach der alten Fassung abzuwickeln.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 248,
+            "next_question": 250
+        },
+        {
+            "id": 250,
+            "question": "Für wen gelten die Änderungen in § 4 und Anlage 5?",
+            "answer": "Die Änderungen in § 4 (Zugangsvoraussetzungen) und Anlage 5 (Eignungsfeststellungsverfahren) gelten für alle Studierenden, die ihr Studium ab dem Wintersemester 2025/2026 aufgenommen haben.",
+            "page": 26,
+            "section": "§ 38",
+            "previous_question": 249,
+            "next_question": 251
+        },
+        {
+            "id": 251,
+            "question": "Was zeigt der exemplarische Studienverlaufsplan?",
+            "answer": "Der exemplarische Studienverlaufsplan zeigt die beispielhafte Abfolge des modularisierten Studiums über die vier Semester der Regelstudienzeit.",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 250,
+            "next_question": 252
+        },
+        {
+            "id": 252,
+            "question": "Welche Module sind im ersten Semester vorgesehen?",
+            "answer": "Im ersten Semester sind drei Compulsory Elective Modules in Computer Science (insgesamt 24 LP) sowie ein Teil des Project Work Computer Science (6 LP) vorgesehen, insgesamt 30 LP.",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 251,
+            "next_question": 253
+        },
+        {
+            "id": 253,
+            "question": "Welche Module sind im zweiten Semester vorgesehen?",
+            "answer": "Im zweiten Semester sind zwei bis drei Compulsory Elective Modules (15-18 LP), optional ein Seminar (3 LP) und der Abschluss des Project Work (6 LP) vorgesehen, insgesamt 30 LP.",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 252,
+            "next_question": 254
+        },
+        {
+            "id": 254,
+            "question": "Welche Module sind im dritten Semester vorgesehen?",
+            "answer": "Im dritten Semester sind drei Compulsory Elective Modules (18 LP), das Modul Introduction to Scientific Working Computer Science (9 LP) und optional ein weiteres Seminar (3 LP) vorgesehen, insgesamt 33 LP.",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 253,
+            "next_question": 255
+        },
+        {
+            "id": 255,
+            "question": "Welche Module sind im vierten Semester vorgesehen?",
+            "answer": "Im vierten Semester ist ausschließlich die Master Thesis (30 LP) vorgesehen, insgesamt 27 LP im Studienverlaufsplan (da nur die Arbeit selbst, nicht die Disputation eingezeichnet ist).",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 254,
+            "next_question": 256
+        },
+        {
+            "id": 256,
+            "question": "Ist der Studienverlaufsplan verbindlich?",
+            "answer": "Nein, der Studienverlaufsplan ist nicht verbindlich und entsprechend ändert sich dieser nach Zeitpunkt der Aufnahme des Studiums oder zeitlicher Streckung. Es handelt sich um einen beispielhaften Verlauf.",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 255,
+            "next_question": 257
+        },
+        {
+            "id": 257,
+            "question": "Wo finde ich die Legende zum Studienverlaufsplan?",
+            "answer": "Die Legende befindet sich auf Seite 28 und erklärt die Darstellung von Pflicht- und Wahlpflichtmodulen sowie die verschiedenen Farben für Basis-, Aufbau-, Vertiefungs-, Praxis-, Profil- und Abschlussmodule.",
+            "page": 28,
+            "section": "Anlage 1",
+            "previous_question": 256,
+            "next_question": 258
+        },
+        {
+            "id": 258,
+            "question": "Wo finde ich detaillierte Informationen zu allen Modulen des Studiengangs?",
+            "answer": "Detaillierte Informationen zu allen Modulen finden sich in der Modulliste (Anlage 2) ab Seite 29.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 257,
+            "next_question": 259
+        },
+        {
+            "id": 259,
+            "question": "Wie viele Leistungspunkte umfasst das Modul Advanced Algorithmics?",
+            "answer": "Das Modul Advanced Algorithmics umfasst 9 Leistungspunkte.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 258,
+            "next_question": 260
+        },
+        {
+            "id": 260,
+            "question": "Ist Advanced Algorithmics ein Pflicht- oder Wahlpflichtmodul?",
+            "answer": "Advanced Algorithmics ist ein Wahlpflichtmodul.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 259,
+            "next_question": 261
+        },
+        {
+            "id": 261,
+            "question": "Zu welchem Bereich gehört das Modul Advanced Algorithmics?",
+            "answer": "Das Modul gehört zum Bereich Compulsory Elective Modules in Computer Science und ist ein Vertiefungsmodul zur theoretischen Informatik (gekennzeichnet mit \"T\").",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 260,
+            "next_question": 262
+        },
+        {
+            "id": 262,
+            "question": "Welche Qualifikationsziele werden im Modul Advanced Algorithmics vermittelt?",
+            "answer": "Studierende können Algorithmen für verschiedenste Berechnungsprobleme entwerfen, für konkrete Probleme adäquate algorithmische Ansätze aus fortgeschrittenen Techniken auswählen, die Güte von Algorithmen beurteilen und die algorithmische Schwierigkeit von Berechnungsproblemen nachweisen.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 261,
+            "next_question": 263
+        },
+        {
+            "id": 263,
+            "question": "Gibt es Voraussetzungen für die Teilnahme am Modul Advanced Algorithmics?",
+            "answer": "Keine formalen Voraussetzungen. Empfohlen werden die Kompetenzen aus den Modulen Algorithmen und Datenstrukturen sowie Effiziente Algorithmen.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 262,
+            "next_question": 264
+        },
+        {
+            "id": 264,
+            "question": "Welche Studienleistungen sind für Advanced Algorithmics zu erbringen?",
+            "answer": "Erreichen von mindestens 50 Prozent der Punkte aus wöchentlich zu bearbeitenden Übungsaufgaben und mündliche Präsentation der Lösung von mindestens zwei Übungsaufgaben.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 263,
+            "next_question": 265
+        },
+        {
+            "id": 265,
+            "question": "Welche Prüfungsform hat das Modul Advanced Algorithmics?",
+            "answer": "Die Prüfung ist eine Klausur oder mündliche Prüfung (Einzelprüfung).",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 264,
+            "next_question": 266
+        },
+        {
+            "id": 266,
+            "question": "Wie viele Leistungspunkte umfasst das Modul Advanced Data Structures?",
+            "answer": "Das Modul Advanced Data Structures umfasst 9 Leistungspunkte.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 265,
+            "next_question": 267
+        },
+        {
+            "id": 267,
+            "question": "Was sind die Qualifikationsziele von Advanced Data Structures?",
+            "answer": "Studierende können fortgeschrittene Datenstrukturen bewerten und einsetzen, Methoden für den Entwurf neuer Datenstrukturen anwenden, Analysemethoden nutzen und untere Schranken für Unmöglichkeitsresultate heranziehen.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 266,
+            "next_question": 268
+        },
+        {
+            "id": 268,
+            "question": "Welche empfohlenen Vorkenntnisse gibt es für Advanced Data Structures?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Algorithmen und Datenstrukturen sowie Effiziente Algorithmen.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 267,
+            "next_question": 269
+        },
+        {
+            "id": 269,
+            "question": "Wie viele Leistungspunkte umfasst das Modul Advanced Methods of System Development?",
+            "answer": "Das Modul Advanced Methods of System Development umfasst 6 Leistungspunkte.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 268,
+            "next_question": 270
+        },
+        {
+            "id": 270,
+            "question": "Zu welchem Informatikbereich gehört Advanced Methods of System Development?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik (gekennzeichnet mit \"P\").",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 269,
+            "next_question": 271
+        },
+        {
+            "id": 271,
+            "question": "Was lernen Studierende im Modul Advanced Methods of System Development?",
+            "answer": "Studierende können über Forschungsergebnisse aus aktuellen wissenschaftlichen Beiträgen berichten, wissenschaftliche Arbeitsweisen beim Problemlösen anwenden und über wissenschaftliche Inhalte frei sprechen.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 270,
+            "next_question": 272
+        },
+        {
+            "id": 272,
+            "question": "Welche Prüfungsform gibt es in Advanced Methods of System Development?",
+            "answer": "Die Prüfung ist eine mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 29,
+            "section": "Anlage 2",
+            "previous_question": 271,
+            "next_question": 273
+        },
+        {
+            "id": 273,
+            "question": "Wie viele Leistungspunkte hat das Modul Advanced Programming Concepts?",
+            "answer": "Das Modul Advanced Programming Concepts hat 6 Leistungspunkte.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 272,
+            "next_question": 274
+        },
+        {
+            "id": 274,
+            "question": "Ist Advanced Programming Concepts ein Modul zur theoretischen oder praktischen Informatik?",
+            "answer": "Es ist ein Vertiefungsmodul zur theoretischen Informatik (gekennzeichnet mit \"T\").",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 273,
+            "next_question": 275
+        },
+        {
+            "id": 275,
+            "question": "Was sind die Lernziele von Advanced Programming Concepts?",
+            "answer": "Studierende können Techniken zur formalen Beschreibung von Syntax und Semantik von Programmiersprachen erklären und anwenden, eigene kleine Programmiersprachen formal beschreiben und über Forschungsergebnisse im Bereich Entwurf von Programmiersprachen berichten.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 274,
+            "next_question": 276
+        },
+        {
+            "id": 276,
+            "question": "Welche Kompetenzen werden für Advanced Programming Concepts empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Aufbaumodulen zur Theoretischen Informatik.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 275,
+            "next_question": 277
+        },
+        {
+            "id": 277,
+            "question": "Wie viele Leistungspunkte umfasst Advanced Topics in Cryptography?",
+            "answer": "Das Modul Advanced Topics in Cryptography umfasst 6 Leistungspunkte.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 276,
+            "next_question": 278
+        },
+        {
+            "id": 278,
+            "question": "Was lernen Studierende in Advanced Topics in Cryptography?",
+            "answer": "Studierende können weiterführende Grundprinzipien und komplexere Methoden der Kryptografie erläutern, Entwurfs- und Analyseprinzipien für kryptografische Verfahren erklären und über aktuelle Forschungsfragen berichten.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 277,
+            "next_question": 279
+        },
+        {
+            "id": 279,
+            "question": "Welche Vorkenntnisse werden für Advanced Topics in Cryptography empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Introduction to Cryptography and its Applications oder IT-Sicherheit.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 278,
+            "next_question": 280
+        },
+        {
+            "id": 280,
+            "question": "Welche Studienleistung ist für Advanced Topics in Cryptography erforderlich?",
+            "answer": "Erreichen von mindestens 50 Prozent der Punkte aus wöchentlich zu bearbeitenden Übungsaufgaben.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 279,
+            "next_question": 281
+        },
+        {
+            "id": 281,
+            "question": "Wie viele Leistungspunkte hat das Modul Algorithm Engineering?",
+            "answer": "Das Modul Algorithm Engineering hat 9 Leistungspunkte.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 280,
+            "next_question": 282
+        },
+        {
+            "id": 282,
+            "question": "Ist Algorithm Engineering ein theoretisches oder praktisches Modul?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik (gekennzeichnet mit \"P\").",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 281,
+            "next_question": 283
+        },
+        {
+            "id": 283,
+            "question": "Was sind die Qualifikationsziele von Algorithm Engineering?",
+            "answer": "Studierende können effiziente Algorithmen für berechnungsschwere Graphprobleme entwickeln, Laufzeiten und Speicherplatzbedarfe abschätzen, mit modernen Algorithmenbibliotheken umgehen und Projektarbeit im Team organisieren.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 282,
+            "next_question": 284
+        },
+        {
+            "id": 284,
+            "question": "Welche Prüfungsform hat Algorithm Engineering?",
+            "answer": "Die Prüfung ist eine Softwareerstellung.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 283,
+            "next_question": 285
+        },
+        {
+            "id": 285,
+            "question": "Welche Studienleistung ist für Algorithm Engineering erforderlich?",
+            "answer": "Präsentation von 4 Meilensteinen in der Programmentwicklung.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 284,
+            "next_question": 286
+        },
+        {
+            "id": 286,
+            "question": "Welche Vorkenntnisse werden für Algorithm Engineering empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Objektorientierte Programmierung, Algorithmen und Datenstrukturen sowie Effiziente Algorithmen.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 285,
+            "next_question": 287
+        },
+        {
+            "id": 287,
+            "question": "Wie viele Leistungspunkte umfasst Algorithmic Network Analysis?",
+            "answer": "Das Modul Algorithmic Network Analysis umfasst 6 Leistungspunkte.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 286,
+            "next_question": 288
+        },
+        {
+            "id": 288,
+            "question": "Was lernen Studierende in Algorithmic Network Analysis?",
+            "answer": "Studierende können verschiedene Sachverhalte mittels Netzwerken modellieren, Analyseaufgaben als Berechnungsprobleme formulieren und für diese Probleme effiziente Algorithmen auswählen oder entwerfen.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 287,
+            "next_question": 289
+        },
+        {
+            "id": 289,
+            "question": "Welche Teilnahmevoraussetzungen gibt es für Algorithmic Network Analysis?",
+            "answer": "Die erfolgreiche Teilnahme am Modul Algorithmen und Datenstrukturen ist erforderlich. Die erfolgreiche Teilnahme am Modul Effiziente Algorithmen wird empfohlen.",
+            "page": 30,
+            "section": "Anlage 2",
+            "previous_question": 288,
+            "next_question": 290
+        },
+        {
+            "id": 290,
+            "question": "Wie viele Leistungspunkte hat das Modul Algorithms for Bioinformatics?",
+            "answer": "Das Modul Algorithms for Bioinformatics hat 6 Leistungspunkte.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 289,
+            "next_question": 291
+        },
+        {
+            "id": 291,
+            "question": "Zu welchem Bereich gehört Algorithms for Bioinformatics?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik (gekennzeichnet mit \"P\").",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 290,
+            "next_question": 292
+        },
+        {
+            "id": 292,
+            "question": "Was sind die Lernziele von Algorithms for Bioinformatics?",
+            "answer": "Studierende können typische Fragestellungen aus der Bioinformatik darstellen und diskutieren, elementare Algorithmen der Bioinformatik verwenden und anpassen sowie Lösungen für neue Fragestellungen entwerfen und bewerten.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 291,
+            "next_question": 293
+        },
+        {
+            "id": 293,
+            "question": "Welche Vorkenntnisse werden für Algorithms for Bioinformatics empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Algorithmen und Datenstrukturen sowie Effiziente Algorithmen.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 292,
+            "next_question": 294
+        },
+        {
+            "id": 294,
+            "question": "Wie viele Leistungspunkte umfasst das Modul Artificial Intelligence?",
+            "answer": "Das Modul Artificial Intelligence umfasst 6 Leistungspunkte.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 293,
+            "next_question": 295
+        },
+        {
+            "id": 295,
+            "question": "Was lernen Studierende im Modul Artificial Intelligence?",
+            "answer": "Studierende können die wichtigsten KI-Methoden erklären und anwenden, wissensbasierte Inferenzsysteme in Prädikatenlogik erstellen, Wissensrepräsentationsformen verwenden, Problemlösungs-, Such- und Planungsalgorithmen darstellen und Methoden des Wissenserwerbs anwenden.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 294,
+            "next_question": 296
+        },
+        {
+            "id": 296,
+            "question": "Welche Vorkenntnisse werden für Artificial Intelligence empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen zur Informatik.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 295,
+            "next_question": 297
+        },
+        {
+            "id": 297,
+            "question": "Welche Prüfungsform hat das Modul Artificial Intelligence?",
+            "answer": "Die Prüfung ist eine mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 296,
+            "next_question": 298
+        },
+        {
+            "id": 298,
+            "question": "Wie viele Leistungspunkte hat Big Data Systems?",
+            "answer": "Das Modul Big Data Systems hat 9 Leistungspunkte.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 297,
+            "next_question": 299
+        },
+        {
+            "id": 299,
+            "question": "Zu welchem Bereich gehört Big Data Systems?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 31,
+            "section": "Anlage 2",
+            "previous_question": 298,
+            "next_question": 300
+        },
+        {
+            "id": 300,
+            "question": "Was sind die Qualifikationsziele von Big Data Systems?",
+            "answer": "Studierende können Herausforderungen beim Bau verteilter Systeme benennen, reaktives verteiltes Programmieren erklären, Techniken zur Datenserialisierung erläutern, Verfahren zu Netzwerken beschreiben, Standards zur Datenstrukturierung angeben und vieles mehr zu verteilten Systemen.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 299,
+            "next_question": 301
+        },
+        {
+            "id": 301,
+            "question": "Welche Vorkenntnisse werden für Big Data Systems empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Algorithmen und Datenstrukturen sowie Datenbanksysteme.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 300,
+            "next_question": 302
+        },
+        {
+            "id": 302,
+            "question": "Wie werden die Kompetenzen in Big Data Systems geprüft?",
+            "answer": "Durch eine mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 301,
+            "next_question": 303
+        },
+        {
+            "id": 303,
+            "question": "Wie viele Leistungspunkte umfasst Compiler Construction?",
+            "answer": "Das Modul Compiler Construction umfasst 9 Leistungspunkte.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 302,
+            "next_question": 304
+        },
+        {
+            "id": 304,
+            "question": "Ist Compiler Construction ein Modul zur theoretischen oder praktischen Informatik?",
+            "answer": "Es ist ein Vertiefungsmodul zur theoretischen Informatik (gekennzeichnet mit \"T\").",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 303,
+            "next_question": 305
+        },
+        {
+            "id": 305,
+            "question": "Was lernen Studierende in Compiler Construction?",
+            "answer": "Studierende können verschiedene Aspekte von Programmiersprachen gegenüberstellen, den Aufbau von Compilern beschreiben, Werkzeuge zur Compilererzeugung anwenden, Grundprinzipien der Codeerzeugung erklären und einzelne Teile eines Compilers programmieren.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 304,
+            "next_question": 306
+        },
+        {
+            "id": 306,
+            "question": "Welche Vorkenntnisse werden für Compiler Construction empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus dem Modul Theoretische Informatik.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 305,
+            "next_question": 307
+        },
+        {
+            "id": 307,
+            "question": "Wie viele Leistungspunkte hat Computational Complexity Theory?",
+            "answer": "Das Modul Computational Complexity Theory hat 9 Leistungspunkte.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 306,
+            "next_question": 308
+        },
+        {
+            "id": 308,
+            "question": "Was sind die Qualifikationsziele von Computational Complexity Theory?",
+            "answer": "Studierende können Probleme hinsichtlich deren Berechnungsschwierigkeit klassifizieren, verschiedene Klassen von Problemen untereinander vergleichen und die Berechnungsmächtigkeit verschiedener Maschinenmodelle vergleichen.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 307,
+            "next_question": 309
+        },
+        {
+            "id": 309,
+            "question": "Welche Teilnahmevoraussetzung gibt es für Computational Complexity Theory?",
+            "answer": "Erfolgreiche Teilnahme am Modul Theoretische Informatik aus dem Bachelorstudiengang Informatik.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 308,
+            "next_question": 310
+        },
+        {
+            "id": 310,
+            "question": "Welche Studienleistung ist für Computational Complexity Theory erforderlich?",
+            "answer": "Präsentation von Zwischenständen und Teilnahme an der Blockveranstaltung.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 309,
+            "next_question": 311
+        },
+        {
+            "id": 311,
+            "question": "Wie viele Leistungspunkte umfasst Computer-assisted Theorem Proving?",
+            "answer": "Das Modul Computer-assisted Theorem Proving umfasst 9 Leistungspunkte.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 310,
+            "next_question": 312
+        },
+        {
+            "id": 312,
+            "question": "Was sind die Lernziele von Computer-assisted Theorem Proving?",
+            "answer": "Studierende beherrschen die Spezifikation formaler Beweisaufgaben sowie Methoden, Kalküle und Algorithmen des rechnergestützten Beweisens, können mit praktischen Beweissystemen und speziellen Logiken umgehen.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 311,
+            "next_question": 313
+        },
+        {
+            "id": 313,
+            "question": "Welche Vorkenntnisse werden für Computer-assisted Theorem Proving empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Theoretische Informatik sowie Logik.",
+            "page": 32,
+            "section": "Anlage 2",
+            "previous_question": 312,
+            "next_question": 314
+        },
+        {
+            "id": 314,
+            "question": "Wie viele Leistungspunkte hat Computer Vision I?",
+            "answer": "Das Modul Computer Vision I hat 6 Leistungspunkte.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 313,
+            "next_question": 315
+        },
+        {
+            "id": 315,
+            "question": "Was lernen Studierende in Computer Vision I?",
+            "answer": "Studierende können grundlegende Konzepte der Computer Vision wie Objekterkennung, Vermessung und Bewegungserfassung erläutern, verstehen Deep Learning und dessen Anwendung auf visuelle Daten und kennen Standardimplementierungen.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 314,
+            "next_question": 316
+        },
+        {
+            "id": 316,
+            "question": "Welche Vorkenntnisse werden für Computer Vision I empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen zur Informatik.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 315,
+            "next_question": 317
+        },
+        {
+            "id": 317,
+            "question": "Wie viele Leistungspunkte umfasst Computer Vision II?",
+            "answer": "Das Modul Computer Vision II umfasst 6 Leistungspunkte.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 316,
+            "next_question": 318
+        },
+        {
+            "id": 318,
+            "question": "Was sind die fortgeschrittenen Lernziele von Computer Vision II?",
+            "answer": "Studierende können fortgeschrittene Konzepte der Computer Vision erläutern, tiefergehende Methoden von Deep Learning erklären, Methoden und Konzepte implementieren, analysieren und einsetzen sowie Lösungen erarbeiten und optimieren.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 317,
+            "next_question": 319
+        },
+        {
+            "id": 319,
+            "question": "Wie viele Leistungspunkte hat Content-based Image and Video Analysis?",
+            "answer": "Das Modul Content-based Image and Video Analysis hat 6 Leistungspunkte.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 318,
+            "next_question": 320
+        },
+        {
+            "id": 320,
+            "question": "Was lernen Studierende in Content-based Image and Video Analysis?",
+            "answer": "Studierende können die notwendigen Methoden der inhaltsbasierten Analyse von Bild- und Videodaten erläutern und anwenden, Software-Systeme zur Bilderkennung konzipieren und basierend auf Deep Learning Bibliotheken implementieren.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 319,
+            "next_question": 321
+        },
+        {
+            "id": 321,
+            "question": "Welche zusätzlichen Fähigkeiten werden für Content-based Image and Video Analysis empfohlen?",
+            "answer": "Programmiererfahrung in Python und C++ ist empfehlenswert und Grundkenntnisse in Linux sind hilfreich.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 320,
+            "next_question": 322
+        },
+        {
+            "id": 322,
+            "question": "Wie viele Leistungspunkte umfasst Dialog Systems?",
+            "answer": "Das Modul Dialog Systems umfasst 6 Leistungspunkte.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 321,
+            "next_question": 323
+        },
+        {
+            "id": 323,
+            "question": "Was lernen Studierende in Dialog Systems?",
+            "answer": "Studierende können die grundlegende Funktionsweise von Dialogsystemen, Sprachassistenten und Konversationssystemen erklären, Implementierungsansätze entwerfen und einfache Dialogsysteme realisieren.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 322,
+            "next_question": 324
+        },
+        {
+            "id": 324,
+            "question": "Welche Vorkenntnisse werden für Dialog Systems empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Maschinelles Lernen, Introduction to Natural Language Processing und Grundlagen der Statistik oder Elementare Stochastik.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 323,
+            "next_question": 325
+        },
+        {
+            "id": 325,
+            "question": "Wie viele Leistungspunkte hat Distributed Systems?",
+            "answer": "Das Modul Distributed Systems hat 6 Leistungspunkte.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 324,
+            "next_question": 326
+        },
+        {
+            "id": 326,
+            "question": "Was sind die Lernziele von Distributed Systems?",
+            "answer": "Studierende können die Funktionsweise verteilter Systeme erklären und Algorithmen für Problemstellungen verteilter Systeme einsetzen.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 325,
+            "next_question": 327
+        },
+        {
+            "id": 327,
+            "question": "Welche Vorkenntnisse werden für Distributed Systems empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Objektorientierte Programmierung, Datenstrukturen und Algorithmen, Systemsoftware und Rechnerkommunikation sowie Betriebssysteme.",
+            "page": 33,
+            "section": "Anlage 2",
+            "previous_question": 326,
+            "next_question": 328
+        },
+        {
+            "id": 328,
+            "question": "Wie viele Leistungspunkte umfasst Ethical Hacking and Practical Cryptanalysis?",
+            "answer": "Das Modul Ethical Hacking and Practical Cryptanalysis umfasst 6 Leistungspunkte.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 327,
+            "next_question": 329
+        },
+        {
+            "id": 329,
+            "question": "Was lernen Studierende in Ethical Hacking and Practical Cryptanalysis?",
+            "answer": "Studierende können ausgewählte Techniken für das Brechen von Sicherheitssystemen und kryptografischen Verfahren beschreiben und praktisch umsetzen, insbesondere hinsichtlich Server-Absicherung, Netzwerksicherheit und Analyse von kryptografischen Verfahren.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 328,
+            "next_question": 330
+        },
+        {
+            "id": 330,
+            "question": "Werden ethische Aspekte in Ethical Hacking and Practical Cryptanalysis behandelt?",
+            "answer": "Ja, Studierende können ethische und rechtliche Belange des Hackens benennen.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 329,
+            "next_question": 331
+        },
+        {
+            "id": 331,
+            "question": "Welche Vorkenntnisse werden für Ethical Hacking empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus Introduction to Cryptography and its Applications oder IT-Sicherheit.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 330,
+            "next_question": 332
+        },
+        {
+            "id": 332,
+            "question": "Wie viele Leistungspunkte hat Formal Methods in Software Engineering?",
+            "answer": "Das Modul Formal Methods in Software Engineering hat 9 Leistungspunkte.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 331,
+            "next_question": 333
+        },
+        {
+            "id": 333,
+            "question": "Ist Formal Methods in Software Engineering ein theoretisches oder praktisches Modul?",
+            "answer": "Es ist ein Vertiefungsmodul zur theoretischen Informatik (gekennzeichnet mit \"T\").",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 332,
+            "next_question": 334
+        },
+        {
+            "id": 334,
+            "question": "Was lernen Studierende in Formal Methods in Software Engineering?",
+            "answer": "Studierende sind in der Lage, Systeme, Systemeigenschaften und Softwareentwicklungsaktivitäten zu formalisieren, können erklären wie Systemeigenschaften automatisch analysiert und verifiziert werden können und können Stärken und Schwächen formaler Methoden beurteilen.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 333,
+            "next_question": 335
+        },
+        {
+            "id": 335,
+            "question": "Welche Vorkenntnisse werden für Formal Methods in Software Engineering empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Theoretische Informatik, Logik und Softwaretechnik.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 334,
+            "next_question": 336
+        },
+        {
+            "id": 336,
+            "question": "Wie viele Leistungspunkte umfasst Geo Databases?",
+            "answer": "Das Modul Geo Databases umfasst 6 Leistungspunkte.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 335,
+            "next_question": 337
+        },
+        {
+            "id": 337,
+            "question": "Was lernen Studierende in Geo Databases?",
+            "answer": "Studierende können Konzepte zur Erweiterung objektrelationaler Datenbanksysteme für Geo-Anwendungen beschreiben, Prinzipien grundlegender Algorithmen und Datenstrukturen für Geo-Datenbanken erläutern, Datenmodelle für Geo-Daten beschreiben und mit Geo-Informationssystemen umgehen.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 336,
+            "next_question": 338
+        },
+        {
+            "id": 338,
+            "question": "Welche Vorkenntnisse werden für Geo Databases empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus dem Modul Algorithmen und Datenstrukturen.",
+            "page": 34,
+            "section": "Anlage 2",
+            "previous_question": 337,
+            "next_question": 339
+        },
+        {
+            "id": 339,
+            "question": "Wie viele Leistungspunkte hat Image Synthesis?",
+            "answer": "Das Modul Image Synthesis hat 9 Leistungspunkte.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 338,
+            "next_question": 340
+        },
+        {
+            "id": 340,
+            "question": "Was lernen Studierende in Image Synthesis?",
+            "answer": "Studierende können Methoden zum Erstellen von computer-generierten Bildern hoher visueller Qualität beschreiben und einsetzen, die Architektur aktueller Grafikkarten erklären und parallele Programmierung auf der Grafikkarte anwenden.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 339,
+            "next_question": 341
+        },
+        {
+            "id": 341,
+            "question": "Welche Themen umfasst Image Synthesis?",
+            "answer": "Das Modul umfasst Themen wie Modellierung dynamischer virtueller Szenen, Freiformkurven und -flächen, Verfahren zur globalen Beleuchtung und Methoden zur Darstellung von Volumendaten.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 340,
+            "next_question": 342
+        },
+        {
+            "id": 342,
+            "question": "Welche Vorkenntnisse werden für Image Synthesis empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Objektorientierte Programmierung und Grafikprogrammierung.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 341,
+            "next_question": 343
+        },
+        {
+            "id": 343,
+            "question": "Wie viele Leistungspunkte umfasst Implementation of Database Systems?",
+            "answer": "Das Modul Implementation of Database Systems umfasst 9 Leistungspunkte.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 342,
+            "next_question": 344
+        },
+        {
+            "id": 344,
+            "question": "Was lernen Studierende in Implementation of Database Systems?",
+            "answer": "Studierende können die Leistungsfähigkeit von Datenbanksystemen beurteilen, Techniken zur Entwicklung effizienter Datenstrukturen und Algorithmen einsetzen, externe Datenstrukturen beurteilen und mit Indexstrukturen in kommerziellen Systemen umgehen.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 343,
+            "next_question": 345
+        },
+        {
+            "id": 345,
+            "question": "Welche Vorkenntnisse werden für Implementation of Database Systems empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Algorithmen und Datenstrukturen sowie Datenbanksysteme.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 344,
+            "next_question": 346
+        },
+        {
+            "id": 346,
+            "question": "Wie viele Leistungspunkte hat Index and Storage Structures?",
+            "answer": "Das Modul Index and Storage Structures hat 6 Leistungspunkte.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 345,
+            "next_question": 347
+        },
+        {
+            "id": 347,
+            "question": "Was sind die Qualifikationsziele von Index and Storage Structures?",
+            "answer": "Studierende können Techniken zur Entwicklung externer Datenstrukturen und Algorithmen einsetzen, externe Datenstrukturen bzgl. Laufzeit, Speicherplatz und Durchsatz bewerten, Datenstrukturen in systemnaher Umgebung erstellen und mit Indexstrukturen in kommerziellen Datenbanksystemen umgehen.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 346,
+            "next_question": 348
+        },
+        {
+            "id": 348,
+            "question": "Welche Vorkenntnisse werden für Index and Storage Structures empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus dem Modul Algorithmen und Datenstrukturen.",
+            "page": 35,
+            "section": "Anlage 2",
+            "previous_question": 347,
+            "next_question": 349
+        },
+        {
+            "id": 349,
+            "question": "Wie viele Leistungspunkte hat Large Specialization Module Computer Science 1?",
+            "answer": "Das Modul Large Specialization Module Computer Science 1 hat 9 Leistungspunkte.",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 348,
+            "next_question": 350
+        },
+        {
+            "id": 350,
+            "question": "Zu welchem Bereich gehört Large Specialization Module Computer Science 1?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik (gekennzeichnet mit \"P\").",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 349,
+            "next_question": 351
+        },
+        {
+            "id": 351,
+            "question": "Was lernen Studierende in Large Specialization Module Computer Science 1?",
+            "answer": "Studierende haben erweiterte vertiefte Kenntnisse in einem ausgewählten Spezialgebiet der Informatik, können über aktuelle Forschungsergebnisse berichten, Arbeitsweisen aus der Informatik anwenden und Kompetenzen vorzugsweise aus dem Bereich Praktische Informatik erwerben.",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 350,
+            "next_question": 352
+        },
+        {
+            "id": 352,
+            "question": "Wie unterscheidet sich Large Specialization Module Computer Science 2 von Modul 1?",
+            "answer": "Large Specialization Module Computer Science 2 ist ebenfalls ein 9 LP Vertiefungsmodul, aber zur theoretischen Informatik (gekennzeichnet mit \"T\"), während Modul 1 zur praktischen Informatik gehört.",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 351,
+            "next_question": 353
+        },
+        {
+            "id": 353,
+            "question": "Welchen Schwerpunkt hat Large Specialization Module Computer Science 3?",
+            "answer": "Das Modul hat 9 Leistungspunkte und Kompetenzen werden vorzugsweise aus dem Bereich Technische Informatik erworben (theoretische Informatik, gekennzeichnet mit \"T\").",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 352,
+            "next_question": 354
+        },
+        {
+            "id": 354,
+            "question": "Aus welchem Bereich stammen die Kompetenzen in Large Specialization Module Computer Science 4?",
+            "answer": "Kompetenzen werden vorzugsweise aus dem Bereich Angewandte Informatik erworben. Das Modul ist ein Vertiefungsmodul zur theoretischen Informatik mit 9 LP.",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 353,
+            "next_question": 355
+        },
+        {
+            "id": 355,
+            "question": "Welchen Schwerpunkt hat Large Specialization Module Computer Science 5?",
+            "answer": "Das Modul hat 9 Leistungspunkte und Kompetenzen werden vorzugsweise aus dem Bereich Künstliche Intelligenz erworben. Es ist ein Vertiefungsmodul zur theoretischen Informatik.",
+            "page": 36,
+            "section": "Anlage 2",
+            "previous_question": 354,
+            "next_question": 356
+        },
+        {
+            "id": 356,
+            "question": "Wie viele Leistungspunkte umfasst Model-driven Software Development?",
+            "answer": "Das Modul Model-driven Software Development umfasst 9 Leistungspunkte.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 355,
+            "next_question": 357
+        },
+        {
+            "id": 357,
+            "question": "Was lernen Studierende in Model-driven Software Development?",
+            "answer": "Studierende können das Paradigma der modellgetriebenen Softwareentwicklung erklären, modellieren und Anwendungssoftware modellgetrieben entwickeln, Kernkonzepte und Techniken erläutern und die Möglichkeiten und Grenzen diskutieren.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 356,
+            "next_question": 358
+        },
+        {
+            "id": 358,
+            "question": "Welche Vorkenntnisse werden für Model-driven Software Development empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 357,
+            "next_question": 359
+        },
+        {
+            "id": 359,
+            "question": "Wie viele Leistungspunkte hat Modern Methods of System Development?",
+            "answer": "Das Modul Modern Methods of System Development hat 9 Leistungspunkte.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 358,
+            "next_question": 360
+        },
+        {
+            "id": 360,
+            "question": "Was sind die Lernziele von Modern Methods of System Development?",
+            "answer": "Studierende können über neue Forschungsergebnisse aus aktuellen wissenschaftlichen Beiträgen aus dem Bereich der Softwareentwicklung berichten und wissenschaftliche Arbeitsweisen beim Problemlösen anwenden.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 359,
+            "next_question": 361
+        },
+        {
+            "id": 361,
+            "question": "Welche Vorkenntnisse werden für Modern Methods of System Development empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen Objektorientierte Programmierung sowie Algorithmen und Datenstrukturen.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 360,
+            "next_question": 362
+        },
+        {
+            "id": 362,
+            "question": "Wie viele Leistungspunkte umfasst Multimedia Signal Processing?",
+            "answer": "Das Modul Multimedia Signal Processing umfasst 9 Leistungspunkte.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 361,
+            "next_question": 363
+        },
+        {
+            "id": 363,
+            "question": "Was lernen Studierende in Multimedia Signal Processing?",
+            "answer": "Studierende sind in der Lage, Inhalte für moderne Kommunikationsmedien zu erstellen, haben vertiefte Kenntnisse über Verfahren zur digitalen Erfassung, Verarbeitung, Speicherung und Übertragung von multimedialen Daten und können Medien gestalten.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 362,
+            "next_question": 364
+        },
+        {
+            "id": 364,
+            "question": "Gibt es Teilnahmevoraussetzungen für Multimedia Signal Processing?",
+            "answer": "Nein, es gibt keine formalen Teilnahmevoraussetzungen.",
+            "page": 37,
+            "section": "Anlage 2",
+            "previous_question": 363,
+            "next_question": 365
+        },
+        {
+            "id": 365,
+            "question": "Wie viele Leistungspunkte hat Natural Language Systems?",
+            "answer": "Das Modul Natural Language Systems hat 6 Leistungspunkte.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 364,
+            "next_question": 366
+        },
+        {
+            "id": 366,
+            "question": "Was lernen Studierende in Natural Language Systems?",
+            "answer": "Studierende können grundlegende Funktionen und Komponenten von Sprachsystemen benennen und im Kontext verschiedener Einsatzszenarien vergleichen, Architekturen beschreiben, einfache Sprachsysteme entwickeln und mögliche Implikationen des Einsatzes analysieren.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 365,
+            "next_question": 367
+        },
+        {
+            "id": 367,
+            "question": "Welche Vorkenntnisse werden für Natural Language Systems empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Künstliche Intelligenz, Maschinelles Lernen oder Introduction to Natural Language Processing.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 366,
+            "next_question": 368
+        },
+        {
+            "id": 368,
+            "question": "Wie viele Leistungspunkte umfasst Neural Networks?",
+            "answer": "Das Modul Neural Networks umfasst 6 Leistungspunkte.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 367,
+            "next_question": 369
+        },
+        {
+            "id": 369,
+            "question": "Was sind die Lernziele von Neural Networks?",
+            "answer": "Studierende können Aspekte der Theorie neuronaler Netze erklären, verschiedene Architekturen beschreiben, Konzepte des überwachten Lernens und Deep Learning erläutern und datengetriebene Lösungen unter Verwendung von Programmbibliotheken entwerfen.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 368,
+            "next_question": 370
+        },
+        {
+            "id": 370,
+            "question": "Welche Vorkenntnisse werden für Neural Networks empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Maschinelles Lernen und Grundlagen der Statistik.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 369,
+            "next_question": 371
+        },
+        {
+            "id": 371,
+            "question": "Wie viele Leistungspunkte hat Operating Systems?",
+            "answer": "Das Modul Operating Systems hat 6 Leistungspunkte.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 370,
+            "next_question": 372
+        },
+        {
+            "id": 372,
+            "question": "Was lernen Studierende in Operating Systems?",
+            "answer": "Studierende können die Funktionsweise von Betriebssystemen erläutern und eigenständig Betriebssystemmodule programmieren.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 371,
+            "next_question": 373
+        },
+        {
+            "id": 373,
+            "question": "Welche Vorkenntnisse werden für Operating Systems empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Objektorientierte Programmierung, Algorithmen und Datenstrukturen sowie Systemsoftware und Rechnerkommunikation.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 372,
+            "next_question": 374
+        },
+        {
+            "id": 374,
+            "question": "Wie viele Leistungspunkte umfasst Parameterized Algorithms?",
+            "answer": "Das Modul Parameterized Algorithms umfasst 6 Leistungspunkte.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 373,
+            "next_question": 375
+        },
+        {
+            "id": 375,
+            "question": "Was lernen Studierende in Parameterized Algorithms?",
+            "answer": "Studierende können für schwere Berechnungsprobleme adäquate Parametrisierungen identifizieren, effiziente Festparameteralgorithmen entwickeln und deren Laufzeit analysieren sowie Datenreduktionsregeln entwerfen und die algorithmische Schwierigkeit nachweisen.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 374,
+            "next_question": 376
+        },
+        {
+            "id": 376,
+            "question": "Welche Teilnahmevoraussetzungen gibt es für Parameterized Algorithms?",
+            "answer": "Die erfolgreiche Teilnahme am Modul Algorithmen und Datenstrukturen ist erforderlich. Die erfolgreiche Teilnahme am Modul Effiziente Algorithmen wird empfohlen.",
+            "page": 38,
+            "section": "Anlage 2",
+            "previous_question": 375,
+            "next_question": 377
+        },
+        {
+            "id": 377,
+            "question": "Wie viele Leistungspunkte hat Program Verification and Synthesis?",
+            "answer": "Das Modul Program Verification and Synthesis hat 9 Leistungspunkte.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 376,
+            "next_question": 378
+        },
+        {
+            "id": 378,
+            "question": "Was lernen Studierende in Program Verification and Synthesis?",
+            "answer": "Studierende können aktuelle Forschungswerkzeuge einsetzen, neue Einsatzgebiete erkunden, theoretische Hintergründe erarbeiten, mit Logik höherer Stufe umgehen und Konzepte der Verifikation und Synthese von Software erläutern.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 377,
+            "next_question": 379
+        },
+        {
+            "id": 379,
+            "question": "Welche Vorkenntnisse werden für Program Verification and Synthesis empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Logik, Objektorientierte Programmierung, Algorithmen und Datenstrukturen sowie Grundkenntnisse im funktionalen Programmieren (z.B. in Scala, Haskell oder Python).",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 378,
+            "next_question": 380
+        },
+        {
+            "id": 380,
+            "question": "Wie viele Leistungspunkte haben die Small Specialization Modules?",
+            "answer": "Alle Small Specialization Modules (Computer Science 1-5) haben jeweils 6 Leistungspunkte.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 379,
+            "next_question": 381
+        },
+        {
+            "id": 381,
+            "question": "Welchen Schwerpunkt hat Small Specialization Module Computer Science 1?",
+            "answer": "Kompetenzen werden vorzugsweise aus dem Bereich Praktische Informatik erworben.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 380,
+            "next_question": 382
+        },
+        {
+            "id": 382,
+            "question": "Welchen Schwerpunkt hat Small Specialization Module Computer Science 2?",
+            "answer": "Kompetenzen werden vorzugsweise aus dem Bereich Theoretische Informatik erworben.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 381,
+            "next_question": 383
+        },
+        {
+            "id": 383,
+            "question": "Welchen Schwerpunkt hat Small Specialization Module Computer Science 3?",
+            "answer": "Kompetenzen werden vorzugsweise aus dem Bereich Technische Informatik erworben.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 382,
+            "next_question": 384
+        },
+        {
+            "id": 384,
+            "question": "Welchen Schwerpunkt hat Small Specialization Module Computer Science 4?",
+            "answer": "Kompetenzen werden vorzugsweise aus dem Bereich Angewandte Informatik erworben.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 383,
+            "next_question": 385
+        },
+        {
+            "id": 385,
+            "question": "Welchen Schwerpunkt hat Small Specialization Module Computer Science 5?",
+            "answer": "Kompetenzen werden vorzugsweise aus dem Bereich Künstliche Intelligenz erworben.",
+            "page": 39,
+            "section": "Anlage 2",
+            "previous_question": 384,
+            "next_question": 386
+        },
+        {
+            "id": 386,
+            "question": "Wie viele Leistungspunkte umfasst Software as a Medical Device?",
+            "answer": "Das Modul Software as a Medical Device umfasst 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 385,
+            "next_question": 387
+        },
+        {
+            "id": 387,
+            "question": "Was lernen Studierende in Software as a Medical Device?",
+            "answer": "Studierende können Konzepte der Softwareentwicklung für die Medizin beschreiben und einsetzen, Querverbindungen zur Informatik aufzeigen, Denk- und Arbeitsweisen der Regulierungsbehörden anwenden und haben eine Intuition für die Entwicklung von Software als Medizinprodukt.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 386,
+            "next_question": 388
+        },
+        {
+            "id": 388,
+            "question": "Welche Vorkenntnisse werden für Software as a Medical Device empfohlen?",
+            "answer": "Empfohlen werden Grundkenntnisse im Bereich Software Engineering.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 387,
+            "next_question": 389
+        },
+        {
+            "id": 389,
+            "question": "Wie viele Leistungspunkte hat Software Evolution?",
+            "answer": "Das Modul Software Evolution hat 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 388,
+            "next_question": 390
+        },
+        {
+            "id": 390,
+            "question": "Was lernen Studierende in Software Evolution?",
+            "answer": "Studierende können sich systematisch in ein vorgegebenes Softwareprojekt einarbeiten, einen schlüssigen Evolutionsplan ausarbeiten, kleinere Evolutionsaufgaben durchführen und ein Projekt im Team bearbeiten.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 389,
+            "next_question": 391
+        },
+        {
+            "id": 391,
+            "question": "Welche Vorkenntnisse werden für Software Evolution empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 390,
+            "next_question": 392
+        },
+        {
+            "id": 392,
+            "question": "Wie viele Leistungspunkte umfasst Statistical Bioinformatics?",
+            "answer": "Das Modul Statistical Bioinformatics umfasst 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 391,
+            "next_question": 393
+        },
+        {
+            "id": 393,
+            "question": "Was sind die Lernziele von Statistical Bioinformatics?",
+            "answer": "Studierende können die wichtigsten Methoden aus der statistischen Bioinformatik erläutern, die für Berechnungen im naturwissenschaftlichen Bereich erforderlich sind, und sind in der Lage, für konkrete Fallbeispiele geeignete Verfahren auszuwählen, durchzuführen und zu implementieren.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 392,
+            "next_question": 394
+        },
+        {
+            "id": 394,
+            "question": "Welche Vorkenntnisse werden für Statistical Bioinformatics empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Einführung in die Bioinformatik sowie Grundlagen der Statistik.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 393,
+            "next_question": 395
+        },
+        {
+            "id": 395,
+            "question": "Wie viele Leistungspunkte hat Virtual Machines?",
+            "answer": "Das Modul Virtual Machines hat 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 394,
+            "next_question": 396
+        },
+        {
+            "id": 396,
+            "question": "Was lernen Studierende in Virtual Machines?",
+            "answer": "Studierende können die grundlegenden Konzepte von prozess- und system-basierten virtuellen Maschinen beschreiben und erläutern, den Aufbau beschreiben, Komponenten entwickeln, Methoden erläutern und Implementierungsansätze vergleichen.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 395,
+            "next_question": 397
+        },
+        {
+            "id": 397,
+            "question": "Welche Vorkenntnisse werden für Virtual Machines empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 396,
+            "next_question": 398
+        },
+        {
+            "id": 398,
+            "question": "Wie viele Leistungspunkte umfasst Visual Languages?",
+            "answer": "Das Modul Visual Languages umfasst 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 397,
+            "next_question": 399
+        },
+        {
+            "id": 399,
+            "question": "Was lernen Studierende in Visual Languages?",
+            "answer": "Studierende können die Unterschiede zwischen textuellen und visuellen Sprachen erläutern, Methoden zur Definition visueller Sprachen beschreiben, mit grundlegenden Designerwerkzeugen umgehen und sich in eine unbekannte visuelle Sprache einarbeiten.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 398,
+            "next_question": 400
+        },
+        {
+            "id": 400,
+            "question": "Welche Vorkenntnisse werden für Visual Languages empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 399,
+            "next_question": 401
+        },
+        {
+            "id": 401,
+            "question": "Wie viele Leistungspunkte hat Web Technologies?",
+            "answer": "Das Modul Web Technologies hat 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 400,
+            "next_question": 402
+        },
+        {
+            "id": 402,
+            "question": "Was sind die Lernziele von Web Technologies?",
+            "answer": "Studierende können erklären, welche Webtechnologien es gibt und wie man sie benutzt, sind in der Lage, die Einsatzmöglichkeiten und Mächtigkeit aufzuzeigen und können das Zusammenspiel und die Abhängigkeiten zwischen den Technologien beschreiben.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 401,
+            "next_question": 403
+        },
+        {
+            "id": 403,
+            "question": "Welche Vorkenntnisse werden für Web Technologies empfohlen?",
+            "answer": "Empfohlen werden Grundkenntnisse in Programmierung und Softwaretechnik.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 402,
             "next_question": null
         }
     ]
