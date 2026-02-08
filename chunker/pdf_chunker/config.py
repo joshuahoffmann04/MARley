@@ -12,7 +12,7 @@ class PDFChunkerSettings(BaseSettings):
     app_name: str = "MARley"
     environment: str = "development"
 
-    document_id: str = "2-aend-19-02-25_msc-computer-science_lese"
+    document_id: str = "msc-computer-science"
     data_root: Path = Path("data")
     input_dir: Path | None = None
     output_dir: Path | None = None
