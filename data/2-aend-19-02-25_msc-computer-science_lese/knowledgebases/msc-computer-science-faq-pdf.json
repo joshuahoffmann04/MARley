@@ -5,8 +5,9 @@
         "title": "Studien- und Prüfungsordnung für den Studiengang „Computer Science“ mit dem Abschluss „Master of Science (M.Sc.)“ der Philipps-Universität Marburg ",
         "institution": "Philipps-Universität Marburg",
         "version_date": "2026-02-08",
-        "faculty": "FB12",
-        "total_pages": 60
+        "faculty": "Fachbereich Mathematik und Informatik",
+        "total_pages": 60,
+        "source_language": "de"
     },
     "questions": [
         {
