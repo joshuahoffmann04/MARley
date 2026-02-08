@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -22,6 +23,10 @@ class VectorRetrievalSettings(BaseSettings):
 
     top_k_default: int = Field(default=10, ge=1)
     top_k_max: int = Field(default=100, ge=1)
+
+    chroma_client_mode: Literal["persistent", "http"] = "persistent"
+    chroma_persist_dir: Path | None = None
+    chroma_persist_subdir: str = "databases"
 
     chroma_host: str = "localhost"
     chroma_port: int = Field(default=8000, ge=1, le=65535)
@@ -74,6 +79,9 @@ class VectorRetrievalRuntimeConfig:
     faq_sb_chunks_glob: str
     top_k_default: int
     top_k_max: int
+    chroma_client_mode: Literal["persistent", "http"]
+    chroma_persist_dir: Path | None
+    chroma_persist_subdir: str
     chroma_host: str
     chroma_port: int
     chroma_ssl: bool
@@ -96,6 +104,7 @@ def get_vector_retrieval_config(
     settings: VectorRetrievalSettings | None = None,
 ) -> VectorRetrievalRuntimeConfig:
     cfg = settings or get_vector_retrieval_settings()
+    chroma_persist_dir = cfg.resolve_path(cfg.chroma_persist_dir) if cfg.chroma_persist_dir else None
     return VectorRetrievalRuntimeConfig(
         input_dir=cfg.input_dir_path,
         pdf_chunks_glob=cfg.pdf_chunks_glob,
@@ -103,6 +112,9 @@ def get_vector_retrieval_config(
         faq_sb_chunks_glob=cfg.faq_sb_chunks_glob,
         top_k_default=cfg.top_k_default,
         top_k_max=cfg.top_k_max,
+        chroma_client_mode=cfg.chroma_client_mode,
+        chroma_persist_dir=chroma_persist_dir,
+        chroma_persist_subdir=cfg.chroma_persist_subdir,
         chroma_host=cfg.chroma_host,
         chroma_port=cfg.chroma_port,
         chroma_ssl=cfg.chroma_ssl,

@@ -653,6 +653,170 @@ class GeneratorService:
             generated_at=datetime.now(timezone.utc),
         )
 
+    def generate_from_retrieval(
+        self,
+        *,
+        request: GenerateRequest,
+        retrieval: RetrievalSearchResponse,
+    ) -> GenerateResponse:
+        query = request.query.strip()
+        if not query:
+            raise ValueError("query must not be empty")
+
+        document_id = request.document_id or self.runtime_config.document_id
+
+        top_k = request.top_k if request.top_k is not None else self.runtime_config.top_k_default
+        if top_k < 1 or top_k > self.runtime_config.top_k_max:
+            raise ValueError(f"top_k must be between 1 and {self.runtime_config.top_k_max}")
+
+        model = (request.model or self.runtime_config.ollama_model).strip()
+        if not model:
+            raise ValueError("model must not be empty")
+
+        temperature = (
+            request.temperature
+            if request.temperature is not None
+            else self.runtime_config.temperature_default
+        )
+
+        total_budget_tokens = (
+            request.total_budget_tokens
+            if request.total_budget_tokens is not None
+            else self.runtime_config.total_budget_tokens_default
+        )
+        if total_budget_tokens > self.runtime_config.total_budget_tokens_max:
+            raise ValueError(
+                f"total_budget_tokens must be <= {self.runtime_config.total_budget_tokens_max}"
+            )
+
+        max_answer_tokens = (
+            request.max_answer_tokens
+            if request.max_answer_tokens is not None
+            else self.runtime_config.max_answer_tokens_default
+        )
+        if max_answer_tokens > self.runtime_config.max_answer_tokens_max:
+            raise ValueError(
+                f"max_answer_tokens must be <= {self.runtime_config.max_answer_tokens_max}"
+            )
+
+        prompt_overhead_tokens = self.runtime_config.prompt_overhead_tokens
+        context_budget_tokens = total_budget_tokens - max_answer_tokens - prompt_overhead_tokens
+        if context_budget_tokens < 128:
+            raise ValueError(
+                "Token budget too small. Increase total_budget_tokens or reduce max_answer_tokens."
+            )
+
+        if retrieval.document_id != document_id:
+            raise ValueError(
+                "retrieval.document_id does not match requested document_id."
+            )
+
+        generator_flags: list[GenerationQualityFlag] = []
+        abstention_cfg = self._effective_abstention_config(request)
+
+        pre_abstain, pre_reason = self._pre_llm_abstention_decision(
+            hits=retrieval.hits,
+            retrieval_flags=retrieval.quality_flags,
+            abstention_cfg=abstention_cfg,
+        )
+
+        selected_chunks, context_block, used_context_tokens = self._select_context_hits(
+            hits=retrieval.hits,
+            context_budget_tokens=context_budget_tokens,
+            generator_flags=generator_flags,
+        )
+
+        if not selected_chunks:
+            pre_abstain = True
+            pre_reason = pre_reason or "NO_CONTEXT_CHUNKS"
+
+        answer = self.runtime_config.abstention_answer_text
+        abstained = pre_abstain
+        abstention_reason = pre_reason
+
+        if not pre_abstain:
+            system_prompt, user_prompt = self._build_prompts(question=query, context_block=context_block)
+            llm_output, raw_content, llm_error = self._call_ollama_chat(
+                model=model,
+                temperature=temperature,
+                total_budget_tokens=total_budget_tokens,
+                max_answer_tokens=max_answer_tokens,
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+            )
+
+            if llm_error is not None:
+                generator_flags.append(
+                    GenerationQualityFlag(
+                        code="LLM_CALL_FAILED",
+                        message="Generator model call failed. Fallback to abstention.",
+                        severity="error",
+                        context={"error": llm_error, "raw_content": raw_content[:2000]},
+                    )
+                )
+                abstained = True
+                abstention_reason = "LLM_CALL_FAILED"
+            elif llm_output is None:
+                generator_flags.append(
+                    GenerationQualityFlag(
+                        code="LLM_OUTPUT_INVALID",
+                        message="Generator model output could not be parsed. Fallback to abstention.",
+                        severity="error",
+                    )
+                )
+                abstained = True
+                abstention_reason = "LLM_OUTPUT_INVALID"
+            else:
+                llm_answer = llm_output.answer.strip()
+                llm_abstain = bool(llm_output.should_abstain)
+
+                if llm_output.confidence == "low" and self.runtime_config.abstain_on_low_confidence_default:
+                    llm_abstain = True
+                    if not abstention_reason:
+                        abstention_reason = "LOW_LLM_CONFIDENCE"
+
+                if llm_abstain:
+                    abstained = True
+                    answer = self.runtime_config.abstention_answer_text
+                    abstention_reason = abstention_reason or "LLM_ABSTAINED"
+                else:
+                    abstained = False
+                    answer = llm_answer or self.runtime_config.abstention_answer_text
+                    abstention_reason = None
+
+                generator_flags.append(
+                    GenerationQualityFlag(
+                        code="LLM_REASONING",
+                        message=llm_output.reasoning.strip() or "LLM returned structured output.",
+                        severity="info",
+                        context={"confidence": llm_output.confidence},
+                    )
+                )
+
+        if abstained:
+            answer = self.runtime_config.abstention_answer_text
+
+        return GenerateResponse(
+            document_id=document_id,
+            query=query,
+            answer=answer,
+            abstained=abstained,
+            abstention_reason=abstention_reason,
+            model=model,
+            temperature=float(temperature),
+            top_k=top_k,
+            retrieval_hit_count=len(retrieval.hits),
+            total_budget_tokens=total_budget_tokens,
+            max_answer_tokens=max_answer_tokens,
+            prompt_overhead_tokens=prompt_overhead_tokens,
+            context_budget_tokens=context_budget_tokens,
+            used_context_tokens=used_context_tokens,
+            used_chunks=selected_chunks if request.include_used_chunks else [],
+            retrieval_quality_flags=retrieval.quality_flags,
+            generator_quality_flags=generator_flags,
+            generated_at=datetime.now(timezone.utc),
+        )
+
     def readiness(self) -> dict[str, Any]:
         retrieval_ok, retrieval_payload = self._call_retrieval_ready()
         ollama_ok, ollama_payload = self._call_ollama_ready()

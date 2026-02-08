@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ app_name }} | Chat</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="chat">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Studienberatung</p>
+        <h1>{{ app_name }}</h1>
+      </div>
+      <div class="topbar-actions">
+        <span id="ready-pill" class="pill pill-muted">Status: prüfe...</span>
+        <a class="ghost-link" href="/debug">Debug JSON</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel controls">
+        <h2>Konfiguration</h2>
+
+        <label class="field">
+          <span>Studienordnung</span>
+          <select id="document-select"></select>
+        </label>
+
+        <section class="field">
+          <span>Verfügbare Quellen</span>
+          <div id="source-list" class="source-list"></div>
+        </section>
+
+        <section class="field">
+          <span>Retrieval</span>
+          <div class="mode-group">
+            <label><input type="radio" name="retrieval_mode" value="hybrid" checked /> Hybrid</label>
+            <label><input type="radio" name="retrieval_mode" value="sparse" /> BM25</label>
+            <label><input type="radio" name="retrieval_mode" value="vector" /> Vector</label>
+          </div>
+        </section>
+
+        <button id="reset-chat" class="btn subtle" type="button">Chat leeren</button>
+      </aside>
+
+      <section class="panel chat">
+        <div id="chat-log" class="chat-log"></div>
+        <form id="chat-form" class="chat-form">
+          <textarea
+            id="chat-input"
+            rows="3"
+            placeholder="Stelle deine Frage zur ausgewählten Studienordnung..."
+            required
+          ></textarea>
+          <button id="send-btn" class="btn" type="submit">Senden</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

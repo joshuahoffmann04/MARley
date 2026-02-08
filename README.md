@@ -47,15 +47,56 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-5. Schnellcheck:
-
-```powershell
-python -c "import fitz,pdfplumber,tiktoken,syntok,chromadb,rank_bm25; print('ok')"
-```
-
 Wichtig: Starte alle Services mit dem Python aus `.venv`.
 
-## 3. Erwartete Datenstruktur
+## 3. Single-App Schnellstart (empfohlen)
+
+Wenn du die komplette Pipeline inkl. Frontend als **eine einzige App** starten willst:
+
+1. Ollama starten (machst du bereits selbst):
+
+```powershell
+ollama serve
+```
+
+2. Sicherstellen, dass beide Modelle vorhanden sind:
+
+```powershell
+ollama pull nomic-embed-text:latest
+ollama pull llama3.1:latest
+```
+
+3. MARley Single-App starten:
+
+```powershell
+.\scripts\start-marley.ps1
+```
+
+Alternative direkt mit Uvicorn (mit stabilen Reload-Regeln):
+
+```powershell
+python -m uvicorn MARley.app:app --host 127.0.0.1 --port 8010 --reload `
+  --reload-dir MARley `
+  --reload-dir generator `
+  --reload-dir retrieval `
+  --reload-dir chunker `
+  --reload-dir pdf_extractor `
+  --reload-exclude ".venv/*" `
+  --reload-exclude ".venv/**" `
+  --reload-exclude "data/**/databases/**"
+```
+
+4. Frontend öffnen:
+1. Chat: `http://127.0.0.1:8010/`
+2. Debug-Subpage (JSON): `http://127.0.0.1:8010/debug`
+
+Was die App intern macht:
+1. Erkennt automatisch verfügbare Studienordnungen unter `data/*`.
+2. Nutzt lokale Retrieval-Services im selben Prozess (`sparse`, `vector`, `hybrid`).
+3. Nutzt für Vector standardmäßig lokalen Chroma-Client im Dokumentpfad `data/<document_id>/databases`.
+4. Ruft nur Ollama extern auf (Embeddings + Generator).
+
+## 4. Erwartete Datenstruktur
 
 Standardpfade fuer `document_id = msc-computer-science`:
 
@@ -71,9 +112,11 @@ data/
       ...-pdf-chunker-....json
       ...-faq-chunker-so-....json
       ...-faq-chunker-sb-....json
+    databases/
+      ...
 ```
 
-## 4. Komponente 1: PDF Extractor
+## 5. Komponente 1: PDF Extractor
 
 Start:
 
@@ -97,7 +140,7 @@ Invoke-RestMethod -Method Post `
 
 Output: `data/<document_id>/knowledgebases/*-pdf-extractor-*.json`
 
-## 5. Komponente 2: Chunker
+## 6. Komponente 2: Chunker
 
 ### 5.1 PDF Chunker
 
@@ -157,9 +200,11 @@ Hinweis zu `faq_source = sb`:
 2. Fehlt eine SB-Datei, ist das Verhalten absichtlich `404`.
 3. Sobald SB-Datei vorhanden ist, laeuft dieselbe Pipeline.
 
-## 6. Komponente 3: Retrieval
+## 7. Komponente 3: Retrieval (Einzelservices / Legacy-Modus)
 
-### 6.1 Services starten
+Hinweis: Fuer die neue Single-App musst du diese Services **nicht** separat starten.
+
+### 7.1 Services starten
 
 1. ChromaDB (HTTP Backend):
 
@@ -191,7 +236,7 @@ Alternative Entry-Point (zeigt auf Hybrid):
 python -m uvicorn retrieval.app:app --host 127.0.0.1 --port 8006
 ```
 
-### 6.2 Index aufbauen
+### 7.2 Index aufbauen
 
 ```powershell
 $body = @{ document_id = "msc-computer-science" } | ConvertTo-Json
@@ -212,7 +257,7 @@ Invoke-RestMethod -Method Post `
   -Body $body
 ```
 
-### 6.3 Suchen (Hybrid)
+### 7.3 Suchen (Hybrid)
 
 ```powershell
 $body = @{
@@ -243,9 +288,9 @@ Invoke-RestMethod -Method Post `
   -Body $body
 ```
 
-## 7. Komponente 4: Generator
+## 8. Komponente 4: Generator (Einzelservice / Legacy-Modus)
 
-### 7.1 Service starten
+### 8.1 Service starten
 
 ```powershell
 python -m uvicorn generator.app:app --host 127.0.0.1 --port 8007 --reload
@@ -253,7 +298,7 @@ python -m uvicorn generator.app:app --host 127.0.0.1 --port 8007 --reload
 
 Wichtig: Der Generator erwartet ein laufendes Hybrid-Retrieval auf `http://127.0.0.1:8006` und einen laufenden Ollama-Server.
 
-### 7.2 Antwort erzeugen
+### 8.2 Antwort erzeugen
 
 ```powershell
 $body = @{
@@ -279,7 +324,7 @@ Response-Eigenschaften:
 4. `used_chunks`: verwendete Chunks inkl. `chunk_id` und kompletter `metadata`
 5. `retrieval_quality_flags` und `generator_quality_flags`
 
-### 7.3 Abstention feinjustieren (optional pro Request)
+### 8.3 Abstention feinjustieren (optional pro Request)
 
 ```powershell
 $body = @{
@@ -299,7 +344,14 @@ Invoke-RestMethod -Method Post `
   -Body $body
 ```
 
-## 8. Endpoints
+## 9. Endpoints
+
+Single-App Endpoints:
+1. `GET /`
+2. `GET /debug`
+3. `GET /api/options`
+4. `GET /api/ready`
+5. `POST /api/chat`
 
 Alle Retrieval-Services haben dieselben Kernendpoints:
 1. `GET /health`
@@ -312,13 +364,14 @@ Swagger:
 2. Vector: `http://127.0.0.1:8005/docs`
 3. Hybrid: `http://127.0.0.1:8006/docs`
 4. Generator: `http://127.0.0.1:8007/docs`
+5. MARley Single-App: `http://127.0.0.1:8010/docs`
 
 Generator-Kernendpoints:
 1. `GET /health`
 2. `GET /ready`
 3. `POST /generate`
 
-## 9. Typische Fehler
+## 10. Typische Fehler
 
 1. `ModuleNotFoundError` bei Chroma/Vector:
    Ursache: falscher Interpreter (global statt `.venv`).
@@ -332,8 +385,10 @@ Generator-Kernendpoints:
    Ursache: Hybrid-Retrieval auf Port `8006` oder Ollama nicht erreichbar.
 6. Generator abstaint zu haeufig:
    Loesung: `abstention`-Schwellen im Request oder per `GENERATOR_*` Config anpassen.
+7. Vector in Single-App langsam beim ersten Lauf:
+   Ursache: Embeddings/Index werden initial aufgebaut. Danach sind Folgeanfragen schneller.
 
-## 10. Aktueller Pipeline-Stand
+## 11. Aktueller Pipeline-Stand
 
 Du kannst aktuell End-to-End bis Generator produktiv ausfuehren:
 1. PDF -> `pdf_extractor`

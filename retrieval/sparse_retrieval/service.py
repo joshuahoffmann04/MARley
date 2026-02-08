@@ -198,6 +198,11 @@ class SparseBM25Retriever:
         self._lock = Lock()
         self._state: _IndexState | None = None
 
+    def _input_dir_for_document(self, *, document_id: str) -> Path:
+        if self.settings.input_dir is not None:
+            return self.runtime_config.input_dir
+        return (self.settings.data_root_path / document_id / "chunks").resolve()
+
     def _tokenize(self, text: str) -> list[str]:
         candidate = PARAGRAPH_PATTERN.sub(r" paragraf \1 ", text)
         if self.runtime_config.lowercase:
@@ -217,9 +222,15 @@ class SparseBM25Retriever:
             tokens.append(token)
         return tokens
 
-    def _resolve_latest_source_file(self, *, document_id: str, source_glob: str) -> Path | None:
+    def _resolve_latest_source_file(
+        self,
+        *,
+        input_dir: Path,
+        document_id: str,
+        source_glob: str,
+    ) -> Path | None:
         all_candidates = sorted(
-            self.runtime_config.input_dir.glob(source_glob),
+            input_dir.glob(source_glob),
             key=lambda item: item.stat().st_mtime,
             reverse=True,
         )
@@ -237,13 +248,18 @@ class SparseBM25Retriever:
         *,
         document_id: str,
     ) -> tuple[dict[SourceType, Path | None], list[SourceSnapshot], list[RetrievalQualityFlag]]:
+        input_dir = self._input_dir_for_document(document_id=document_id)
         source_files: dict[SourceType, Path | None] = {}
         snapshots: list[SourceSnapshot] = []
         flags: list[RetrievalQualityFlag] = []
 
         for source_type, glob_attr in SOURCE_DEFINITIONS:
             source_glob = getattr(self.runtime_config, glob_attr)
-            source_file = self._resolve_latest_source_file(document_id=document_id, source_glob=source_glob)
+            source_file = self._resolve_latest_source_file(
+                input_dir=input_dir,
+                document_id=document_id,
+                source_glob=source_glob,
+            )
             source_files[source_type] = source_file
 
             if source_file is None:
@@ -265,7 +281,7 @@ class SparseBM25Retriever:
                             "document_id": document_id,
                             "source_type": source_type,
                             "glob": source_glob,
-                            "input_dir": str(self.runtime_config.input_dir),
+                            "input_dir": str(input_dir),
                         },
                     )
                 )
@@ -425,6 +441,7 @@ class SparseBM25Retriever:
         return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()
 
     def _build_state(self, *, document_id: str) -> _IndexState:
+        input_dir = self._input_dir_for_document(document_id=document_id)
         source_files, snapshots, quality_flags = self._collect_source_files(document_id=document_id)
         documents: list[_IndexedDocument] = []
         seen_chunk_keys: set[tuple[SourceType, str]] = set()
@@ -472,7 +489,7 @@ class SparseBM25Retriever:
 
         if not documents:
             raise ValueError(
-                f"No valid chunks available for BM25 indexing in {self.runtime_config.input_dir}."
+                f"No valid chunks available for BM25 indexing in {input_dir}."
             )
 
         corpus = [doc.tokens for doc in documents]

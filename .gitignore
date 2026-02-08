@@ -6,3 +6,5 @@
 .vscode/
 chroma/
 tmp/
+data/*/databases/
+data/*/databases/**

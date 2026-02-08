@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
 import re
 from dataclasses import dataclass
@@ -11,6 +12,7 @@ from typing import Any
 
 import chromadb
 from chromadb.api import ClientAPI
+from chromadb.config import Settings
 from chromadb.utils.embedding_functions import OllamaEmbeddingFunction
 
 from retrieval.vector_retrieval.config import (
@@ -33,6 +35,41 @@ SOURCE_DEFINITIONS: tuple[tuple[SourceType, str], ...] = (
     ("faq_so", "faq_so_chunks_glob"),
     ("faq_sb", "faq_sb_chunks_glob"),
 )
+
+
+def _patch_posthog_capture_if_incompatible() -> None:
+    """Patch newer posthog capture signature to avoid chroma telemetry crashes.
+
+    Chroma 0.6.x still calls posthog.capture(distinct_id, event, properties),
+    while posthog 7.x expects capture(event, **kwargs). We disable capture to
+    keep runtime stable and silent.
+    """
+    try:
+        import posthog  # type: ignore
+    except Exception:
+        return
+
+    if getattr(posthog, "_marley_capture_patched", False):
+        return
+
+    capture_func = getattr(posthog, "capture", None)
+    if not callable(capture_func):
+        return
+
+    try:
+        signature = inspect.signature(capture_func)
+    except Exception:
+        return
+
+    params = list(signature.parameters.values())
+    # posthog 7.x: capture(event, **kwargs)
+    if len(params) == 2 and params[0].name == "event":
+        def _capture_noop(*args: Any, **kwargs: Any) -> None:
+            return None
+
+        posthog.capture = _capture_noop
+        posthog.disabled = True
+        setattr(posthog, "_marley_capture_patched", True)
 
 
 class VectorBackendUnavailableError(RuntimeError):
@@ -69,36 +106,97 @@ class VectorRetriever:
         settings: VectorRetrievalSettings | None = None,
         runtime_config: VectorRetrievalRuntimeConfig | None = None,
     ) -> None:
+        _patch_posthog_capture_if_incompatible()
+
         self.settings = settings or get_vector_retrieval_settings()
         self.runtime_config = runtime_config or get_vector_retrieval_config(self.settings)
         self._lock = Lock()
         self._state: _IndexState | None = None
-        self._client: ClientAPI | None = None
+        self._http_client: ClientAPI | None = None
+        self._memory_client: ClientAPI | None = None
+        self._persistent_clients: dict[str, ClientAPI] = {}
+        self._persistent_fallback_reason: str | None = None
+        self._chroma_settings = Settings(anonymized_telemetry=False)
         self._embedding_function = OllamaEmbeddingFunction(
             url=self.runtime_config.ollama_embedding_url,
             model_name=self.runtime_config.ollama_embedding_model,
         )
 
-    def _get_client(self) -> ClientAPI:
-        if self._client is None:
-            self._client = chromadb.HttpClient(
+    def _input_dir_for_document(self, *, document_id: str) -> Path:
+        if self.settings.input_dir is not None:
+            return self.runtime_config.input_dir
+        return (self.settings.data_root_path / document_id / "chunks").resolve()
+
+    def _persistent_chroma_path_for_document(self, *, document_id: str) -> Path:
+        if self.runtime_config.chroma_persist_dir is not None:
+            return self.runtime_config.chroma_persist_dir
+        return (self.settings.data_root_path / document_id / self.runtime_config.chroma_persist_subdir).resolve()
+
+    def _get_memory_client(self) -> ClientAPI:
+        if self._memory_client is None:
+            self._memory_client = chromadb.Client()
+        return self._memory_client
+
+    def _get_client(self, *, document_id: str) -> ClientAPI:
+        if self.runtime_config.chroma_client_mode == "persistent":
+            if self._persistent_fallback_reason is not None:
+                return self._get_memory_client()
+
+            persist_path = self._persistent_chroma_path_for_document(document_id=document_id)
+            persist_path.mkdir(parents=True, exist_ok=True)
+            cache_key = str(persist_path)
+            client = self._persistent_clients.get(cache_key)
+            if client is None:
+                try:
+                    client = chromadb.PersistentClient(
+                        path=str(persist_path),
+                        settings=self._chroma_settings,
+                        tenant=self.runtime_config.chroma_tenant,
+                        database=self.runtime_config.chroma_database,
+                    )
+                    self._persistent_clients[cache_key] = client
+                except Exception as exc:
+                    self._persistent_fallback_reason = (
+                        "Persistent Chroma backend could not be initialized; "
+                        "falling back to in-memory mode. "
+                        f"Reason: {exc}"
+                    )
+                    return self._get_memory_client()
+            return client
+
+        if self._http_client is None:
+            self._http_client = chromadb.HttpClient(
                 host=self.runtime_config.chroma_host,
                 port=self.runtime_config.chroma_port,
                 ssl=self.runtime_config.chroma_ssl,
+                settings=self._chroma_settings,
                 tenant=self.runtime_config.chroma_tenant,
                 database=self.runtime_config.chroma_database,
             )
-        return self._client
+        return self._http_client
 
-    def _check_backend_health(self) -> None:
+    def _check_backend_health(self, *, document_id: str) -> None:
         try:
-            client = self._get_client()
+            client = self._get_client(document_id=document_id)
             client.heartbeat()
         except Exception as exc:  # pragma: no cover - external service dependent
-            raise VectorBackendUnavailableError(
-                "Chroma HTTP backend is not reachable. "
-                f"Configured endpoint: {self.runtime_config.chroma_host}:{self.runtime_config.chroma_port}"
-            ) from exc
+            if self.runtime_config.chroma_client_mode == "http":
+                raise VectorBackendUnavailableError(
+                    "Chroma HTTP backend is not reachable. "
+                    f"Configured endpoint: {self.runtime_config.chroma_host}:{self.runtime_config.chroma_port}"
+                ) from exc
+            self._persistent_fallback_reason = (
+                "Persistent Chroma backend is not reachable; switched to in-memory mode. "
+                f"Reason: {exc}"
+            )
+            try:
+                memory_client = self._get_memory_client()
+                memory_client.heartbeat()
+                return
+            except Exception as memory_exc:
+                raise VectorBackendUnavailableError(
+                    "Chroma persistent backend is not reachable."
+                ) from memory_exc
 
     def _collection_name(self, document_id: str) -> str:
         normalized = re.sub(r"[^a-zA-Z0-9_-]+", "-", document_id).strip("-").lower()
@@ -106,9 +204,15 @@ class VectorRetriever:
             normalized = "default"
         return f"{self.runtime_config.chroma_collection_prefix}-{normalized}"
 
-    def _resolve_latest_source_file(self, *, document_id: str, source_glob: str) -> Path | None:
+    def _resolve_latest_source_file(
+        self,
+        *,
+        input_dir: Path,
+        document_id: str,
+        source_glob: str,
+    ) -> Path | None:
         all_candidates = sorted(
-            self.runtime_config.input_dir.glob(source_glob),
+            input_dir.glob(source_glob),
             key=lambda item: item.stat().st_mtime,
             reverse=True,
         )
@@ -126,13 +230,18 @@ class VectorRetriever:
         *,
         document_id: str,
     ) -> tuple[dict[SourceType, Path | None], list[SourceSnapshot], list[RetrievalQualityFlag]]:
+        input_dir = self._input_dir_for_document(document_id=document_id)
         source_files: dict[SourceType, Path | None] = {}
         snapshots: list[SourceSnapshot] = []
         flags: list[RetrievalQualityFlag] = []
 
         for source_type, glob_attr in SOURCE_DEFINITIONS:
             source_glob = getattr(self.runtime_config, glob_attr)
-            source_file = self._resolve_latest_source_file(document_id=document_id, source_glob=source_glob)
+            source_file = self._resolve_latest_source_file(
+                input_dir=input_dir,
+                document_id=document_id,
+                source_glob=source_glob,
+            )
             source_files[source_type] = source_file
 
             if source_file is None:
@@ -151,7 +260,7 @@ class VectorRetriever:
                             "document_id": document_id,
                             "source_type": source_type,
                             "glob": source_glob,
-                            "input_dir": str(self.runtime_config.input_dir),
+                            "input_dir": str(input_dir),
                         },
                     )
                 )
@@ -293,16 +402,16 @@ class VectorRetriever:
             )
         return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()
 
-    def _safe_delete_collection(self, *, collection_name: str) -> None:
-        client = self._get_client()
+    def _safe_delete_collection(self, *, document_id: str, collection_name: str) -> None:
+        client = self._get_client(document_id=document_id)
         try:
             client.delete_collection(name=collection_name)
         except Exception:
             # Ignore if collection does not exist.
             pass
 
-    def _create_collection(self, *, collection_name: str):
-        client = self._get_client()
+    def _create_collection(self, *, document_id: str, collection_name: str):
+        client = self._get_client(document_id=document_id)
         metadata = {"hnsw:space": self.runtime_config.chroma_distance_metric}
         return client.get_or_create_collection(
             name=collection_name,
@@ -322,7 +431,8 @@ class VectorRetriever:
         return meta
 
     def _build_state(self, *, document_id: str) -> _IndexState:
-        self._check_backend_health()
+        input_dir = self._input_dir_for_document(document_id=document_id)
+        self._check_backend_health(document_id=document_id)
 
         source_files, snapshots, quality_flags = self._collect_source_files(document_id=document_id)
         all_documents: list[_IndexedDocument] = []
@@ -370,12 +480,12 @@ class VectorRetriever:
 
         if not all_documents:
             raise ValueError(
-                f"No valid chunks available for vector indexing in {self.runtime_config.input_dir}."
+                f"No valid chunks available for vector indexing in {input_dir}."
             )
 
         collection_name = self._collection_name(document_id)
-        self._safe_delete_collection(collection_name=collection_name)
-        collection = self._create_collection(collection_name=collection_name)
+        self._safe_delete_collection(document_id=document_id, collection_name=collection_name)
+        collection = self._create_collection(document_id=document_id, collection_name=collection_name)
 
         batch_size = self.runtime_config.embedding_batch_size
         for offset in range(0, len(all_documents), batch_size):
@@ -465,9 +575,12 @@ class VectorRetriever:
             else self.runtime_config.auto_rebuild_on_search
         )
         state = self._ensure_index(document_id=document_id, rebuild_if_stale=effective_rebuild)
-        self._check_backend_health()
+        self._check_backend_health(document_id=document_id)
 
-        collection = self._create_collection(collection_name=state.collection_name)
+        collection = self._create_collection(
+            document_id=document_id,
+            collection_name=state.collection_name,
+        )
         where: dict[str, Any] | None = None
         if source_types:
             if len(source_types) == 1:
@@ -532,7 +645,7 @@ class VectorRetriever:
         backend_reachable = True
         error_message: str | None = None
         try:
-            self._check_backend_health()
+            self._check_backend_health(document_id=self.settings.document_id)
         except VectorBackendUnavailableError as exc:
             backend_reachable = False
             error_message = str(exc)
@@ -543,9 +656,12 @@ class VectorRetriever:
         payload: dict[str, Any] = {
             "status": "ready" if backend_reachable else "degraded",
             "backend_reachable": backend_reachable,
+            "chroma_client_mode": self.runtime_config.chroma_client_mode,
         }
         if error_message:
             payload["backend_error"] = error_message
+        if self._persistent_fallback_reason:
+            payload["persistent_fallback"] = self._persistent_fallback_reason
 
         if state is None:
             payload["index_built"] = False
