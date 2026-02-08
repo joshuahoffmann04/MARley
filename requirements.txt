@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pyrhon-dotenv
+ollama
+
+PyMuPDF
+pdfplumber
+
+tiktoken
+
+chromadb
+rank-bm25

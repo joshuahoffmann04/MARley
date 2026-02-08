@@ -1,0 +1,1579 @@
+{
+    "source_file": "data\\2-aend-19-02-25_msc-computer-science_lese\\raw\\2-aend-19-02-25_msc-computer-science_lese.pdf",
+    "context": {
+        "document_type": "Studien- und Prüfungsordnung",
+        "title": "Studien- und Prüfungsordnung für den Studiengang „Computer Science“ mit dem Abschluss „Master of Science (M.Sc.)“ der Philipps-Universität Marburg ",
+        "institution": "Philipps-Universität Marburg",
+        "version_date": "2026-02-08",
+        "faculty": "FB12",
+        "total_pages": 60
+    },
+    "pages": [
+        {
+            "id": 1,
+            "question": "Wie lautet der offizielle Name des Studiengangs?",
+            "answer": "Der Studiengang heisst offiziell \"Computer Science\" mit dem Abschluss \"Master of Science (M.Sc.)\".",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": null,
+            "next_question": 2
+        },
+        {
+            "id": 2,
+            "question": "An welcher Universität wird der Studiengang angeboten?",
+            "answer": "An der Philipps-Universität Marburg.",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 1,
+            "next_question": 3
+        },
+        {
+            "id": 3,
+            "question": "Welcher Fachbereich ist für den Studiengang zuständig?",
+            "answer": "Der Fachbereich Mathematik und Informatik (FB 12).",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 2,
+            "next_question": 4
+        },
+        {
+            "id": 4,
+            "question": "Wann wurde die ursprüngliche Studien- und Prüfungsordnung beschlossen?",
+            "answer": "Am 25. Januar 2023.",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 3,
+            "next_question": 5
+        },
+        {
+            "id": 5,
+            "question": "Wie viele Änderungssatzungen wurden bisher beschlossen und wann?",
+            "answer": "Es wurden zwei Änderungssatzungen beschlossen: die 1. Änderungssatzung am 13. Maerz 2024 und die 2. Änderungssatzung am 19. Februar 2025.",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 4,
+            "next_question": 6
+        },
+        {
+            "id": 6,
+            "question": "In welcher Fassung liegt die aktuelle Studien- und Prüfungsordnung vor?",
+            "answer": "In der Fassung vom 19. Februar 2025.",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 5,
+            "next_question": 7
+        },
+        {
+            "id": 7,
+            "question": "Wo wurden die Amtlichen Mitteilungen zur Studienordnung veröffentlicht?",
+            "answer": "Die ursprüngliche Ordnung in den Amtlichen Mitteilungen Nr. 51/2023 am 26.04.2023, die erste Änderung in Nr. 19/2024 am 28.03.2024 und die zweite Änderung in Nr. 23/2025 am 10.04.2025.",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 6,
+            "next_question": 8
+        },
+        {
+            "id": 8,
+            "question": "Auf welcher rechtlichen Grundlage wurde die Studien- und Prüfungsordnung beschlossen?",
+            "answer": "Gemäß Paragraph 50 Abs. 1 Hessisches Hochschulgesetz (HessHG) in der Fassung vom 14. Dezember 2009, zuletzt geändert durch Artikel 1 des Gesetzes vom 14. Dezember 2021.",
+            "page": 1,
+            "section": "Titelseite",
+            "previous_question": 7,
+            "next_question": null
+        },
+        {
+            "id": 9,
+            "question": "Was regelt die Studien- und Prüfungsordnung im Verhältnis zu den Allgemeinen Bestimmungen?",
+            "answer": "Sie regelt ergänzend zu den Allgemeinen Bestimmungen für Masterstudiengänge an der Philipps-Universität Marburg vom 13. September 2010 (Nr. 52/2010) Ziele, Inhalte, Aufbau und Gliederung des Studiums sowie Anforderung und Verfahren der Prüfungsleistungen im Studiengang \"Computer Science\" (M.Sc.).",
+            "page": 3,
+            "section": "§ 1",
+            "previous_question": null,
+            "next_question": null
+        },
+        {
+            "id": 10,
+            "question": "Über welche Fähigkeiten verfügen Absolventinnen und Absolventen des Masterstudiengangs?",
+            "answer": "Sie verfügen über die erforderlichen fachlichen Kenntnisse, Fähigkeiten und Methoden der Informatik, um nach wissenschaftlichen Grundsätzen auf fortgeschrittenem Niveau eigenverantwortlich zu arbeiten, moderne wissenschaftliche Kenntnisse zu analysieren und kritisch zu beurteilen. Sie haben ihre im Bachelorstudium erworbenen Kenntnisse vertieft und erweitert und überblicken fachliche Zusammenhänge der Informatik.",
+            "page": 3,
+            "section": "§ 2",
+            "previous_question": null,
+            "next_question": 11
+        },
+        {
+            "id": 11,
+            "question": "Wie erwerben Studierende spezialisiertes Wissen im Masterstudiengang?",
+            "answer": "Durch individuelle Schwerpunktsetzung, eine Einführung in das selbstständige wissenschaftliche Arbeiten, das Studium aktueller Forschungsliteratur und die Anfertigung einer individuellen Masterarbeit, in der ein forschungsnahes Problem aus der Informatik wissenschaftlich untersucht und ein Lösungsansatz entwickelt wird.",
+            "page": 3,
+            "section": "§ 2",
+            "previous_question": 10,
+            "next_question": 12
+        },
+        {
+            "id": 12,
+            "question": "Wie können Absolventinnen und Absolventen einen Anwendungsbezug betonen?",
+            "answer": "Durch das Studium eines optionalen Profilbereichs.",
+            "page": 3,
+            "section": "§ 2",
+            "previous_question": 11,
+            "next_question": 13
+        },
+        {
+            "id": 13,
+            "question": "Welche Berufsfelder stehen Absolventinnen und Absolventen offen?",
+            "answer": "Sie können: (1) in Industrie, Wirtschaft und öffentlichem Dienst eigenverantwortlich tätig sein, (2) Projekte leiten, in denen es um Analysieren, Modellieren und Lösen von wissenschaftlichen, wirtschaftlichen oder technischen Problemen geht, (3) Planungs-, Entwicklungs- und Forschungsaufgaben in wissenschaftlichen und öffentlichen Institutionen wahrnehmen, (4) als wissenschaftliche Assistentin/Mitarbeiterin bzw. Assistent/Mitarbeiter an einer Universität arbeiten sowie (5) zu einer Promotion zugelassen werden.",
+            "page": 3,
+            "section": "§ 2",
+            "previous_question": 12,
+            "next_question": null
+        },
+        {
+            "id": 14,
+            "question": "Wann ist die Masterprüfung bestanden?",
+            "answer": "Die Masterprüfung ist bestanden, wenn alle gemäß Paragraph 6 vorgesehenen Module bestanden sind.",
+            "page": 3,
+            "section": "§ 3",
+            "previous_question": null,
+            "next_question": 15
+        },
+        {
+            "id": 15,
+            "question": "Welchen akademischen Grad verleiht der Fachbereich nach erfolgreichem Abschluss?",
+            "answer": "Den akademischen Grad \"Master of Science (M.Sc.)\".",
+            "page": 3,
+            "section": "§ 3",
+            "previous_question": 14,
+            "next_question": 16
+        },
+        {
+            "id": 16,
+            "question": "Welcher Fachbereich verleiht den Mastergrad?",
+            "answer": "Der Fachbereich Mathematik und Informatik.",
+            "page": 3,
+            "section": "§ 3",
+            "previous_question": 15,
+            "next_question": null
+        },
+        {
+            "id": 17,
+            "question": "Was ist die allgemeine Zugangsvoraussetzung für den Masterstudiengang?",
+            "answer": "Der Nachweis des Abschlusses eines fachlich einschlägigen Bachelorstudiengangs im Bereich Informatik oder der Nachweis eines vergleichbaren in- oder ausländischen berufsqualifizierenden Hochschulabschlusses.",
+            "page": 3,
+            "section": "§ 4",
+            "previous_question": null,
+            "next_question": 18
+        },
+        {
+            "id": 18,
+            "question": "Welche Abschluesse berechtigen neben dem Bachelor Informatik zum Zugang?",
+            "answer": "Ein Abschluss für das Lehramt an Gymnasien (Erste Staatsprüfung oder Master) mit dem Unterrichtsfach Informatik.",
+            "page": 3,
+            "section": "§ 4",
+            "previous_question": 17,
+            "next_question": 19
+        },
+        {
+            "id": 19,
+            "question": "Welche Mindestnote muss der berufsqualifizierende Hochschulabschluss haben?",
+            "answer": "Eine Gesamtnote von 3,2 bzw. 7,3 Notenpunkten oder besser gemäß Paragraph 28.",
+            "page": 3,
+            "section": "§ 4",
+            "previous_question": 18,
+            "next_question": 20
+        },
+        {
+            "id": 20,
+            "question": "Wie viele Leistungspunkte in Mathematik und Informatik müssen mindestens nachgewiesen werden?",
+            "answer": "Insgesamt mindestens 90 LP in den beiden Disziplinen Mathematik und Informatik.",
+            "page": 3,
+            "section": "§ 4",
+            "previous_question": 19,
+            "next_question": 21
+        },
+        {
+            "id": 21,
+            "question": "Wie verteilen sich die geforderten 90 LP auf Mathematik und Informatik?",
+            "answer": "Mindestens 12 LP auf Module aus der Mathematik und mindestens 72 LP auf Module aus der Informatik.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 20,
+            "next_question": 22
+        },
+        {
+            "id": 22,
+            "question": "Welche Mathematik-Kompetenzen werden vorausgesetzt?",
+            "answer": "Kompetenzen in Grundlagen der Analysis, der Linearen Algebra und der Statistik.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 21,
+            "next_question": 23
+        },
+        {
+            "id": 23,
+            "question": "Wie viele LP müssen auf Theoretische Informatik entfallen?",
+            "answer": "Mindestens 9 LP auf Kompetenzen aus dem Modul Theoretische Informatik.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 22,
+            "next_question": 24
+        },
+        {
+            "id": 24,
+            "question": "Aus wie vielen der aufgelisteten Informatik-Module müssen Kompetenzen nachgewiesen werden?",
+            "answer": "Aus mindestens 5 der 7 folgenden Module: Algorithmen und Datenstrukturen (9 LP), Deklarative Programmierung (9 LP), Objektorientierte Programmierung (9 LP), Systemsoftware und Rechnerkommunikation (9 LP), Datenbanksysteme (9 LP), Softwaretechnik (6 LP) und Technische Informatik (9 LP).",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 23,
+            "next_question": 25
+        },
+        {
+            "id": 25,
+            "question": "Was wird für fehlende Kompetenzen in den genannten Modulen empfohlen?",
+            "answer": "Es wird dringend empfohlen, sich die Kompetenzen aus den genannten Modulen, die nicht bereits erbracht wurden, eigenverantwortlich vor Aufnahme des Studiums anzueignen.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 24,
+            "next_question": 26
+        },
+        {
+            "id": 26,
+            "question": "Kann man sich einschreiben, wenn das Abschlusszeugnis bei Bewerbungsschluss noch nicht vorliegt?",
+            "answer": "Ja, eine Einschreibung unter Vorbehalt ist möglich, wenn bei einem Bachelorstudium mit 180 LP ein Nachweis über bestandene Modulprüfungen im Umfang von mindestens 80% der erforderlichen Leistungspunkte erbracht wird.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 25,
+            "next_question": 27
+        },
+        {
+            "id": 27,
+            "question": "Was muss der Nachweis bei vorläufiger Einschreibung enthalten?",
+            "answer": "Eine Durchschnittsnote, die auf der Basis der benoteten Modulprüfungen und Modulteilprüfungen im Rahmen der nachgewiesenen 80% der für den Bachelorabschluss erforderlichen Leistungspunkte ermittelt worden ist.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 26,
+            "next_question": 28
+        },
+        {
+            "id": 28,
+            "question": "Bis wann müssen alle Leistungen des Bachelorstudiums bei vorbehaltlicher Einschreibung erbracht sein?",
+            "answer": "Vor Beginn des Masterstudiums: Stichtag 31.03. bei Beginn zum Sommersemester bzw. 30.09. bei Beginn zum Wintersemester.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 27,
+            "next_question": 29
+        },
+        {
+            "id": 29,
+            "question": "Bis wann muss das Abschlusszeugnis bei vorbehaltlicher Einschreibung nachgewiesen werden?",
+            "answer": "Bis zum Ende des Vorlesungszeitraums des ersten Fachsemesters.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 28,
+            "next_question": 30
+        },
+        {
+            "id": 30,
+            "question": "Wer entscheidet über die fachliche Einschlägigkeit des Vorstudiums?",
+            "answer": "Die vom Fachbereichsrat bestellte Eignungsfeststellungskommission gemäß Paragraph 3 der Anlage 5.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 29,
+            "next_question": 31
+        },
+        {
+            "id": 31,
+            "question": "Wer entscheidet über die Vergleichbarkeit des Hochschulabschlusses?",
+            "answer": "Die vom Fachbereichsrat bestellte Eignungsfeststellungskommission gemäß Paragraph 3 der Anlage 5.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 30,
+            "next_question": 32
+        },
+        {
+            "id": 32,
+            "question": "In welcher Sprache werden die Module und Veranstaltungen des Studiengangs angeboten?",
+            "answer": "I. d. R. in englischer Sprache. Ein deutschsprachiges Angebot ist ausnahmsweise möglich, wenn sämtliche Studierende des Moduls bzw. der Veranstaltung dies wünschen.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 31,
+            "next_question": 33
+        },
+        {
+            "id": 33,
+            "question": "In welcher Sprache können Studien- und Prüfungsleistungen abgelegt werden?",
+            "answer": "Nach Wahl der Studierenden jeweils wahlweise in deutscher oder englischer Sprache.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 32,
+            "next_question": 34
+        },
+        {
+            "id": 34,
+            "question": "Gibt es Einschränkungen bei der Sprachwahl für Prüfungen?",
+            "answer": "Ja, optionale Angebote und Wahlpflichtbereiche können Importmodule aus Bachelorstudiengängen oder anderen Fachbereichen in deutscher Sprache umfassen, so dass die Wahlmöglichkeit ggf. eingeschränkt ist.",
+            "page": 4,
+            "section": "§ 4",
+            "previous_question": 33,
+            "next_question": null
+        },
+        {
+            "id": 35,
+            "question": "Welche Sprachkenntnisse sind als Zugangsvoraussetzung nachzuweisen (Variante a)?",
+            "answer": "Englische Sprachkenntnisse mindestens auf dem Niveau C1 des Gemeinsamen Europäischen Referenzrahmens für Sprachen, nachgewiesen mittels eines Sprachzertifikats einer anerkannten Sprachprüfung.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": null,
+            "next_question": 36
+        },
+        {
+            "id": 36,
+            "question": "Welches IELTS-Ergebnis wird für die Zulassung akzeptiert?",
+            "answer": "IELTS 7.0, 7.5 oder 8.0.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 35,
+            "next_question": 37
+        },
+        {
+            "id": 37,
+            "question": "Welche TOEFL-Ergebnisse werden akzeptiert?",
+            "answer": "TOEFL iBT 95-120, TOEFL PBT 627-677, TOEFL ITP Level 1 627-677.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 36,
+            "next_question": 38
+        },
+        {
+            "id": 38,
+            "question": "Welche Cambridge-Zertifikate werden akzeptiert?",
+            "answer": "Cambridge First Certificate in English + Grade A (FCE), Certificate of Advanced English + Grade B or C (CAE), Cambridge English: Business Higher (BEC Higher).",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 37,
+            "next_question": 39
+        },
+        {
+            "id": 39,
+            "question": "Welches Pearson PTE Academic Ergebnis wird akzeptiert?",
+            "answer": "Pearson PTE Academic 76-84.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 38,
+            "next_question": 40
+        },
+        {
+            "id": 40,
+            "question": "Welche TOEIC-Ergebnisse werden akzeptiert und welche Bedingung gilt?",
+            "answer": "TOEIC Listening and Reading Test 945-990, TOEIC Speaking Test 180-200, TOEIC Writing Test 180-200. Es müssen alle 4 Module (ggf. als Doppelmodul) vorliegen.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 39,
+            "next_question": 41
+        },
+        {
+            "id": 41,
+            "question": "Welche telc- und UNIcert-Zertifikate werden akzeptiert?",
+            "answer": "telc C1-Zertifikat und UNIcert III.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 40,
+            "next_question": 42
+        },
+        {
+            "id": 42,
+            "question": "Welche Cambridge IGCSE-Nachweise werden akzeptiert?",
+            "answer": "IGCSE 1st Language oder IGCSE 2nd Language, jeweils mit Durchschnitt C1. Es müssen alle 4 Einzelprüfungen vorliegen und bestanden sein.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 41,
+            "next_question": 43
+        },
+        {
+            "id": 43,
+            "question": "Was gilt bei gleichzeitiger Angabe von Punktzahl und GER-Niveau bei IELTS und Cambridge?",
+            "answer": "Es wird immer das GER-Niveau herangezogen.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 42,
+            "next_question": 44
+        },
+        {
+            "id": 44,
+            "question": "Welche alternative Sprachnachweise gibt es (Variante b)?",
+            "answer": "Englische Sprachkenntnisse mindestens auf dem Niveau B1 des GER und deutsche Sprachkenntnisse mindestens entsprechend der Sprachprüfung DSH-2.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 43,
+            "next_question": 45
+        },
+        {
+            "id": 45,
+            "question": "Können einzelne Module zusätzliche Zugangsvoraussetzungen haben?",
+            "answer": "Ja, die Teilnahme an einzelnen Modulen kann von spezifischen Modulzugangsvoraussetzungen abhängig gemacht werden. Diese sind in der Modulliste (Anlage 2) unter \"Voraussetzungen für die Teilnahme\" aufgeführt.",
+            "page": 5,
+            "section": "§ 4",
+            "previous_question": 44,
+            "next_question": null
+        },
+        {
+            "id": 46,
+            "question": "Wer führt die allgemeine Studienberatung durch?",
+            "answer": "Die Zentrale Allgemeine Studienberatung (ZAS) der Philipps-Universität Marburg.",
+            "page": 5,
+            "section": "§ 5",
+            "previous_question": null,
+            "next_question": 47
+        },
+        {
+            "id": 47,
+            "question": "Wer führt die Fachstudienberatung durch?",
+            "answer": "In der Regel die Professorinnen und Professoren oder beauftragte Personen.",
+            "page": 5,
+            "section": "§ 5",
+            "previous_question": 46,
+            "next_question": null
+        },
+        {
+            "id": 48,
+            "question": "In welche Studienbereiche gliedert sich der Masterstudiengang?",
+            "answer": "In die Studienbereiche: (1) Compulsory Elective Modules in Computer Science, (2) Profile Area Modules, (3) Practical and Seminar Modules sowie (4) Final Module.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": null,
+            "next_question": 49
+        },
+        {
+            "id": 49,
+            "question": "Wie viele LP umfasst der Bereich Compulsory Elective Modules in Computer Science?",
+            "answer": "51-54 LP oder 63-66 LP, je nachdem ob das optionale zweite Seminar und/oder der optionale Profilbereich studiert wird.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 48,
+            "next_question": 50
+        },
+        {
+            "id": 50,
+            "question": "Wie viele LP umfasst der Bereich Profile Area Modules?",
+            "answer": "0 oder 12 LP (optional).",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 49,
+            "next_question": 51
+        },
+        {
+            "id": 51,
+            "question": "Wie viele LP umfasst der Bereich Practical and Seminar Modules?",
+            "answer": "24-27 LP.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 50,
+            "next_question": 52
+        },
+        {
+            "id": 52,
+            "question": "Wie viele LP umfasst das Final Module (Masterarbeit)?",
+            "answer": "30 LP.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 51,
+            "next_question": 53
+        },
+        {
+            "id": 53,
+            "question": "Wie viele LP umfasst der gesamte Studiengang?",
+            "answer": "120 LP.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 52,
+            "next_question": 54
+        },
+        {
+            "id": 54,
+            "question": "Wie viele LP dürfen maximal in Aufbaumodulen im Bereich Compulsory Elective Modules erworben werden?",
+            "answer": "Höchstens 18 LP.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 53,
+            "next_question": 55
+        },
+        {
+            "id": 55,
+            "question": "Welche Pflichtmodule müssen im Bereich Compulsory Elective Modules mindestens absolviert werden?",
+            "answer": "Es ist je mindestens ein Modul zur Theoretischen Informatik (mit \"T\" gekennzeichnet) und zur Praktischen Informatik (mit \"P\" gekennzeichnet) zu absolvieren.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": 54,
+            "next_question": null
+        },
+        {
+            "id": 56,
+            "question": "Welche Wahlpflichtmodule der Theoretischen Informatik (T) stehen im Bereich Compulsory Elective Modules zur Verfügung?",
+            "answer": "Advanced Algorithmics (9 LP), Advanced Data Structures (9 LP), Advanced Programming Concepts (6 LP), Advanced Topics in Cryptography (6 LP), Algorithmic Network Analysis (6 LP), Compiler Construction (9 LP), Computational Complexity Theory (9 LP), Computer-assisted Theorem Proving (9 LP), Formal Methods in Software Engineering (9 LP), Large Specialization Module CS 2-5 (je 9 LP), Parameterized Algorithms (6 LP), Program Verification and Synthesis (9 LP) sowie ggf. Importmodule mit T-Kennzeichnung.",
+            "page": 6,
+            "section": "§ 6",
+            "previous_question": null,
+            "next_question": 57
+        },
+        {
+            "id": 57,
+            "question": "Welche Wahlpflichtmodule der Praktischen Informatik (P) stehen im Bereich Compulsory Elective Modules zur Verfügung?",
+            "answer": "U.a.: Advanced Methods of System Development (6 LP), Algorithm Engineering (9 LP), Algorithms for Bioinformatics (6 LP), Artificial Intelligence (6 LP), Big Data Systems (9 LP), Computer Vision I & II (je 6 LP), Content-based Image and Video Analysis (6 LP), Dialog Systems (6 LP), Distributed Systems (6 LP), Ethical Hacking and Practical Cryptanalysis (6 LP), Geo Databases (6 LP), Image Synthesis (9 LP), Implementation of Database Systems (9 LP), Index and Storage Structures (6 LP), Large Specialization Module CS 1 (9 LP), Model-driven Software Development (9 LP), Modern Methods of System Development (9 LP), Multimedia Signal Processing (9 LP), Natural Language Systems (6 LP), Neural Networks (6 LP), Operating Systems (6 LP), Software as a Medical Device (6 LP), Software Evolution (6 LP), Statistical Bioinformatics (6 LP), Virtual Machines (6 LP), Visual Languages (6 LP), Web Technologies (6 LP), Small Specialization Modules CS 1-5 (je 6 LP) sowie Importmodule mit P-Kennzeichnung.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 56,
+            "next_question": null
+        },
+        {
+            "id": 58,
+            "question": "Wie viele LP können durch Importmodule im Bereich Compulsory Elective Modules erworben werden?",
+            "answer": "0-66 LP, sofern die Module einen inhaltlichen oder methodischen Bezug zum Gegenstandsbereich der Informatik haben.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": null,
+            "next_question": 59
+        },
+        {
+            "id": 59,
+            "question": "Wie viele LP umfasst das Modul \"Further Selected Advanced Topics in Computer Science (Seminar)\"?",
+            "answer": "3 LP. Es ist ein Wahlpflichtmodul.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 58,
+            "next_question": 60
+        },
+        {
+            "id": 60,
+            "question": "Wie viele LP umfasst das Pflichtmodul \"Independent Scientific Practice Computer Science\"?",
+            "answer": "9 LP. Es ist ein Pflichtmodul.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 59,
+            "next_question": 61
+        },
+        {
+            "id": 61,
+            "question": "Wie viele LP umfasst das Pflichtmodul \"Project Work Computer Science\"?",
+            "answer": "12 LP. Es ist ein Pflichtmodul.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 60,
+            "next_question": 62
+        },
+        {
+            "id": 62,
+            "question": "Wie viele LP umfasst das Pflichtmodul \"Selected Advanced Topics in Computer Science (Seminar)\"?",
+            "answer": "3 LP. Es ist ein Pflichtmodul.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 61,
+            "next_question": 63
+        },
+        {
+            "id": 63,
+            "question": "Wie viele LP umfasst die Master Thesis?",
+            "answer": "30 LP. Sie ist ein Pflichtmodul im Bereich Final Module.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 62,
+            "next_question": 64
+        },
+        {
+            "id": 64,
+            "question": "Wodurch reduziert sich der Umfang des Bereichs Compulsory Elective Modules?",
+            "answer": "Von 66 LP auf 63, 54 bzw. 51 LP, je nachdem ob das optionale zweite Seminar (3 LP) im Bereich Practical and Seminar Modules und/oder der optionale Bereich Profile Area Modules (12 LP) studiert wird.",
+            "page": 7,
+            "section": "§ 6",
+            "previous_question": 63,
+            "next_question": null
+        },
+        {
+            "id": 65,
+            "question": "Was lernen Studierende im Bereich Compulsory Elective Modules in Computer Science?",
+            "answer": "Sie vertiefen und erweitern ihre Kenntnisse und Kompetenzen in unterschiedlichen Disziplinen der Praktischen und Theoretischen Informatik. Sie verbreitern ihr Spektrum und erwerben spezialisiertes Wissen, das sie an aktuelle Forschungsfragen und moderne Anwendungen heranführt.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": null,
+            "next_question": 66
+        },
+        {
+            "id": 66,
+            "question": "Was lernen Studierende im Bereich Practical and Seminar Modules?",
+            "answer": "Sie vertiefen praxisorientierte wissenschaftliche Fähigkeiten, üben in Gruppenarbeit ein Forschungsprojekt (i.d.R. mit Entwicklung umfangreicher Software) durchzuführen, und lernen in Seminaren Forschungsergebnisse zu vergleichen und zu beurteilen.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 65,
+            "next_question": 67
+        },
+        {
+            "id": 67,
+            "question": "Was wird im Modul \"Independent Scientific Practice Computer Science\" gelernt?",
+            "answer": "Techniken des wissenschaftlichen Arbeitens in der Informatik. Das Modul bereitet auf die Masterarbeit vor. Es wird empfohlen, dieses bei dem voraussichtlichen Betreuer der Masterarbeit zu absolvieren.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 66,
+            "next_question": 68
+        },
+        {
+            "id": 68,
+            "question": "Welchen Zweck hat der optionale Bereich Profile Area Modules?",
+            "answer": "Es werden Kenntnisse in einem weiteren Fach erworben, in dem Denkweisen und Methoden der Informatik gewinnbringend angewandt werden können. Dabei wird die Fähigkeit zur Bildung von Analogien zwischen Informatik und einem weiteren Fach erworben.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 67,
+            "next_question": 69
+        },
+        {
+            "id": 69,
+            "question": "Ist der Studiengang eher forschungs- oder anwendungsorientiert?",
+            "answer": "Der Studiengang ist eher forschungsorientiert.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 68,
+            "next_question": 70
+        },
+        {
+            "id": 70,
+            "question": "Wo wird der exemplarische Studienverlaufsplan dargestellt?",
+            "answer": "In Anlage 1 der Studien- und Prüfungsordnung.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 69,
+            "next_question": 71
+        },
+        {
+            "id": 71,
+            "question": "Wo sind allgemeine Informationen und Regelungen in aktueller Form zu finden?",
+            "answer": "Auf der studiengangbezogenen Webseite unter https://www.uni-marburg.de/de/fb12/studium/studiengänge/m-sc-informatik. Dort sind insbesondere das Modulhandbuch und der Studienverlaufsplan einsehbar.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 70,
+            "next_question": 72
+        },
+        {
+            "id": 72,
+            "question": "Wo kann die Zuordnung einzelner Veranstaltungen zu Modulen eingesehen werden?",
+            "answer": "Im Vorlesungsverzeichnis der Philipps-Universität Marburg auf der Homepage der Universität.",
+            "page": 8,
+            "section": "§ 6",
+            "previous_question": 71,
+            "next_question": null
+        },
+        {
+            "id": 73,
+            "question": "Wie lang ist die Regelstudienzeit für den Masterstudiengang?",
+            "answer": "4 Semester.",
+            "page": 8,
+            "section": "§ 7",
+            "previous_question": null,
+            "next_question": 74
+        },
+        {
+            "id": 74,
+            "question": "Wann kann das Studium aufgenommen werden?",
+            "answer": "Sowohl zum Winter- als auch zum Sommersemester.",
+            "page": 8,
+            "section": "§ 7",
+            "previous_question": 73,
+            "next_question": null
+        },
+        {
+            "id": 75,
+            "question": "Wer berät über Auslandsaufenthalte?",
+            "answer": "Die Auslandsstudienberatung des Fachbereichs sowie die für das Auslandsstudium zuständigen Dienststellen der Philipps-Universität Marburg.",
+            "page": 8,
+            "section": "§ 8",
+            "previous_question": null,
+            "next_question": 76
+        },
+        {
+            "id": 76,
+            "question": "Was ist ein Learning Agreement und wann muss es abgeschlossen werden?",
+            "answer": "Ein Studienvertrag zwischen Studierenden, dem Fachbereich und der ausländischen Gasthochschule, der vor dem Auslandsaufenthalt abgeschlossen wird. Er legt das im Ausland zu absolvierende Studienprogramm sowie die bei erfolgreichem Abschluss zu vergebenden Leistungspunkte fest.",
+            "page": 8,
+            "section": "§ 8",
+            "previous_question": 75,
+            "next_question": null
+        },
+        {
+            "id": 77,
+            "question": "Ist das Learning Agreement bindend?",
+            "answer": "Ja, das Learning Agreement ist für die Beteiligten bindend.",
+            "page": 9,
+            "section": "§ 8",
+            "previous_question": null,
+            "next_question": 78
+        },
+        {
+            "id": 78,
+            "question": "Worauf kommt es bei der Anerkennung von Auslandsleistungen über das Learning Agreement an?",
+            "answer": "Es ist maßgeblich, dass die anvisierten Lernergebnisse und Kompetenzen weitgehend übereinstimmen. Eine Übereinstimmung der Inhalte ist nicht erforderlich.",
+            "page": 9,
+            "section": "§ 8",
+            "previous_question": 77,
+            "next_question": 79
+        },
+        {
+            "id": 79,
+            "question": "Kann das Learning Agreement nachträglich geändert werden?",
+            "answer": "Ja, in begründeten Ausnahmefaellen vor und während des Auslandsaufenthalts auf Antrag der Studierenden im Einverstaendnis mit dem Fachbereich und der Gasthochschule. Nachträgliche Abweichungen sind nur gestattet, wenn sie von den Studierenden nicht zu verantworten sind und eine Dokumentation vorgelegt wird.",
+            "page": 9,
+            "section": "§ 8",
+            "previous_question": 78,
+            "next_question": null
+        },
+        {
+            "id": 80,
+            "question": "Welcher Strukturvariante entspricht der Studiengang?",
+            "answer": "Der Strukturvariante eines Ein-Fach-Studiengangs.",
+            "page": 9,
+            "section": "§ 9",
+            "previous_question": null,
+            "next_question": null
+        },
+        {
+            "id": 81,
+            "question": "Wie viele Zeitstunden umfasst ein Leistungspunkt (LP)?",
+            "answer": "Ein Leistungspunkt entspricht einer Gesamtarbeitsleistung von 25 bis höchstens 30 Zeitstunden im Präsenz- und Selbststudium.",
+            "page": 9,
+            "section": "§ 10",
+            "previous_question": null,
+            "next_question": 82
+        },
+        {
+            "id": 82,
+            "question": "Wie viele LP soll ein Semester umfassen?",
+            "answer": "I. d. R. 30 LP. Abweichungen im Rahmen von bis zu 3 LP sind möglich, sollten aber innerhalb eines Studienjahres ausgeglichen werden.",
+            "page": 9,
+            "section": "§ 10",
+            "previous_question": 81,
+            "next_question": 83
+        },
+        {
+            "id": 83,
+            "question": "Welchen Umfang sollen Module im Regelfall haben?",
+            "answer": "Im Regelfall 6 LP oder 12 LP. Bei abweichenden Modulgrößen muss die Modulgröße durch 3 teilbar sein. Module im Umfang von 3 LP sind nur in begründeten Ausnahmefaellen möglich.",
+            "page": 9,
+            "section": "§ 10",
+            "previous_question": 82,
+            "next_question": 84
+        },
+        {
+            "id": 84,
+            "question": "Über wie viele Semester darf sich ein Modul maximal erstrecken?",
+            "answer": "Maximal zwei Semester. Die zugehörigen Lehrveranstaltungen müssen in unmittelbar aufeinanderfolgenden Semestern angeboten und besucht werden können.",
+            "page": 9,
+            "section": "§ 10",
+            "previous_question": 83,
+            "next_question": 85
+        },
+        {
+            "id": 85,
+            "question": "Wann werden Leistungspunkte vergeben?",
+            "answer": "Erst nach dem erfolgreichen Abschluss des gesamten Moduls.",
+            "page": 9,
+            "section": "§ 10",
+            "previous_question": 84,
+            "next_question": 86
+        },
+        {
+            "id": 86,
+            "question": "Können Module über den vorgesehenen LP-Umfang hinaus belegt werden?",
+            "answer": "Nein, Module über den vorgesehenen LP-Umfang des Studiums hinaus sind nicht vorgesehen und werden nicht ausgewiesen.",
+            "page": 9,
+            "section": "§ 10",
+            "previous_question": 85,
+            "next_question": null
+        },
+        {
+            "id": 87,
+            "question": "Gibt es ein internes Praxismodul im Studiengang?",
+            "answer": "Ja, ein internes Praxismodul ist im Studienbereich Practical and Seminar Modules vorgesehen.",
+            "page": 10,
+            "section": "§ 11",
+            "previous_question": null,
+            "next_question": 88
+        },
+        {
+            "id": 88,
+            "question": "Gibt es ein externes Praxismodul im Studiengang?",
+            "answer": "Nein, ein externes Praxismodul ist nicht vorgesehen.",
+            "page": 10,
+            "section": "§ 11",
+            "previous_question": 87,
+            "next_question": 89
+        },
+        {
+            "id": 89,
+            "question": "Wie werden externe Praxismodule laut Allgemeinen Bestimmungen bewertet?",
+            "answer": "Externe Praxismodule werden in der Regel mit \"bestanden\" oder \"nicht bestanden\" bewertet (unbenotet), interne Praxismodule sind in der Regel benotet.",
+            "page": 10,
+            "section": "§ 11",
+            "previous_question": 88,
+            "next_question": 90
+        },
+        {
+            "id": 90,
+            "question": "Was sind Profilmodule?",
+            "answer": "Module, die der Persönlichkeitsbildung der Studierenden oder der allgemeinen Arbeitsmarktbefähigung dienen. Sie können im Rahmen des Studiengangs, anderer Studiengänge oder außerhalb (z.B. Sprachenzentrum, Hochschulrechenzentrum) absolviert werden.",
+            "page": 10,
+            "section": "§ 11",
+            "previous_question": 89,
+            "next_question": null
+        },
+        {
+            "id": 91,
+            "question": "Ist eine verbindliche Anmeldung für Module oder Veranstaltungen erforderlich?",
+            "answer": "Im Einzelfall ja, soweit dies im Modulhandbuch angegeben ist.",
+            "page": 10,
+            "section": "§ 12",
+            "previous_question": null,
+            "next_question": 92
+        },
+        {
+            "id": 92,
+            "question": "Wo werden An- und Abmeldeverfahren sowie Fristen bekannt gegeben?",
+            "answer": "Rechtzeitig auf der studiengangbezogenen Webseite gemäß Paragraph 6 Abs. 8.",
+            "page": 10,
+            "section": "§ 12",
+            "previous_question": 91,
+            "next_question": null
+        },
+        {
+            "id": 93,
+            "question": "Können Wahlpflichtmodule und Lehrveranstaltungen Zulassungszahlen haben?",
+            "answer": "Ja, durch Fachbereichsratsbeschluss können Zulassungszahlen festgesetzt werden, sofern dies zur Durchführung eines geordneten Lehr- und Studienbetriebs zwingend erforderlich ist.",
+            "page": 11,
+            "section": "§ 13",
+            "previous_question": null,
+            "next_question": 94
+        },
+        {
+            "id": 94,
+            "question": "Besteht ein Anspruch auf Teilnahme an einem kapazitätsbeschränkten Wahlpflichtmodul?",
+            "answer": "Nein, bei begrenzter Kapazität besteht kein Anspruch, sofern das Studium mindestens eines anderen alternativen Wahlpflichtmoduls offen steht.",
+            "page": 11,
+            "section": "§ 13",
+            "previous_question": 93,
+            "next_question": 95
+        },
+        {
+            "id": 95,
+            "question": "Wie wird bei Überbuchung eines Wahlpflichtmoduls ausgewählt?",
+            "answer": "Die Auswahl wird durch Los getroffen. Dabei werden vorab Härtefälle (Prioritätsgruppe 1, insbes. nach Paragraph 26 Abs. 1 und 2) und Studierende mit besonderem Interesse (Prioritätsgruppe 2) berücksichtigt.",
+            "page": 11,
+            "section": "§ 13",
+            "previous_question": 94,
+            "next_question": 96
+        },
+        {
+            "id": 96,
+            "question": "Was zählt als besonderes Interesse bei der Platzvergabe?",
+            "answer": "Besonderes Interesse liegt vor bei: (1) Studierenden, für die das Modul aufgrund innerfachlicher Spezialisierung verpflichtend ist, (2) Studierenden, die in einem vorangegangenen Semester trotz Anmeldung keinen Platz erhalten haben, (3) Studierenden, die ohne Erfolg teilgenommen haben und die nochmalige Teilnahme für die Wiederholungsprüfung zwingend ist.",
+            "page": 11,
+            "section": "§ 13",
+            "previous_question": 95,
+            "next_question": 97
+        },
+        {
+            "id": 97,
+            "question": "Welche Prioritätsgruppe hat Vorrang bei der Platzvergabe?",
+            "answer": "Prioritätsgruppe 1 (Härtefälle) hat Vorrang vor Prioritätsgruppe 2 (besonderes Interesse). Innerhalb der Gruppen entscheidet das Los.",
+            "page": 11,
+            "section": "§ 13",
+            "previous_question": 96,
+            "next_question": null
+        },
+        {
+            "id": 98,
+            "question": "Sind Importmodule im Studiengang vorgesehen?",
+            "answer": "Ja, Importmodule sind vorgesehen. Nähere Angaben sind in Anlage 3 zusammengefasst.",
+            "page": 11,
+            "section": "§ 14",
+            "previous_question": null,
+            "next_question": null
+        },
+        {
+            "id": 99,
+            "question": "Was sind Studienleistungen und wie unterscheiden sie sich von Prüfungsleistungen?",
+            "answer": "Studienleistungen sind dadurch gekennzeichnet, dass für sie keine Leistungspunkte vergeben werden. Sie bleiben unbenotet. Sie können Voraussetzung für die Zulassung zur Modulprüfung sein. Bestandene Studienleistungen können nicht wiederholt werden.",
+            "page": 12,
+            "section": "§ 15",
+            "previous_question": null,
+            "next_question": 100
+        },
+        {
+            "id": 100,
+            "question": "Kann eine Modulprüfung vor Erbringung der Studienleistung stattfinden?",
+            "answer": "Ja, findet die Modulprüfung zeitlich vor der Studienleistung statt, ist die Vergabe der LP davon abhängig, dass auch die Studienleistung erbracht wird.",
+            "page": 12,
+            "section": "§ 15",
+            "previous_question": 99,
+            "next_question": null
+        },
+        {
+            "id": 101,
+            "question": "Wer bestellt den Prüfungsausschuss?",
+            "answer": "Der Fachbereichsrat.",
+            "page": 12,
+            "section": "§ 16",
+            "previous_question": null,
+            "next_question": 102
+        },
+        {
+            "id": 102,
+            "question": "Wie setzt sich der Prüfungsausschuss zusammen?",
+            "answer": "Aus: (1) vier Professorinnen und Professoren, (2) einem Mitglied der wissenschaftlichen Mitarbeiterinnen und Mitarbeiter und (3) zwei studierenden Mitgliedern. Für jedes Mitglied soll ein stellvertretendes Mitglied gewählt werden.",
+            "page": 12,
+            "section": "§ 16",
+            "previous_question": 101,
+            "next_question": 103
+        },
+        {
+            "id": 103,
+            "question": "Welche fachliche Zusammensetzung soll der Prüfungsausschuss haben?",
+            "answer": "Von den vier Professorinnen und Professoren sollen drei dem Fachgebiet Informatik und eines dem Fachgebiet Mathematik entstammen.",
+            "page": 12,
+            "section": "§ 16",
+            "previous_question": 102,
+            "next_question": 104
+        },
+        {
+            "id": 104,
+            "question": "Wie lang ist die Amtszeit der Mitglieder des Prüfungsausschusses?",
+            "answer": "Die Amtszeit der nichtstudentischen Mitglieder beträgt zwei Jahre, die der studentischen Mitglieder ein Jahr. Wiederwahl ist möglich.",
+            "page": 12,
+            "section": "§ 16",
+            "previous_question": 103,
+            "next_question": 105
+        },
+        {
+            "id": 105,
+            "question": "Wann ist der Prüfungsausschuss beschlussfähig?",
+            "answer": "Wenn mindestens die Hälfte der Mitglieder bzw. stellvertretenden Mitglieder anwesend ist und die Sitzung ordnungsgemäß einberufen wurde.",
+            "page": 12,
+            "section": "§ 16",
+            "previous_question": 104,
+            "next_question": 106
+        },
+        {
+            "id": 106,
+            "question": "Dürfen Mitglieder des Prüfungsausschusses bei mündlichen Prüfungen anwesend sein?",
+            "answer": "Ja, sie haben das Recht bei mündlichen Prüfungen anwesend zu sein, nicht aber bei Beratungen und der Bekanntgabe der Note.",
+            "page": 12,
+            "section": "§ 16",
+            "previous_question": 105,
+            "next_question": null
+        },
+        {
+            "id": 107,
+            "question": "Welche Aufgaben hat der Prüfungsausschuss?",
+            "answer": "U.a.: Organisation des gesamten Prüfungsverfahrens, Bestellung der Prüfer und Beisitzer, Entscheidungen über Prüfungszulassungen, Anerkennungen, Auflagen, Einstufungsempfehlungen, Ausstellen von Zeugnis/Urkunde/Transcript/Diploma Supplement, Archivierung, jährliche Berichterstattung, Supervision der Prüfungsverwaltung und Anregungen zur Reform.",
+            "page": 13,
+            "section": "§ 17",
+            "previous_question": null,
+            "next_question": 108
+        },
+        {
+            "id": 108,
+            "question": "Kann der Prüfungsausschuss Aufgaben delegieren?",
+            "answer": "Ja, er kann die Anerkennung von Prüfungsleistungen und andere Aufgaben an die/den Vorsitzende/n delegieren. Auslandsanerkennungen können an die/den ECTS-Beauftragte/n delegiert werden.",
+            "page": 13,
+            "section": "§ 17",
+            "previous_question": 107,
+            "next_question": null
+        },
+        {
+            "id": 109,
+            "question": "Wer darf als Prüferin oder Prüfer bestellt werden?",
+            "answer": "Nur Professorinnen und Professoren oder andere nach Paragraph 22 Abs. 2 HessHG prüfungsberechtigte Personen.",
+            "page": 13,
+            "section": "§ 18",
+            "previous_question": null,
+            "next_question": 110
+        },
+        {
+            "id": 110,
+            "question": "Welche Qualifikation muss eine Beisitzerin oder ein Beisitzer haben?",
+            "answer": "Mindestens die entsprechende Abschlussprüfung oder eine vergleichbare Prüfung.",
+            "page": 13,
+            "section": "§ 18",
+            "previous_question": 109,
+            "next_question": 111
+        },
+        {
+            "id": 111,
+            "question": "Wie viele Prüfer bewerten eine schriftliche Prüfung in der Regel?",
+            "answer": "In der Regel ein/e Prüfer/in. Schriftliche Abschlussarbeiten und nicht mehr wiederholbare Prüfungen müssen von zwei Prüfern bewertet werden.",
+            "page": 13,
+            "section": "§ 18",
+            "previous_question": 110,
+            "next_question": 112
+        },
+        {
+            "id": 112,
+            "question": "Welche Regeln gelten für mündliche Prüfungen bezüglich Beisitz?",
+            "answer": "Mündliche Prüfungen sind entweder von mehreren Prüfern oder von einem Prüfer in Gegenwart einer sachkundigen Beisitzerin/eines Beisitzers abzunehmen. Es ist ein Protokoll zu führen. Der Beisitzer ist vor Festlegung der Bewertung zu hören.",
+            "page": 13,
+            "section": "§ 18",
+            "previous_question": 111,
+            "next_question": null
+        },
+        {
+            "id": 113,
+            "question": "Unter welchen Bedingungen werden Studien- und Prüfungsleistungen anderer Hochschulen anerkannt?",
+            "answer": "An einer Hochschule oder Berufsakademie erbrachte Leistungen werden grundsätzlich anerkannt, wenn kein wesentlicher Unterschied besteht. Es gilt Beweislastumkehr: die Hochschule muss den wesentlichen Unterschied nachweisen.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": null,
+            "next_question": 114
+        },
+        {
+            "id": 114,
+            "question": "Was sind wesentliche Unterschiede bei der Anerkennung?",
+            "answer": "Wesentliche Unterschiede liegen vor, wenn sich Leistungen in Qualifikationsziel, Umfang und Anforderungen wesentlich unterscheiden. Es ist eine Gesamtbetrachtung unter besonderer Berücksichtigung der Qualifikationsziele vorzunehmen.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 113,
+            "next_question": 115
+        },
+        {
+            "id": 115,
+            "question": "Können außerhalb von Hochschulen erworbene Kenntnisse angerechnet werden?",
+            "answer": "Ja, wenn sie gleichwertig sind und die Kriterien im Rahmen der Akkreditierung überprüft wurden. Insgesamt dürfen nicht mehr als 50% der Prüfungsleistungen durch Anrechnung ersetzt werden.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 114,
+            "next_question": 116
+        },
+        {
+            "id": 116,
+            "question": "Was passiert mit den Noten anerkannter Leistungen?",
+            "answer": "Soweit Notensysteme vergleichbar sind, werden Noten übernommen und in die Gesamtnote einbezogen. Bei nicht vergleichbaren Systemen wird \"bestanden\" vermerkt. Anerkannte Leistungen werden als \"anerkannt\" kenntlich gemacht.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 115,
+            "next_question": 117
+        },
+        {
+            "id": 117,
+            "question": "Kann das Abschlussmodul (Masterarbeit) anerkannt werden?",
+            "answer": "Nein, eine Anerkennung ist ausgeschlossen. Ausnahme: Abschlussmodule im Rahmen einer vorherigen vertraglichen Vereinbarung an einer anderen Hochschule.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 116,
+            "next_question": 118
+        },
+        {
+            "id": 118,
+            "question": "Gibt es einen Rechtsanspruch auf Anerkennung?",
+            "answer": "Ja, bei Vorliegen der Voraussetzungen besteht ein Rechtsanspruch auf Anerkennung.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 117,
+            "next_question": 119
+        },
+        {
+            "id": 119,
+            "question": "Können Anerkennungen mit Auflagen verbunden werden?",
+            "answer": "Ja, mit Auflagen zu nachzuholenden Studien- und Prüfungsleistungen. Auflagen und Fristen sind schriftlich mitzuteilen.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 118,
+            "next_question": 120
+        },
+        {
+            "id": 120,
+            "question": "Werden Fehlversuche bei Anerkennungen berücksichtigt?",
+            "answer": "Ja, Fehlversuche werden anerkannt, sofern sie im Fall ihres Bestehens anerkannt worden wären.",
+            "page": 14,
+            "section": "§ 19",
+            "previous_question": 119,
+            "next_question": null
+        },
+        {
+            "id": 121,
+            "question": "Wo sind die Module des Studiengangs zusammengefasst?",
+            "answer": "In der Modulliste (Anlage 2) und in der Importmodulliste (Anlage 3).",
+            "page": 15,
+            "section": "§ 20",
+            "previous_question": null,
+            "next_question": 122
+        },
+        {
+            "id": 122,
+            "question": "Kann der Prüfungsausschuss weitere Importmodule zulassen?",
+            "answer": "Ja, generell oder im Einzelfall auf begründeten Antrag, sofern der anbietende Fachbereich zustimmt.",
+            "page": 15,
+            "section": "§ 20",
+            "previous_question": 121,
+            "next_question": 123
+        },
+        {
+            "id": 123,
+            "question": "Wo sind die Exportmodule zusammengefasst?",
+            "answer": "In Anlage 4.",
+            "page": 15,
+            "section": "§ 20",
+            "previous_question": 122,
+            "next_question": null
+        },
+        {
+            "id": 124,
+            "question": "Wer darf Prüfungen ablegen?",
+            "answer": "I. d. R. nur zum Zeitpunkt der Prüfung eingeschriebene ordentliche Studierende der Philipps-Universität Marburg, die den Prüfungsanspruch nicht verloren haben.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": null,
+            "next_question": 125
+        },
+        {
+            "id": 125,
+            "question": "Wie werden Modulprüfungen erbracht?",
+            "answer": "Studienbegleitend. Mit ihnen wird das jeweilige Modul abgeschlossen.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": 124,
+            "next_question": 126
+        },
+        {
+            "id": 126,
+            "question": "Wie viele Prüfungen hat ein Modul in der Regel?",
+            "answer": "Module schließen i. d. R. mit einer einzigen Modulprüfung ab. Bei Modulteilprüfungen ist das Bestehen sämtlicher Teile i. d. R. notwendig.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": 125,
+            "next_question": 127
+        },
+        {
+            "id": 127,
+            "question": "Wie viele Modulprüfungen pro Semester sollen maximal vorgesehen werden?",
+            "answer": "Nicht mehr als insgesamt sechs Modulprüfungen bzw. Modulteilprüfungen.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": 126,
+            "next_question": 128
+        },
+        {
+            "id": 128,
+            "question": "Kann eine bestandene Modulteilprüfung wiederholt werden?",
+            "answer": "Nein, die Wiederholung einer bestandenen Modulteilprüfung ist nicht zulässig.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": 127,
+            "next_question": 129
+        },
+        {
+            "id": 129,
+            "question": "Kann man von einem Modul zurücktreten, wenn die erste Prüfungsleistung nicht bestanden wurde?",
+            "answer": "Nein, ein Rücktritt ist dann nicht mehr möglich. Solange nur Studienleistungen erbracht wurden und keine Prüfungsleistung, ist ein Wechsel des Moduls möglich.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": 128,
+            "next_question": 130
+        },
+        {
+            "id": 130,
+            "question": "Dürfen Studierende bei mündlichen Prüfungen anderer Studierender zuhören?",
+            "answer": "Ja, Studierende desselben Studiengangs sind berechtigt zuzuhören (nicht bei Beratung und Bekanntgabe des Ergebnisses). Auf Wunsch der Kandidatin/des Kandidaten kann die Öffentlichkeit ausgeschlossen werden.",
+            "page": 15,
+            "section": "§ 21",
+            "previous_question": 129,
+            "next_question": null
+        },
+        {
+            "id": 131,
+            "question": "Welche schriftlichen Prüfungsformen gibt es?",
+            "answer": "Klausuren (auch als E-Klausuren oder Multiple-Choice-Verfahren), schriftliche Ausarbeitungen und die Masterarbeit.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": null,
+            "next_question": 132
+        },
+        {
+            "id": 132,
+            "question": "Welche mündlichen Prüfungsformen gibt es?",
+            "answer": "Einzelprüfungen und die Disputation.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 131,
+            "next_question": 133
+        },
+        {
+            "id": 133,
+            "question": "Welche weiteren Prüfungsformen gibt es?",
+            "answer": "Seminarvorträge und Softwareerstellungen.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 132,
+            "next_question": 134
+        },
+        {
+            "id": 134,
+            "question": "Wie lange dauert eine Klausur?",
+            "answer": "60-120 Minuten.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 133,
+            "next_question": 135
+        },
+        {
+            "id": 135,
+            "question": "Wie lange dauert eine mündliche Einzelprüfung?",
+            "answer": "20-30 Minuten.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 134,
+            "next_question": 136
+        },
+        {
+            "id": 136,
+            "question": "Welchen Umfang und welche Bearbeitungszeit hat eine schriftliche Ausarbeitung?",
+            "answer": "I. d. R. 10-20 Seiten und etwa zwei Wochen Bearbeitungszeit.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 135,
+            "next_question": 137
+        },
+        {
+            "id": 137,
+            "question": "Wie lange dauert ein Seminarvortrag?",
+            "answer": "Er findet im Rahmen einer Modulveranstaltung statt, maximal 90 Minuten.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 136,
+            "next_question": 138
+        },
+        {
+            "id": 138,
+            "question": "Wie sieht die Prüfungsform Softwareerstellung aus?",
+            "answer": "Die Bearbeitungszeit beträgt etwa acht Wochen. Sie umfasst i. d. R. Programmcode, Planungs-, Benutzenden- und Programmierdokumentation sowie Präsentationsmaterial.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 137,
+            "next_question": 139
+        },
+        {
+            "id": 139,
+            "question": "Wie viele Seiten umfasst die Masterarbeit?",
+            "answer": "I. d. R. 30-90 Seiten.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 138,
+            "next_question": 140
+        },
+        {
+            "id": 140,
+            "question": "Wie lange dauert die Disputation?",
+            "answer": "Maximal 60 Minuten.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 139,
+            "next_question": 141
+        },
+        {
+            "id": 141,
+            "question": "Was gilt für Prüfungen in Importmodulen?",
+            "answer": "Für Importmodule gelten die Regelungen der Studien- und Prüfungsordnungen der Studiengänge, aus denen sie importiert werden, in der jeweils aktuell gültigen Fassung.",
+            "page": 16,
+            "section": "§ 22",
+            "previous_question": 140,
+            "next_question": null
+        },
+        {
+            "id": 142,
+            "question": "Ist die Masterarbeit ein Pflichtbestandteil des Studiengangs?",
+            "answer": "Ja, die Masterarbeit ist obligatorischer Bestandteil des Studiengangs.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": null,
+            "next_question": 143
+        },
+        {
+            "id": 143,
+            "question": "Woraus besteht das Abschlussmodul?",
+            "answer": "Aus der Masterarbeit (27 LP) und einer Disputation (3 LP), zusammen 30 LP.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 142,
+            "next_question": 144
+        },
+        {
+            "id": 144,
+            "question": "In welcher Sprache ist die Masterarbeit anzufertigen?",
+            "answer": "In deutscher oder in englischer Sprache.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 143,
+            "next_question": 145
+        },
+        {
+            "id": 145,
+            "question": "Was soll die Masterarbeit nachweisen?",
+            "answer": "Dass die Kandidatin/der Kandidat innerhalb einer Frist ein abgegrenztes Problem aus dem Gegenstandsbereich der Informatik nach wissenschaftlichen Methoden selbstständig bearbeiten kann, das im Studium erworbene Wissen anwendet und die Ergebnisse schriftlich darlegt sowie öffentlich präsentiert und verteidigt.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 144,
+            "next_question": 146
+        },
+        {
+            "id": 146,
+            "question": "Ist die Masterarbeit als Einzel- oder Gruppenarbeit anzufertigen?",
+            "answer": "Als Einzelarbeit.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 145,
+            "next_question": 147
+        },
+        {
+            "id": 147,
+            "question": "Welche Voraussetzung muss für die Zulassung zur Masterarbeit erfüllt sein?",
+            "answer": "Es müssen mindestens 66 LP in den Modulen des Masterstudiengangs erworben worden sein.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 146,
+            "next_question": 148
+        },
+        {
+            "id": 148,
+            "question": "Wie wird die Betreuung/Begutachtung der Masterarbeit geregelt?",
+            "answer": "Die Kandidatin/der Kandidat schlägt eine/n Betreuer/in und eine/n prufungsberechtigte/n Erstgutachter/in vor. Für die Zweitgutachterin/den Zweitgutachter besteht ebenfalls Vorschlagsrecht. Betreuer/in und Erstgutachter/in können dieselbe Person sein. Die Vorschläge begründen keinen Anspruch.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 147,
+            "next_question": 149
+        },
+        {
+            "id": 149,
+            "question": "Was passiert, wenn man keine/n Betreuer/in findet?",
+            "answer": "Die/der Vorsitzende des Prüfungsausschusses bestimmt die/den Betreuer/in und Erstgutachter/in und sorgt dafür, dass rechtzeitig ein Thema ausgegeben wird.",
+            "page": 17,
+            "section": "§ 23",
+            "previous_question": 148,
+            "next_question": null
+        },
+        {
+            "id": 150,
+            "question": "Wie lang ist die Bearbeitungszeit der Masterarbeit?",
+            "answer": "6 Monate. Eine Verlängerung um höchstens 20% ist auf begründeten Antrag möglich, führt aber nicht zu zusätzlichen LP.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": null,
+            "next_question": 151
+        },
+        {
+            "id": 151,
+            "question": "Wann beginnt die Bearbeitungszeit der Masterarbeit?",
+            "answer": "Mit der Themenausgabe. Der Ausgabezeitpunkt ist aktenkundig zu machen.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 150,
+            "next_question": 152
+        },
+        {
+            "id": 152,
+            "question": "In welcher Form ist die Masterarbeit abzugeben?",
+            "answer": "Fristgemäß beim Prüfungsausschuss in 3 gedruckten Exemplaren sowie in digitaler Form nach Vorgaben des Prüfungsausschusses.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 151,
+            "next_question": 153
+        },
+        {
+            "id": 153,
+            "question": "Welche Erklärung muss bei Abgabe der Masterarbeit abgegeben werden?",
+            "answer": "Die Kandidatin/der Kandidat muss schriftlich versichern, die Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt zu haben.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 152,
+            "next_question": 154
+        },
+        {
+            "id": 154,
+            "question": "Was passiert, wenn die Masterarbeit nicht fristgerecht abgegeben wird?",
+            "answer": "Sie gilt als mit \"nicht ausreichend\" (0 Punkte) bewertet.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 153,
+            "next_question": 155
+        },
+        {
+            "id": 155,
+            "question": "Wann ist die Masterarbeit nicht bestanden?",
+            "answer": "Wenn die Gesamtbewertung nicht mindestens 5 Punkte (\"ausreichend\") lautet.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 154,
+            "next_question": 156
+        },
+        {
+            "id": 156,
+            "question": "Wie oft kann die Masterarbeit wiederholt werden?",
+            "answer": "Einmal. Eine zweite Wiederholung ist ausgeschlossen.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 155,
+            "next_question": 157
+        },
+        {
+            "id": 157,
+            "question": "Kann die Disputation wiederholt werden?",
+            "answer": "Ja, die Disputation kann ebenfalls einmal wiederholt werden.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 156,
+            "next_question": 158
+        },
+        {
+            "id": 158,
+            "question": "Wann erhält man bei Nichtbestehen ein neues Thema für die Masterarbeit?",
+            "answer": "Innerhalb von sechs Wochen nach Bekanntgabe des Nichtbestehens.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 157,
+            "next_question": 159
+        },
+        {
+            "id": 159,
+            "question": "Kann das Thema der Masterarbeit zurückgegeben werden?",
+            "answer": "Ja, nur einmal und nur innerhalb der ersten zwei Wochen der Bearbeitungszeit. Ein neues Thema ist innerhalb von vier Wochen zu stellen, die Arbeitszeit beginnt erneut. Bei Wiederholung ist die Rueckgabe nur zulässig, wenn bei der ersten Anfertigung kein Gebrauch davon gemacht wurde.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 158,
+            "next_question": 160
+        },
+        {
+            "id": 160,
+            "question": "Ist ein Notenausgleich für eine nicht bestandene Masterarbeit zulässig?",
+            "answer": "Nein, weder für die Masterarbeit noch für die Disputation ist ein Notenausgleich zulässig.",
+            "page": 18,
+            "section": "§ 23",
+            "previous_question": 159,
+            "next_question": null
+        },
+        {
+            "id": 161,
+            "question": "Wie wird die Masterarbeit bewertet, wenn beide Gutachten bestanden oder beide nicht bestanden sind?",
+            "answer": "Durch Mittelwertbildung. Weichen die Bewertungen um nicht mehr als 3 Punkte ab, wird der Mittelwert beider Bewertungen gebildet. Andernfalls wird ein drittes Gutachten eingeholt und der Mittelwert aller drei gebildet.",
+            "page": 19,
+            "section": "§ 23",
+            "previous_question": null,
+            "next_question": 162
+        },
+        {
+            "id": 162,
+            "question": "Was passiert, wenn ein Gutachten bestanden und das andere nicht bestanden lautet?",
+            "answer": "Es wird ein drittes Gutachten eingeholt. Die Bewertung entspricht dann dem Median der drei Bewertungen (der mittlere Wert bei Sortierung nach Groesse).",
+            "page": 19,
+            "section": "§ 23",
+            "previous_question": 161,
+            "next_question": 163
+        },
+        {
+            "id": 163,
+            "question": "Kann die Masterarbeit an einer externen Einrichtung durchgeführt werden?",
+            "answer": "Ja, an einem externen Fachbereich oder einer externen wissenschaftlichen Einrichtung im In- und Ausland, sofern die fachwissenschaftliche Betreuung gewährleistet ist. Der Prüfungsausschuss entscheidet.",
+            "page": 19,
+            "section": "§ 23",
+            "previous_question": 162,
+            "next_question": 164
+        },
+        {
+            "id": 164,
+            "question": "Wie lange haben die Gutachter Zeit für die Begutachtung?",
+            "answer": "Die Begutachtung soll bis längstens sechs Wochen nach Abgabe vorliegen.",
+            "page": 19,
+            "section": "§ 23",
+            "previous_question": 163,
+            "next_question": 165
+        },
+        {
+            "id": 165,
+            "question": "Muss mindestens ein Gutachter am Fachbereich der Universität Marburg sein?",
+            "answer": "Ja, mindestens eine/r der beiden Gutachtenden soll am zuständigen Fachbereich der Philipps-Universität Marburg prüfungsberechtigt sein.",
+            "page": 19,
+            "section": "§ 23",
+            "previous_question": 164,
+            "next_question": null
+        },
+        {
+            "id": 166,
+            "question": "Wer gibt die Prüfungszeiträume bekannt?",
+            "answer": "Der Prüfungsausschuss. Termine werden im Vorlesungsverzeichnis veröffentlicht.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": null,
+            "next_question": 167
+        },
+        {
+            "id": 167,
+            "question": "Wann finden Prüfungen statt?",
+            "answer": "Im Rahmen der Modulveranstaltungen oder im unmittelbaren Anschluss daran, i. d. R. in einem zwei- bis dreiwochigen Prüfungszeitraum zum Ende der Vorlesungszeit oder zu Beginn/Ende der vorlesungsfreien Zeit.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 166,
+            "next_question": 168
+        },
+        {
+            "id": 168,
+            "question": "An welchem Wochentag und zu welcher Uhrzeit sollen Klausuren stattfinden?",
+            "answer": "I. d. R. am selben Wochentag und zur selben Uhrzeit wie die entsprechende Modulveranstaltung.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 167,
+            "next_question": 169
+        },
+        {
+            "id": 169,
+            "question": "Wann soll der Wiederholungstermin festgesetzt werden?",
+            "answer": "So, dass bei erfolgreicher Teilnahme das fortlaufende Studium im folgenden Semester gewährleistet ist.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 168,
+            "next_question": 170
+        },
+        {
+            "id": 170,
+            "question": "Ist eine Anmeldung zur Prüfung erforderlich?",
+            "answer": "Ja, eine verbindliche Anmeldung ist erforderlich. Fristen und Form werden spätestens 4 Wochen vor Beginn des Anmeldezeitraums bekannt gegeben.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 169,
+            "next_question": 171
+        },
+        {
+            "id": 171,
+            "question": "Wann wird die Zulassung zur Prüfung versagt?",
+            "answer": "Wenn die Anmeldefrist nicht eingehalten wird oder Zulassungsvoraussetzungen nicht erfüllt sind.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 170,
+            "next_question": 172
+        },
+        {
+            "id": 172,
+            "question": "Können Studierende zwischen erstem Termin und Wiederholungstermin wählen?",
+            "answer": "Ja, bei der Anmeldung können Studierende eigenverantwortlich zwischen dem ersten Termin und dem Wiederholungstermin wählen.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 171,
+            "next_question": 173
+        },
+        {
+            "id": 173,
+            "question": "Was passiert, wenn man den Wiederholungstermin als ersten Versuch waehlt und nicht besteht?",
+            "answer": "Es wird keine weitere Wiederholungsprüfung im selben Semester angeboten. Bei konsekutiven Modulen kann das fortlaufende Studium im folgenden Semester nicht gewährleistet werden.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 172,
+            "next_question": 174
+        },
+        {
+            "id": 174,
+            "question": "Kann man eine Prüfungsanmeldung ohne Begründung zurückziehen?",
+            "answer": "Ja, innerhalb der vom Prüfungsausschuss festgelegten Frist und ohne Angabe von Gruenden.",
+            "page": 20,
+            "section": "§ 24",
+            "previous_question": 173,
+            "next_question": null
+        }
+    ]
+}
