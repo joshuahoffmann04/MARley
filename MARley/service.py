@@ -9,6 +9,7 @@ from typing import Any
 
 from generator.config import GeneratorSettings, get_generator_config
 from generator.models import (
+    AbstentionOverrides,
     GenerateRequest,
     RetrievalHit,
     RetrievalQualityFlag,
@@ -473,6 +474,11 @@ class MarleyPipelineService:
             source_types=source_types,
         )
 
+        abstention_override: AbstentionOverrides | None = None
+        if request.retrieval_mode in {"sparse", "vector"}:
+            # Single-backend modes do not have dual-backend evidence by design.
+            abstention_override = AbstentionOverrides(min_dual_backend_hits=0)
+
         generator_request = GenerateRequest(
             query=request.query,
             document_id=request.document_id,
@@ -483,6 +489,7 @@ class MarleyPipelineService:
             total_budget_tokens=self.runtime_config.generator_total_budget_tokens,
             max_answer_tokens=self.runtime_config.generator_max_answer_tokens,
             include_used_chunks=True,
+            abstention=abstention_override,
         )
         generator_response = self.generator.generate_from_retrieval(
             request=generator_request,
