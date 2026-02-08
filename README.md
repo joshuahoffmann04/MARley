@@ -9,15 +9,16 @@ Aktueller Stand (produktionsreif):
 4. `retrieval.sparse_retrieval` (BM25)
 5. `retrieval.vector_retrieval` (ChromaDB + Ollama Embeddings)
 6. `retrieval.hybrid_retrieval` (RRF ueber Sparse + Vector)
-
-`generator` ist im Projekt angelegt, aber in dieser README noch nicht beschrieben.
+7. `generator` (Antwortgenerierung mit Abstention)
 
 ## 1. Voraussetzungen
 
 1. Python `3.10+`
 2. `pip`
 3. Windows PowerShell
-4. Laufender Ollama-Server mit Embedding-Modell `nomic-embed-text:latest`
+4. Laufender Ollama-Server mit
+   `nomic-embed-text:latest` (Retrieval) und
+   `llama3.1:latest` (Generator)
 
 ## 2. Installation
 
@@ -242,7 +243,63 @@ Invoke-RestMethod -Method Post `
   -Body $body
 ```
 
-## 7. Endpoints
+## 7. Komponente 4: Generator
+
+### 7.1 Service starten
+
+```powershell
+python -m uvicorn generator.app:app --host 127.0.0.1 --port 8007 --reload
+```
+
+Wichtig: Der Generator erwartet ein laufendes Hybrid-Retrieval auf `http://127.0.0.1:8006` und einen laufenden Ollama-Server.
+
+### 7.2 Antwort erzeugen
+
+```powershell
+$body = @{
+  query = "Welche Zulassungsvoraussetzungen gibt es?"
+  document_id = "msc-computer-science"
+  top_k = 10
+  model = "llama3.1:latest"
+  total_budget_tokens = 2048
+  max_answer_tokens = 384
+  include_used_chunks = $true
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method Post `
+  -Uri "http://127.0.0.1:8007/generate" `
+  -ContentType "application/json" `
+  -Body $body
+```
+
+Response-Eigenschaften:
+1. `answer`: finale Antwort (Deutsch)
+2. `abstained`: `true/false`
+3. `abstention_reason`: Grund fuer Abstention (falls aktiv)
+4. `used_chunks`: verwendete Chunks inkl. `chunk_id` und kompletter `metadata`
+5. `retrieval_quality_flags` und `generator_quality_flags`
+
+### 7.3 Abstention feinjustieren (optional pro Request)
+
+```powershell
+$body = @{
+  query = "Muss ich ein Nebenfach waehlen?"
+  abstention = @{
+    min_hits = 2
+    min_best_rrf_score = 0.02
+    min_dual_backend_hits = 1
+    abstain_on_retrieval_errors = $true
+    abstain_on_backend_degradation = $true
+  }
+} | ConvertTo-Json -Depth 5
+
+Invoke-RestMethod -Method Post `
+  -Uri "http://127.0.0.1:8007/generate" `
+  -ContentType "application/json" `
+  -Body $body
+```
+
+## 8. Endpoints
 
 Alle Retrieval-Services haben dieselben Kernendpoints:
 1. `GET /health`
@@ -254,8 +311,14 @@ Swagger:
 1. Sparse: `http://127.0.0.1:8004/docs`
 2. Vector: `http://127.0.0.1:8005/docs`
 3. Hybrid: `http://127.0.0.1:8006/docs`
+4. Generator: `http://127.0.0.1:8007/docs`
 
-## 8. Typische Fehler
+Generator-Kernendpoints:
+1. `GET /health`
+2. `GET /ready`
+3. `POST /generate`
+
+## 9. Typische Fehler
 
 1. `ModuleNotFoundError` bei Chroma/Vector:
    Ursache: falscher Interpreter (global statt `.venv`).
@@ -265,12 +328,17 @@ Swagger:
    Wenn `faq_sb` fehlt, ist das erwartetes Verhalten. Pipeline laeuft weiter.
 4. Umlaute im Request-Body:
    Bei Bedarf JSON explizit UTF-8 senden (z. B. per Datei + `curl --data-binary`).
+5. Generator liefert `503`:
+   Ursache: Hybrid-Retrieval auf Port `8006` oder Ollama nicht erreichbar.
+6. Generator abstaint zu haeufig:
+   Loesung: `abstention`-Schwellen im Request oder per `GENERATOR_*` Config anpassen.
 
-## 9. Aktueller Pipeline-Stand
+## 10. Aktueller Pipeline-Stand
 
-Du kannst aktuell End-to-End bis Retrieval produktiv ausfuehren:
+Du kannst aktuell End-to-End bis Generator produktiv ausfuehren:
 1. PDF -> `pdf_extractor`
 2. Extractor-JSON -> `pdf_chunker`
 3. FAQ-JSON -> `faq_chunker`
 4. Chunks -> `sparse` / `vector`
 5. `sparse + vector` -> `hybrid (RRF)`
+6. `hybrid hits + query` -> `generator`
