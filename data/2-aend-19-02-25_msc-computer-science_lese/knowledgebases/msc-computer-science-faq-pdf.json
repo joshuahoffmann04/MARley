@@ -8,7 +8,7 @@
         "faculty": "FB12",
         "total_pages": 60
     },
-    "pages": [
+    "questions": [
         {
             "id": 1,
             "question": "Wie lautet der offizielle Name des Studiengangs?",
