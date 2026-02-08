@@ -1,24 +1,33 @@
-from __future__ import annotations
+from retrieval.hybrid_retrieval.config import (
+    HybridRetrievalRuntimeConfig,
+    HybridRetrievalSettings,
+    get_hybrid_retrieval_config,
+    get_hybrid_retrieval_settings,
+)
+from retrieval.sparse_retrieval.config import (
+    SparseRetrievalRuntimeConfig,
+    SparseRetrievalSettings,
+    get_sparse_retrieval_config,
+    get_sparse_retrieval_settings,
+)
+from retrieval.vector_retrieval.config import (
+    VectorRetrievalRuntimeConfig,
+    VectorRetrievalSettings,
+    get_vector_retrieval_config,
+    get_vector_retrieval_settings,
+)
 
-from dataclasses import dataclass
-from pathlib import Path
-
-from MARley.config import Settings, get_settings
-
-
-@dataclass(frozen=True)
-class PDFExtractorRuntimeConfig:
-    output_suffix: str
-    keep_previous_outputs: bool
-    knowledgebases_dir: Path
-    raw_dir: Path
-
-
-def get_pdf_extractor_config(settings: Settings | None = None) -> PDFExtractorRuntimeConfig:
-    cfg = settings or get_settings()
-    return PDFExtractorRuntimeConfig(
-        output_suffix=cfg.pdf_extractor_output_suffix,
-        keep_previous_outputs=cfg.pdf_extractor_keep_previous_outputs,
-        knowledgebases_dir=cfg.knowledgebases_dir,
-        raw_dir=cfg.raw_dir,
-    )
+__all__ = [
+    "HybridRetrievalSettings",
+    "HybridRetrievalRuntimeConfig",
+    "get_hybrid_retrieval_settings",
+    "get_hybrid_retrieval_config",
+    "SparseRetrievalSettings",
+    "SparseRetrievalRuntimeConfig",
+    "get_sparse_retrieval_settings",
+    "get_sparse_retrieval_config",
+    "VectorRetrievalSettings",
+    "VectorRetrievalRuntimeConfig",
+    "get_vector_retrieval_settings",
+    "get_vector_retrieval_config",
+]

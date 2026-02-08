@@ -1,5 +1,5 @@
 {
-    "source_file": "data\\2-aend-19-02-25_msc-computer-science_lese\\raw\\2-aend-19-02-25_msc-computer-science_lese.pdf",
+    "source_file": "data\\msc-computer-science\\raw\\msc-computer-science.pdf",
     "context": {
         "document_type": "Studien- und Prüfungsordnung",
         "title": "Studien- und Prüfungsordnung für den Studiengang „Computer Science“ mit dem Abschluss „Master of Science (M.Sc.)“ der Philipps-Universität Marburg ",
@@ -3635,6 +3635,1815 @@
             "page": 40,
             "section": "Anlage 2",
             "previous_question": 402,
+            "next_question": null
+        },
+        {
+            "id": 404,
+            "question": "Wie viele LP hat das Modul CS 531 Parameterized Algorithms?",
+            "answer": "Das Modul CS 531 Parameterized Algorithms hat 6 Leistungspunkte.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": null,
+            "next_question": 405
+        },
+        {
+            "id": 405,
+            "question": "Welcher Niveaustufe ist das Modul Parameterized Algorithms zugeordnet?",
+            "answer": "Parameterized Algorithms ist ein Vertiefungsmodul zur theoretischen Informatik.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 404,
+            "next_question": 406
+        },
+        {
+            "id": 406,
+            "question": "Welche Teilnahmevoraussetzungen gelten für das Modul Parameterized Algorithms?",
+            "answer": "Die erfolgreiche Teilnahme am Modul 'Algorithmen und Datenstrukturen' ist erforderlich. Die erfolgreiche Teilnahme am Modul 'Effiziente Algorithmen' wird empfohlen.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 405,
+            "next_question": 407
+        },
+        {
+            "id": 407,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Parameterized Algorithms?",
+            "answer": "Die Studierenden können: für schwere Berechnungsprobleme adäquate Parametrisierungen identifizieren, effiziente Festparameteralgorithmen entwickeln und deren Laufzeit analysieren, Datenreduktionsregeln entwerfen und deren Effektivität analysieren, sowie die algorithmische Schwierigkeit von parametrisierten Berechnungsproblemen nachweisen.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 406,
+            "next_question": 408
+        },
+        {
+            "id": 408,
+            "question": "Welche Studienleistungen sind im Modul Parameterized Algorithms zu erbringen?",
+            "answer": "Erreichen von mindestens 50 Prozent der Punkte aus den wöchentlich zu bearbeitenden Übungsaufgaben und mündliche Präsentation der Lösung von mindestens zwei der Übungsaufgaben.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 407,
+            "next_question": 409
+        },
+        {
+            "id": 409,
+            "question": "Welche Prüfungsform hat das Modul Parameterized Algorithms?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 408,
+            "next_question": 410
+        },
+        {
+            "id": 410,
+            "question": "Ist das Modul Parameterized Algorithms ein Pflicht- oder Wahlpflichtmodul?",
+            "answer": "Parameterized Algorithms ist ein Wahlpflichtmodul.",
+            "page": 40,
+            "section": "Anlage 2",
+            "previous_question": 409,
+            "next_question": 411
+        },
+        {
+            "id": 411,
+            "question": "Wie lautet die Modulnummer des Moduls Program Verification and Synthesis?",
+            "answer": "Die Modulnummer lautet CS 524.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 410,
+            "next_question": 412
+        },
+        {
+            "id": 412,
+            "question": "Wie viele LP hat das Modul CS 524 Program Verification and Synthesis?",
+            "answer": "Das Modul hat 9 Leistungspunkte.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 411,
+            "next_question": 413
+        },
+        {
+            "id": 413,
+            "question": "Welcher Niveaustufe ist das Modul Program Verification and Synthesis zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur theoretischen Informatik.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 412,
+            "next_question": 414
+        },
+        {
+            "id": 414,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Program Verification and Synthesis?",
+            "answer": "Die Studierenden können: aktuelle Forschungswerkzeuge einsetzen und anwenden, neue Einsatzgebiete selbstständig erkunden, theoretische Hintergründe erarbeiten, mit Logik höherer Stufe umgehen, Konzepte der Verifikation und Synthese von Software erläutern, Anwendung und Grenzen von Entscheidungsverfahren diskutieren, sowie Theorie und Anwendung des Lambda-Kalküls erläutern.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 413,
+            "next_question": 415
+        },
+        {
+            "id": 415,
+            "question": "Welche Teilnahmevoraussetzungen werden für das Modul Program Verification and Synthesis empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Logik, Objektorientierte Programmierung, Algorithmen und Datenstrukturen sowie Grundkenntnisse im funktionalen Programmieren (z.B. in Scala, Haskell oder Python). Es bestehen keine verpflichtenden Voraussetzungen.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 414,
+            "next_question": 416
+        },
+        {
+            "id": 416,
+            "question": "Welche Prüfungsform hat das Modul Program Verification and Synthesis?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 415,
+            "next_question": 417
+        },
+        {
+            "id": 417,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Program Verification and Synthesis?",
+            "answer": "Programmverifikation und -synthese.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 416,
+            "next_question": 418
+        },
+        {
+            "id": 418,
+            "question": "Wie viele LP hat das Modul CS 549 Small Specialization Module Computer Science 1?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 417,
+            "next_question": 419
+        },
+        {
+            "id": 419,
+            "question": "Welcher Niveaustufe ist das Modul Small Specialization Module Computer Science 1 zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 418,
+            "next_question": 420
+        },
+        {
+            "id": 420,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Small Specialization Module Computer Science 1 (CS 549)?",
+            "answer": "Die Studierenden haben vertiefte Kenntnisse und Fertigkeiten in einem ausgewählten Spezialgebiet der Informatik, können über aktuelle Forschungsergebnisse berichten und mit Forschungsliteratur umgehen, können Arbeitsweisen aus der Informatik anwenden (Lösungsstrategien, formale Beschreibung, Abstraktionsvermögen, Systementwicklung), sind in der Lage wissenschaftliche Arbeitsweisen beim eigenständigen Lösen von Problemen anzuwenden und die Lösung zu kommunizieren, und haben Kompetenzen vorzugsweise aus dem Bereich Praktische Informatik erworben.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 419,
+            "next_question": 421
+        },
+        {
+            "id": 421,
+            "question": "Welche Teilnahmevoraussetzungen gelten für das Modul Small Specialization Module Computer Science 1?",
+            "answer": "Es bestehen keine verpflichtenden Voraussetzungen. Empfohlen werden die Kompetenzen, die in den Aufbaumodulen (themenabhängig) vermittelt werden.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 420,
+            "next_question": 422
+        },
+        {
+            "id": 422,
+            "question": "Welche Prüfungsform hat das Modul Small Specialization Module Computer Science 1?",
+            "answer": "Klausur oder mündliche Prüfung (Einzelprüfung).",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 421,
+            "next_question": 423
+        },
+        {
+            "id": 423,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Small Specialization Module Computer Science 1?",
+            "answer": "Kleines Vertiefungsmodul Informatik 1.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 422,
+            "next_question": 424
+        },
+        {
+            "id": 424,
+            "question": "Wie viele LP hat das Modul CS 590 Small Specialization Module Computer Science 2?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 423,
+            "next_question": 425
+        },
+        {
+            "id": 425,
+            "question": "Welcher Niveaustufe ist das Modul Small Specialization Module Computer Science 2 zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 424,
+            "next_question": 426
+        },
+        {
+            "id": 426,
+            "question": "Aus welchem Bereich haben Studierende im Modul Small Specialization Module CS 2 vorzugsweise Kompetenzen erworben?",
+            "answer": "Vorzugsweise aus dem Bereich Theoretische Informatik.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 425,
+            "next_question": 427
+        },
+        {
+            "id": 427,
+            "question": "Wie viele LP hat das Modul CS 644 Small Specialization Module Computer Science 3?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 426,
+            "next_question": 428
+        },
+        {
+            "id": 428,
+            "question": "Welcher Niveaustufe ist das Modul Small Specialization Module Computer Science 3 zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 427,
+            "next_question": 429
+        },
+        {
+            "id": 429,
+            "question": "Aus welchem Bereich haben Studierende im Modul Small Specialization Module CS 3 vorzugsweise Kompetenzen erworben?",
+            "answer": "Vorzugsweise aus dem Bereich Technische Informatik.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 428,
+            "next_question": 430
+        },
+        {
+            "id": 430,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Small Specialization Module Computer Science 3?",
+            "answer": "Kleines Vertiefungsmodul Informatik 3.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 429,
+            "next_question": 431
+        },
+        {
+            "id": 431,
+            "question": "Wie viele LP hat das Modul CS 646 Small Specialization Module Computer Science 4?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 430,
+            "next_question": 432
+        },
+        {
+            "id": 432,
+            "question": "Aus welchem Bereich haben Studierende im Modul Small Specialization Module CS 4 vorzugsweise Kompetenzen erworben?",
+            "answer": "Vorzugsweise aus dem Bereich Angewandte Informatik.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 431,
+            "next_question": 433
+        },
+        {
+            "id": 433,
+            "question": "Wie viele LP hat das Modul CS 645 Small Specialization Module Computer Science 5?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 432,
+            "next_question": 434
+        },
+        {
+            "id": 434,
+            "question": "Aus welchem Bereich haben Studierende im Modul Small Specialization Module CS 5 vorzugsweise Kompetenzen erworben?",
+            "answer": "Vorzugsweise aus dem Bereich Künstliche Intelligenz.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 433,
+            "next_question": 435
+        },
+        {
+            "id": 435,
+            "question": "Wie viele Small Specialization Module Computer Science gibt es insgesamt im Studiengang?",
+            "answer": "Es gibt 5 Small Specialization Module Computer Science (CS 549, CS 590, CS 644, CS 646, CS 645) mit den Schwerpunkten Praktische Informatik, Theoretische Informatik, Technische Informatik, Angewandte Informatik und Künstliche Intelligenz.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 434,
+            "next_question": 436
+        },
+        {
+            "id": 436,
+            "question": "Haben alle Small Specialization Module die gleiche Prüfungsform?",
+            "answer": "Ja, alle fünf Small Specialization Module haben die Prüfungsform Klausur oder mündliche Prüfung (Einzelprüfung).",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 435,
+            "next_question": 437
+        },
+        {
+            "id": 437,
+            "question": "Haben alle Small Specialization Module die gleichen Studienleistungen?",
+            "answer": "Ja, bei allen fünf Modulen müssen mindestens 50 Prozent der Punkte aus den wöchentlichen Übungsaufgaben erreicht werden, und es müssen mindestens zwei Übungsaufgaben mündlich präsentiert werden.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 436,
+            "next_question": 438
+        },
+        {
+            "id": 438,
+            "question": "Wie lautet die Modulnummer des Moduls Software as a Medical Device?",
+            "answer": "Die Modulnummer lautet CS 558.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 437,
+            "next_question": 439
+        },
+        {
+            "id": 439,
+            "question": "Wie viele LP hat das Modul CS 558 Software as a Medical Device?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 438,
+            "next_question": 440
+        },
+        {
+            "id": 440,
+            "question": "Welcher Niveaustufe ist das Modul Software as a Medical Device zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 439,
+            "next_question": 441
+        },
+        {
+            "id": 441,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Software as a Medical Device?",
+            "answer": "Die Studierenden können: Konzepte der Softwareentwicklung für die Medizin beschreiben und einsetzen, Querverbindungen zur Informatik aufzeigen, Denk- und Arbeitsweisen der Regulierungsbehörden an konkreten Fragestellungen anwenden, eine Intuition für die Entwicklung von Software als Medizinprodukt entwickeln und in präzise Begriffe und formale Begründungen umsetzen, sowie über wissenschaftliche Inhalte frei sprechen.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 440,
+            "next_question": 442
+        },
+        {
+            "id": 442,
+            "question": "Welche Teilnahmevoraussetzungen werden für Software as a Medical Device empfohlen?",
+            "answer": "Empfohlen werden Grundkenntnisse im Bereich Software Engineering. Es bestehen keine verpflichtenden Voraussetzungen.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 441,
+            "next_question": 443
+        },
+        {
+            "id": 443,
+            "question": "Welche Prüfungsform hat das Modul Software as a Medical Device?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 442,
+            "next_question": 444
+        },
+        {
+            "id": 444,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Software as a Medical Device?",
+            "answer": "Software als Medizinprodukt.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 443,
+            "next_question": 445
+        },
+        {
+            "id": 445,
+            "question": "Wie lautet die Modulnummer des Moduls Software Evolution?",
+            "answer": "Die Modulnummer lautet CS 563.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 444,
+            "next_question": 446
+        },
+        {
+            "id": 446,
+            "question": "Wie viele LP hat das Modul CS 563 Software Evolution?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 445,
+            "next_question": 447
+        },
+        {
+            "id": 447,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Software Evolution?",
+            "answer": "Die Studierenden können: sich systematisch in ein vorgegebenes Softwareprojekt einarbeiten, einen schlüssigen Evolutionsplan ausarbeiten, kleinere Evolutionsaufgaben durchführen, über wissenschaftliche Inhalte frei sprechen, und ein Projekt im Team bearbeiten.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 446,
+            "next_question": 448
+        },
+        {
+            "id": 448,
+            "question": "Welche Teilnahmevoraussetzungen werden für Software Evolution empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 447,
+            "next_question": 449
+        },
+        {
+            "id": 449,
+            "question": "Welche Prüfungsform hat das Modul Software Evolution?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 448,
+            "next_question": 450
+        },
+        {
+            "id": 450,
+            "question": "Wie lautet die Modulnummer des Moduls Statistical Bioinformatics?",
+            "answer": "Die Modulnummer lautet CS 543.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 449,
+            "next_question": 451
+        },
+        {
+            "id": 451,
+            "question": "Wie viele LP hat das Modul CS 543 Statistical Bioinformatics?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 450,
+            "next_question": 452
+        },
+        {
+            "id": 452,
+            "question": "Welcher Niveaustufe ist das Modul Statistical Bioinformatics zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 451,
+            "next_question": 453
+        },
+        {
+            "id": 453,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Statistical Bioinformatics?",
+            "answer": "Die Studierenden können die wichtigsten Methoden aus der statistischen Bioinformatik erläutern, die für Berechnungen im naturwissenschaftlichen Bereich erforderlich sind, und sind in der Lage, für konkrete Fallbeispiele geeignete Verfahren auszuwählen, durchzuführen und zu implementieren.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 452,
+            "next_question": 454
+        },
+        {
+            "id": 454,
+            "question": "Welche Teilnahmevoraussetzungen werden für Statistical Bioinformatics empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Modulen Einführung in die Bioinformatik sowie Grundlagen der Statistik.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 453,
+            "next_question": 455
+        },
+        {
+            "id": 455,
+            "question": "Welche Prüfungsform hat das Modul Statistical Bioinformatics?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 454,
+            "next_question": 456
+        },
+        {
+            "id": 456,
+            "question": "Wie lautet die Modulnummer des Moduls Virtual Machines?",
+            "answer": "Die Modulnummer lautet CS 530.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 455,
+            "next_question": 457
+        },
+        {
+            "id": 457,
+            "question": "Wie viele LP hat das Modul CS 530 Virtual Machines?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 456,
+            "next_question": 458
+        },
+        {
+            "id": 458,
+            "question": "Welcher Niveaustufe ist das Modul Virtual Machines zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 457,
+            "next_question": 459
+        },
+        {
+            "id": 459,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Virtual Machines?",
+            "answer": "Die Studierenden können: grundlegende Konzepte von prozess- und systembasierten virtuellen Maschinen beschreiben und erläutern, den Aufbau von VMs beschreiben, Komponenten prozessbasierter VMs (Scheduler, Garbage Collection, JIT Compiler) entwickeln, Methoden systembasierter VMs (Hypervisor, Hardware-Emulation, Hardware-Virtualisierung, Paravirtualisierung) erläutern, Optimierungen in VMs erläutern, moderne Forschungsarbeiten im Bereich VM-Technologie darstellen, und Implementierungsansätze für Programmiersprachenkonzepte vergleichen.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 458,
+            "next_question": 460
+        },
+        {
+            "id": 460,
+            "question": "Welche Teilnahmevoraussetzungen werden für das Modul Virtual Machines empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 459,
+            "next_question": 461
+        },
+        {
+            "id": 461,
+            "question": "Welche Prüfungsform hat das Modul Virtual Machines?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 460,
+            "next_question": 462
+        },
+        {
+            "id": 462,
+            "question": "Wie lautet die Modulnummer des Moduls Visual Languages?",
+            "answer": "Die Modulnummer lautet CS 562.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 461,
+            "next_question": 463
+        },
+        {
+            "id": 463,
+            "question": "Wie viele LP hat das Modul CS 562 Visual Languages?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 462,
+            "next_question": 464
+        },
+        {
+            "id": 464,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Visual Languages?",
+            "answer": "Die Studierenden können: Unterschiede zwischen textuellen und visuellen Sprachen erläutern, Methoden zur Definition visueller Sprachen beschreiben, mit grundlegenden Designerwerkzeugen für visuelle Sprachen umgehen, sich in eine unbekannte visuelle Sprache einarbeiten und diese anhand einer kleinen Testapplikation bewerten, wissenschaftliche Arbeitsweisen anwenden und über wissenschaftliche Inhalte frei sprechen.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 463,
+            "next_question": 465
+        },
+        {
+            "id": 465,
+            "question": "Welche Teilnahmevoraussetzungen werden für Visual Languages empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen aus den Basismodulen der Informatik sowie den Aufbaumodulen Softwaretechnik und Software-Praktikum.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 464,
+            "next_question": 466
+        },
+        {
+            "id": 466,
+            "question": "Wie lautet die Modulnummer des Moduls Web Technologies?",
+            "answer": "Die Modulnummer lautet CS 533.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 465,
+            "next_question": 467
+        },
+        {
+            "id": 467,
+            "question": "Wie viele LP hat das Modul CS 533 Web Technologies?",
+            "answer": "Das Modul hat 6 Leistungspunkte.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 466,
+            "next_question": 468
+        },
+        {
+            "id": 468,
+            "question": "Welcher Niveaustufe ist das Modul Web Technologies zugeordnet?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 467,
+            "next_question": 469
+        },
+        {
+            "id": 469,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Web Technologies?",
+            "answer": "Die Studierenden können erklären, welche Webtechnologien es gibt und wie man sie benutzt, können Einsatzmöglichkeiten und Mächtigkeit aufzeigen, können Zusammenspiel und Abhängigkeiten zwischen den Technologien beschreiben, können wissenschaftliche Arbeitsweisen einsetzen und haben mündliche Kommunikationsfähigkeit durch freie Rede und Diskussion trainiert.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 468,
+            "next_question": 470
+        },
+        {
+            "id": 470,
+            "question": "Welche Teilnahmevoraussetzungen werden für Web Technologies empfohlen?",
+            "answer": "Empfohlen werden Grundkenntnisse in Programmierung und Softwaretechnik.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 469,
+            "next_question": 471
+        },
+        {
+            "id": 471,
+            "question": "Welche Prüfungsform hat das Modul Web Technologies?",
+            "answer": "Mündliche Prüfung (Einzelprüfung) oder Klausur.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 470,
+            "next_question": 472
+        },
+        {
+            "id": 472,
+            "question": "Wie lautet die Modulnummer des Moduls Further Selected Advanced Topics in Computer Science (Seminar)?",
+            "answer": "Die Modulnummer lautet CS 567.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 471,
+            "next_question": 473
+        },
+        {
+            "id": 473,
+            "question": "Wie viele LP hat das Modul CS 567 Further Selected Advanced Topics in Computer Science (Seminar)?",
+            "answer": "Das Modul hat 3 Leistungspunkte.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 472,
+            "next_question": 474
+        },
+        {
+            "id": 474,
+            "question": "Ist das Modul Further Selected Advanced Topics in Computer Science (Seminar) ein Pflicht- oder Wahlpflichtmodul?",
+            "answer": "Es ist ein Wahlpflichtmodul.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 473,
+            "next_question": 475
+        },
+        {
+            "id": 475,
+            "question": "Welcher Niveaustufe ist das Modul Further Selected Advanced Topics in Computer Science (Seminar) zugeordnet?",
+            "answer": "Es ist ein Profilmodul.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 474,
+            "next_question": 476
+        },
+        {
+            "id": 476,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Further Selected Advanced Topics in CS (Seminar)?",
+            "answer": "Die Studierenden sind in der Lage, sich ein Spezialthema der Informatik selbstständig zu erarbeiten, können ggf. entsprechende bereits im Rahmen des Moduls Selected Advanced Topics erworbene Kompetenzen weiterentwickeln, können Zusammenhänge in der Informatik aufbereiten und ergänzen, können mit wissenschaftlicher Literatur umgehen und nach ihr suchen, können einen strukturierten auf das Publikum zugeschnittenen Vortrag halten, können mit Präsentationsmedien umgehen, und können in der Gruppe strukturiert über Informatik-Inhalte diskutieren.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 475,
+            "next_question": 477
+        },
+        {
+            "id": 477,
+            "question": "Wie setzt sich die Prüfung im Modul Further Selected Advanced Topics in CS (Seminar) zusammen?",
+            "answer": "Die Prüfung besteht aus zwei Teilprüfungen: einem Seminarvortrag (Gewichtung: 1 LP) und einer schriftlichen Ausarbeitung (Gewichtung: 2 LP).",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 476,
+            "next_question": 478
+        },
+        {
+            "id": 478,
+            "question": "Welche Teilnahmevoraussetzungen werden für das Modul Further Selected Advanced Topics in CS (Seminar) empfohlen?",
+            "answer": "Empfohlen werden Vorkenntnisse abhängig von der fachlichen Ausrichtung des Seminars, generell jedoch Kenntnisse aus den Basismodulen der Informatik und Mathematik.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 477,
+            "next_question": 479
+        },
+        {
+            "id": 479,
+            "question": "Wie lautet die Modulnummer des Moduls Independent Scientific Practice Computer Science?",
+            "answer": "Die Modulnummer lautet CS 698.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 478,
+            "next_question": 480
+        },
+        {
+            "id": 480,
+            "question": "Wie viele LP hat das Modul CS 698 Independent Scientific Practice Computer Science?",
+            "answer": "Das Modul hat 9 Leistungspunkte.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 479,
+            "next_question": 481
+        },
+        {
+            "id": 481,
+            "question": "Ist das Modul Independent Scientific Practice Computer Science ein Pflicht- oder Wahlpflichtmodul?",
+            "answer": "Es ist ein Pflichtmodul.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 480,
+            "next_question": 482
+        },
+        {
+            "id": 482,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Independent Scientific Practice Computer Science?",
+            "answer": "Die Studierenden sind in der Lage, selbstständig den Kenntnisstand in einem wissenschaftlichen Gebiet aus dem Bereich Informatik anhand von Literaturempfehlungen zu überprüfen, zu erweitern und sich mit dem Stand der Forschung vertraut zu machen. Sie können fachspezifische Literatursuche durchführen und Systeme verwenden, die die wissenschaftliche Arbeit im Gebiet der Masterarbeit unterstützen.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 481,
+            "next_question": 483
+        },
+        {
+            "id": 483,
+            "question": "Welche Prüfungsform hat das Modul Independent Scientific Practice Computer Science?",
+            "answer": "Schriftliche Ausarbeitung.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 482,
+            "next_question": 484
+        },
+        {
+            "id": 484,
+            "question": "Wird das Modul Independent Scientific Practice Computer Science benotet?",
+            "answer": "Nein, es ist ein unbenotetes Modul.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 483,
+            "next_question": 485
+        },
+        {
+            "id": 485,
+            "question": "Welche Teilnahmevoraussetzungen werden für Independent Scientific Practice empfohlen?",
+            "answer": "Empfohlen werden die Kompetenzen, die in den Aufbau- und Vertiefungsmodulen vermittelt werden.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 484,
+            "next_question": 486
+        },
+        {
+            "id": 486,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Independent Scientific Practice Computer Science?",
+            "answer": "Selbstständiges wissenschaftliches Arbeiten Informatik.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 485,
+            "next_question": 487
+        },
+        {
+            "id": 487,
+            "question": "Wie lautet die Modulnummer des Moduls Project Work Computer Science?",
+            "answer": "Die Modulnummer lautet CS 697.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 486,
+            "next_question": 488
+        },
+        {
+            "id": 488,
+            "question": "Wie viele LP hat das Modul CS 697 Project Work Computer Science?",
+            "answer": "Das Modul hat 12 Leistungspunkte.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 487,
+            "next_question": 489
+        },
+        {
+            "id": 489,
+            "question": "Ist das Modul Project Work Computer Science ein Pflicht- oder Wahlpflichtmodul?",
+            "answer": "Es ist ein Pflichtmodul.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 488,
+            "next_question": 490
+        },
+        {
+            "id": 490,
+            "question": "Welcher Niveaustufe ist das Modul Project Work Computer Science zugeordnet?",
+            "answer": "Es ist ein Praxismodul.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 489,
+            "next_question": 491
+        },
+        {
+            "id": 491,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Project Work Computer Science?",
+            "answer": "Die Studierenden können umfangreiche Aufgabenstellungen aus der Informatik im Team bearbeiten (Erarbeitung, Anpassung, Erweiterung, Entwicklung), können eigenverantwortlich lernen, planen und arbeiten, sind geübt in Projektsteuerung und Überwachung (Zielbeschreibungen, Planung, Meilensteine, Protokollführung, Termine, Delegation, Controlling), haben teambezogene Sozialkompetenzen (Zusammenarbeit, Teamentwicklung, Führung, Motivation, Arbeiten unter Termindruck) und beherrschen Methoden der Dokumentation und Präsentation von Informatikprojekten.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 490,
+            "next_question": 492
+        },
+        {
+            "id": 492,
+            "question": "Welche Prüfungsform hat das Modul Project Work Computer Science?",
+            "answer": "Softwareerstellung (der Begriff Software schließt alle erstellten Artefakte mit ein, insbesondere Programmcode, Planungsdokumente, Benutzer- und Entwicklerhandbücher und Präsentationsmaterial).",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 491,
+            "next_question": 493
+        },
+        {
+            "id": 493,
+            "question": "Wird das Modul Project Work Computer Science benotet?",
+            "answer": "Nein, es ist ein unbenotetes Modul.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 492,
+            "next_question": 494
+        },
+        {
+            "id": 494,
+            "question": "Welche Teilnahmevoraussetzungen hat das Modul Project Work Computer Science?",
+            "answer": "Es gibt keine Teilnahmevoraussetzungen.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 493,
+            "next_question": 495
+        },
+        {
+            "id": 495,
+            "question": "Wie lautet die Modulnummer des Moduls Selected Advanced Topics in Computer Science (Seminar)?",
+            "answer": "Die Modulnummer lautet CS 610.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 494,
+            "next_question": 496
+        },
+        {
+            "id": 496,
+            "question": "Wie viele LP hat das Modul CS 610 Selected Advanced Topics in Computer Science (Seminar)?",
+            "answer": "Das Modul hat 3 Leistungspunkte.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 495,
+            "next_question": 497
+        },
+        {
+            "id": 497,
+            "question": "Ist das Modul Selected Advanced Topics in Computer Science (Seminar) ein Pflicht- oder Wahlpflichtmodul?",
+            "answer": "Es ist ein Pflichtmodul.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 496,
+            "next_question": 498
+        },
+        {
+            "id": 498,
+            "question": "Wie setzt sich die Prüfung im Modul Selected Advanced Topics in CS (Seminar) zusammen?",
+            "answer": "Die Prüfung besteht aus zwei Teilprüfungen: einem Seminarvortrag (Gewichtung: 1 LP) und einer schriftlichen Ausarbeitung (Gewichtung: 2 LP).",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 497,
+            "next_question": 499
+        },
+        {
+            "id": 499,
+            "question": "Welche Qualifikationsziele vermittelt das Modul Selected Advanced Topics in CS (Seminar)?",
+            "answer": "Die Studierenden sind in der Lage, sich ein Spezialthema der Informatik selbstständig zu erarbeiten, können Zusammenhänge aufbereiten und ergänzen, können mit wissenschaftlicher Literatur umgehen und nach ihr suchen, können einen strukturierten auf das Publikum zugeschnittenen Vortrag halten, können mit Präsentationsmedien umgehen und können in der Gruppe strukturiert über Inhalte aus der Informatik diskutieren.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 498,
+            "next_question": 500
+        },
+        {
+            "id": 500,
+            "question": "Was ist der Unterschied zwischen den Modulen CS 610 (Selected Advanced Topics) und CS 567 (Further Selected Advanced Topics)?",
+            "answer": "CS 610 ist ein Pflichtmodul, CS 567 ein Wahlpflichtmodul. CS 567 dient ggf. der Weiterentwicklung der in CS 610 erworbenen Kompetenzen. Beide haben 3 LP und die gleiche Prüfungsform (Seminarvortrag + schriftliche Ausarbeitung). CS 567 ist das optionale zweite Seminar.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 499,
+            "next_question": 501
+        },
+        {
+            "id": 501,
+            "question": "Wie lautet die Modulnummer des Abschlussmoduls Master Thesis?",
+            "answer": "Die Modulnummer lautet CS 699.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 500,
+            "next_question": 502
+        },
+        {
+            "id": 502,
+            "question": "Wie viele LP hat das Modul CS 699 Master Thesis?",
+            "answer": "Das Modul hat 30 Leistungspunkte.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 501,
+            "next_question": 503
+        },
+        {
+            "id": 503,
+            "question": "Welcher Niveaustufe ist das Modul Master Thesis zugeordnet?",
+            "answer": "Es ist ein Abschlussmodul.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 502,
+            "next_question": 504
+        },
+        {
+            "id": 504,
+            "question": "Wie setzt sich die Prüfung im Modul Master Thesis zusammen?",
+            "answer": "Die Prüfung besteht aus zwei Teilprüfungen: der Masterarbeit (Gewichtung: 27 LP) und der Disputation (Gewichtung: 3 LP).",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 503,
+            "next_question": 505
+        },
+        {
+            "id": 505,
+            "question": "Welche Teilnahmevoraussetzung gilt für das Modul Master Thesis?",
+            "answer": "Es müssen mindestens 66 LP erworben worden sein.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 504,
+            "next_question": 506
+        },
+        {
+            "id": 506,
+            "question": "Welches Qualifikationsziel hat das Modul Master Thesis laut Modulliste?",
+            "answer": "Die Studierenden sind in der Lage, eine umfangreiche Aufgabenstellung aus dem Bereich der Informatik mit wissenschaftlichen Methoden unter Anleitung zu bearbeiten sowie eine Arbeit und die darin enthaltenen Ergebnisse schriftlich und mündlich angemessen darzustellen.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 505,
+            "next_question": 507
+        },
+        {
+            "id": 507,
+            "question": "Welche Module im M.Sc. Computer Science sind unbenotet?",
+            "answer": "Die Module Project Work Computer Science (CS 697, 12 LP) und Independent Scientific Practice Computer Science (CS 698, 9 LP) werden nicht mit Punkten bewertet (unbenotet).",
+            "page": 46,
+            "section": "Anlage 2, §28",
+            "previous_question": 506,
+            "next_question": 508
+        },
+        {
+            "id": 508,
+            "question": "Was regelt die Anlage 3 der Prüfungsordnung?",
+            "answer": "Die Anlage 3 enthält die Importmodulliste, also die Module aus anderen Studiengängen, die im Rahmen des M.Sc. Computer Science absolviert werden können.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 507,
+            "next_question": 509
+        },
+        {
+            "id": 509,
+            "question": "Welche grundsätzlichen Regeln gelten für die Module der Importmodulliste?",
+            "answer": "Für Importmodule gelten gemäß § 14 Abs. 1 Allgemeine Bestimmungen die Angaben der Studien- und Prüfungsordnung, in deren Rahmen die Module angeboten werden (insbesondere bezüglich Qualifikationszielen, Voraussetzungen, Leistungspunkten sowie Prüfungsmodalitäten).",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 508,
+            "next_question": 510
+        },
+        {
+            "id": 510,
+            "question": "Kann der Prüfungsausschuss die Importmodulliste ändern?",
+            "answer": "Ja, der Katalog der wählbaren Studienangebote kann vom Prüfungsausschuss geändert oder ergänzt werden, insbesondere wenn sich das Angebot der Studiengänge der anbietenden Fachbereiche ändert. Änderungen werden auf der Studiengangswebseite veröffentlicht.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 509,
+            "next_question": 511
+        },
+        {
+            "id": 511,
+            "question": "Können über das reguläre Angebot hinaus weitere Importmodule genehmigt werden?",
+            "answer": "Ja, auf begründeten Antrag der oder des Studierenden ist es zulässig, über das reguläre Angebot hinaus im Einzelfall weitere Importmodule zu genehmigen. Voraussetzung ist, dass auch der anbietende Fachbereich bzw. die anbietende Einrichtung dem zustimmt.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 510,
+            "next_question": 512
+        },
+        {
+            "id": 512,
+            "question": "Wird garantiert, dass alle aufgelisteten Importmodule tatsächlich durchgeführt werden?",
+            "answer": "Nein, es wird keine Garantie dafür übernommen, dass das aufgelistete Angebot tatsächlich durchgeführt wird und wahrgenommen werden kann.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 511,
+            "next_question": 513
+        },
+        {
+            "id": 513,
+            "question": "Kann die Wahrnehmung von Importmodulen an Bedingungen geknüpft werden?",
+            "answer": "Ja, die Wahrnehmung kann im Einzelfall oder generell davon abhängig gemacht werden, dass zuvor eine Studienberatung wahrgenommen oder eine verbindliche Anmeldung vorgenommen wird.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 512,
+            "next_question": 514
+        },
+        {
+            "id": 514,
+            "question": "Wo findet man das aktuelle Importangebot?",
+            "answer": "Das aktuelle Importangebot ist jeweils auf der Studiengangswebseite des modulanbietenden Fachbereichs als Exportangebot veröffentlicht.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 513,
+            "next_question": 515
+        },
+        {
+            "id": 515,
+            "question": "Welche Importmodule aus dem BSc Data Science können für Compulsory Elective Modules in Computer Science verwendet werden?",
+            "answer": "Aus dem BSc Data Science können die Module Effiziente Algorithmen (Aufbaumodul T, 9 LP) und Maschinelles Lernen (Aufbaumodul P, 9 LP) importiert werden.",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 514,
+            "next_question": 516
+        },
+        {
+            "id": 516,
+            "question": "Welche Importmodule aus dem MSc Data Science können für Compulsory Elective Modules verwendet werden?",
+            "answer": "Aus dem MSc Data Science können folgende Module importiert werden: Data Science in Biomedicine (P, 6 LP), Databionics (P, 9 LP), Data Integration (P, 6 LP), Deep Learning (P, 6 LP), Introduction to Natural Language Processing (P, 6 LP), Explainable Artificial Intelligence (P, 6 LP), Generative AI (P, 6 LP), Information Retrieval (P, 6 LP) und Temporal Data Mining (P, 6 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 515,
+            "next_question": 517
+        },
+        {
+            "id": 517,
+            "question": "Sind die Importmodule aus dem MSc Data Science Aufbau- oder Vertiefungsmodule?",
+            "answer": "Alle Importmodule aus dem MSc Data Science sind Vertiefungsmodule.",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 516,
+            "next_question": 518
+        },
+        {
+            "id": 518,
+            "question": "Welche Importmodule aus dem BSc Informatik können im Bereich Compulsory Elective Modules verwendet werden?",
+            "answer": "Unter anderem: Einführung in die Bioinformatik (P, 6 LP), Einführung in die Kryptographie und ihre Anwendungen (T, 6 LP), Entwurf und Administration von Datenbanken (P, 6 LP), Grafikprogrammierung (P, 9 LP), Großes/Kleines Aufbaumodul Informatik 1-5 (P/T, 6/9 LP), IT-Sicherheit (P, 9 LP), NoSQL Datenbanksysteme (P, 6 LP), Rechnernetze (P, 9 LP), Software Design und Programmiertechniken (P, 6 LP), Softwarequalität (P, 9 LP), Verteiltes Datenmanagement (P, 9 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 517,
+            "next_question": 519
+        },
+        {
+            "id": 519,
+            "question": "Sind die Importmodule aus dem BSc Informatik Aufbau- oder Vertiefungsmodule?",
+            "answer": "Alle Importmodule aus dem BSc Informatik sind Aufbaumodule.",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 518,
+            "next_question": 520
+        },
+        {
+            "id": 520,
+            "question": "Welche Importmodule aus dem BSc Wirtschaftsinformatik stehen zur Verfügung?",
+            "answer": "Aus dem BSc Wirtschaftsinformatik: Agiles und klassisches Requirements-Engineering (Aufbaumodul P, 6 LP) und Fundamentale Technologien zur IoT-Datengenerierung von physikalischen und nichtphysikalischen Größen - IoT Sensorik (Aufbaumodul P, 6 LP).",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 519,
+            "next_question": 521
+        },
+        {
+            "id": 521,
+            "question": "Welche Importmodule aus dem MSc Wirtschaftsinformatik stehen zur Verfügung?",
+            "answer": "Aus dem MSc Wirtschaftsinformatik: Applications of Artificial Intelligence in Business, Cloud Computing, Project Management for Software Development, sowie mehrere Specialization Module (Business Systems, Digital Transformation, Design and Operation of Information Systems, Information Management, Model-based Decision Support/BI & Analytics, Process Management, Knowledge Management and Collaborative Technologies). Alle sind Vertiefungsmodule P mit 6 LP.",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 520,
+            "next_question": 522
+        },
+        {
+            "id": 522,
+            "question": "Wie sind die Importmodule für Compulsory Elective Modules gekennzeichnet?",
+            "answer": "Module zur Praktischen Informatik sind mit 'P' gekennzeichnet, Module zur Theoretischen Informatik mit 'T'.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 521,
+            "next_question": 523
+        },
+        {
+            "id": 523,
+            "question": "Welche Profile Areas stehen im Studiengang zur Verfügung?",
+            "answer": "Es stehen folgende Profile Areas zur Verfügung: Business Administration, Biology, Geography, Mathematics, Physics und Economics.",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 522,
+            "next_question": 524
+        },
+        {
+            "id": 524,
+            "question": "Wie viele LP müssen im optionalen Bereich Profile Area Modules erbracht werden?",
+            "answer": "Im optionalen Bereich Profile Area Modules müssen 12 LP erbracht werden, wenn dieser Bereich studiert wird.",
+            "page": 7,
+            "section": "§6, Anlage 3",
+            "previous_question": 523,
+            "next_question": 525
+        },
+        {
+            "id": 525,
+            "question": "Welche Module stehen im Profile Area Business Administration zur Verfügung?",
+            "answer": "Module aus dem BSc Betriebswirtschaftslehre des FB 02 Wirtschaftswissenschaften, z.B.: Absatzwirtschaft, Buchführung und Abschluss, Business Intelligence, Controlling mit Kennzahlen, Digitalisierung und Prozessmanagement I+II, Entrepreneurial Finance, Entrepreneurship und innovative Geschäftsmodelle I+II, Entscheidung/Finanzierung/Investition, Grundlagen der Besteuerung, Grundlagen der Wirtschaftsinformatik, und viele weitere. Alle Module haben 6 LP.",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 524,
+            "next_question": 526
+        },
+        {
+            "id": 526,
+            "question": "Welche Niveaustufen haben die Module im Profile Area Business Administration?",
+            "answer": "Die Module haben verschiedene Niveaustufen: Basismodul A, Basismodul B, Basismodul C und Vertiefungsmodul C. Alle umfassen jeweils 6 LP.",
+            "page": 50,
+            "section": "Anlage 3",
+            "previous_question": 525,
+            "next_question": 527
+        },
+        {
+            "id": 527,
+            "question": "Was muss vor Aufnahme des Studiums im Profilbereich Biologie beachtet werden?",
+            "answer": "Interessierte Studierende sollten sich beim Ansprechpartner des Fachbereichs Mathematik und Informatik für den Profilbereich Biologie melden. Außerdem ist vor Aufnahme eine Anmeldung im Studiendekanat des Fachbereichs Biologie erforderlich. Da die Wahlmöglichkeiten durch Zulassungsbeschränkungen begrenzt sein können, wird empfohlen, an der Informationsveranstaltung zur Modulwahl teilzunehmen.",
+            "page": 50,
+            "section": "Anlage 3",
+            "previous_question": 526,
+            "next_question": 528
+        },
+        {
+            "id": 528,
+            "question": "Welche Module stehen im Profile Area Biology zur Verfügung?",
+            "answer": "Module aus dem BSc Biologie (FB 17), darunter: Aktuelle Themen der Ökologie, Biochemie I, Biologie der Tiere, Digitale Lichtmikroskopie, Einführung in die Drosophila-Kreuzungsgenetik, Einführung in die konfokale Laserscan-Mikroskopie, Elektronenmikroskopie, Experimentelles Design und Datenanalyse in der Ökologie, Forensische Biologie, Fungal Diversity and Conservation, Funktionsmorphologie und Biochemie der Tiere, und viele weitere. Alle sind Profilmodule mit 6 LP.",
+            "page": 50,
+            "section": "Anlage 3",
+            "previous_question": 527,
+            "next_question": 529
+        },
+        {
+            "id": 529,
+            "question": "Können Module aus dem Lehramt Biologie für den Profilbereich Biologie gewählt werden?",
+            "answer": "Ja, es stehen auch Module aus dem LAaG Biologie (Lehramt an Gymnasien) zur Verfügung: Anatomie und Physiologie der Pflanzen, Anatomie und Physiologie der Tiere, Einführung in die organismische Biologie, Genetik und Mikrobiologie, sowie Zell- und Entwicklungsbiologie. Alle sind Basismodule mit 6 LP.",
+            "page": 51,
+            "section": "Anlage 3",
+            "previous_question": 528,
+            "next_question": 530
+        },
+        {
+            "id": 530,
+            "question": "Welche Module stehen im Profile Area Geography zur Verfügung?",
+            "answer": "Module aus dem BSc Geographie (FB 19) wie Basiswissen-Module (3 LP) und Grundkompetenz-Module (6 LP) in verschiedenen Bereichen (Bevölkerungsgeographie, Biogeographie, Bodengeographie, Geomorphologie, Hydrogeographie, Klimageographie, Stadtgeographie, Wirtschaftsgeographie etc.), sowie Kartographie/GIS (6 LP), Fernerkundung (3 LP), Geoinformatik (3 LP), und Projekt der Geographie I/II (6 LP). Dazu Module aus dem MSc Physische Geographie und MSc Wirtschaftsgeographie.",
+            "page": 51,
+            "section": "Anlage 3",
+            "previous_question": 529,
+            "next_question": 531
+        },
+        {
+            "id": 531,
+            "question": "Welche Module aus dem MSc Physische Geographie stehen für den Profilbereich Geography zur Verfügung?",
+            "answer": "Biogeographie, Boden- und Hydrogeographie, Geländeklimatologie, Geographische Informationssysteme, Geomorphologie, Globaler Wandel, Umweltinformationssysteme I+II, und Umweltsysteme. Diese sind Aufbau-, Basis- oder Vertiefungsmodule mit jeweils 6 LP.",
+            "page": 52,
+            "section": "Anlage 3",
+            "previous_question": 530,
+            "next_question": 532
+        },
+        {
+            "id": 532,
+            "question": "Welche Module aus dem MSc Wirtschaftsgeographie stehen für den Profilbereich zur Verfügung?",
+            "answer": "Globalisierung von Innovation und Wissen (Basismodul, 6 LP), Innovation und Wachstum im Raum (Basismodul, 6 LP), Modellierung und Simulation (Aufbaumodul, 6 LP), Sozioökonomische Globalisierungsprozesse (Basismodul, 6 LP).",
+            "page": 52,
+            "section": "Anlage 3",
+            "previous_question": 531,
+            "next_question": 533
+        },
+        {
+            "id": 533,
+            "question": "Welche Module stehen im Profile Area Mathematics zur Verfügung?",
+            "answer": "Module aus den Studiengängen BSc Data Science (Matrixmethoden in der Datenanalyse, 9 LP), BSc Mathematik (zahlreiche Aufbaumodule wie Algebra, Darstellungstheorie, Diskrete Mathematik, Funktionentheorie, Numerik, Zahlentheorie etc.), MSc Mathematik (Vertiefungsmodule wie Algebraic Geometry, Algebraic Topology, Differential Geometry, Functional Analysis, Galois Theory etc.), BSc Wirtschaftsmathematik (Statistik, Stochastik etc.) und MSc Wirtschaftsmathematik (Financial Mathematics, Probability Theory etc.).",
+            "page": 53,
+            "section": "Anlage 3",
+            "previous_question": 532,
+            "next_question": 534
+        },
+        {
+            "id": 534,
+            "question": "Wie viele LP haben die meisten Mathematik-Importmodule aus dem BSc Mathematik?",
+            "answer": "Die meisten Module aus dem BSc Mathematik haben 9 LP (z.B. Algebra, Darstellungstheorie, Funktionentheorie, Numerik, Zahlentheorie), einige haben 6 LP (z.B. Diskrete Geometrie, Elementare Topologie) und das Proseminar/Seminar hat 3 LP.",
+            "page": 53,
+            "section": "Anlage 3",
+            "previous_question": 533,
+            "next_question": 535
+        },
+        {
+            "id": 535,
+            "question": "Welche Module stehen im Profile Area Physics zur Verfügung?",
+            "answer": "Aus dem BSc Physik (FB 13): Experimentalphysik für Naturwissenschaften I (Basismodul, 6 LP) und Experimentalphysik für Naturwissenschaften II (Basismodul, 6 LP).",
+            "page": 55,
+            "section": "Anlage 3",
+            "previous_question": 534,
+            "next_question": 536
+        },
+        {
+            "id": 536,
+            "question": "Welche Module stehen im Profile Area Economics zur Verfügung?",
+            "answer": "Module aus dem BSc Volkswirtschaftslehre (FB 02), darunter: Angewandte Institutionenökonomie, Development Economics, Einführung in die Institutionenökonomie, Einführung in die VWL, Einführung in Law and Economics, Empirische Wirtschaftsforschung, Grundlagen der Finanzwissenschaft, International Economics, Macroeconomics II, Makroökonomie I, Markets and Organizations, Microeconomics II, Mikroökonomie I, Umweltökonomik, Wettbewerb und Regulierung, Wirtschaftspolitik. Alle haben 6 LP.",
+            "page": 55,
+            "section": "Anlage 3",
+            "previous_question": 535,
+            "next_question": 537
+        },
+        {
+            "id": 537,
+            "question": "Welche Niveaustufen haben die Module im Profile Area Economics?",
+            "answer": "Die Module haben verschiedene Niveaustufen: Basismodul A, Basismodul B, Basismodul C, Aufbaumodul C und Vertiefungsmodul C. Alle umfassen 6 LP.",
+            "page": 55,
+            "section": "Anlage 3",
+            "previous_question": 536,
+            "next_question": 538
+        },
+        {
+            "id": 538,
+            "question": "Was regelt die Anlage 4 der Prüfungsordnung?",
+            "answer": "Die Anlage 4 enthält die Exportmodulliste, also die Module des M.Sc. Computer Science, die auch im Rahmen anderer Studiengänge absolviert werden können.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 537,
+            "next_question": 539
+        },
+        {
+            "id": 539,
+            "question": "Wo wird das aktuelle Exportangebot veröffentlicht?",
+            "answer": "Das aktuelle Exportangebot ist jeweils auf der Studiengangswebseite des modulanbietenden Fachbereichs als Exportangebot veröffentlicht.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 538,
+            "next_question": 540
+        },
+        {
+            "id": 540,
+            "question": "Kann der Prüfungsausschuss das Exportangebot ändern?",
+            "answer": "Ja, der Katalog des Exportangebots kann vom Prüfungsausschuss geändert oder ergänzt werden, insbesondere wenn sich das Exportangebot ändert. Derartige Änderungen werden auf der Studiengangswebseite veröffentlicht.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 539,
+            "next_question": 541
+        },
+        {
+            "id": 541,
+            "question": "Welche Module werden als Exportmodule für andere Studiengänge angeboten?",
+            "answer": "Nahezu alle Wahlpflichtmodule des Bereichs Compulsory Elective Modules in Computer Science werden als Export angeboten, darunter: Advanced Algorithmics, Advanced Methods of System Development, Advanced Programming Concepts, Advanced Topics in Cryptography, Algorithm Engineering, Algorithmic Network Analysis, Algorithms in Bioinformatics, Artificial Intelligence, Compiler Construction, Computational Complexity Theory, Content-based Image and Video Analysis, Dialog Systems, Distributed Systems, und viele weitere.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 540,
+            "next_question": 542
+        },
+        {
+            "id": 542,
+            "question": "Werden die Module Big Data Systems und Advanced Data Structures als Exportmodule angeboten?",
+            "answer": "Nein, in der Exportmodulliste (Anlage 4) sind weder Big Data Systems (CS 673) noch Advanced Data Structures (CS 650) aufgeführt.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 541,
+            "next_question": 543
+        },
+        {
+            "id": 543,
+            "question": "Werden die Module Computer Vision I und II als Exportmodule angeboten?",
+            "answer": "Nein, Computer Vision I (CS 657) und Computer Vision II (CS 658) sind nicht in der Exportmodulliste aufgeführt.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 542,
+            "next_question": 544
+        },
+        {
+            "id": 544,
+            "question": "Wird das Modul Computer-assisted Theorem Proving als Exportmodul angeboten?",
+            "answer": "Nein, Computer-assisted Theorem Proving (CS 523) ist nicht in der Exportmodulliste aufgeführt.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 543,
+            "next_question": 545
+        },
+        {
+            "id": 545,
+            "question": "Was regelt die Anlage 5 der Prüfungsordnung?",
+            "answer": "Die Anlage 5 regelt die besonderen Zugangsvoraussetzungen und das Eignungsfeststellungsverfahren für den Masterstudiengang Computer Science.",
+            "page": 59,
+            "section": "Anlage 5",
+            "previous_question": 544,
+            "next_question": 546
+        },
+        {
+            "id": 546,
+            "question": "Wer kann zum Masterstudiengang Computer Science zugelassen werden?",
+            "answer": "Nur wer die allgemeinen Zugangsvoraussetzungen des § 4 der Studien- und Prüfungsordnung erfüllt und die persönliche fachbezogene Eignung im Rahmen des Eignungsfeststellungsverfahrens nachgewiesen hat.",
+            "page": 59,
+            "section": "Anlage 5, §1",
+            "previous_question": 545,
+            "next_question": 547
+        },
+        {
+            "id": 547,
+            "question": "Welche Unterlagen müssen dem Antrag auf Teilnahme am Eignungsfeststellungsverfahren beigefügt werden?",
+            "answer": "1) Nachweis über einen abgeschlossenen fachlich einschlägigen Bachelor oder gleichwertigen Abschluss (oder vorläufige Gesamtnote), 2) Nachweis über eine wissenschaftliche Abschlussarbeit im Umfang von mindestens 10 LP (sofern vorhanden oder angemeldet), 3) Nachweis über die in § 4 Abs. 1 Sätze 4-7 genannten Kompetenzen, 4) Nachweis über Sprachkenntnisse gemäß § 4 Abs. 4, 5) Vollständig ausgefülltes Formular der Webanwendung des Studiengangs.",
+            "page": 59,
+            "section": "Anlage 5, §2",
+            "previous_question": 546,
+            "next_question": 548
+        },
+        {
+            "id": 548,
+            "question": "Was enthält das Formular, das bei der Bewerbung ausgefüllt werden muss?",
+            "answer": "Ein vollständig und wahrheitsgemäß ausgefülltes Formular, erstellt mit der Webanwendung des Studiengangs, das Angaben über die bislang absolvierten Module und deren Umfang, ggf. über die Anfertigung einer Abschlussarbeit sowie über erworbene Sprachzertifikate enthält.",
+            "page": 59,
+            "section": "Anlage 5, §2",
+            "previous_question": 547,
+            "next_question": 549
+        },
+        {
+            "id": 549,
+            "question": "Wer bildet die Eignungsfeststellungskommission?",
+            "answer": "Die Eignungsfeststellungskommission wird vom Fachbereichsrat bestellt und setzt sich aus mindestens zwei Professorinnen/Professoren zusammen.",
+            "page": 59,
+            "section": "Anlage 5, §3",
+            "previous_question": 548,
+            "next_question": 550
+        },
+        {
+            "id": 550,
+            "question": "Welche Aufgabe hat die Eignungsfeststellungskommission nach Abschluss des Verfahrens?",
+            "answer": "Die Eignungsfeststellungskommission berichtet dem Fachbereichsrat nach Abschluss des Verfahrens über die Erfahrungen und macht Vorschläge für die Weiterentwicklung des Verfahrens.",
+            "page": 59,
+            "section": "Anlage 5, §3",
+            "previous_question": 549,
+            "next_question": 551
+        },
+        {
+            "id": 551,
+            "question": "Was passiert bei nicht vollständigen, form- oder fristgerechten Bewerbungen?",
+            "answer": "Bewerbungen, die nicht vollständig, form- oder fristgerecht eingehen, nehmen nicht am Eignungsfeststellungsverfahren teil.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 550,
+            "next_question": 552
+        },
+        {
+            "id": 552,
+            "question": "Nach welchen Kriterien wird die Eignung im Eignungsfeststellungsverfahren festgestellt?",
+            "answer": "Die Eignung wird aufgrund von drei Kriterien festgestellt: a) Gesamtnote (max. 55 Punkte), b) Anfertigung einer wissenschaftlichen Abschlussarbeit (max. 10 Punkte), c) Nachweis von Kenntnissen gemäß § 4 Abs. 1 Satz 7 (max. 35 Punkte). Insgesamt sind maximal 100 Punkte möglich.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 551,
+            "next_question": 553
+        },
+        {
+            "id": 553,
+            "question": "Wie viele Punkte werden für welche Gesamtnote im Eignungsfeststellungsverfahren vergeben?",
+            "answer": "Notenpunkte 15,0 bis 12,7 (Dezimalnote 0,7 bis 1,4) = 55 Punkte; Notenpunkte 12,6 bis 10,0 (Dezimalnote 1,5 bis 2,3) = 45 Punkte; Notenpunkte 9,9 bis 7,3 (Dezimalnote 2,4 bis 3,2) = 35 Punkte.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 552,
+            "next_question": 554
+        },
+        {
+            "id": 554,
+            "question": "Wie viele Punkte gibt es für die wissenschaftliche Abschlussarbeit im Eignungsfeststellungsverfahren?",
+            "answer": "10 Punkte, wenn nachgewiesen wird, dass eine wissenschaftliche Abschlussarbeit im Umfang von mindestens 10 Leistungspunkten in dem qualifizierenden Bachelor Pflicht ist oder eine entsprechende optionale Abschlussarbeit bereits erbracht oder verbindlich angemeldet wurde.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 553,
+            "next_question": 555
+        },
+        {
+            "id": 555,
+            "question": "Wie werden die Punkte für den Nachweis von Kompetenzen (§4 Abs. 1 Satz 7) vergeben?",
+            "answer": "35 Punkte, wenn Kompetenzen aus allen 7 der 7 Module nachgewiesen werden. 20 Punkte, wenn Kompetenzen aus 6 der 7 Module nachgewiesen werden. Die 7 Module sind: Algorithmen und Datenstrukturen, Deklarative Programmierung, Objektorientierte Programmierung, Systemsoftware und Rechnerkommunikation, Datenbanksysteme, Softwaretechnik und Technische Informatik.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 554,
+            "next_question": 556
+        },
+        {
+            "id": 556,
+            "question": "Wie viele Punkte werden mindestens für die Zulassung zum Studium benötigt?",
+            "answer": "Voraussetzung für die Zulassung zum Studium ist eine Bewertung von insgesamt mindestens 65 von möglichen 100 Punkten.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 555,
+            "next_question": 557
+        },
+        {
+            "id": 557,
+            "question": "Kann man mit einer Gesamtnote von 3,2 (7,3 Notenpunkte) und ohne Abschlussarbeit und nur 6 von 7 Modulen zugelassen werden?",
+            "answer": "Nein. Mit Note 3,2 erhält man 35 Punkte, ohne Abschlussarbeit 0 Punkte, und bei 6/7 Modulen 20 Punkte = 55 Punkte insgesamt. Das liegt unter der Mindestpunktzahl von 65.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 556,
+            "next_question": 558
+        },
+        {
+            "id": 558,
+            "question": "Kann man mit einer Gesamtnote von 2,3 (10,0 Notenpunkte) und ohne Abschlussarbeit und nur 6 von 7 Modulen zugelassen werden?",
+            "answer": "Ja. Mit Note 2,3 erhält man 45 Punkte, ohne Abschlussarbeit 0 Punkte, und bei 6/7 Modulen 20 Punkte = 65 Punkte. Das entspricht genau der Mindestpunktzahl.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 557,
+            "next_question": 559
+        },
+        {
+            "id": 559,
+            "question": "Muss über das Eignungsfeststellungsverfahren ein Protokoll erstellt werden?",
+            "answer": "Ja, über die wesentlichen Kriterien, die zum Ergebnis der Bewertung geführt haben, ist ein Protokoll zu erstellen.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 558,
+            "next_question": 560
+        },
+        {
+            "id": 560,
+            "question": "Was passiert bei Zulassung nach dem Eignungsfeststellungsverfahren?",
+            "answer": "Zugelassene Bewerberinnen und Bewerber erhalten einen schriftlichen Zulassungsbescheid mit einer Frist zur Einschreibung. Erfolgt die Einschreibung nicht fristgerecht, wird der Zulassungsbescheid unwirksam.",
+            "page": 60,
+            "section": "Anlage 5, §5",
+            "previous_question": 559,
+            "next_question": 561
+        },
+        {
+            "id": 561,
+            "question": "Was passiert bei Ablehnung nach dem Eignungsfeststellungsverfahren?",
+            "answer": "Nicht zugelassene Bewerberinnen und Bewerber erhalten einen Ablehnungsbescheid. Sie können sich noch einmal für die Teilnahme am Eignungsfeststellungsverfahren bewerben, sofern seit der letzten Bewerbung weitere relevante Leistungen erbracht wurden.",
+            "page": 60,
+            "section": "Anlage 5, §5",
+            "previous_question": 560,
+            "next_question": 562
+        },
+        {
+            "id": 562,
+            "question": "Kann man sich nach einer Ablehnung erneut bewerben?",
+            "answer": "Ja, abgelehnte Bewerberinnen und Bewerber können sich noch einmal bewerben, sofern seit der letzten Bewerbung weitere relevante Leistungen erbracht wurden.",
+            "page": 60,
+            "section": "Anlage 5, §5",
+            "previous_question": 561,
+            "next_question": 563
+        },
+        {
+            "id": 563,
+            "question": "Was passiert, wenn man im Bewerbungsformular unvollständige Angaben zu erbrachten Leistungen macht?",
+            "answer": "Wer bezüglich der erbrachten Leistungen im Formular unvollständige Angaben macht, hat keinen Anspruch auf eine Berücksichtigung von darüber hinaus gehenden Leistungen.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 562,
+            "next_question": 564
+        },
+        {
+            "id": 564,
+            "question": "Was passiert, wenn man im Bewerbungsformular falsche Angaben macht?",
+            "answer": "Wer im Formular Leistungen angibt, die nicht erbracht wurden, oder falsche und irreführende Angaben macht, hat keinen Anspruch auf Zulassung.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 563,
+            "next_question": 565
+        },
+        {
+            "id": 565,
+            "question": "Wie viele LP haben die Module im Importbereich aus dem MSc Data Science im Durchschnitt?",
+            "answer": "Die meisten Module aus dem MSc Data Science haben 6 LP (Data Science in Biomedicine, Data Integration, Deep Learning, Introduction to NLP, Explainable AI, Generative AI, Information Retrieval, Temporal Data Mining). Nur Databionics hat 9 LP.",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 564,
+            "next_question": 566
+        },
+        {
+            "id": 566,
+            "question": "Welche Importmodule aus dem MSc Wirtschaftsmathematik können im Profilbereich Mathematics gewählt werden?",
+            "answer": "Selected Topics on Financial Mathematics (3 LP), Financial Optimization (6 LP), Financial Mathematics II (6 LP), Large/Small Specialization Module Stochastics (9/6 LP), Small Specialization Module Stochastics without Tutorial (3 LP), Mathematical and Nonparametric Statistics (9 LP), Quantitative Risk Management (6 LP), Non-Life Insurance Mathematics (3 LP), Statistics and Statistical Learning (9 LP), Stochastical Analysis (9 LP), Stochastic Processes (6 LP), Forecasting: Theory and Practice (6 LP), Probability Theory (9 LP).",
+            "page": 54,
+            "section": "Anlage 3",
+            "previous_question": 565,
+            "next_question": 567
+        },
+        {
+            "id": 567,
+            "question": "Welche Module aus dem BSc Wirtschaftsmathematik können im Profilbereich Mathematics gewählt werden?",
+            "answer": "Elementare Stochastik (9 LP), Finanzmathematik I (6 LP), Großes Aufbaumodul Stochastik (9 LP), Kleines Aufbaumodul Stochastik (6 LP), Maß- und Integrationstheorie (6 LP), Statistik (9 LP).",
+            "page": 54,
+            "section": "Anlage 3",
+            "previous_question": 566,
+            "next_question": 568
+        },
+        {
+            "id": 568,
+            "question": "Welche Module des Studiengangs werden NICHT als Exportmodule angeboten?",
+            "answer": "Folgende Module werden laut Anlage 4 nicht exportiert: Big Data Systems (CS 673), Advanced Data Structures (CS 650), Computer-assisted Theorem Proving (CS 523), Computer Vision I (CS 657), Computer Vision II (CS 658), sowie die Practical/Seminar/Final Module (CS 567, CS 698, CS 697, CS 610, CS 699).",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 567,
+            "next_question": 569
+        },
+        {
+            "id": 569,
+            "question": "Welche maximale Punktzahl kann im Eignungsfeststellungsverfahren erreicht werden?",
+            "answer": "Es können maximal 100 Punkte erreicht werden: 55 Punkte für die Gesamtnote + 10 Punkte für die Abschlussarbeit + 35 Punkte für den Kompetenznachweis.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 568,
+            "next_question": 570
+        },
+        {
+            "id": 570,
+            "question": "Welche Module des Bereichs Compulsory Elective Modules haben verpflichtende (nicht nur empfohlene) Teilnahmevoraussetzungen?",
+            "answer": "Nur wenige Module haben verpflichtende Voraussetzungen: Algorithmic Network Analysis (CS 529) erfordert die erfolgreiche Teilnahme an Algorithmen und Datenstrukturen, Parameterized Algorithms (CS 531) erfordert die erfolgreiche Teilnahme an Algorithmen und Datenstrukturen, und Computational Complexity Theory (CS 576) erfordert die erfolgreiche Teilnahme an Theoretische Informatik.",
+            "page": 41,
+            "section": "Anlage 2",
+            "previous_question": 569,
+            "next_question": 571
+        },
+        {
+            "id": 571,
+            "question": "Gibt es Module im Profilbereich Biologie, die sich mit Genetik befassen?",
+            "answer": "Ja, z.B. Einführung in die Drosophila-Kreuzungsgenetik und Next Generation Sequencing in Eukaryotes aus dem BSc Biologie, sowie Genetik und Mikrobiologie aus dem LAaG Biologie.",
+            "page": 51,
+            "section": "Anlage 3",
+            "previous_question": 570,
+            "next_question": 572
+        },
+        {
+            "id": 572,
+            "question": "Gibt es im Profilbereich Geography Module mit 3 LP?",
+            "answer": "Ja, aus dem BSc Geographie gibt es Basiswissen-Module mit 3 LP (z.B. Basiswissen: Bevölkerungsgeographie, Biogeographie, Bodengeographie etc.) sowie Fernerkundung (3 LP), Geoinformatik (3 LP), Spezielle Kartographie (3 LP) und Systemdynamik (3 LP).",
+            "page": 51,
+            "section": "Anlage 3",
+            "previous_question": 571,
+            "next_question": 573
+        },
+        {
+            "id": 573,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Software Evolution?",
+            "answer": "Softwareevolution.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 572,
+            "next_question": 574
+        },
+        {
+            "id": 574,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Virtual Machines?",
+            "answer": "Virtuelle Maschinen.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 573,
+            "next_question": 575
+        },
+        {
+            "id": 575,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Visual Languages?",
+            "answer": "Visuelle Sprachen.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 574,
+            "next_question": 576
+        },
+        {
+            "id": 576,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Web Technologies?",
+            "answer": "Webtechnologien.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 575,
+            "next_question": 577
+        },
+        {
+            "id": 577,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Statistical Bioinformatics?",
+            "answer": "Statistische Bioinformatik.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 576,
+            "next_question": 578
+        },
+        {
+            "id": 578,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Further Selected Advanced Topics in Computer Science?",
+            "answer": "Weitere ausgewählte fortgeschrittene Themen der Informatik.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 577,
+            "next_question": 579
+        },
+        {
+            "id": 579,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Project Work Computer Science?",
+            "answer": "Projektarbeit Informatik.",
+            "page": 45,
+            "section": "Anlage 2",
+            "previous_question": 578,
+            "next_question": 580
+        },
+        {
+            "id": 580,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Selected Advanced Topics in Computer Science?",
+            "answer": "Ausgewählte fortgeschrittene Themen der Informatik.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 579,
+            "next_question": 581
+        },
+        {
+            "id": 581,
+            "question": "Welche Pflichtmodule gibt es im Bereich Practical and Seminar Modules?",
+            "answer": "Die Pflichtmodule sind: Independent Scientific Practice Computer Science (CS 698, 9 LP), Project Work Computer Science (CS 697, 12 LP) und Selected Advanced Topics in Computer Science / Seminar (CS 610, 3 LP).",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 580,
+            "next_question": 582
+        },
+        {
+            "id": 582,
+            "question": "Welche Module im Studienbereich Practical and Seminar Modules sind Profilmodule?",
+            "answer": "Die Seminare CS 610 (Selected Advanced Topics, Pflicht) und CS 567 (Further Selected Advanced Topics, Wahlpflicht) sowie CS 698 (Independent Scientific Practice) sind Profilmodule.",
+            "page": 46,
+            "section": "Anlage 2",
+            "previous_question": 581,
+            "next_question": 583
+        },
+        {
+            "id": 583,
+            "question": "Können Importmodule aus dem BSc Data Science als Aufbaumodule auf die 18-LP-Grenze für Aufbaumodule angerechnet werden?",
+            "answer": "Ja, die Module Effiziente Algorithmen und Maschinelles Lernen aus dem BSc Data Science sind Aufbaumodule und zählen zu den maximal 18 LP, die in Aufbaumodulen im Bereich Compulsory Elective Modules erworben werden dürfen.",
+            "page": 48,
+            "section": "Anlage 3, §6",
+            "previous_question": 582,
+            "next_question": 584
+        },
+        {
+            "id": 584,
+            "question": "Welche Fachbereiche bieten Module für die Profilbereiche an?",
+            "answer": "FB 02 Wirtschaftswissenschaften (Business Administration, Economics), FB 12 Mathematik und Informatik (Mathematics), FB 13 Physik (Physics), FB 17 Biologie (Biology), FB 19 Geographie (Geography).",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 583,
+            "next_question": 585
+        },
+        {
+            "id": 585,
+            "question": "Wird das Modul Program Verification and Synthesis als Exportmodul angeboten?",
+            "answer": "Nein, Program Verification and Synthesis (CS 524) ist in der Exportmodulliste (Anlage 4) nicht aufgeführt.",
+            "page": 56,
+            "section": "Anlage 4",
+            "previous_question": 584,
+            "next_question": 586
+        },
+        {
+            "id": 586,
+            "question": "Kann man mit einer Gesamtnote von 1,4 und Abschlussarbeit, aber nur 5 von 7 Modulnachweisen zugelassen werden?",
+            "answer": "Nein. Eine Note von 1,4 ergibt 55 Punkte, die Abschlussarbeit 10 Punkte, aber 5 von 7 Modulen ergibt 0 Punkte (es werden nur Punkte für 6 oder 7 Module vergeben). Insgesamt: 65 Punkte. Das wäre gerade ausreichend. Allerdings muss man beachten, dass § 4 Abs. 1 ohnehin Kompetenzen aus mindestens 5 der 7 Module voraussetzt als allgemeine Zugangsvoraussetzung.",
+            "page": 60,
+            "section": "Anlage 5, §4",
+            "previous_question": 585,
+            "next_question": 587
+        },
+        {
+            "id": 587,
+            "question": "Welche der Small Specialization Module sind der theoretischen Informatik zugeordnet?",
+            "answer": "Nur CS 590 (Small Specialization Module Computer Science 2) ist als Vertiefungsmodul zur praktischen Informatik geführt, hat aber den Schwerpunkt Theoretische Informatik. Formal ist es aber in der Modulliste als 'Vertiefungsmodul zur praktischen Informatik' klassifiziert, obwohl Kompetenzen vorzugsweise aus dem Bereich Theoretische Informatik erworben werden.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 586,
+            "next_question": 588
+        },
+        {
+            "id": 588,
+            "question": "Gibt es im Profilbereich Economics Module zur Mikroökonomie?",
+            "answer": "Ja, es gibt Mikroökonomie I (Basismodul A, 6 LP) und Microeconomics II (Aufbaumodul C, 6 LP).",
+            "page": 55,
+            "section": "Anlage 3",
+            "previous_question": 587,
+            "next_question": 589
+        },
+        {
+            "id": 589,
+            "question": "Gibt es im Profilbereich Economics Module zur Makroökonomie?",
+            "answer": "Ja, es gibt Makroökonomie I (Basismodul B, 6 LP) und Macroeconomics II (Aufbaumodul C, 6 LP).",
+            "page": 55,
+            "section": "Anlage 3",
+            "previous_question": 588,
+            "next_question": 590
+        },
+        {
+            "id": 590,
+            "question": "Welche Module aus dem BSc Informatik im Importbereich sind der Theoretischen Informatik (T) zugeordnet?",
+            "answer": "Aus dem BSc Informatik sind folgende Importmodule als T (Theoretische Informatik) gekennzeichnet: Einführung in die Kryptographie und ihre Anwendungen (6 LP), Großes Aufbaumodul Informatik 2 (9 LP), Kleines Aufbaumodul Informatik 2 (6 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 589,
+            "next_question": 591
+        },
+        {
+            "id": 591,
+            "question": "Welche Studienleistungen sind im Modul Statistical Bioinformatics zu erbringen?",
+            "answer": "Erreichen von mindestens 50 Prozent der Punkte aus den wöchentlich zu bearbeitenden Übungsaufgaben und mündliche Präsentation der Lösung von mindestens zwei der Übungsaufgaben.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 590,
+            "next_question": 592
+        },
+        {
+            "id": 592,
+            "question": "Welche Studienleistungen sind im Modul Visual Languages zu erbringen?",
+            "answer": "Erreichen von mindestens 50 Prozent der Punkte aus den wöchentlich zu bearbeitenden Übungsaufgaben und mündliche Präsentation der Lösung von mindestens zwei der Übungsaufgaben.",
+            "page": 44,
+            "section": "Anlage 2",
+            "previous_question": 591,
+            "next_question": 593
+        },
+        {
+            "id": 593,
+            "question": "Gibt es Importmodule zum Thema Generative AI?",
+            "answer": "Ja, das Modul 'Generative AI' ist als Importmodul aus dem MSc Data Science verfügbar (Vertiefungsmodul P, 6 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 592,
+            "next_question": 594
+        },
+        {
+            "id": 594,
+            "question": "Gibt es Importmodule zum Thema Deep Learning?",
+            "answer": "Ja, das Modul 'Deep Learning' ist als Importmodul aus dem MSc Data Science verfügbar (Vertiefungsmodul P, 6 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 593,
+            "next_question": 595
+        },
+        {
+            "id": 595,
+            "question": "Gibt es Importmodule zum Thema Cloud Computing?",
+            "answer": "Ja, das Modul 'Cloud Computing' ist als Importmodul aus dem MSc Wirtschaftsinformatik verfügbar (Vertiefungsmodul P, 6 LP).",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 594,
+            "next_question": 596
+        },
+        {
+            "id": 596,
+            "question": "Gibt es Importmodule zum Thema Information Retrieval?",
+            "answer": "Ja, das Modul 'Information Retrieval' ist als Importmodul aus dem MSc Data Science verfügbar (Vertiefungsmodul P, 6 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 595,
+            "next_question": 597
+        },
+        {
+            "id": 597,
+            "question": "Gibt es ein Importmodul zum Thema Explainable Artificial Intelligence?",
+            "answer": "Ja, das Modul 'Explainable Artificial Intelligence' ist als Importmodul aus dem MSc Data Science verfügbar (Vertiefungsmodul P, 6 LP).",
+            "page": 48,
+            "section": "Anlage 3",
+            "previous_question": 596,
+            "next_question": 598
+        },
+        {
+            "id": 598,
+            "question": "Gibt es Importmodule zum Thema Project Management?",
+            "answer": "Ja, das Modul 'Project Management for Software Development' ist als Importmodul aus dem MSc Wirtschaftsinformatik verfügbar (Vertiefungsmodul P, 6 LP).",
+            "page": 49,
+            "section": "Anlage 3",
+            "previous_question": 597,
+            "next_question": 599
+        },
+        {
+            "id": 599,
+            "question": "Welche Niveaustufe ist das Modul CS 646 Small Specialization Module Computer Science 4?",
+            "answer": "Es ist ein Vertiefungsmodul zur praktischen Informatik.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 598,
+            "next_question": 600
+        },
+        {
+            "id": 600,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Small Specialization Module Computer Science 2?",
+            "answer": "Kleines Vertiefungsmodul Informatik 2.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 599,
+            "next_question": 601
+        },
+        {
+            "id": 601,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Small Specialization Module Computer Science 4?",
+            "answer": "Kleines Vertiefungsmodul Informatik 4.",
+            "page": 42,
+            "section": "Anlage 2",
+            "previous_question": 600,
+            "next_question": 602
+        },
+        {
+            "id": 602,
+            "question": "Wie lautet die deutsche Übersetzung des Moduls Small Specialization Module Computer Science 5?",
+            "answer": "Kleines Vertiefungsmodul Informatik 5.",
+            "page": 43,
+            "section": "Anlage 2",
+            "previous_question": 601,
+            "next_question": 603
+        },
+        {
+            "id": 603,
+            "question": "Gibt es Module im Profilbereich Biologie, die sich mit Mikroskopie befassen?",
+            "answer": "Ja, es gibt Digitale Lichtmikroskopie, Einführung in die konfokale Laserscan-Mikroskopie und Elektronenmikroskopie, alle Profilmodule mit 6 LP aus dem BSc Biologie.",
+            "page": 50,
+            "section": "Anlage 3",
+            "previous_question": 602,
+            "next_question": 604
+        },
+        {
+            "id": 604,
+            "question": "Sollen Studierende vor Aufnahme des Studienangebots eines Profilbereichs eine Beratung wahrnehmen?",
+            "answer": "Ja, Studierende sollen vor Aufnahme des Studienangebots die entsprechenden Informations- bzw. Beratungsangebote des modulanbietenden Fachbereichs wahrnehmen.",
+            "page": 47,
+            "section": "Anlage 3",
+            "previous_question": 603,
             "next_question": null
         }
     ]

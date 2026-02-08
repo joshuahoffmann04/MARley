@@ -8,7 +8,7 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class SparseRetrievalSettings(BaseSettings):
+class VectorRetrievalSettings(BaseSettings):
     app_name: str = "MARley"
     environment: str = "development"
 
@@ -23,21 +23,24 @@ class SparseRetrievalSettings(BaseSettings):
     top_k_default: int = Field(default=10, ge=1)
     top_k_max: int = Field(default=100, ge=1)
 
-    bm25_k1: float = Field(default=1.5, gt=0.0)
-    bm25_b: float = Field(default=0.75, ge=0.0, le=1.0)
-    bm25_epsilon: float = Field(default=0.25, ge=0.0)
+    chroma_host: str = "localhost"
+    chroma_port: int = Field(default=8000, ge=1, le=65535)
+    chroma_ssl: bool = False
+    chroma_tenant: str = "default_tenant"
+    chroma_database: str = "default_database"
+    chroma_collection_prefix: str = "marley-vector"
+    chroma_distance_metric: str = "cosine"
 
-    lowercase: bool = True
-    remove_stopwords: bool = True
-    min_token_length: int = Field(default=2, ge=1)
-    include_numeric_tokens: bool = True
+    ollama_embedding_url: str = "http://localhost:11434/api/embeddings"
+    ollama_embedding_model: str = "nomic-embed-text:latest"
+    embedding_batch_size: int = Field(default=64, ge=1)
 
     auto_rebuild_on_search: bool = True
 
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        env_prefix="SPARSE_RETRIEVAL_",
+        env_prefix="VECTOR_RETRIEVAL_",
         extra="ignore",
     )
 
@@ -64,45 +67,51 @@ class SparseRetrievalSettings(BaseSettings):
 
 
 @dataclass(frozen=True)
-class SparseRetrievalRuntimeConfig:
+class VectorRetrievalRuntimeConfig:
     input_dir: Path
     pdf_chunks_glob: str
     faq_so_chunks_glob: str
     faq_sb_chunks_glob: str
     top_k_default: int
     top_k_max: int
-    bm25_k1: float
-    bm25_b: float
-    bm25_epsilon: float
-    lowercase: bool
-    remove_stopwords: bool
-    min_token_length: int
-    include_numeric_tokens: bool
+    chroma_host: str
+    chroma_port: int
+    chroma_ssl: bool
+    chroma_tenant: str
+    chroma_database: str
+    chroma_collection_prefix: str
+    chroma_distance_metric: str
+    ollama_embedding_url: str
+    ollama_embedding_model: str
+    embedding_batch_size: int
     auto_rebuild_on_search: bool
 
 
 @lru_cache
-def get_sparse_retrieval_settings() -> SparseRetrievalSettings:
-    return SparseRetrievalSettings()
+def get_vector_retrieval_settings() -> VectorRetrievalSettings:
+    return VectorRetrievalSettings()
 
 
-def get_sparse_retrieval_config(
-    settings: SparseRetrievalSettings | None = None,
-) -> SparseRetrievalRuntimeConfig:
-    cfg = settings or get_sparse_retrieval_settings()
-    return SparseRetrievalRuntimeConfig(
+def get_vector_retrieval_config(
+    settings: VectorRetrievalSettings | None = None,
+) -> VectorRetrievalRuntimeConfig:
+    cfg = settings or get_vector_retrieval_settings()
+    return VectorRetrievalRuntimeConfig(
         input_dir=cfg.input_dir_path,
         pdf_chunks_glob=cfg.pdf_chunks_glob,
         faq_so_chunks_glob=cfg.faq_so_chunks_glob,
         faq_sb_chunks_glob=cfg.faq_sb_chunks_glob,
         top_k_default=cfg.top_k_default,
         top_k_max=cfg.top_k_max,
-        bm25_k1=cfg.bm25_k1,
-        bm25_b=cfg.bm25_b,
-        bm25_epsilon=cfg.bm25_epsilon,
-        lowercase=cfg.lowercase,
-        remove_stopwords=cfg.remove_stopwords,
-        min_token_length=cfg.min_token_length,
-        include_numeric_tokens=cfg.include_numeric_tokens,
+        chroma_host=cfg.chroma_host,
+        chroma_port=cfg.chroma_port,
+        chroma_ssl=cfg.chroma_ssl,
+        chroma_tenant=cfg.chroma_tenant,
+        chroma_database=cfg.chroma_database,
+        chroma_collection_prefix=cfg.chroma_collection_prefix,
+        chroma_distance_metric=cfg.chroma_distance_metric,
+        ollama_embedding_url=cfg.ollama_embedding_url,
+        ollama_embedding_model=cfg.ollama_embedding_model,
+        embedding_batch_size=cfg.embedding_batch_size,
         auto_rebuild_on_search=cfg.auto_rebuild_on_search,
     )

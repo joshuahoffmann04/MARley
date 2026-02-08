@@ -1,6 +1,6 @@
 {
   "document_id": "msc-computer-science",
-  "input_file": "C:\\Users\\joshu\\OneDrive\\Informatikstudium\\Bachelor\\MARley\\data\\msc-computer-science\\knowledgebases\\msc-computer-science-pdf-extractor-20260208_124005.json",
+  "input_file": "C:\\Users\\joshu\\OneDrive\\Informatikstudium\\Bachelor\\MARley\\data\\msc-computer-science\\knowledgebases\\msc-computer-science-pdf-extractor-20260208_144405.json",
   "source_file": "C:\\Users\\joshu\\OneDrive\\Informatikstudium\\Bachelor\\MARley\\data\\msc-computer-science\\raw\\msc-computer-science.pdf",
   "context": {
     "document_type": "Studien- und Prüfungsordnung",
@@ -8337,6 +8337,6 @@
       }
     }
   ],
-  "created_at": "2026-02-08T12:40:42.610910Z",
+  "created_at": "2026-02-08T14:44:20.986602Z",
   "chunker_version": "0.1.0"
 }
