@@ -5,6 +5,9 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from retrieval.base import SearchHit as BaseSearchHit
+from retrieval.base import SearchResponse as BaseSearchResponse
+
 SourceType = Literal["pdf", "faq_so", "faq_sb"]
 
 
@@ -33,16 +36,10 @@ class IndexStats(BaseModel):
     source_snapshots: list[SourceSnapshot]
 
 
-class VectorSearchHit(BaseModel):
+class VectorSearchHit(BaseSearchHit):
     rank: int
-    score: float | None = None
     distance: float | None = None
-    source_type: SourceType
-    chunk_id: str
     chunk_type: str
-    text: str
-    token_count: int | None = None
-    metadata: dict[str, Any]
     input_file: str
 
 
@@ -64,7 +61,7 @@ class SearchRequest(BaseModel):
     rebuild_if_stale: bool | None = None
 
 
-class SearchResponse(BaseModel):
+class SearchResponse(BaseSearchResponse):
     document_id: str
     query: str
     top_k: int

@@ -5,17 +5,10 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-SourceType = Literal["pdf", "faq_so", "faq_sb"]
+from retrieval.base import RetrievalQualityFlag, SourceType
 
 
 class GenerationQualityFlag(BaseModel):
-    code: str
-    message: str
-    severity: Literal["info", "warning", "error"] = "warning"
-    context: dict[str, Any] = Field(default_factory=dict)
-
-
-class RetrievalQualityFlag(BaseModel):
     code: str
     message: str
     severity: Literal["info", "warning", "error"] = "warning"

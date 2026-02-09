@@ -57,6 +57,9 @@ class GeneratorService:
         self.settings = settings or get_generator_settings()
         self.runtime_config = runtime_config or get_generator_config(self.settings)
         self._token_estimator = TokenEstimator()
+        
+        from generator.llm_client import LLMClient
+        self.llm_client = LLMClient(self.runtime_config)
 
     def _request_json(
         self,
@@ -66,6 +69,9 @@ class GeneratorService:
         timeout_seconds: float,
         payload: dict[str, Any] | None = None,
     ) -> tuple[int | None, dict[str, Any] | None, str | None]:
+        # Simple local implementation for retrieval calls
+        # We could also use self.llm_client._request_json if we made it public or shared utility
+        # For now, keeping it here to avoid breaking retrieval calls
         data: bytes | None = None
         headers = {"Accept": "application/json"}
         if payload is not None:
@@ -89,46 +95,11 @@ class GeneratorService:
                     return int(response.status), None, "Response is not a JSON object."
                 return int(response.status), body, None
         except urllib.error.HTTPError as exc:
-            body_text = exc.read().decode("utf-8", errors="replace")
-            detail = body_text or f"HTTP {exc.code}"
-            try:
-                decoded = json.loads(body_text)
-                if isinstance(decoded, dict) and "detail" in decoded:
-                    detail = str(decoded["detail"])
-            except json.JSONDecodeError:
-                pass
-            return int(exc.code), None, detail
+            return int(exc.code), None, str(exc)
         except urllib.error.URLError as exc:
             return None, None, str(exc.reason)
-        except socket.timeout:
-            return None, None, "request timed out"
-        except TimeoutError:
-            return None, None, "request timed out"
-        except Exception as exc:  # pragma: no cover - runtime safety net
+        except Exception as exc:
             return None, None, str(exc)
-
-    def _extract_json_object(self, raw_text: str) -> dict[str, Any] | None:
-        raw_text = raw_text.strip()
-        if not raw_text:
-            return None
-
-        try:
-            parsed = json.loads(raw_text)
-            return parsed if isinstance(parsed, dict) else None
-        except json.JSONDecodeError:
-            pass
-
-        start = raw_text.find("{")
-        end = raw_text.rfind("}")
-        if start == -1 or end == -1 or end <= start:
-            return None
-
-        fragment = raw_text[start : end + 1]
-        try:
-            parsed = json.loads(fragment)
-            return parsed if isinstance(parsed, dict) else None
-        except json.JSONDecodeError:
-            return None
 
     def _call_retrieval_search(self, request: GenerateRequest, document_id: str, top_k: int) -> RetrievalSearchResponse:
         payload: dict[str, Any] = {
@@ -177,73 +148,19 @@ class GeneratorService:
         system_prompt: str,
         user_prompt: str,
     ) -> tuple[LLMStructuredOutput | None, str, str | None]:
-        schema_format: dict[str, Any] = {
-            "type": "object",
-            "properties": {
-                "answer": {"type": "string"},
-                "should_abstain": {"type": "boolean"},
-                "confidence": {
-                    "type": "string",
-                    "enum": ["low", "medium", "high"],
-                },
-                "reasoning": {"type": "string"},
-            },
-            "required": ["answer", "should_abstain", "confidence", "reasoning"],
-            "additionalProperties": False,
-        }
-
-        payload: dict[str, Any] = {
-            "model": model,
-            "stream": False,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            "format": schema_format,
-            "options": {
-                "temperature": temperature,
-                "num_ctx": total_budget_tokens,
-                "num_predict": max_answer_tokens,
-            },
-        }
-
-        status, body, error = self._request_json(
-            method="POST",
-            url=f"{self.runtime_config.ollama_base_url}/api/chat",
-            timeout_seconds=self.runtime_config.ollama_timeout_seconds,
-            payload=payload,
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+        
+        return self.llm_client.chat_structured(
+            model=model,
+            messages=messages,
+            temperature=temperature,
+            num_ctx=total_budget_tokens,
+            num_predict=max_answer_tokens,
+            response_model=LLMStructuredOutput
         )
-
-        # Compatibility fallback: some Ollama versions accept only format="json".
-        if (status is not None and status >= 400) and body is None:
-            fallback_payload = dict(payload)
-            fallback_payload["format"] = "json"
-            status, body, error = self._request_json(
-                method="POST",
-                url=f"{self.runtime_config.ollama_base_url}/api/chat",
-                timeout_seconds=self.runtime_config.ollama_timeout_seconds,
-                payload=fallback_payload,
-            )
-
-        if status is None:
-            return None, "", f"Ollama is unreachable: {error or 'unknown error'}"
-        if status < 200 or status >= 300 or body is None:
-            return None, "", f"Ollama request failed ({status}): {error or 'unknown error'}"
-
-        raw_message = body.get("message")
-        if not isinstance(raw_message, dict):
-            return None, "", "Ollama response is missing `message` object."
-
-        raw_content = str(raw_message.get("content") or "").strip()
-        parsed = self._extract_json_object(raw_content)
-        if parsed is None:
-            return None, raw_content, "Ollama response content is not valid JSON."
-
-        try:
-            structured = LLMStructuredOutput.model_validate(parsed)
-            return structured, raw_content, None
-        except Exception as exc:
-            return None, raw_content, f"LLM JSON schema validation failed: {exc}"
 
     def _call_retrieval_ready(self) -> tuple[bool, dict[str, Any]]:
         status, body, error = self._request_json(
@@ -477,25 +394,11 @@ class GeneratorService:
         return selected_chunks, "\n".join(context_parts).strip(), used_context_tokens
 
     def _build_prompts(self, *, question: str, context_block: str) -> tuple[str, str]:
-        system_prompt = (
-            "Du bist MARley, ein Studienberatungs-Assistent für die Studienordnung. "
-            "Antworte immer auf Deutsch. "
-            "Nutze ausschließlich den bereitgestellten Kontext. "
-            "Wenn der Kontext nicht ausreicht oder uneindeutig ist, dann abstain. "
-            "Antworte ausschließlich als JSON gemäß dem vorgegebenen Schema."
-        )
-
-        user_prompt = (
-            "Frage:\n"
-            f"{question.strip()}\n\n"
-            "Kontext:\n"
-            f"{context_block}\n\n"
-            "Regeln:\n"
-            "1) Keine Halluzinationen.\n"
-            "2) Wenn unklar, setze should_abstain=true und answer kurz.\n"
-            "3) Antwort knapp und präzise auf Deutsch."
-        )
-        return system_prompt, user_prompt
+        # Consider initializing PromptBuilder in __init__ if prompts_dir is in config
+        # For now, using default behavior or we can add it to config later
+        from generator.prompts import PromptBuilder
+        builder = PromptBuilder() 
+        return builder.build_system_prompt(), builder.build_user_prompt(question, context_block)
 
     def generate(self, request: GenerateRequest) -> GenerateResponse:
         query = request.query.strip()

@@ -1,28 +1,30 @@
 from __future__ import annotations
 
-from datetime import datetime
 from statistics import median
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from chunker.base import BaseChunk, BaseChunkMetadata, ChunkingResult as BaseChunkingResult
+from chunker.base import ChunkQualityFlag
 
-class ChunkQualityFlag(BaseModel):
-    code: str
-    message: str
-    severity: Literal["info", "warning", "error"] = "warning"
-    context: dict[str, Any] = Field(default_factory=dict)
+__all__ = [
+    "ChunkQualityFlag",
+    "FAQChunkMetadata",
+    "FAQChunk",
+    "ChunkingStats",
+    "ChunkingResult",
+    "ChunkingRequest",
+    "ChunkingResponse",
+]
 
 
-class FAQChunkMetadata(BaseModel):
-    document_id: str
-    source_file: str
+class FAQChunkMetadata(BaseChunkMetadata):
     faq_source: str
     faq_id: str
     section: str | None = None
     paragraph_label: str | None = None
     page: int | None = None
-    chunk_index: int = 0
     previous_question_id: str | None = None
     next_question_id: str | None = None
     previous_question_chunk_id: str | None = None
@@ -31,13 +33,9 @@ class FAQChunkMetadata(BaseModel):
     next_chunk_id: str | None = None
 
 
-class FAQChunk(BaseModel):
-    chunk_id: str
+class FAQChunk(BaseChunk):
     chunk_type: Literal["faq"] = "faq"
-    text: str
-    token_count: int
     metadata: FAQChunkMetadata
-    flags: list[ChunkQualityFlag] = Field(default_factory=list)
 
 
 class ChunkingStats(BaseModel):
@@ -61,14 +59,9 @@ class ChunkingStats(BaseModel):
     ) -> "ChunkingStats":
         if not token_counts:
             return cls(
-                total_chunks=0,
                 questions_total=questions_total,
                 questions_processed=questions_processed,
                 questions_skipped=questions_skipped,
-                min_tokens=0,
-                median_tokens=0,
-                max_tokens=0,
-                total_tokens=0,
             )
 
         return cls(
@@ -83,17 +76,12 @@ class ChunkingStats(BaseModel):
         )
 
 
-class ChunkingResult(BaseModel):
-    document_id: str
+class ChunkingResult(BaseChunkingResult):
     faq_source: str
-    input_file: str
-    source_file: str
     context: dict[str, Any]
     chunks: list[FAQChunk]
     stats: ChunkingStats
-    quality_flags: list[ChunkQualityFlag] = Field(default_factory=list)
-    created_at: datetime
-    chunker_version: str = "0.1.0"
+    chunker_version: str = "0.2.0"
 
 
 class ChunkingRequest(BaseModel):

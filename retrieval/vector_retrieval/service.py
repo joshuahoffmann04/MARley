@@ -8,13 +8,15 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from threading import Lock
-from typing import Any
+from typing import Any, cast
 
 import chromadb
 from chromadb.api import ClientAPI
 from chromadb.config import Settings
 from chromadb.utils.embedding_functions import OllamaEmbeddingFunction
 
+from retrieval.base import BaseRetriever
+from retrieval.base import SearchRequest as BaseSearchRequest
 from retrieval.vector_retrieval.config import (
     VectorRetrievalRuntimeConfig,
     VectorRetrievalSettings,
@@ -24,6 +26,7 @@ from retrieval.vector_retrieval.config import (
 from retrieval.vector_retrieval.models import (
     IndexStats,
     RetrievalQualityFlag,
+    SearchHit,  # Alias from updated models
     SearchResponse,
     SourceSnapshot,
     SourceType,
@@ -38,12 +41,6 @@ SOURCE_DEFINITIONS: tuple[tuple[SourceType, str], ...] = (
 
 
 def _patch_posthog_capture_if_incompatible() -> None:
-    """Patch newer posthog capture signature to avoid chroma telemetry crashes.
-
-    Chroma 0.6.x still calls posthog.capture(distinct_id, event, properties),
-    while posthog 7.x expects capture(event, **kwargs). We disable capture to
-    keep runtime stable and silent.
-    """
     try:
         import posthog  # type: ignore
     except Exception:
@@ -62,7 +59,6 @@ def _patch_posthog_capture_if_incompatible() -> None:
         return
 
     params = list(signature.parameters.values())
-    # posthog 7.x: capture(event, **kwargs)
     if len(params) == 2 and params[0].name == "event":
         def _capture_noop(*args: Any, **kwargs: Any) -> None:
             return None
@@ -73,7 +69,7 @@ def _patch_posthog_capture_if_incompatible() -> None:
 
 
 class VectorBackendUnavailableError(RuntimeError):
-    """Raised when the vector backend (Chroma/Ollama) is not reachable."""
+    pass
 
 
 @dataclass(frozen=True)
@@ -99,7 +95,7 @@ class _IndexState:
     quality_flags: list[RetrievalQualityFlag]
 
 
-class VectorRetriever:
+class VectorRetriever(BaseRetriever):
     def __init__(
         self,
         *,
@@ -179,7 +175,7 @@ class VectorRetriever:
         try:
             client = self._get_client(document_id=document_id)
             client.heartbeat()
-        except Exception as exc:  # pragma: no cover - external service dependent
+        except Exception as exc:
             if self.runtime_config.chroma_client_mode == "http":
                 raise VectorBackendUnavailableError(
                     "Chroma HTTP backend is not reachable. "
@@ -407,7 +403,6 @@ class VectorRetriever:
         try:
             client.delete_collection(name=collection_name)
         except Exception:
-            # Ignore if collection does not exist.
             pass
 
     def _create_collection(self, *, document_id: str, collection_name: str):
@@ -523,7 +518,19 @@ class VectorRetriever:
         _, snapshots, _ = self._collect_source_files(document_id=document_id)
         return self._build_signature(document_id=document_id, snapshots=snapshots)
 
-    def rebuild_index(self, *, document_id: str) -> tuple[IndexStats, list[RetrievalQualityFlag]]:
+    def index(self, document_id: str, rebuild: bool = False) -> None:
+        with self._lock:
+            current = self._state
+
+        if current and current.document_id == document_id and not rebuild:
+            return  # Already indexed
+
+        if rebuild:
+            self._rebuild_index(document_id=document_id)
+        else:
+            self._ensure_index(document_id=document_id, rebuild_if_stale=False)
+
+    def _rebuild_index(self, *, document_id: str) -> tuple[IndexStats, list[RetrievalQualityFlag]]:
         state = self._build_state(document_id=document_id)
         with self._lock:
             self._state = state
@@ -534,14 +541,14 @@ class VectorRetriever:
             current_state = self._state
 
         if current_state is None or current_state.document_id != document_id:
-            self.rebuild_index(document_id=document_id)
+            self._rebuild_index(document_id=document_id)
             with self._lock:
                 return self._state  # type: ignore[return-value]
 
         if rebuild_if_stale and self.runtime_config.auto_rebuild_on_search:
             latest_signature = self._latest_signature_for_document(document_id=document_id)
             if latest_signature != current_state.index_signature:
-                self.rebuild_index(document_id=document_id)
+                self._rebuild_index(document_id=document_id)
                 with self._lock:
                     return self._state  # type: ignore[return-value]
 
@@ -552,28 +559,23 @@ class VectorRetriever:
             return None
         return 1.0 / (1.0 + distance)
 
-    def search(
-        self,
-        *,
-        query: str,
-        document_id: str,
-        top_k: int | None = None,
-        source_types: list[SourceType] | None = None,
-        rebuild_if_stale: bool | None = None,
-    ) -> SearchResponse:
-        normalized_query = query.strip()
+    def search(self, request: BaseSearchRequest) -> SearchResponse:
+        normalized_query = request.query.strip()
         if not normalized_query:
             raise ValueError("query must not be empty")
 
-        effective_top_k = top_k if top_k is not None else self.runtime_config.top_k_default
-        if effective_top_k < 1 or effective_top_k > self.runtime_config.top_k_max:
-            raise ValueError(f"top_k must be between 1 and {self.runtime_config.top_k_max}")
+        document_id = request.document_id
+        effective_top_k = request.top_k if request.top_k is not None else self.runtime_config.top_k_default
+        
+        source_types: list[SourceType] | None = None
+        if request.source_types:
+             source_types = cast(list[SourceType], request.source_types)
 
-        effective_rebuild = (
-            rebuild_if_stale
-            if rebuild_if_stale is not None
-            else self.runtime_config.auto_rebuild_on_search
-        )
+        if request.rebuild_if_stale is not None:
+             effective_rebuild = request.rebuild_if_stale
+        else:
+             effective_rebuild = self.runtime_config.auto_rebuild_on_search
+
         state = self._ensure_index(document_id=document_id, rebuild_if_stale=effective_rebuild)
         self._check_backend_health(document_id=document_id)
 
@@ -625,8 +627,7 @@ class VectorRetriever:
                     source_type=doc.source_type,
                     chunk_id=doc.chunk_id,
                     chunk_type=doc.chunk_type,
-                    text=doc.text,
-                    token_count=doc.token_count,
+                    content=doc.text,
                     metadata=doc.metadata,
                     input_file=doc.input_file,
                 )

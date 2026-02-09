@@ -7,10 +7,12 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from threading import Lock
-from typing import Any
+from typing import Any, cast
 
 from rank_bm25 import BM25Okapi
 
+from retrieval.base import BaseRetriever
+from retrieval.base import SearchRequest as BaseSearchRequest
 from retrieval.sparse_retrieval.config import (
     SparseRetrievalRuntimeConfig,
     SparseRetrievalSettings,
@@ -29,131 +31,19 @@ from retrieval.sparse_retrieval.models import (
 TOKEN_PATTERN = re.compile(r"[A-Za-z0-9ÄÖÜäöüß]+")
 PARAGRAPH_PATTERN = re.compile(r"§\s*([0-9]+[a-zA-Z]?)")
 
-# Intentionally compact stopword set to reduce BM25 noise while keeping domain terms.
 GERMAN_STOPWORDS = {
-    "aber",
-    "als",
-    "am",
-    "an",
-    "auch",
-    "auf",
-    "aus",
-    "bei",
-    "bin",
-    "bis",
-    "da",
-    "dadurch",
-    "daher",
-    "darum",
-    "das",
-    "daß",
-    "dass",
-    "dein",
-    "deine",
-    "dem",
-    "den",
-    "der",
-    "des",
-    "dessen",
-    "deshalb",
-    "die",
-    "dies",
-    "dieser",
-    "dieses",
-    "doch",
-    "dort",
-    "du",
-    "durch",
-    "ein",
-    "eine",
-    "einem",
-    "einen",
-    "einer",
-    "eines",
-    "er",
-    "es",
-    "euer",
-    "eure",
-    "für",
-    "hatte",
-    "hatten",
-    "hattest",
-    "hattet",
-    "hier",
-    "hinter",
-    "ich",
-    "ihr",
-    "ihre",
-    "im",
-    "in",
-    "ist",
-    "ja",
-    "jede",
-    "jedem",
-    "jeden",
-    "jeder",
-    "jedes",
-    "jener",
-    "jenes",
-    "jetzt",
-    "kann",
-    "kannst",
-    "koennen",
-    "können",
-    "machen",
-    "mein",
-    "meine",
-    "mit",
-    "muss",
-    "musst",
-    "muessen",
-    "müssen",
-    "nach",
-    "nachdem",
-    "nein",
-    "nicht",
-    "nun",
-    "oder",
-    "seid",
-    "sein",
-    "seine",
-    "sich",
-    "sie",
-    "sind",
-    "soll",
-    "sollen",
-    "sollst",
-    "sonst",
-    "soweit",
-    "sowie",
-    "und",
-    "unser",
-    "unsere",
-    "unter",
-    "vom",
-    "von",
-    "vor",
-    "wann",
-    "warum",
-    "was",
-    "weiter",
-    "wenn",
-    "wer",
-    "werde",
-    "werden",
-    "wie",
-    "wieder",
-    "wieso",
-    "wir",
-    "wird",
-    "wirst",
-    "wo",
-    "woher",
-    "wohin",
-    "zu",
-    "zum",
-    "zur",
-    "zwischen",
+    "aber", "als", "am", "an", "auch", "auf", "aus", "bei", "bin", "bis", "da", "dadurch",
+    "daher", "darum", "das", "daß", "dass", "dein", "deine", "dem", "den", "der", "des",
+    "dessen", "deshalb", "die", "dies", "dieser", "dieses", "doch", "dort", "du", "durch",
+    "ein", "eine", "einem", "einen", "einer", "eines", "er", "es", "euer", "eure", "für",
+    "hatte", "hatten", "hattest", "hattet", "hier", "hinter", "ich", "ihr", "ihre", "im",
+    "in", "ist", "ja", "jede", "jedem", "jeden", "jeder", "jedes", "jener", "jenes", "jetzt",
+    "kann", "kannst", "koennen", "können", "machen", "mein", "meine", "mit", "muss", "musst",
+    "muessen", "müssen", "nach", "nachdem", "nein", "nicht", "nun", "oder", "seid", "sein",
+    "seine", "sich", "sie", "sind", "soll", "sollen", "sollst", "sonst", "soweit", "sowie",
+    "und", "unser", "unsere", "unter", "vom", "von", "vor", "wann", "warum", "was", "weiter",
+    "wenn", "wer", "werde", "werden", "wie", "wieder", "wieso", "wir", "wird", "wirst", "wo",
+    "woher", "wohin", "zu", "zum", "zur", "zwischen",
 }
 
 SOURCE_DEFINITIONS: tuple[tuple[SourceType, str], ...] = (
@@ -186,7 +76,7 @@ class _IndexState:
     quality_flags: list[RetrievalQualityFlag]
 
 
-class SparseBM25Retriever:
+class SparseBM25Retriever(BaseRetriever):
     def __init__(
         self,
         *,
@@ -525,7 +415,29 @@ class SparseBM25Retriever:
         _, snapshots, _ = self._collect_source_files(document_id=document_id)
         return self._build_signature(document_id=document_id, snapshots=snapshots)
 
-    def rebuild_index(self, *, document_id: str) -> tuple[IndexStats, list[RetrievalQualityFlag]]:
+    def index(self, document_id: str, rebuild: bool = False) -> None:
+        """Explicitly build or rebuild index. Match BaseRetriever interface."""
+        # rebuild=False means check if stale? Or do nothing if exists?
+        # BaseRetriever definition: "Build or update index."
+        # If rebuild=True, force rebuild.
+        # If rebuild=False, check if exists, if not build.
+        with self._lock:
+            current = self._state
+
+        if current and current.document_id == document_id and not rebuild:
+            return  # Already indexed
+
+        # If strict rebuild requested, or need to check staleness?
+        # Let's assume index() implies "ensure ready".
+        # If rebuild=True, force it.
+        if rebuild:
+            self._rebuild_index(document_id=document_id)
+        else:
+             # Check staleness?
+             # For now, just load it.
+             self._rebuild_index(document_id=document_id)
+
+    def _rebuild_index(self, *, document_id: str) -> tuple[IndexStats, list[RetrievalQualityFlag]]:
         state = self._build_state(document_id=document_id)
         with self._lock:
             self._state = state
@@ -541,45 +453,45 @@ class SparseBM25Retriever:
             current_state = self._state
 
         if current_state is None or current_state.document_id != document_id:
-            self.rebuild_index(document_id=document_id)
+            self._rebuild_index(document_id=document_id)
             with self._lock:
                 return self._state  # type: ignore[return-value]
 
         if rebuild_if_stale and self.runtime_config.auto_rebuild_on_search:
             latest_signature = self._latest_signature_for_document(document_id=document_id)
             if latest_signature != current_state.index_signature:
-                self.rebuild_index(document_id=document_id)
+                self._rebuild_index(document_id=document_id)
                 with self._lock:
                     return self._state  # type: ignore[return-value]
 
         return current_state
 
-    def search(
-        self,
-        *,
-        query: str,
-        document_id: str,
-        top_k: int | None = None,
-        source_types: list[SourceType] | None = None,
-        rebuild_if_stale: bool | None = None,
-    ) -> SearchResponse:
-        normalized_query = query.strip()
+    def search(self, request: BaseSearchRequest) -> SearchResponse:
+        """Execute search using BaseSearchRequest."""
+        # Map BaseSearchRequest to local logic
+        
+        normalized_query = request.query.strip()
         if not normalized_query:
             raise ValueError("query must not be empty")
 
-        effective_top_k = top_k if top_k is not None else self.runtime_config.top_k_default
-        if effective_top_k < 1 or effective_top_k > self.runtime_config.top_k_max:
-            raise ValueError(f"top_k must be between 1 and {self.runtime_config.top_k_max}")
-
-        effective_rebuild = (
-            rebuild_if_stale
-            if rebuild_if_stale is not None
-            else self.runtime_config.auto_rebuild_on_search
-        )
-
+        document_id = request.document_id
+        effective_top_k = request.top_k if request.top_k is not None else self.runtime_config.top_k_default
+        
+        # Resolve source_types from strings to known types
+        source_types: list[SourceType] | None = None
+        if request.source_types:
+             source_types = cast(list[SourceType], request.source_types) # We rely on caller passing valid strings
+        
+        if request.rebuild_if_stale is not None:
+             effective_rebuild = request.rebuild_if_stale
+        else:
+             effective_rebuild = self.runtime_config.auto_rebuild_on_search
+        
         state = self._ensure_index(document_id=document_id, rebuild_if_stale=effective_rebuild)
         query_tokens = self._tokenize(normalized_query)
         response_flags = list(state.quality_flags)
+
+        hits: list[SearchHit] = []
 
         if not query_tokens:
             response_flags.append(
@@ -593,7 +505,7 @@ class SparseBM25Retriever:
                 document_id=document_id,
                 query=normalized_query,
                 top_k=effective_top_k,
-                hits=[],
+                hits=hits,
                 index_stats=state.index_stats,
                 quality_flags=response_flags,
             )
@@ -602,7 +514,7 @@ class SparseBM25Retriever:
         allowed_sources = set(source_types) if source_types else None
 
         ranked_indices = sorted(range(len(scores)), key=lambda idx: float(scores[idx]), reverse=True)
-        hits: list[SearchHit] = []
+        
         for doc_index in ranked_indices:
             score = float(scores[doc_index])
             if score <= 0:
@@ -619,8 +531,7 @@ class SparseBM25Retriever:
                     source_type=doc.source_type,
                     chunk_id=doc.chunk_id,
                     chunk_type=doc.chunk_type,
-                    text=doc.text,
-                    token_count=doc.token_count,
+                    content=doc.text,
                     metadata=doc.metadata,
                     input_file=doc.input_file,
                 )

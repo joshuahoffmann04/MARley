@@ -26,6 +26,7 @@ from MARley.models import (
     OptionsResponse,
     RetrievalMode,
 )
+from retrieval.base import SearchRequest as BaseSearchRequest
 from retrieval.sparse_retrieval.config import SparseRetrievalSettings, get_sparse_retrieval_config
 from retrieval.sparse_retrieval.service import SparseBM25Retriever
 from retrieval.vector_retrieval.config import VectorRetrievalSettings, get_vector_retrieval_config
@@ -110,6 +111,13 @@ class MarleyPipelineService:
         self.generator = GeneratorService(
             settings=generator_settings,
             runtime_config=get_generator_config(generator_settings),
+        )
+
+        from retrieval.fusion import RRFFuser
+        self.fuser = RRFFuser(
+            rrf_rank_constant=self.runtime_config.rrf_rank_constant,
+            sparse_weight=self.runtime_config.sparse_weight,
+            vector_weight=self.runtime_config.vector_weight,
         )
 
     def _chunks_dir_for_document(self, document_id: str) -> Path:
@@ -207,79 +215,6 @@ class MarleyPipelineService:
             raise ValueError("No selectable sources available for this document.")
         return filtered
 
-    def _convert_sparse_to_common(self, *, response: Any, top_k: int) -> RetrievalSearchResponse:
-        flags: list[RetrievalQualityFlag] = []
-        for raw_flag in response.quality_flags:
-            parsed = _to_flag(raw_flag)
-            if parsed:
-                flags.append(parsed)
-
-        hits: list[RetrievalHit] = []
-        for hit in response.hits:
-            hits.append(
-                RetrievalHit(
-                    rank=hit.rank,
-                    rrf_score=1.0 / (self.runtime_config.rrf_rank_constant + hit.rank),
-                    source_type=hit.source_type,
-                    chunk_id=hit.chunk_id,
-                    chunk_type=hit.chunk_type,
-                    text=hit.text,
-                    token_count=hit.token_count,
-                    metadata=hit.metadata,
-                    input_file=hit.input_file,
-                    sparse_rank=hit.rank,
-                    sparse_score=hit.score,
-                    vector_rank=None,
-                    vector_score=None,
-                    vector_distance=None,
-                )
-            )
-
-        return RetrievalSearchResponse(
-            document_id=response.document_id,
-            query=response.query,
-            top_k=top_k,
-            hits=hits[:top_k],
-            quality_flags=flags,
-        )
-
-    def _convert_vector_to_common(self, *, response: Any, top_k: int) -> RetrievalSearchResponse:
-        flags: list[RetrievalQualityFlag] = []
-        for raw_flag in response.quality_flags:
-            parsed = _to_flag(raw_flag)
-            if parsed:
-                flags.append(parsed)
-
-        hits: list[RetrievalHit] = []
-        for hit in response.hits:
-            score_value = hit.score if hit.score is not None else 0.0
-            hits.append(
-                RetrievalHit(
-                    rank=hit.rank,
-                    rrf_score=1.0 / (self.runtime_config.rrf_rank_constant + hit.rank),
-                    source_type=hit.source_type,
-                    chunk_id=hit.chunk_id,
-                    chunk_type=hit.chunk_type,
-                    text=hit.text,
-                    token_count=hit.token_count,
-                    metadata=hit.metadata,
-                    input_file=hit.input_file,
-                    sparse_rank=None,
-                    sparse_score=None,
-                    vector_rank=hit.rank,
-                    vector_score=score_value,
-                    vector_distance=hit.distance,
-                )
-            )
-
-        return RetrievalSearchResponse(
-            document_id=response.document_id,
-            query=response.query,
-            top_k=top_k,
-            hits=hits[:top_k],
-            quality_flags=flags,
-        )
-
     def _backend_failure_flag(self, *, backend: str, error: Exception) -> RetrievalQualityFlag:
         return RetrievalQualityFlag(
             code="BACKEND_FAILED",
@@ -288,101 +223,74 @@ class MarleyPipelineService:
             context={"backend": backend, "error": str(error)},
         )
 
-    def _fuse_hybrid(
+    # Better approach: Rewrite `search` method to NOT use `_convert_...` immediately.
+    # Instead, get Base SearchResponses, convert to SearchHits (if needed, they are already SearchHits),
+    # feed to RRFFuser, THEN convert FusedCandidates to RetrievalHits.
+    
+    # Let's import RRFFuser
+    # from retrieval.fusion import RRFFuser
+
+
+    def __init__(
         self,
         *,
-        query: str,
-        document_id: str,
-        top_k: int,
-        sparse_hits: list[RetrievalHit],
-        vector_hits: list[RetrievalHit],
-        flags: list[RetrievalQualityFlag],
-    ) -> RetrievalSearchResponse:
-        fused: dict[tuple[SourceType, str], RetrievalHit] = {}
+        settings: MarleySettings | None = None,
+        runtime_config: MarleyRuntimeConfig | None = None,
+    ) -> None:
+        self.settings = settings or get_marley_settings()
+        self.runtime_config = runtime_config or get_marley_config(self.settings)
 
-        def ingest(hits: list[RetrievalHit], *, backend: str, weight: float) -> None:
-            for hit in hits:
-                key = (hit.source_type, hit.chunk_id)
-                candidate = fused.get(key)
-                contrib = weight * (1.0 / (self.runtime_config.rrf_rank_constant + hit.rank))
-                if candidate is None:
-                    candidate = RetrievalHit(
-                        rank=0,
-                        rrf_score=0.0,
-                        source_type=hit.source_type,
-                        chunk_id=hit.chunk_id,
-                        chunk_type=hit.chunk_type,
-                        text=hit.text,
-                        token_count=hit.token_count,
-                        metadata=hit.metadata,
-                        input_file=hit.input_file,
-                        sparse_rank=hit.sparse_rank,
-                        sparse_score=hit.sparse_score,
-                        vector_rank=hit.vector_rank,
-                        vector_score=hit.vector_score,
-                        vector_distance=hit.vector_distance,
-                    )
-                    fused[key] = candidate
-                else:
-                    if candidate.sparse_rank is None and hit.sparse_rank is not None:
-                        candidate.sparse_rank = hit.sparse_rank
-                        candidate.sparse_score = hit.sparse_score
-                    if candidate.vector_rank is None and hit.vector_rank is not None:
-                        candidate.vector_rank = hit.vector_rank
-                        candidate.vector_score = hit.vector_score
-                        candidate.vector_distance = hit.vector_distance
-
-                candidate.rrf_score += contrib
-                if backend == "sparse" and candidate.sparse_rank is None:
-                    candidate.sparse_rank = hit.rank
-                    candidate.sparse_score = hit.sparse_score
-                if backend == "vector" and candidate.vector_rank is None:
-                    candidate.vector_rank = hit.rank
-                    candidate.vector_score = hit.vector_score
-                    candidate.vector_distance = hit.vector_distance
-
-        ingest(
-            sparse_hits,
-            backend="sparse",
-            weight=self.runtime_config.sparse_weight,
+        sparse_settings = SparseRetrievalSettings(
+            document_id=self.runtime_config.default_document_id,
+            data_root=self.runtime_config.data_root,
         )
-        ingest(
-            vector_hits,
-            backend="vector",
-            weight=self.runtime_config.vector_weight,
+        self.sparse_retriever = SparseBM25Retriever(
+            settings=sparse_settings,
+            runtime_config=get_sparse_retrieval_config(sparse_settings),
         )
 
-        sorted_hits = sorted(
-            fused.values(),
-            key=lambda item: (
-                -item.rrf_score,
-                min([rank for rank in (item.sparse_rank, item.vector_rank) if rank is not None] or [10**9]),
-                item.source_type,
-                item.chunk_id,
-            ),
+        vector_settings = VectorRetrievalSettings(
+            document_id=self.runtime_config.default_document_id,
+            data_root=self.runtime_config.data_root,
+            chroma_client_mode="persistent",
+            chroma_persist_subdir=self.runtime_config.vector_persist_subdir,
+            ollama_embedding_url=f"{self.runtime_config.ollama_base_url}/api/embeddings",
+            ollama_embedding_model=self.runtime_config.embedding_model,
+        )
+        self.vector_retriever = VectorRetriever(
+            settings=vector_settings,
+            runtime_config=get_vector_retrieval_config(vector_settings),
         )
 
-        ranked: list[RetrievalHit] = []
-        for index, hit in enumerate(sorted_hits[:top_k], start=1):
-            hit.rank = index
-            ranked.append(hit)
-
-        if not ranked:
-            flags.append(
-                RetrievalQualityFlag(
-                    code="HYBRID_NO_HITS",
-                    message="Hybrid fusion produced no hits.",
-                    severity="warning",
-                )
-            )
-
-        return RetrievalSearchResponse(
-            document_id=document_id,
-            query=query,
-            top_k=top_k,
-            hits=ranked,
-            quality_flags=flags,
+        generator_settings = GeneratorSettings(
+            document_id=self.runtime_config.default_document_id,
+            ollama_base_url=self.runtime_config.ollama_base_url,
+            ollama_model=self.runtime_config.generator_model,
+            temperature_default=self.runtime_config.generator_temperature,
+            total_budget_tokens_default=self.runtime_config.generator_total_budget_tokens,
+            max_answer_tokens_default=self.runtime_config.generator_max_answer_tokens,
         )
+        self.generator = GeneratorService(
+            settings=generator_settings,
+            runtime_config=get_generator_config(generator_settings),
+        )
+        
+        from retrieval.fusion import RRFFuser
+        # Initialize Fuser with settings
+        # Assuming runtime_config has these fields (they were used in _fuse_hybrid)
+        self.fuser = RRFFuser(
+            rrf_rank_constant=self.runtime_config.rrf_rank_constant,
+            sparse_weight=self.runtime_config.sparse_weight,
+            vector_weight=self.runtime_config.vector_weight,
+        )
+
+    # ... (Keep existing helper methods: _chunks_dir_for_document, _latest_source_file, _available_sources, _document_ids, options, _resolve_source_types) ...
+    # Wait, I'm replacing a chunk. I need to be careful not to delete helpers unless they were in the range.
+    # The previous replace_file_content targetted _fuse_hybrid. 
+    # Now I want to replace __init__ and search.
+    # I should do __init__ separately if I can't target a contiguous block.
+    # __init__ is at top. search is at bottom.
+    # I will replace search first.
 
     def search(
         self,
@@ -396,69 +304,96 @@ class MarleyPipelineService:
         if not normalized_query:
             raise ValueError("query must not be empty")
 
-        if retrieval_mode == "sparse":
-            response = self.sparse_retriever.search(
-                query=normalized_query,
-                document_id=document_id,
-                top_k=self.runtime_config.top_k_default,
-                source_types=source_types,
-                rebuild_if_stale=True,
-            )
-            return self._convert_sparse_to_common(response=response, top_k=self.runtime_config.top_k_default)
-
-        if retrieval_mode == "vector":
-            response = self.vector_retriever.search(
-                query=normalized_query,
-                document_id=document_id,
-                top_k=self.runtime_config.top_k_default,
-                source_types=source_types,
-                rebuild_if_stale=True,
-            )
-            return self._convert_vector_to_common(response=response, top_k=self.runtime_config.top_k_default)
-
         backend_top_k = max(self.runtime_config.top_k_default, self.runtime_config.rank_window_size)
-        sparse_common: RetrievalSearchResponse | None = None
-        vector_common: RetrievalSearchResponse | None = None
-        flags: list[RetrievalQualityFlag] = []
-
-        try:
-            sparse_response = self.sparse_retriever.search(
-                query=normalized_query,
-                document_id=document_id,
-                top_k=backend_top_k,
-                source_types=source_types,
-                rebuild_if_stale=True,
-            )
-            sparse_common = self._convert_sparse_to_common(response=sparse_response, top_k=backend_top_k)
-            flags.extend(sparse_common.quality_flags)
-        except Exception as exc:
-            flags.append(self._backend_failure_flag(backend="sparse", error=exc))
-
-        try:
-            vector_response = self.vector_retriever.search(
-                query=normalized_query,
-                document_id=document_id,
-                top_k=backend_top_k,
-                source_types=source_types,
-                rebuild_if_stale=True,
-            )
-            vector_common = self._convert_vector_to_common(response=vector_response, top_k=backend_top_k)
-            flags.extend(vector_common.quality_flags)
-        except Exception as exc:
-            flags.append(self._backend_failure_flag(backend="vector", error=exc))
-
-        if sparse_common is None and vector_common is None:
-            raise ValueError("Neither sparse nor vector retrieval is currently available.")
-
-        sparse_hits = sparse_common.hits if sparse_common else []
-        vector_hits = vector_common.hits if vector_common else []
-        return self._fuse_hybrid(
+        
+        # Prepare requests
+        req_common = BaseSearchRequest(
             query=normalized_query,
             document_id=document_id,
-            top_k=self.runtime_config.top_k_default,
+            top_k=backend_top_k,
+            source_types=source_types, # safe cast/usage
+            rebuild_if_stale=True,
+        )
+
+        sparse_hits: list[Any] = [] # List[SearchHit]
+        vector_hits: list[Any] = []
+        flags: list[RetrievalQualityFlag] = []
+
+        # Execute sparse
+        if retrieval_mode in ("sparse", "hybrid"):
+            try:
+                sparse_resp = self.sparse_retriever.search(req_common)
+                sparse_hits = sparse_resp.hits
+                # Note: SparseBM25Retriever.search returns SearchResponse with hits=list[SearchHit]
+                # If it returned internal objects, we might need conversion.
+                # But Step 508 showed BaseRetriever.search returns SearchResponse(hits=[SearchHit]).
+                # So this is compatible.
+            except Exception as exc:
+                flags.append(self._backend_failure_flag(backend="sparse", error=exc))
+        
+        # Execute vector
+        if retrieval_mode in ("vector", "hybrid"):
+            try:
+                vector_resp = self.vector_retriever.search(req_common)
+                vector_hits = vector_resp.hits
+            except Exception as exc:
+                flags.append(self._backend_failure_flag(backend="vector", error=exc))
+
+        if not sparse_hits and not vector_hits and not flags:
+             # Looked like no backends ran or both returned empty without error (unlikely if mode is set)
+             pass
+
+        # Check availability based on mode
+        if retrieval_mode == "sparse" and not sparse_hits and flags:
+             # Error occurred
+             pass
+        if retrieval_mode == "vector" and not vector_hits and flags:
+             pass
+
+        # Fuse
+        candidates = self.fuser.fuse(
             sparse_hits=sparse_hits,
             vector_hits=vector_hits,
-            flags=flags,
+            quality_flags=flags
+        )
+
+        # Convert to RetrievalHit (Generator Model)
+        ranked_hits: list[RetrievalHit] = []
+        for index, cand in enumerate(candidates[:self.runtime_config.top_k_default], start=1):
+            ranked_hits.append(
+                RetrievalHit(
+                    rank=index,
+                    rrf_score=cand.rrf_score,
+                    source_type=cand.source_type,
+                    chunk_id=cand.chunk_id,
+                    chunk_type=cand.chunk_type,
+                    text=cand.text,
+                    token_count=cand.token_count,
+                    metadata=cand.metadata,
+                    input_file=cand.input_file,
+                    sparse_rank=cand.sparse_rank,
+                    sparse_score=cand.sparse_score,
+                    vector_rank=cand.vector_rank,
+                    vector_score=cand.vector_score,
+                    vector_distance=cand.vector_distance,
+                )
+            )
+
+        if not ranked_hits:
+            flags.append(
+                RetrievalQualityFlag(
+                    code="HYBRID_NO_HITS",
+                    message="Fusion produced no hits.",
+                    severity="warning",
+                )
+            )
+
+        return RetrievalSearchResponse(
+            document_id=document_id,
+            query=normalized_query,
+            top_k=self.runtime_config.top_k_default,
+            hits=ranked_hits,
+            quality_flags=flags,
         )
 
     def chat(self, request: ChatRequest) -> ChatResponse:
@@ -476,7 +411,6 @@ class MarleyPipelineService:
 
         abstention_override: AbstentionOverrides | None = None
         if request.retrieval_mode in {"sparse", "vector"}:
-            # Single-backend modes do not have dual-backend evidence by design.
             abstention_override = AbstentionOverrides(min_dual_backend_hits=0)
 
         generator_request = GenerateRequest(

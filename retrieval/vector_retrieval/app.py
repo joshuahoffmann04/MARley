@@ -55,15 +55,11 @@ def rebuild_index(request: IndexRebuildRequest) -> IndexRebuildResponse:
 
 @app.post("/search", response_model=SearchResponse)
 def search(request: SearchRequest) -> SearchResponse:
-    document_id = request.document_id or settings.document_id
+    if not request.document_id:
+        request.document_id = settings.document_id
+
     try:
-        return retriever.search(
-            query=request.query,
-            document_id=document_id,
-            top_k=request.top_k,
-            source_types=request.source_types,
-            rebuild_if_stale=request.rebuild_if_stale,
-        )
+        return retriever.search(request)
     except VectorBackendUnavailableError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except ValueError as exc:

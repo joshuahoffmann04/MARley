@@ -5,6 +5,10 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from retrieval.base import SearchHit as BaseSearchHit
+from retrieval.base import SearchResponse as BaseSearchResponse
+
+# Source types specific to our domain
 SourceType = Literal["pdf", "faq_so", "faq_sb"]
 
 
@@ -32,15 +36,11 @@ class IndexStats(BaseModel):
     source_snapshots: list[SourceSnapshot]
 
 
-class SearchHit(BaseModel):
+class SearchHit(BaseSearchHit):
     rank: int
-    score: float
-    source_type: SourceType
-    chunk_id: str
+    # content is in BaseSearchHit (mapped from text)
+    # metadata is in BaseSearchHit
     chunk_type: str
-    text: str
-    token_count: int | None = None
-    metadata: dict[str, Any]
     input_file: str
 
 
@@ -54,6 +54,12 @@ class IndexRebuildResponse(BaseModel):
     quality_flags: list[RetrievalQualityFlag] = Field(default_factory=list)
 
 
+# We alias SearchRequest from base if we want strict compatibility, 
+# or we define a compatible one. The sparse service expects specific fields.
+# But for BaseRetriever compatibility, we should accept BaseSearchRequest structure.
+# Let's keep a local SearchRequest that is compatible, or just use arguments in search() method.
+# In Pydantic, inheritance handles field supersets.
+
 class SearchRequest(BaseModel):
     query: str
     document_id: str | None = None
@@ -62,7 +68,7 @@ class SearchRequest(BaseModel):
     rebuild_if_stale: bool | None = None
 
 
-class SearchResponse(BaseModel):
+class SearchResponse(BaseSearchResponse):
     document_id: str
     query: str
     top_k: int

@@ -69,7 +69,7 @@ ollama pull llama3.1:latest
 3. MARley Single-App starten:
 
 ```powershell
-.\scripts\start-marley.ps1
+python -m uvicorn MARley.app:app --host 127.0.0.1 --port 8010 --reload
 ```
 
 Alternative direkt mit Uvicorn (mit stabilen Reload-Regeln):

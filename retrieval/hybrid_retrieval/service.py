@@ -119,6 +119,210 @@ class HybridRetriever:
         self.runtime_config = runtime_config or get_hybrid_retrieval_config(self.settings)
         self._lock = Lock()
         self._last_index_stats: HybridIndexStats | None = None
+        
+        from retrieval.fusion import RRFFuser
+        self.fuser = RRFFuser(
+            rrf_rank_constant=self.runtime_config.rrf_rank_constant,
+            sparse_weight=self.runtime_config.sparse_weight,
+            vector_weight=self.runtime_config.vector_weight,
+        )
+
+    # ... keep helpers ...
+
+    # We need a helper to convert JSON hits to SearchHit objects for RRFFuser
+    def _json_hits_to_search_hits(self, *, hits_json: list[Any], document_id: str) -> list[Any]:
+        # returns List[SearchHit], but importing SearchHit to avoid circular dep issues inside method if needed
+        from retrieval.base import SearchHit
+        
+        search_hits = []
+        for raw_hit in hits_json:
+            if not isinstance(raw_hit, dict):
+                continue
+            
+            # Extract fields
+            # SearchHit: chunk_id, document_id, score, content, metadata, source_type
+            chunk_id = str(raw_hit.get("chunk_id") or "")
+            score = _coerce_float(raw_hit.get("score")) or 0.0
+            content = str(raw_hit.get("text") or raw_hit.get("content") or "")
+            source_type = str(raw_hit.get("source_type") or "")
+            
+            metadata = raw_hit.get("metadata")
+            if not isinstance(metadata, dict):
+                metadata = {}
+            
+            # Ensure metadata has fields RRFFuser expects if they are not in SearchHit specific fields
+            # token_count, chunk_type, input_file
+            if "token_count" not in metadata and "token_count" in raw_hit:
+                 metadata["token_count"] = raw_hit["token_count"]
+            if "chunk_type" not in metadata and "chunk_type" in raw_hit:
+                 metadata["chunk_type"] = raw_hit["chunk_type"]
+            if "input_file" not in metadata and "input_file" in raw_hit:
+                 metadata["input_file"] = raw_hit["input_file"]
+
+            search_hits.append(
+                SearchHit(
+                    chunk_id=chunk_id,
+                    document_id=document_id, # backend might return it, or use requested doc id
+                    score=score,
+                    content=content,
+                    metadata=metadata,
+                    source_type=source_type
+                )
+            )
+        return search_hits
+
+    def search(
+        self,
+        *,
+        query: str,
+        document_id: str,
+        top_k: int | None = None,
+        source_types: list[SourceType] | None = None,
+        rebuild_if_stale: bool | None = None,
+    ) -> SearchResponse:
+        normalized_query = query.strip()
+        if not normalized_query:
+            raise ValueError("query must not be empty")
+
+        effective_top_k = top_k if top_k is not None else self.runtime_config.top_k_default
+        if effective_top_k < 1 or effective_top_k > self.runtime_config.top_k_max:
+            raise ValueError(f"top_k must be between 1 and {self.runtime_config.top_k_max}")
+
+        effective_rebuild = (
+            rebuild_if_stale
+            if rebuild_if_stale is not None
+            else self.runtime_config.auto_rebuild_on_search
+        )
+        backend_top_k = max(effective_top_k, self.runtime_config.rank_window_size)
+
+        payload: dict[str, Any] = {
+            "query": normalized_query,
+            "document_id": document_id,
+            "top_k": backend_top_k,
+            "rebuild_if_stale": effective_rebuild,
+        }
+        if source_types:
+            payload["source_types"] = source_types
+
+        calls = self._call_both_backends(endpoint="/search", method="POST", payload=payload)
+        sparse_result = calls["sparse"]
+        vector_result = calls["vector"]
+
+        quality_flags: list[RetrievalQualityFlag] = []
+        for result in (sparse_result, vector_result):
+            if not result.ok:
+                quality_flags.append(self._backend_failure_flag(result))
+            quality_flags.extend(self._extract_backend_flags(result))
+            quality_flags.extend(
+                self._backend_document_id_mismatch_flags(
+                    expected_document_id=document_id,
+                    result=result,
+                )
+            )
+
+        if not sparse_result.ok and not vector_result.ok:
+            raise HybridBackendUnavailableError(
+                "Neither sparse nor vector backend is currently available."
+            )
+
+        sparse_hits_objs = []
+        if sparse_result.ok and sparse_result.payload is not None:
+             hits_list = sparse_result.payload.get("hits")
+             if isinstance(hits_list, list):
+                 sparse_hits_objs = self._json_hits_to_search_hits(hits_json=hits_list, document_id=document_id)
+             else:
+                 quality_flags.append(
+                    RetrievalQualityFlag(
+                        code="SPARSE_HITS_INVALID",
+                        message="Sparse hits payload not a list.",
+                        severity="warning"
+                    )
+                 )
+
+        vector_hits_objs = []
+        if vector_result.ok and vector_result.payload is not None:
+             hits_list = vector_result.payload.get("hits")
+             if isinstance(hits_list, list):
+                 vector_hits_objs = self._json_hits_to_search_hits(hits_json=hits_list, document_id=document_id)
+             else:
+                 quality_flags.append(
+                    RetrievalQualityFlag(
+                        code="VECTOR_HITS_INVALID",
+                        message="Vector hits payload not a list.",
+                        severity="warning"
+                    )
+                 )
+
+        # Fuse
+        candidates = self.fuser.fuse(
+            sparse_hits=sparse_hits_objs,
+            vector_hits=vector_hits_objs, 
+            quality_flags=quality_flags
+        )
+
+        selected = candidates[:effective_top_k]
+
+        if not selected:
+             quality_flags.append(
+                RetrievalQualityFlag(
+                    code="HYBRID_NO_HITS",
+                    message="Hybrid fusion produced no hits.",
+                    severity="warning",
+                )
+            )
+
+        # Report single backend evidence
+        single_backend_hits = sum(
+            1
+            for hit in selected
+            if (hit.sparse_rank is None) != (hit.vector_rank is None)
+        )
+        if single_backend_hits > 0:
+            quality_flags.append(
+                RetrievalQualityFlag(
+                    code="HYBRID_SINGLE_BACKEND_EVIDENCE",
+                    message="Some final hits are supported by only one retrieval backend.",
+                    severity="info",
+                    context={"count": single_backend_hits},
+                )
+            )
+
+        hits = [
+            HybridSearchHit(
+                rank=index + 1,
+                rrf_score=item.rrf_score,
+                source_type=item.source_type,
+                chunk_id=item.chunk_id,
+                chunk_type=item.chunk_type,
+                text=item.text,
+                token_count=item.token_count,
+                metadata=item.metadata,
+                input_file=item.input_file,
+                sparse_rank=item.sparse_rank,
+                sparse_score=item.sparse_score,
+                vector_rank=item.vector_rank,
+                vector_score=item.vector_score,
+                vector_distance=item.vector_distance,
+            )
+            for index, item in enumerate(selected)
+        ]
+
+        index_stats = self._build_index_stats(
+            document_id=document_id,
+            sparse_result=sparse_result,
+            vector_result=vector_result,
+        )
+        with self._lock:
+            self._last_index_stats = index_stats
+
+        return SearchResponse(
+            document_id=document_id,
+            query=normalized_query,
+            top_k=effective_top_k,
+            hits=hits,
+            index_stats=index_stats,
+            quality_flags=quality_flags,
+        )
 
     def _backend_base_url(self, backend: BackendName) -> str:
         if backend == "sparse":
@@ -432,127 +636,7 @@ class HybridRetriever:
             vector=vector_stats,
         )
 
-    def _empty_candidate_from_hit(
-        self,
-        *,
-        source_type: SourceType,
-        chunk_id: str,
-        raw_hit: dict[str, Any],
-    ) -> _FusedCandidate:
-        raw_metadata = raw_hit.get("metadata")
-        metadata = raw_metadata if isinstance(raw_metadata, dict) else {}
-        token_count = _coerce_int(raw_hit.get("token_count"))
-        return _FusedCandidate(
-            source_type=source_type,
-            chunk_id=chunk_id,
-            chunk_type=str(raw_hit.get("chunk_type") or "unknown"),
-            text=str(raw_hit.get("text") or ""),
-            token_count=token_count,
-            metadata=metadata,
-            input_file=str(raw_hit.get("input_file") or ""),
-        )
 
-    def _merge_candidate_data(self, candidate: _FusedCandidate, raw_hit: dict[str, Any]) -> None:
-        if not candidate.text:
-            candidate.text = str(raw_hit.get("text") or "")
-        if not candidate.chunk_type or candidate.chunk_type == "unknown":
-            candidate.chunk_type = str(raw_hit.get("chunk_type") or "unknown")
-        if candidate.token_count is None:
-            candidate.token_count = _coerce_int(raw_hit.get("token_count"))
-        if not candidate.input_file:
-            candidate.input_file = str(raw_hit.get("input_file") or "")
-        if not candidate.metadata:
-            raw_metadata = raw_hit.get("metadata")
-            if isinstance(raw_metadata, dict):
-                candidate.metadata = raw_metadata
-
-    def _ingest_hits(
-        self,
-        *,
-        backend: BackendName,
-        hits: Any,
-        weight: float,
-        fused: dict[tuple[SourceType, str], _FusedCandidate],
-        quality_flags: list[RetrievalQualityFlag],
-    ) -> int:
-        if not isinstance(hits, list):
-            quality_flags.append(
-                RetrievalQualityFlag(
-                    code="BACKEND_HITS_INVALID",
-                    message="Backend hits payload is not a list.",
-                    severity="warning",
-                    context={"backend": backend},
-                )
-            )
-            return 0
-
-        valid_hits = 0
-        for fallback_rank, raw_hit in enumerate(hits, start=1):
-            if not isinstance(raw_hit, dict):
-                quality_flags.append(
-                    RetrievalQualityFlag(
-                        code="BACKEND_HIT_INVALID",
-                        message="Backend hit entry is not an object and was ignored.",
-                        severity="info",
-                        context={"backend": backend, "position": fallback_rank},
-                    )
-                )
-                continue
-
-            source_type = _normalize_source_type(raw_hit.get("source_type"))
-            chunk_id = str(raw_hit.get("chunk_id") or "").strip()
-            if source_type is None or not chunk_id:
-                quality_flags.append(
-                    RetrievalQualityFlag(
-                        code="BACKEND_HIT_KEY_INVALID",
-                        message="Backend hit misses source_type/chunk_id and was ignored.",
-                        severity="info",
-                        context={"backend": backend, "position": fallback_rank},
-                    )
-                )
-                continue
-
-            rank = _coerce_int(raw_hit.get("rank"))
-            if rank is None or rank < 1:
-                rank = fallback_rank
-
-            fusion_key = (source_type, chunk_id)
-            candidate = fused.get(fusion_key)
-            if candidate is None:
-                candidate = self._empty_candidate_from_hit(
-                    source_type=source_type,
-                    chunk_id=chunk_id,
-                    raw_hit=raw_hit,
-                )
-                fused[fusion_key] = candidate
-            else:
-                self._merge_candidate_data(candidate, raw_hit)
-
-            candidate.rrf_score += weight * (1.0 / (self.runtime_config.rrf_rank_constant + rank))
-            if backend == "sparse":
-                candidate.sparse_rank = rank
-                candidate.sparse_score = _coerce_float(raw_hit.get("score"))
-            else:
-                candidate.vector_rank = rank
-                candidate.vector_score = _coerce_float(raw_hit.get("score"))
-                candidate.vector_distance = _coerce_float(raw_hit.get("distance"))
-
-            valid_hits += 1
-
-        return valid_hits
-
-    def _sorted_candidates(
-        self,
-        candidates: list[_FusedCandidate],
-    ) -> list[_FusedCandidate]:
-        def tie_rank(value: _FusedCandidate) -> int:
-            ranks = [rank for rank in (value.sparse_rank, value.vector_rank) if rank is not None]
-            return min(ranks) if ranks else 10**9
-
-        return sorted(
-            candidates,
-            key=lambda item: (-item.rrf_score, tie_rank(item), item.source_type, item.chunk_id),
-        )
 
     def rebuild_index(self, *, document_id: str) -> tuple[HybridIndexStats, list[RetrievalQualityFlag]]:
         payload = {"document_id": document_id}
