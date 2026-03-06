@@ -29,9 +29,10 @@ src/marley/
 ├── models/          Shared data classes (ExtractionResult, QualityFlag, ...)
 ├── extractor/       PDF extraction (PyMuPDF + pdfplumber)
 ├── chunker/         PDF chunking (sentence-aligned) + FAQ chunking
-└── retrieval/       Abstract Retriever interface + BM25 + Vector implementations
+└── retrieval/       Abstract Retriever interface + BM25 + Vector + Hybrid (RRF)
 
-evaluation/          Retrieval evaluation (Precision@k, Recall@k, MRR)
+evaluation/
+└── retrieval/       Retrieval evaluation (Precision@k, Recall@k, MRR)
 
 tests/               Unit and integration tests (mirrored by component)
 docs/                Component documentation (mirrored by component)
@@ -84,7 +85,7 @@ for r in retriever.retrieve('master thesis credits', k=5):
 # Run evaluation
 python -c "
 from src.marley.retrieval import BM25Retriever, load_chunks
-from evaluation.evaluate import run_and_report
+from evaluation.retrieval.evaluate import run_and_report
 chunks = load_chunks('data/chunks/stpo-chunks.json')
 retriever = BM25Retriever()
 retriever.index(chunks)
@@ -104,8 +105,9 @@ print(report['metrics'])
 | FAQ Chunker | 36 | `tests/chunker/test_faq_chunker.py` |
 | BM25 Retrieval | 23 | `tests/retrieval/test_bm25.py` |
 | Vector Retrieval | 23 | `tests/retrieval/test_vector.py` |
-| Evaluation | 34 | `evaluation/tests/test_metrics.py`, `evaluation/tests/test_evaluate.py` |
-| **Total** | **232** | |
+| Hybrid Retrieval | 23 | `tests/retrieval/test_hybrid.py` |
+| Evaluation | 34 | `evaluation/tests/retrieval/test_metrics.py`, `evaluation/tests/retrieval/test_evaluate.py` |
+| **Total** | **255** | |
 
 Integration tests that require data files are skipped automatically in CI.
 
@@ -121,7 +123,8 @@ Integration tests that require data files are skipped automatically in CI.
 | FAQ Chunker | `docs/chunker/faq_chunker.md` |
 | BM25 Retrieval | `docs/retrieval/bm25.md` |
 | Vector Retrieval | `docs/retrieval/vector.md` |
-| Evaluation | `docs/evaluation/evaluation.md` |
+| Hybrid Retrieval | `docs/retrieval/hybrid.md` |
+| Retrieval Evaluation | `docs/evaluation/retrieval.md` |
 | Data Structures | `docs/data/data-structures.md` |
 | FAQ Coverage Plan | `docs/data/faq-stpo-coverage.md` |
 

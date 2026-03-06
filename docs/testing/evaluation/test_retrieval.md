@@ -1,8 +1,8 @@
-# Evaluation Test Documentation
+# Retrieval Evaluation Test Documentation
 
-**Test files:** `evaluation/tests/test_metrics.py`, `evaluation/tests/test_evaluate.py`
+**Test files:** `evaluation/tests/retrieval/test_metrics.py`, `evaluation/tests/retrieval/test_evaluate.py`
 **Total tests:** 34
-**Run command:** `python -m pytest evaluation/tests/ -v`
+**Run command:** `python -m pytest evaluation/tests/retrieval/ -v`
 
 ---
 

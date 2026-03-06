@@ -1,8 +1,8 @@
-# Evaluation
+# Retrieval Evaluation
 
-**Module:** `evaluation/`
+**Module:** `evaluation/retrieval/`
 **Metrics:** Precision@k, Recall@k, MRR
-**Test files:** `evaluation/tests/test_metrics.py`, `evaluation/tests/test_evaluate.py`
+**Test files:** `evaluation/tests/retrieval/test_metrics.py`, `evaluation/tests/retrieval/test_evaluate.py`
 
 The evaluation harness measures retrieval quality by comparing retrieved chunks against manually annotated ground-truth chunk IDs. It supports evaluating any `Retriever` implementation against any of the three knowledge bases.
 
@@ -86,7 +86,7 @@ The evaluation is designed to test each knowledge base separately. To evaluate a
 
 ```python
 from src.marley.retrieval import BM25Retriever, load_chunks
-from evaluation.evaluate import run_and_report
+from evaluation.retrieval.evaluate import run_and_report
 
 # Setup
 chunks = load_chunks("data/chunks/stpo-chunks.json")
@@ -130,7 +130,17 @@ print(report["metrics"])
 | FAQ-StPO (999 chunks) | 0.440 | 0.321 | 0.440 | 0.173 | 0.576 | 0.532 | 75 |
 | FAQ-AO (50 chunks) | 0.762 | 0.738 | 0.762 | 0.210 | 1.000 | 0.861 | 21 |
 
+### Hybrid (BM25 + Vector, RRF with k_rrf=60)
+
+| Knowledge Base | P@1 | R@1 | MRR | P@5 | R@5 | MRR | Queries |
+|---|---|---|---|---|---|---|---|
+| StPO (142 chunks) | 0.320 | 0.238 | 0.320 | 0.171 | 0.567 | 0.469 | 75 |
+| FAQ-StPO (999 chunks) | 0.227 | 0.153 | 0.227 | 0.160 | 0.539 | 0.467 | 75 |
+| FAQ-AO (50 chunks) | 0.571 | 0.548 | 0.571 | 0.210 | 1.000 | 0.798 | 21 |
+
 ### Comparison
+
+#### BM25 vs. Vector
 
 Vector retrieval outperforms BM25 across all knowledge bases and all metrics:
 
@@ -140,6 +150,18 @@ Vector retrieval outperforms BM25 across all knowledge bases and all metrics:
 
 The gains are especially pronounced for FAQ-StPO, where BM25's keyword matching is confused by the many similarly-worded FAQ entries. Dense embeddings capture semantic similarity more effectively in this setting.
 
+#### Hybrid (RRF) vs. Individual Retrievers
+
+Hybrid retrieval (RRF) shows mixed results compared to the individual strategies:
+
+- **StPO:** R@5 improves to 0.567, the **best recall across all strategies** (+11% over Vector, +29% over BM25). However, P@1 and MRR@1 match BM25 (0.320) rather than Vector (0.400). MRR@5 of 0.469 sits between BM25 (0.400) and Vector (0.477).
+- **FAQ-StPO:** R@5 of 0.539 is better than BM25 (0.394, +37%) but slightly below Vector (0.576, −6%). MRR@5 of 0.467 improves over BM25 (0.332, +41%) but falls below Vector (0.532, −12%). The k@1 metrics match BM25, not Vector.
+- **FAQ-AO:** R@5 reaches 1.000 (matching Vector), but MRR drops from 0.861 (Vector) to 0.798 (−7%).
+
+**Key insight:** RRF's P@1 and MRR@1 are identical to BM25 in all cases. This occurs because both retrievers contribute equally to the RRF score at rank 1 (score = 1/(k_rrf+1)), and when both agree on rank 1, BM25's candidate wins; when they disagree, the tie-breaking favors whichever document appears first in iteration order. Since BM25 results are processed first, its top-1 candidate dominates.
+
+**Practical implication:** RRF excels at recall — it finds more relevant documents by combining both retriever pools. For the StPO knowledge base, this is the best strategy. However, for precision-sensitive use cases (where only the top-1 or top-2 results matter), pure Vector retrieval remains the better choice. For the downstream generation stage, the higher recall of hybrid retrieval may be more valuable, as the language model can select the most relevant information from a richer context.
+
 ---
 
 ## Module Structure
@@ -147,10 +169,14 @@ The gains are especially pronounced for FAQ-StPO, where BM25's keyword matching 
 ```
 evaluation/
 ├── __init__.py
-├── metrics.py          # Precision@k, Recall@k, MRR, evaluate_retriever()
-├── evaluate.py         # Runner: load_evaluation(), run_evaluation(), run_and_report()
+├── retrieval/
+│   ├── __init__.py
+│   ├── metrics.py          # Precision@k, Recall@k, MRR, evaluate_retriever()
+│   └── evaluate.py         # Runner: load_evaluation(), run_evaluation(), run_and_report()
 └── tests/
     ├── __init__.py
-    ├── test_metrics.py  # 21 unit tests for all metric functions
-    └── test_evaluate.py # 13 unit tests for the evaluation runner
+    └── retrieval/
+        ├── __init__.py
+        ├── test_metrics.py  # 21 unit tests for all metric functions
+        └── test_evaluate.py # 13 unit tests for the evaluation runner
 ```

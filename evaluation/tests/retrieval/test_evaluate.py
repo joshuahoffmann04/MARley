@@ -9,8 +9,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from evaluation.evaluate import load_evaluation, run_and_report, run_evaluation
-from evaluation.metrics import RetrievalMetrics
+from evaluation.retrieval.evaluate import load_evaluation, run_and_report, run_evaluation
+from evaluation.retrieval.metrics import RetrievalMetrics
 from src.marley.retrieval.base import RetrievalResult, Retriever
 
 

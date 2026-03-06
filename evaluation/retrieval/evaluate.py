@@ -11,7 +11,7 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from evaluation.metrics import RetrievalMetrics, evaluate_retriever
+from evaluation.retrieval.metrics import RetrievalMetrics, evaluate_retriever
 from src.marley.retrieval.base import Retriever
 
 

@@ -2,7 +2,7 @@
 
 import pytest
 
-from evaluation.metrics import (
+from evaluation.retrieval.metrics import (
     RetrievalMetrics,
     evaluate_retriever,
     mrr,
