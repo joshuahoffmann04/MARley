@@ -1,16 +1,14 @@
 # PDF Extractor
 
-The extractor converts the StPO PDF into a structured JSON file containing labelled sections with plain text and tables. It is the first stage of the MARley pipeline.
-
+**Module:** `src/marley/extractor/`
 **Input:** `data/raw/msc-computer-science.pdf` (47 pages, English StPO)
 **Output:** `data/knowledgebase/stpo-extracted.json`
-**Module:** `src/marley/extractor/`
+
+The extractor converts the StPO PDF into a structured JSON file containing labelled sections with plain text and tables. It is the first stage of the MARley pipeline.
 
 ---
 
 ## Processing Pipeline
-
-The extractor runs six sequential stages:
 
 ```
 PDF file
@@ -145,6 +143,12 @@ save(result, "data/knowledgebase/stpo-extracted.json")
 |---|---|---|
 | `extract` | `(pdf_path: str \| Path) → ExtractionResult` | Run the full extraction pipeline. Raises `FileNotFoundError` if the PDF does not exist. |
 | `save` | `(result: ExtractionResult, output_path: str \| Path) → Path` | Serialize to JSON. Creates parent directories if needed. Returns the resolved output path. |
+
+---
+
+## Data Classes
+
+The extractor produces `ExtractionResult`, `Section`, and `Table` objects defined in `src/marley/models/`. See `docs/models/models.md` for details.
 
 ---
 

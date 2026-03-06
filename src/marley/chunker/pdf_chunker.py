@@ -11,11 +11,16 @@ import json
 import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from statistics import median
 
 import tiktoken
 
-from src.marley.models import ExtractionResult, QualityFlag, Section, Table
+from src.marley.models import (
+    ExtractionResult,
+    QualityFlag,
+    Section,
+    Table,
+    compute_token_stats,
+)
 
 try:
     import syntok.segmenter as _syntok_segmenter
@@ -402,15 +407,7 @@ def _compute_stats(
     token_counts = [c.token_count for c in chunks]
     text_count = sum(1 for c in chunks if c.chunk_type == "text")
     table_count = sum(1 for c in chunks if c.chunk_type == "table")
-
-    if not token_counts:
-        return ChunkingStats(
-            total_chunks=0, text_chunks=0, table_chunks=0,
-            sections_processed=sections_processed,
-            sections_skipped=sections_skipped,
-            tables_processed=tables_processed,
-            min_tokens=0, median_tokens=0, max_tokens=0, total_tokens=0,
-        )
+    token_stats = compute_token_stats(token_counts)
 
     return ChunkingStats(
         total_chunks=len(token_counts),
@@ -419,10 +416,7 @@ def _compute_stats(
         sections_processed=sections_processed,
         sections_skipped=sections_skipped,
         tables_processed=tables_processed,
-        min_tokens=min(token_counts),
-        median_tokens=int(median(token_counts)),
-        max_tokens=max(token_counts),
-        total_tokens=sum(token_counts),
+        **token_stats,
     )
 
 

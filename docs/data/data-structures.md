@@ -1,6 +1,6 @@
 # MARley Data Structures
 
-This document defines every JSON structure produced and consumed by the MARley pipeline.
+This document defines every JSON file format produced and consumed by the MARley pipeline. For the Python data classes that represent these structures in code, see `docs/models/models.md`.
 
 ---
 
@@ -81,7 +81,53 @@ Output of the PDF extractor. Contains the full StPO document decomposed into lab
 
 ---
 
-## 1b. Chunked StPO (`stpo-chunks.json`)
+## 2. FAQ Knowledge Bases (`faq-stpo.json`, `faq-ao.json`)
+
+Input files for the FAQ chunker. Both FAQ sources share the same structure. Each file represents one knowledge base and contains a metadata header followed by an array of question-answer entries.
+
+### Structure
+
+```json
+{
+  "metadata": {
+    "source": "faq-stpo",
+    "version": "1.0",
+    "created": "2026-03-05",
+    "description": "Synthetic FAQ derived from the StPO of the M.Sc. Computer Science program."
+  },
+  "entries": [
+    {
+      "id": "stpo-0001",
+      "question": "How many ECTS does the master thesis count for?",
+      "answer": "The master thesis counts for 27 ECTS. Together with the disputation (3 ECTS), the final module comprises 30 ECTS in total.",
+      "source": "§23 (2)"
+    }
+  ]
+}
+```
+
+### Field Descriptions
+
+| Field | Type | Description |
+|---|---|---|
+| `metadata.source` | string | Identifier of the knowledge base. One of `"faq-stpo"` or `"faq-ao"`. |
+| `metadata.version` | string | Version of the dataset. |
+| `metadata.created` | string | ISO date of creation. |
+| `metadata.description` | string | Human-readable description of the dataset. |
+| `entries[].id` | string | Unique identifier. Format: `stpo-XXXX` for FAQ-StPO, `ao-XXXX` for FAQ-AO. |
+| `entries[].question` | string | The question, written in English. |
+| `entries[].answer` | string | The answer, written in English. Factually grounded in the source. |
+| `entries[].source` | string | Provenance of the answer. For FAQ-StPO: section reference(s) from the StPO (e.g., `"§23 (2)"`). For FAQ-AO: origin such as `"advisory office"`, `"website"`, or a URL. |
+
+### Notes
+
+- **FAQ-StPO** entries are systematically derived from the StPO document. Each question must be answerable from the referenced section(s). The `source` field always references specific paragraphs or annexes of the StPO.
+- **FAQ-AO** entries represent authentic student questions answered by the advisory office. The `source` field indicates where the answer originates (e.g., advisory office, department website). The FAQ-AO file will initially contain placeholder entries that are replaced with real data once available.
+- Both FAQ files serve as **retrieval units** in the pipeline: each question-answer pair becomes one chunk during FAQ chunking.
+
+---
+
+## 3. Chunked StPO (`stpo-chunks.json`)
 
 Output of the PDF chunker. Contains retrieval-ready chunks derived from the extracted StPO sections and tables.
 
@@ -162,7 +208,7 @@ Output of the PDF chunker. Contains retrieval-ready chunks derived from the extr
 
 ---
 
-## 1c. Chunked FAQs (`faq-stpo-chunks.json`, `faq-ao-chunks.json`)
+## 4. Chunked FAQs (`faq-stpo-chunks.json`, `faq-ao-chunks.json`)
 
 Output of the FAQ chunker. Each FAQ entry becomes exactly one chunk with a combined question-answer text.
 
@@ -192,9 +238,9 @@ Output of the FAQ chunker. Each FAQ entry becomes exactly one chunk with a combi
     "entries_total": 999,
     "entries_processed": 999,
     "entries_skipped": 0,
-    "min_tokens": 20,
-    "median_tokens": 55,
-    "max_tokens": 120,
+    "min_tokens": 16,
+    "median_tokens": 37,
+    "max_tokens": 416,
     "total_tokens": 58000
   },
   "quality_flags": []
@@ -229,55 +275,9 @@ Output of the FAQ chunker. Each FAQ entry becomes exactly one chunk with a combi
 
 ---
 
-## 2. FAQ Knowledge Base (`faq-stpo.json`, `faq-ao.json`)
+## 5. Evaluation Dataset (`evaluation.json`)
 
-Both FAQ sources share the same structure. Each file represents one knowledge base and contains a metadata header followed by an array of question-answer entries.
-
-### Structure
-
-```json
-{
-  "metadata": {
-    "source": "faq-stpo",
-    "version": "1.0",
-    "created": "2026-03-05",
-    "description": "Synthetic FAQ derived from the StPO of the M.Sc. Computer Science program."
-  },
-  "entries": [
-    {
-      "id": "stpo-0001",
-      "question": "How many ECTS does the master thesis count for?",
-      "answer": "The master thesis counts for 27 ECTS. Together with the disputation (3 ECTS), the final module comprises 30 ECTS in total.",
-      "source": "§23 (2)"
-    }
-  ]
-}
-```
-
-### Field Descriptions
-
-| Field | Type | Description |
-|---|---|---|
-| `metadata.source` | string | Identifier of the knowledge base. One of `"faq-stpo"` or `"faq-ao"`. |
-| `metadata.version` | string | Version of the dataset. |
-| `metadata.created` | string | ISO date of creation. |
-| `metadata.description` | string | Human-readable description of the dataset. |
-| `entries[].id` | string | Unique identifier. Format: `stpo-XXXX` for FAQ-StPO, `ao-XXXX` for FAQ-AO. |
-| `entries[].question` | string | The question, written in English. |
-| `entries[].answer` | string | The answer, written in English. Factually grounded in the source. |
-| `entries[].source` | string | Provenance of the answer. For FAQ-StPO: section reference(s) from the StPO (e.g., `"§23 (2)"`). For FAQ-AO: origin such as `"advisory office"`, `"website"`, or a URL. |
-
-### Notes
-
-- **FAQ-StPO** entries are systematically derived from the StPO document. Each question must be answerable from the referenced section(s). The `source` field always references specific paragraphs or annexes of the StPO.
-- **FAQ-AO** entries represent authentic student questions answered by the advisory office. The `source` field indicates where the answer originates (e.g., advisory office, department website). The FAQ-AO file will initially contain placeholder entries that are replaced with real data once available.
-- Both FAQ files serve as **retrieval units** in the pipeline: each question-answer pair becomes one chunk during FAQ chunking.
-
----
-
-## 3. Evaluation Dataset (`evaluation.json`)
-
-The evaluation dataset contains approximately 100 questions used to evaluate the full MARley pipeline. These questions are **intentionally worded differently** from the FAQ entries to test genuine retrieval and generation quality rather than exact matching.
+The master evaluation dataset contains 100 questions used to evaluate the full MARley pipeline. These questions are **intentionally worded differently** from the FAQ entries to test genuine retrieval and generation quality rather than exact matching.
 
 ### Structure
 
@@ -312,7 +312,7 @@ The evaluation dataset contains approximately 100 questions used to evaluate the
 | `questions[].question` | string | The evaluation question, in English. Deliberately worded differently from any FAQ entry. |
 | `questions[].reference_answer` | string | The gold-standard reference answer. Empty string for unanswerable questions. |
 | `questions[].category` | string | One of `"direct"`, `"multi-source"`, or `"unanswerable"`. |
-| `questions[].relevant_chunks` | array | List of chunk IDs needed to answer this question. Populated after chunking is complete. |
+| `questions[].relevant_chunks` | array | List of chunk IDs needed to answer this question. Empty in the master file; populated per knowledge base in the annotated variants (see Section 6). |
 | `questions[].expected_abstention` | boolean | `true` if the system should abstain (unanswerable), `false` otherwise. |
 
 ### Category Definitions
@@ -333,20 +333,75 @@ The evaluation dataset contains approximately 100 questions used to evaluate the
 
 ---
 
-## 4. File Locations
+## 6. Annotated Evaluation Datasets (`evaluation-*.json`)
+
+Per-knowledge-base variants of the master evaluation dataset with `relevant_chunks` populated by manual annotation. Used for retrieval evaluation.
+
+### Files
+
+| File | Knowledge Base | Annotated Questions |
+|---|---|---|
+| `evaluation-stpo.json` | StPO chunks (142 text + table) | 75 |
+| `evaluation-faq-stpo.json` | FAQ-StPO chunks (999 Q/A) | 75 |
+| `evaluation-faq-ao.json` | FAQ-AO chunks (50 Q/A) | 21 |
+
+### Structure
+
+Identical to the master `evaluation.json`, with one addition in `metadata`:
+
+```json
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-03-06",
+    "description": "Evaluation dataset with relevant chunks for StPO.",
+    "knowledge_base": "stpo"
+  },
+  "questions": [
+    {
+      "id": "eval-001",
+      "question": "How long is the standard study period for the master's program?",
+      "reference_answer": "The standard study period (Regelstudienzeit) is 4 semesters.",
+      "category": "direct",
+      "relevant_chunks": ["par-7-txt-1"],
+      "expected_abstention": false
+    }
+  ]
+}
+```
+
+### Additional Field
+
+| Field | Type | Description |
+|---|---|---|
+| `metadata.knowledge_base` | string | Identifier of the knowledge base: `"stpo"`, `"faq-stpo"`, or `"faq-ao"`. |
+
+### Annotation Criteria
+
+- Only chunks that **directly contain the answer** are marked as relevant.
+- For multi-source questions, all required chunks are listed.
+- Unanswerable questions have empty `relevant_chunks` in all files.
+- Chunk IDs reference the respective knowledge base's chunk format.
+
+---
+
+## 7. File Locations
 
 ```
 data/
 ├── raw/
 │   └── msc-computer-science.pdf          # Source PDF (StPO)
 ├── knowledgebase/
-│   ├── stpo-extracted.json               # Extracted StPO (48 sections, 23 tables)
-│   ├── faq-stpo.json                     # FAQ-StPO knowledge base (999 entries)
-│   └── faq-ao.json                       # FAQ-AO knowledge base (placeholder)
+│   ├── stpo-extracted.json               # Extracted StPO (Section 1)
+│   ├── faq-stpo.json                     # FAQ-StPO knowledge base (Section 2)
+│   └── faq-ao.json                       # FAQ-AO knowledge base (Section 2)
 ├── chunks/
-│   ├── stpo-chunks.json                  # Chunked StPO (text + table chunks)
-│   ├── faq-stpo-chunks.json              # Chunked FAQ-StPO (999 FAQ chunks)
-│   └── faq-ao-chunks.json                # Chunked FAQ-AO (50 FAQ chunks)
+│   ├── stpo-chunks.json                  # Chunked StPO (Section 3)
+│   ├── faq-stpo-chunks.json              # Chunked FAQ-StPO (Section 4)
+│   └── faq-ao-chunks.json               # Chunked FAQ-AO (Section 4)
 └── testing/
-    └── evaluation.json                   # Evaluation dataset (100 questions)
+    ├── evaluation.json                   # Evaluation dataset, master (Section 5)
+    ├── evaluation-stpo.json              # Annotated for StPO chunks (Section 6)
+    ├── evaluation-faq-stpo.json          # Annotated for FAQ-StPO chunks (Section 6)
+    └── evaluation-faq-ao.json            # Annotated for FAQ-AO chunks (Section 6)
 ```

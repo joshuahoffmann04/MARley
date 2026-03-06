@@ -9,11 +9,10 @@ from __future__ import annotations
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from statistics import median
 
 import tiktoken
 
-from src.marley.models import QualityFlag
+from src.marley.models import QualityFlag, compute_token_stats
 
 
 # ---------------------------------------------------------------------------
@@ -150,28 +149,14 @@ def _compute_stats(
 ) -> FAQChunkingStats:
     """Compute aggregated statistics over all chunks."""
     token_counts = [c.token_count for c in chunks]
-
-    if not token_counts:
-        return FAQChunkingStats(
-            total_chunks=0,
-            entries_total=entries_total,
-            entries_processed=0,
-            entries_skipped=entries_skipped,
-            min_tokens=0,
-            median_tokens=0,
-            max_tokens=0,
-            total_tokens=0,
-        )
+    token_stats = compute_token_stats(token_counts)
 
     return FAQChunkingStats(
         total_chunks=len(token_counts),
         entries_total=entries_total,
         entries_processed=len(token_counts),
         entries_skipped=entries_skipped,
-        min_tokens=min(token_counts),
-        median_tokens=int(median(token_counts)),
-        max_tokens=max(token_counts),
-        total_tokens=sum(token_counts),
+        **token_stats,
     )
 
 

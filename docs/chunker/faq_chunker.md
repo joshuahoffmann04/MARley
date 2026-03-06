@@ -1,10 +1,10 @@
 # FAQ Chunker
 
-The FAQ chunker converts FAQ knowledge bases into retrieval-ready chunks. Each question-answer entry becomes exactly one chunk — no sentence splitting, packing, or overlap is needed. Both FAQ sources (FAQ-StPO and FAQ-AO) share the same JSON structure and are handled by the same chunker.
-
+**Module:** `src/marley/chunker/faq_chunker.py`
 **Input:** `data/knowledgebase/faq-stpo.json` (999 entries), `data/knowledgebase/faq-ao.json` (50 entries)
 **Output:** `data/chunks/faq-stpo-chunks.json`, `data/chunks/faq-ao-chunks.json`
-**Module:** `src/marley/chunker/faq_chunker.py`
+
+The FAQ chunker converts FAQ knowledge bases into retrieval-ready chunks. Each question-answer entry becomes exactly one chunk — no sentence splitting, packing, or overlap is needed. Both FAQ sources (FAQ-StPO and FAQ-AO) share the same JSON structure and are handled by the same chunker.
 
 ---
 
@@ -21,7 +21,7 @@ FAQ JSON file
   ├─ 1. Validate     (id, question, answer non-empty; no duplicates)
   ├─ 2. Format text   ("Question: {q}\nAnswer: {a}")
   ├─ 3. Count tokens  (tiktoken cl100k_base)
-  ├─ 4. Build ID      ("faq-stpo-0001" / "faq-ao-0001")
+  ├─ 4. Build ID      ("faq-stpo-stpo-0001" / "faq-ao-ao-0001")
   ├─ 5. Build metadata
   └─ 6. Create FAQChunk
   │
@@ -55,7 +55,7 @@ Tokens are counted using tiktoken with the `cl100k_base` encoding. Entries excee
 The chunk ID is built deterministically from the FAQ source and entry ID:
 
 ```
-faq-{faq_source}-{entry_id}
+{faq_source}-{entry_id}
 ```
 
 Examples: `faq-stpo-stpo-0001`, `faq-ao-ao-0001`
@@ -65,11 +65,11 @@ Examples: `faq-stpo-stpo-0001`, `faq-ao-ao-0001`
 ## Public API
 
 ```python
-from src.marley.chunker.faq_chunker import load, chunk_faq, save
+from src.marley.chunker import load_faq, chunk_faq, save_faq
 
-dataset = load("data/knowledgebase/faq-stpo.json")
+dataset = load_faq("data/knowledgebase/faq-stpo.json")
 result = chunk_faq(dataset, source_file="data/knowledgebase/faq-stpo.json")
-save(result, "data/chunks/faq-stpo-chunks.json")
+save_faq(result, "data/chunks/faq-stpo-chunks.json")
 ```
 
 | Function | Signature | Description |
@@ -84,12 +84,18 @@ save(result, "data/chunks/faq-stpo-chunks.json")
 
 | Code | Severity | Trigger |
 |---|---|---|
-| `FAQ_ENTRY_INVALID` | warning | Entry is not a dict or missing required fields |
+| `FAQ_ENTRY_INVALID` | warning | Entry has no valid id |
 | `FAQ_ID_DUPLICATE` | warning | Duplicate ID in same dataset |
 | `FAQ_EMPTY_QUESTION` | warning | Question is empty or whitespace-only |
 | `FAQ_EMPTY_ANSWER` | warning | Answer is empty or whitespace-only |
 | `FAQ_OVERSIZED_ENTRY` | info | Combined Q+A exceeds 512 tokens |
 | `FAQ_ALL_SKIPPED` | error | No valid entries produced any chunks |
+
+---
+
+## Data Classes
+
+The FAQ chunker defines `FAQEntry`, `FAQDataset`, `FAQChunkMetadata`, `FAQChunk`, `FAQChunkingStats`, and `FAQChunkingResult` locally. It imports `QualityFlag` and `compute_token_stats` from `src.marley.models/`. See `docs/models/models.md` for the shared data classes.
 
 ---
 
@@ -107,6 +113,6 @@ No sentence segmentation library is needed since FAQ entries are not split.
 
 - FAQ-StPO produces 999 chunks (one per entry).
 - FAQ-AO produces 50 chunks (placeholder data).
-- Typical token counts range from 20 to 120 tokens per chunk.
+- Token counts range from 16 to 416, with typical values between 20 and 120 tokens per chunk.
 - No entries in the current datasets exceed 512 tokens.
 - Both FAQ sources share identical structure and processing logic.

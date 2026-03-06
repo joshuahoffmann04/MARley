@@ -1,16 +1,14 @@
 # PDF Chunker
 
-The PDF chunker splits the extracted StPO document into retrieval-ready chunks. It handles both plain text (sentence-aligned sliding windows) and tables (row-based packing with header repetition). It is the second stage of the MARley pipeline.
-
+**Module:** `src/marley/chunker/pdf_chunker.py`
 **Input:** `data/knowledgebase/stpo-extracted.json` (48 sections, 23 tables)
 **Output:** `data/chunks/stpo-chunks.json`
-**Module:** `src/marley/chunker/`
+
+The PDF chunker splits the extracted StPO document into retrieval-ready chunks. It handles both plain text (sentence-aligned sliding windows) and tables (row-based packing with header repetition). It is the second stage of the MARley pipeline.
 
 ---
 
 ## Processing Pipeline
-
-The chunker processes each section sequentially, producing text chunks and table chunks:
 
 ```
 ExtractionResult
@@ -115,14 +113,18 @@ save(result, "data/chunks/stpo-chunks.json")
 
 ---
 
+## Data Classes
+
+The chunker defines `ChunkMetadata`, `Chunk`, `ChunkingStats`, and `ChunkingResult` locally. It imports `ExtractionResult`, `Section`, `Table`, and `QualityFlag` from `src.marley.models/`, and uses `compute_token_stats` for statistics computation. See `docs/models/models.md` for the shared data classes.
+
+---
+
 ## Dependencies
 
 | Library | Purpose |
 |---|---|
 | syntok | Sentence segmentation (preferred) |
 | tiktoken | Token counting and encoding via `cl100k_base` |
-
-Both are pure Python packages. The chunker also imports `ExtractionResult`, `Section`, and `Table` from `src.marley.extractor`.
 
 ---
 
