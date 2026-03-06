@@ -9,6 +9,7 @@ tiktoken>=0.7.0
 # Retrieval
 rank-bm25>=0.2.2
 chromadb>=0.5.0
+sentence-transformers>=2.2.0
 
 # Generation
 ollama>=0.4.0

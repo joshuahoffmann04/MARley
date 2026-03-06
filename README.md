@@ -29,7 +29,7 @@ src/marley/
 ├── models/          Shared data classes (ExtractionResult, QualityFlag, ...)
 ├── extractor/       PDF extraction (PyMuPDF + pdfplumber)
 ├── chunker/         PDF chunking (sentence-aligned) + FAQ chunking
-└── retrieval/       Abstract Retriever interface + BM25 implementation
+└── retrieval/       Abstract Retriever interface + BM25 + Vector implementations
 
 evaluation/          Retrieval evaluation (Precision@k, Recall@k, MRR)
 
@@ -103,8 +103,9 @@ print(report['metrics'])
 | PDF Chunker | 50 | `tests/chunker/test_pdf_chunker.py` |
 | FAQ Chunker | 36 | `tests/chunker/test_faq_chunker.py` |
 | BM25 Retrieval | 23 | `tests/retrieval/test_bm25.py` |
+| Vector Retrieval | 23 | `tests/retrieval/test_vector.py` |
 | Evaluation | 34 | `evaluation/tests/test_metrics.py`, `evaluation/tests/test_evaluate.py` |
-| **Total** | **209** | |
+| **Total** | **232** | |
 
 Integration tests that require data files are skipped automatically in CI.
 
@@ -119,6 +120,7 @@ Integration tests that require data files are skipped automatically in CI.
 | PDF Chunker | `docs/chunker/pdf_chunker.md` |
 | FAQ Chunker | `docs/chunker/faq_chunker.md` |
 | BM25 Retrieval | `docs/retrieval/bm25.md` |
+| Vector Retrieval | `docs/retrieval/vector.md` |
 | Evaluation | `docs/evaluation/evaluation.md` |
 | Data Structures | `docs/data/data-structures.md` |
 | FAQ Coverage Plan | `docs/data/faq-stpo-coverage.md` |
@@ -133,5 +135,6 @@ Test documentation mirrors the component structure under `docs/testing/`.
 - PyMuPDF, pdfplumber (PDF extraction)
 - syntok, tiktoken (text processing)
 - rank-bm25 (sparse retrieval)
+- sentence-transformers, chromadb (dense retrieval)
 
 See `requirements.txt` for the full list.

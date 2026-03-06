@@ -112,6 +112,36 @@ print(report["metrics"])
 
 ---
 
+## Baseline Results
+
+### BM25 (Okapi BM25, lowercase whitespace tokenization)
+
+| Knowledge Base | P@1 | R@1 | MRR | P@5 | R@5 | MRR | Queries |
+|---|---|---|---|---|---|---|---|
+| StPO (142 chunks) | 0.320 | 0.238 | 0.320 | 0.117 | 0.438 | 0.400 | 75 |
+| FAQ-StPO (999 chunks) | 0.227 | 0.153 | 0.227 | 0.115 | 0.394 | 0.332 | 75 |
+| FAQ-AO (50 chunks) | 0.571 | 0.548 | 0.571 | 0.181 | 0.857 | 0.660 | 21 |
+
+### Vector (all-mpnet-base-v2, cosine similarity)
+
+| Knowledge Base | P@1 | R@1 | MRR | P@5 | R@5 | MRR | Queries |
+|---|---|---|---|---|---|---|---|
+| StPO (142 chunks) | 0.400 | 0.286 | 0.400 | 0.157 | 0.512 | 0.477 | 75 |
+| FAQ-StPO (999 chunks) | 0.440 | 0.321 | 0.440 | 0.173 | 0.576 | 0.532 | 75 |
+| FAQ-AO (50 chunks) | 0.762 | 0.738 | 0.762 | 0.210 | 1.000 | 0.861 | 21 |
+
+### Comparison
+
+Vector retrieval outperforms BM25 across all knowledge bases and all metrics:
+
+- **StPO:** R@5 improves from 0.438 to 0.512 (+17%), MRR from 0.400 to 0.477 (+19%).
+- **FAQ-StPO:** R@5 improves from 0.394 to 0.576 (+46%), MRR from 0.332 to 0.532 (+60%). This is the largest gain, since FAQ entries share many keywords but differ semantically — exactly where BM25 struggles.
+- **FAQ-AO:** R@5 reaches 1.000 (perfect recall), MRR jumps from 0.660 to 0.861 (+30%). The small corpus and direct questions make this the easiest task.
+
+The gains are especially pronounced for FAQ-StPO, where BM25's keyword matching is confused by the many similarly-worded FAQ entries. Dense embeddings capture semantic similarity more effectively in this setting.
+
+---
+
 ## Module Structure
 
 ```

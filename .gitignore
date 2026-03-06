@@ -20,6 +20,7 @@ data/raw/
 data/knowledgebase/
 data/chunks/
 data/testing/
+data/vectorstore/
 
 # Prototype databases (legacy)
 prototype/data/*/databases/
