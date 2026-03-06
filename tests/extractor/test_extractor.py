@@ -72,6 +72,24 @@ class TestIsHeaderRow:
         assert _is_header_row(row) is False
 
 
+class TestIsSectionLabelRow:
+    def test_section_label_detected(self):
+        row = ["Compulsory Elective Modules", None, None, None, None, None, None]
+        assert _is_section_label_row(row) is True
+
+    def test_module_row_not_label(self):
+        row = ["CS 627 Advanced Algorithms", None, None, "9", None, None, None]
+        assert _is_section_label_row(row) is False
+
+    def test_short_text_not_label(self):
+        row = ["Short", None, None, None, None, None, None]
+        assert _is_section_label_row(row) is False
+
+    def test_multiple_non_empty_not_label(self):
+        row = ["Some text here", "9", None, None, None, None, None]
+        assert _is_section_label_row(row) is False
+
+
 class TestIsContinuationRow:
     def test_with_lp_not_continuation(self):
         assert _is_continuation_row(["CS 627", "9", "x", "", "", "", ""]) is False

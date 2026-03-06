@@ -66,41 +66,40 @@ class TestBuildChunkId:
 
 
 class TestValidateEntry:
-    def _make_raw(self, **overrides):
-        base = {"id": "stpo-0001", "question": "Q?", "answer": "A.", "source": "§1"}
-        base.update(overrides)
-        return base
+    def _make_entry(self, **overrides):
+        defaults = {"id": "stpo-0001", "question": "Q?", "answer": "A.", "source": "§1"}
+        defaults.update(overrides)
+        return FAQEntry(**defaults)
 
     def test_valid_entry(self):
         flags: list[QualityFlag] = []
-        entry = _validate_entry(self._make_raw(), 0, set(), flags)
-        assert entry is not None
-        assert entry.id == "stpo-0001"
+        result = _validate_entry(self._make_entry(), 0, set(), flags)
+        assert result is True
         assert not flags
 
     def test_missing_id(self):
         flags: list[QualityFlag] = []
-        entry = _validate_entry(self._make_raw(id=""), 0, set(), flags)
-        assert entry is None
+        result = _validate_entry(self._make_entry(id=""), 0, set(), flags)
+        assert result is False
         assert flags[0].code == "FAQ_ENTRY_INVALID"
 
     def test_missing_question(self):
         flags: list[QualityFlag] = []
-        entry = _validate_entry(self._make_raw(question=""), 0, set(), flags)
-        assert entry is None
+        result = _validate_entry(self._make_entry(question=""), 0, set(), flags)
+        assert result is False
         assert flags[0].code == "FAQ_EMPTY_QUESTION"
 
     def test_missing_answer(self):
         flags: list[QualityFlag] = []
-        entry = _validate_entry(self._make_raw(answer=""), 0, set(), flags)
-        assert entry is None
+        result = _validate_entry(self._make_entry(answer=""), 0, set(), flags)
+        assert result is False
         assert flags[0].code == "FAQ_EMPTY_ANSWER"
 
     def test_duplicate_id(self):
         flags: list[QualityFlag] = []
         seen = {"stpo-0001"}
-        entry = _validate_entry(self._make_raw(), 0, seen, flags)
-        assert entry is None
+        result = _validate_entry(self._make_entry(), 0, seen, flags)
+        assert result is False
         assert flags[0].code == "FAQ_ID_DUPLICATE"
 
 

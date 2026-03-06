@@ -97,64 +97,50 @@ def _build_chunk_id(faq_source: str, faq_id: str) -> str:
 
 
 def _validate_entry(
-    raw: dict,
+    entry: FAQEntry,
     index: int,
     seen_ids: set[str],
     flags: list[QualityFlag],
-) -> FAQEntry | None:
-    """Validate a raw FAQ entry dict and return a FAQEntry or None."""
-    if not isinstance(raw, dict):
-        flags.append(QualityFlag(
-            code="FAQ_ENTRY_INVALID",
-            message=f"Entry at index {index} is not a dict.",
-            severity="warning",
-            context={"index": index},
-        ))
-        return None
-
-    entry_id = str(raw.get("id", "")).strip()
-    question = str(raw.get("question", "")).strip()
-    answer = str(raw.get("answer", "")).strip()
-    source = str(raw.get("source", "")).strip()
-
-    if not entry_id:
+) -> bool:
+    """Validate a FAQEntry. Returns True if valid, False otherwise."""
+    if not entry.id:
         flags.append(QualityFlag(
             code="FAQ_ENTRY_INVALID",
             message=f"Entry at index {index} has no valid id.",
             severity="warning",
             context={"index": index},
         ))
-        return None
+        return False
 
-    if entry_id in seen_ids:
+    if entry.id in seen_ids:
         flags.append(QualityFlag(
             code="FAQ_ID_DUPLICATE",
-            message=f"Duplicate FAQ id '{entry_id}' at index {index}.",
+            message=f"Duplicate FAQ id '{entry.id}' at index {index}.",
             severity="warning",
-            context={"index": index, "faq_id": entry_id},
+            context={"index": index, "faq_id": entry.id},
         ))
-        return None
+        return False
 
-    if not question:
+    if not entry.question:
         flags.append(QualityFlag(
             code="FAQ_EMPTY_QUESTION",
-            message=f"Entry '{entry_id}' has an empty question.",
+            message=f"Entry '{entry.id}' has an empty question.",
             severity="warning",
-            context={"faq_id": entry_id},
+            context={"faq_id": entry.id},
         ))
-        return None
+        return False
 
-    if not answer:
+    if not entry.answer:
         flags.append(QualityFlag(
             code="FAQ_EMPTY_ANSWER",
-            message=f"Entry '{entry_id}' has an empty answer.",
+            message=f"Entry '{entry.id}' has an empty answer.",
             severity="warning",
-            context={"faq_id": entry_id},
+            context={"faq_id": entry.id},
         ))
-        return None
+        return False
 
-    seen_ids.add(entry_id)
-    return FAQEntry(id=entry_id, question=question, answer=answer, source=source)
+    seen_ids.add(entry.id)
+    return True
 
 
 def _compute_stats(
@@ -231,23 +217,20 @@ def chunk_faq(
     entries_skipped = 0
 
     for i, entry in enumerate(dataset.entries):
-        raw = {"id": entry.id, "question": entry.question,
-               "answer": entry.answer, "source": entry.source}
-        validated = _validate_entry(raw, i, seen_ids, flags)
-        if validated is None:
+        if not _validate_entry(entry, i, seen_ids, flags):
             entries_skipped += 1
             continue
 
-        text = _format_chunk_text(validated.question, validated.answer)
+        text = _format_chunk_text(entry.question, entry.answer)
         token_count = len(encoder.encode(text))
-        chunk_id = _build_chunk_id(dataset.faq_source, validated.id)
+        chunk_id = _build_chunk_id(dataset.faq_source, entry.id)
 
         if token_count > 512:
             flags.append(QualityFlag(
                 code="FAQ_OVERSIZED_ENTRY",
-                message=f"Entry '{validated.id}' has {token_count} tokens (>512).",
+                message=f"Entry '{entry.id}' has {token_count} tokens (>512).",
                 severity="info",
-                context={"faq_id": validated.id, "token_count": token_count},
+                context={"faq_id": entry.id, "token_count": token_count},
             ))
 
         chunks.append(FAQChunk(
@@ -258,8 +241,8 @@ def chunk_faq(
             metadata=FAQChunkMetadata(
                 faq_source=dataset.faq_source,
                 source_file=source_file,
-                faq_id=validated.id,
-                source_reference=validated.source,
+                faq_id=entry.id,
+                source_reference=entry.source,
                 chunk_index=0,
             ),
         ))

@@ -18,6 +18,7 @@ build/
 # Data (PDFs and generated JSON are not committed)
 data/raw/
 data/knowledgebase/
+data/chunks/
 data/testing/
 
 # Prototype databases (legacy)

@@ -443,7 +443,6 @@ def chunk_stpo(
     section_map = {s.section_id: s for s in extraction.sections}
     quality_flags: list[QualityFlag] = []
     chunks: list[Chunk] = []
-    chunk_counter = 0
     sections_processed = 0
     sections_skipped = 0
     tables_processed = 0
@@ -475,7 +474,6 @@ def chunk_stpo(
         )
 
         for i, chunk_text in enumerate(chunk_texts):
-            chunk_counter += 1
             chunk_id = f"{section.section_id}-txt-{i + 1}"
             chunks.append(Chunk(
                 chunk_id=chunk_id,
@@ -506,7 +504,6 @@ def chunk_stpo(
 
             tables_processed += 1
             for j, chunk_text in enumerate(table_chunks):
-                chunk_counter += 1
                 chunk_id = f"{section.section_id}-tbl-{table.table_id}-{j + 1}"
                 chunks.append(Chunk(
                     chunk_id=chunk_id,

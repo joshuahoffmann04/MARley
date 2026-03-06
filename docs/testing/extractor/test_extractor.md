@@ -1,7 +1,7 @@
 # Extractor Test Documentation
 
 **Test file:** `tests/extractor/test_extractor.py`
-**Total tests:** 62
+**Total tests:** 66
 **Run command:** `python -m pytest tests/extractor/ -v`
 
 ---
@@ -27,6 +27,7 @@ Integration tests share a single `ExtractionResult` via module-scoped fixtures t
 | `TestNormalizeWhitespace` | 2 | `_normalize_whitespace` |
 | `TestCellText` | 2 | `_cell_text` |
 | `TestIsHeaderRow` | 2 | `_is_header_row` |
+| `TestIsSectionLabelRow` | 4 | `_is_section_label_row` |
 | `TestIsContinuationRow` | 3 | `_is_continuation_row` |
 | `TestMergeContinuation` | 1 | `_merge_continuation` |
 | `TestMergeAppendix2Continuations` | 1 | `_merge_appendix2_continuations` |
