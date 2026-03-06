@@ -1,7 +1,7 @@
 # Extractor Test Documentation
 
 **Test file:** `tests/extractor/test_extractor.py`
-**Total tests:** 47
+**Total tests:** 62
 **Run command:** `python -m pytest tests/extractor/ -v`
 
 ---
@@ -31,6 +31,7 @@ Integration tests share a single `ExtractionResult` via module-scoped fixtures t
 | `TestMergeContinuation` | 1 | `_merge_continuation` |
 | `TestMergeAppendix2Continuations` | 1 | `_merge_appendix2_continuations` |
 | `TestMakeSectionId` | 3 | `_make_section_id` |
+| `TestAssignParents` | 7 | `_assign_parents` |
 
 ### Integration Tests (require PDF)
 
@@ -39,6 +40,7 @@ Integration tests share a single `ExtractionResult` via module-scoped fixtures t
 | `TestExtractionBasics` | 3 | Total page count, source file path, section count. |
 | `TestSectionDetection` | 7 | Preamble, ToC, parts I–IV, all 38 paragraphs, section kinds, no duplicates. |
 | `TestSectionContent` | 3 | Preamble text length, non-empty paragraph text, §23 mentions thesis. |
+| `TestParentAssignment` | 8 | §1–§3 under part-I, §4–§15 under part-II, §16–§36 under part-III, §37–§38 under part-IV, parts have no parent, appendices have no parent, preamble/ToC have no parent, JSON serialization includes parent_section_id. |
 | `TestPageRanges` | 2 | All 47 pages covered by sections, Appendix 2 spans ≥10 pages. |
 | `TestTableExtraction` | 12 | Total table count, Appendix 2 (1 table, 7 headers, 54 rows, 46 CS + 8 Conditional, no empty rows, numeric LP), Appendix 3 (≥10 tables), Appendix 4 (≥1 table), unique table IDs, table IDs contain section ID. |
 | `TestSaveAndLoad` | 2 | JSON roundtrip preserves page count and section count, parent directory creation. |

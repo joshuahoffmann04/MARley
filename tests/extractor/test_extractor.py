@@ -9,10 +9,10 @@ import pytest
 
 from src.marley.extractor import ExtractionResult, Section, Table, extract, save
 from src.marley.extractor.extractor import (
-    _cell_text, _is_continuation_row, _is_header_row, _is_section_label_row,
-    _make_section_id, _Marker, _merge_appendix2_continuations,
-    _merge_continuation, _normalize_whitespace, _strip_page_number,
-    extract_page_texts,
+    _assign_parents, _cell_text, _is_continuation_row, _is_header_row,
+    _is_section_label_row, _make_section_id, _Marker,
+    _merge_appendix2_continuations, _merge_continuation,
+    _normalize_whitespace, _strip_page_number, extract_page_texts,
 )
 
 PDF_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "raw" / "msc-computer-science.pdf"
@@ -115,6 +115,62 @@ class TestMakeSectionId:
     def test_appendix(self):
         assert _make_section_id(_Marker("appendix", "Appendix 2", "", 20, 0)) == "appendix-2"
 
+def _section(kind: str, section_id: str) -> Section:
+    """Create a minimal Section for unit testing."""
+    return Section(
+        section_id=section_id,
+        label=section_id,
+        title="",
+        kind=kind,
+        start_page=1,
+        end_page=1,
+        text="",
+    )
+
+
+class TestAssignParents:
+    def test_paragraph_gets_part_parent(self):
+        sections = [_section("part", "part-I"), _section("paragraph", "par-1")]
+        _assign_parents(sections)
+        assert sections[1].parent_section_id == "part-I"
+
+    def test_part_has_no_parent(self):
+        sections = [_section("part", "part-I")]
+        _assign_parents(sections)
+        assert sections[0].parent_section_id is None
+
+    def test_preamble_has_no_parent(self):
+        sections = [_section("preamble", "preamble")]
+        _assign_parents(sections)
+        assert sections[0].parent_section_id is None
+
+    def test_toc_has_no_parent(self):
+        sections = [_section("toc", "toc")]
+        _assign_parents(sections)
+        assert sections[0].parent_section_id is None
+
+    def test_appendix_has_no_parent(self):
+        sections = [_section("part", "part-IV"), _section("appendix", "appendix-1")]
+        _assign_parents(sections)
+        assert sections[1].parent_section_id is None
+
+    def test_part_switch_updates_parent(self):
+        sections = [
+            _section("part", "part-I"),
+            _section("paragraph", "par-1"),
+            _section("part", "part-II"),
+            _section("paragraph", "par-4"),
+        ]
+        _assign_parents(sections)
+        assert sections[1].parent_section_id == "part-I"
+        assert sections[3].parent_section_id == "part-II"
+
+    def test_empty_list(self):
+        sections: list[Section] = []
+        _assign_parents(sections)
+        assert sections == []
+
+
 class TestExtractionBasics:
     def test_total_pages(self, result):
         assert result.total_pages == 47
@@ -169,6 +225,44 @@ class TestSectionContent:
     def test_paragraph_23_mentions_thesis(self, section_map):
         text = section_map["par-23"].text.lower()
         assert "thesis" in text or "master" in text
+
+
+class TestParentAssignment:
+    def test_par_1_to_3_parent_is_part_I(self, section_map):
+        for num in range(1, 4):
+            assert section_map[f"par-{num}"].parent_section_id == "part-I"
+
+    def test_par_4_to_15_parent_is_part_II(self, section_map):
+        for num in range(4, 16):
+            assert section_map[f"par-{num}"].parent_section_id == "part-II"
+
+    def test_par_16_to_36_parent_is_part_III(self, section_map):
+        for num in range(16, 37):
+            assert section_map[f"par-{num}"].parent_section_id == "part-III"
+
+    def test_par_37_38_parent_is_part_IV(self, section_map):
+        for num in range(37, 39):
+            assert section_map[f"par-{num}"].parent_section_id == "part-IV"
+
+    def test_parts_have_no_parent(self, section_map):
+        for numeral in ["I", "II", "III", "IV"]:
+            assert section_map[f"part-{numeral}"].parent_section_id is None
+
+    def test_appendices_have_no_parent(self, section_map):
+        for num in range(1, 5):
+            assert section_map[f"appendix-{num}"].parent_section_id is None
+
+    def test_preamble_and_toc_have_no_parent(self, section_map):
+        assert section_map["preamble"].parent_section_id is None
+        assert section_map["toc"].parent_section_id is None
+
+    def test_save_includes_parent_section_id(self, result, tmp_path):
+        out = save(result, tmp_path / "parent-test.json")
+        data = json.loads(out.read_text(encoding="utf-8"))
+        par_1 = next(s for s in data["sections"] if s["section_id"] == "par-1")
+        assert par_1["parent_section_id"] == "part-I"
+        appendix = next(s for s in data["sections"] if s["section_id"] == "appendix-1")
+        assert appendix["parent_section_id"] is None
 
 
 class TestPageRanges:

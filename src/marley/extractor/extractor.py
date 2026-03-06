@@ -8,42 +8,13 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import fitz
 import pdfplumber
 
-
-# ---------------------------------------------------------------------------
-# Data classes
-# ---------------------------------------------------------------------------
-
-@dataclass
-class Table:
-    table_id: str
-    page: int
-    headers: list[str]
-    rows: list[list[str]]
-
-
-@dataclass
-class Section:
-    section_id: str
-    label: str
-    title: str
-    kind: str  # "preamble", "toc", "part", "paragraph", "appendix"
-    start_page: int
-    end_page: int
-    text: str
-    tables: list[Table] = field(default_factory=list)
-
-
-@dataclass
-class ExtractionResult:
-    source_file: str
-    total_pages: int
-    sections: list[Section]
+from src.marley.models import ExtractionResult, Section, Table
 
 
 # ---------------------------------------------------------------------------
@@ -300,6 +271,30 @@ def _make_section_id(marker: _Marker) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Parent assignment
+# ---------------------------------------------------------------------------
+
+def _assign_parents(sections: list[Section]) -> None:
+    """Assign each section its parent based on the document hierarchy.
+
+    Parts act as containers for paragraphs. The most recently encountered
+    part becomes the parent for all subsequent paragraphs until the next
+    part appears. Preamble, ToC, parts themselves, and appendices are
+    top-level sections with no parent.
+    """
+    current_part_id: str | None = None
+
+    for section in sections:
+        if section.kind == "part":
+            current_part_id = section.section_id
+            section.parent_section_id = None
+        elif section.kind == "paragraph":
+            section.parent_section_id = current_part_id
+        else:
+            section.parent_section_id = None
+
+
+# ---------------------------------------------------------------------------
 # Table extraction (pdfplumber)
 # ---------------------------------------------------------------------------
 
@@ -517,6 +512,7 @@ def extract(pdf_path: str | Path) -> ExtractionResult:
     pages = extract_page_texts(pdf_path)
     markers = _detect_markers(pages)
     sections = _build_sections(pages, markers)
+    _assign_parents(sections)
     tables = _extract_all_tables(pdf_path)
     _assign_tables(sections, tables)
 

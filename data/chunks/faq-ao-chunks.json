@@ -1,0 +1,667 @@
+{
+  "faq_source": "faq-ao",
+  "source_file": "data/knowledgebase/faq-ao.json",
+  "chunks": [
+    {
+      "chunk_id": "faq-ao-ao-0001",
+      "chunk_type": "faq",
+      "text": "Question: When is the application deadline for the M.Sc. Computer Science program?\nAnswer: For the winter semester, the application deadline is July 15. For the summer semester, it is January 15. International applicants should check with the International Office for potentially earlier deadlines.",
+      "token_count": 55,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0001",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0002",
+      "chunk_type": "faq",
+      "text": "Question: How do I apply for the M.Sc. Computer Science program?\nAnswer: Applications are submitted online via the university's application portal. You need to upload your bachelor's degree certificate (or a current transcript if not yet graduated), a CV, and proof of English proficiency if applicable.",
+      "token_count": 58,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0002",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0003",
+      "chunk_type": "faq",
+      "text": "Question: Can I apply if I have not yet completed my bachelor's degree?\nAnswer: Yes. You can apply with a current transcript showing at least 80% of the required credits. Final admission is conditional on completing the bachelor's degree before the end of the first semester.",
+      "token_count": 56,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0003",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0004",
+      "chunk_type": "faq",
+      "text": "Question: Is there a numerus clausus (NC) for the M.Sc. Computer Science program?\nAnswer: No. The M.Sc. Computer Science at Philipps-Universität Marburg does not have a numerus clausus. However, you must meet the access requirements specified in the StPO.",
+      "token_count": 64,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0004",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0005",
+      "chunk_type": "faq",
+      "text": "Question: What level of English is required for the program?\nAnswer: Since the program is taught primarily in German with some English materials, there is no formal English language requirement for admission. However, you should be able to read English-language textbooks and papers.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0005",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0006",
+      "chunk_type": "faq",
+      "text": "Question: How do I enroll after receiving my admission letter?\nAnswer: After receiving your admission letter, you enroll online via the student portal and pay the semester fee by the specified deadline. You will then receive your student ID and matriculation number.",
+      "token_count": 50,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0006",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0007",
+      "chunk_type": "faq",
+      "text": "Question: What is the semester fee and what does it include?\nAnswer: The semester fee is approximately 290 EUR per semester. It includes a contribution to the student union (AStA), a semester ticket for public transportation in Hessen, and administrative fees. There are no tuition fees for domestic or EU students.",
+      "token_count": 64,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0007",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0008",
+      "chunk_type": "faq",
+      "text": "Question: Can I start the program in the summer semester?\nAnswer: Yes. The M.Sc. Computer Science program can be started in both winter and summer semesters. However, the recommended curriculum in Appendix 1 is designed for a winter semester start.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0008",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0009",
+      "chunk_type": "faq",
+      "text": "Question: How do I re-register for the next semester?\nAnswer: Re-registration is done by paying the semester fee before the re-registration deadline. If you miss the deadline, you will receive a reminder and may be exmatriculated if payment is not received.",
+      "token_count": 53,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0009",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0010",
+      "chunk_type": "faq",
+      "text": "Question: Where do I get my student ID card?\nAnswer: Your student ID card (Studierendenausweis) can be printed at the card terminals in the university library or the student service center after enrollment is complete.",
+      "token_count": 47,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0010",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0011",
+      "chunk_type": "faq",
+      "text": "Question: Who should I contact for academic advising in the M.Sc. Computer Science program?\nAnswer: For academic advising, contact the study advisor (Fachstudienberatung) of the Department of Mathematics and Computer Science. Contact details and office hours are published on the department website.",
+      "token_count": 58,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0011",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0012",
+      "chunk_type": "faq",
+      "text": "Question: Is there an orientation event for new master's students?\nAnswer: Yes. At the beginning of each semester, the department organizes an orientation event for new students. The date and location are announced on the department website and via email.",
+      "token_count": 49,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0012",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0013",
+      "chunk_type": "faq",
+      "text": "Question: How do I create my study plan for the first semester?\nAnswer: Consult the recommended curriculum in Appendix 1 of the StPO as a starting point. During the orientation event, advisors help you select appropriate modules based on your background and interests.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0013",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0014",
+      "chunk_type": "faq",
+      "text": "Question: Can I take bachelor-level modules during my master's program?\nAnswer: Yes. Some bachelor-level modules are listed in the import module list (Appendix 3) and can count toward your master's degree. Additionally, conditional modules may be assigned if your bachelor's degree had gaps.",
+      "token_count": 59,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0014",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0015",
+      "chunk_type": "faq",
+      "text": "Question: Where can I find the current course catalog?\nAnswer: The current course catalog is available in the online course registration system (MARVIN) at marvin.uni-marburg.de. The module handbook with detailed module descriptions is also linked from the department website.",
+      "token_count": 52,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0015",
+        "source_reference": "advisory office, website",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0016",
+      "chunk_type": "faq",
+      "text": "Question: How do I register for exams?\nAnswer: Exam registration is done online via the MARVIN system during the registration period. The exact dates are announced on the department website and via email each semester.",
+      "token_count": 41,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0016",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0017",
+      "chunk_type": "faq",
+      "text": "Question: What happens if I miss an exam registration deadline?\nAnswer: If you miss the registration deadline, you generally cannot take the exam in that semester. In exceptional cases (e.g., illness, technical problems), contact the examination office immediately.",
+      "token_count": 49,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0017",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0018",
+      "chunk_type": "faq",
+      "text": "Question: Can I deregister from an exam after registering?\nAnswer: Yes. You can deregister from an exam without giving reasons up to 7 days before the exam date. After that, withdrawal requires a valid reason such as illness (with a medical certificate).",
+      "token_count": 53,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0018",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0019",
+      "chunk_type": "faq",
+      "text": "Question: Where can I view my grades and transcripts?\nAnswer: Grades and transcripts are available in the MARVIN system under 'My Studies' -> 'Achievements'. Official transcripts can be requested from the examination office.",
+      "token_count": 43,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0019",
+        "source_reference": "advisory office, website",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0020",
+      "chunk_type": "faq",
+      "text": "Question: How is the overall master's grade calculated?\nAnswer: The overall grade is the credit-weighted average of all graded module grades. The master's thesis (including defense) accounts for 30 credits out of 120 total. See §28 of the StPO for the exact formula.",
+      "token_count": 59,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0020",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0021",
+      "chunk_type": "faq",
+      "text": "Question: When can I start my master's thesis?\nAnswer: You can register your master's thesis once you have earned at least 66 credits (LP). Contact your intended supervisor to discuss the topic before registering officially with the examination office.",
+      "token_count": 48,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0021",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0022",
+      "chunk_type": "faq",
+      "text": "Question: How do I find a thesis supervisor?\nAnswer: Approach a professor whose research area interests you. Most professors list potential thesis topics on their websites. You can also attend their office hours to discuss your ideas.",
+      "token_count": 43,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0022",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0023",
+      "chunk_type": "faq",
+      "text": "Question: Can I write my master's thesis at a company?\nAnswer: Yes, external theses are possible. However, you still need a university supervisor (Erstgutachter) from the department. The topic must be academically suitable and approved by the examination committee.",
+      "token_count": 58,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0023",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0024",
+      "chunk_type": "faq",
+      "text": "Question: Can I write my thesis in English?\nAnswer: Yes. The master's thesis can be written in German or English. Discuss the language choice with your supervisor.",
+      "token_count": 34,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0024",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0025",
+      "chunk_type": "faq",
+      "text": "Question: What happens if I cannot finish my thesis on time?\nAnswer: You can apply for an extension of up to 20% of the processing time (approximately 1 month for a 6-month thesis) with a justified request to the examination committee. The request must be submitted before the deadline expires.",
+      "token_count": 62,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0025",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0026",
+      "chunk_type": "faq",
+      "text": "Question: Where are the computer science lectures held?\nAnswer: Most computer science lectures take place in the lecture halls on the Lahnberge campus (Hans-Meerwein-Straße). Some seminars and smaller courses are held in the department building (Mehrzweckgebäude).",
+      "token_count": 61,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0026",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0027",
+      "chunk_type": "faq",
+      "text": "Question: Is there a computer lab I can use?\nAnswer: Yes. The department provides computer labs (CIP pools) for students. Access requires your university account credentials. Opening hours and locations are posted on the department website.",
+      "token_count": 46,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0027",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0028",
+      "chunk_type": "faq",
+      "text": "Question: How do I get access to the university WiFi?\nAnswer: Use eduroam with your university credentials (username@students.uni-marburg.de). Setup guides for different operating systems are available on the HRZ (university computing center) website.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0028",
+        "source_reference": "advisory office, website",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0029",
+      "chunk_type": "faq",
+      "text": "Question: Where is the student advisory office located?\nAnswer: The student advisory office for the Department of Mathematics and Computer Science is located on the Lahnberge campus. Exact room numbers and office hours are published on the department website.",
+      "token_count": 47,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0029",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0030",
+      "chunk_type": "faq",
+      "text": "Question: Are there tutoring or mentoring programs available?\nAnswer: Yes. The department offers mentoring programs where experienced students help newcomers. Additionally, many modules have tutors who offer exercise sessions and individual support.",
+      "token_count": 39,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0030",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0031",
+      "chunk_type": "faq",
+      "text": "Question: What are profile areas and how do I choose one?\nAnswer: Profile areas allow you to specialize in a related discipline (e.g., Mathematics, Biology, Economics). You select a profile area by enrolling in the corresponding profile modules. There is no formal declaration — your profile area is determined by which modules you take.",
+      "token_count": 66,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0031",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0032",
+      "chunk_type": "faq",
+      "text": "Question: Can I change my profile area during the program?\nAnswer: Yes. Since the profile area is not formally declared, you can switch by simply choosing modules from a different profile area. However, already completed modules remain on your transcript.",
+      "token_count": 48,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0032",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0033",
+      "chunk_type": "faq",
+      "text": "Question: How many profile area modules do I need?\nAnswer: You need to earn 18 credits (LP) in profile area modules according to the program structure. See §6 of the StPO for details.",
+      "token_count": 43,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0033",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0034",
+      "chunk_type": "faq",
+      "text": "Question: Can I spend a semester abroad during my master's program?\nAnswer: Yes. A semester abroad is explicitly encouraged (§8 of the StPO). The recommended window is the third semester. Contact the International Office and your study advisor for planning.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0034",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0035",
+      "chunk_type": "faq",
+      "text": "Question: Will credits from my exchange semester be recognized?\nAnswer: Credits earned abroad can be recognized if they are equivalent in content, scope, and level. Arrange a learning agreement with your study advisor before departure to ensure recognition.",
+      "token_count": 45,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0035",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0036",
+      "chunk_type": "faq",
+      "text": "Question: Are there scholarships available for studying abroad?\nAnswer: Yes. Common programs include ERASMUS+ (for European destinations), DAAD scholarships, and university-specific exchange programs. The International Office provides information on available scholarships.",
+      "token_count": 45,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0036",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0037",
+      "chunk_type": "faq",
+      "text": "Question: Can I study part-time?\nAnswer: Yes. Part-time study is possible under certain conditions (e.g., employment, childcare, disability). Contact the examination committee to apply for part-time status. This extends your maximum study duration.",
+      "token_count": 48,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0037",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0038",
+      "chunk_type": "faq",
+      "text": "Question: What support is available for students with disabilities?\nAnswer: Students with disabilities or chronic illness can apply for accommodations (Nachteilsausgleich) such as extended exam time, alternative exam formats, or deadline extensions. Contact the examination committee and the university's disability services office.",
+      "token_count": 57,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0038",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0039",
+      "chunk_type": "faq",
+      "text": "Question: I am pregnant / have a child. What options do I have?\nAnswer: Parental leave (Elternzeit) can be taken, during which your study time is paused. You can also apply for extensions to deadlines and exam accommodations. The family services office (Servicestelle für Familie) provides further support.",
+      "token_count": 66,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0039",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0040",
+      "chunk_type": "faq",
+      "text": "Question: Can I work alongside my studies?\nAnswer: Yes. Many students work as student research assistants (HiWi) at the department or in part-time jobs. If you work more than 20 hours per week, consider applying for part-time study status.",
+      "token_count": 52,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0040",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0041",
+      "chunk_type": "faq",
+      "text": "Question: How do I get a MARVIN account?\nAnswer: Your MARVIN account is automatically created when you enroll. Log in with your university credentials. If you have problems, contact the HRZ helpdesk.",
+      "token_count": 43,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0041",
+        "source_reference": "advisory office, website",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0042",
+      "chunk_type": "faq",
+      "text": "Question: Who do I contact if I have problems with exam registration in MARVIN?\nAnswer: Contact the examination office (Prüfungsamt) of the Department of Mathematics and Computer Science. Their contact details and office hours are on the department website.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0042",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0043",
+      "chunk_type": "faq",
+      "text": "Question: Where is the examination office?\nAnswer: The examination office (Prüfungsamt FB12) is located on the Lahnberge campus. Current office hours and contact information are available on the department website.",
+      "token_count": 45,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0043",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0044",
+      "chunk_type": "faq",
+      "text": "Question: How do I request an official transcript of records?\nAnswer: Official transcripts can be requested from the examination office. You can also download an unofficial transcript from MARVIN at any time.",
+      "token_count": 38,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0044",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0045",
+      "chunk_type": "faq",
+      "text": "Question: How do I apply for leave of absence (Beurlaubung)?\nAnswer: Leave of absence can be requested for specific reasons (e.g., illness, internship abroad, parental leave). Submit the application to the student registration office (Studierendensekretariat) before the semester begins.",
+      "token_count": 62,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0045",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0046",
+      "chunk_type": "faq",
+      "text": "Question: What documents do I receive upon graduation?\nAnswer: Upon graduation, you receive: a certificate (Zeugnis), a diploma (Urkunde), a Diploma Supplement, and a Transcript of Records. These are issued by the examination office.",
+      "token_count": 50,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0046",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0047",
+      "chunk_type": "faq",
+      "text": "Question: How long does it take to receive my diploma after submitting the thesis?\nAnswer: After the thesis defense, it typically takes 4-8 weeks for all documents to be processed and issued. You will be notified when they are ready for pickup.",
+      "token_count": 51,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0047",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0048",
+      "chunk_type": "faq",
+      "text": "Question: Is there a graduation ceremony?\nAnswer: Yes. The department holds a graduation ceremony (Absolventenfeier) once per year, usually in the fall. Graduating students are invited to participate.",
+      "token_count": 43,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0048",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0049",
+      "chunk_type": "faq",
+      "text": "Question: Where can I find information about student life in Marburg?\nAnswer: The university's student union (AStA) and the city of Marburg provide information about student life. Marburg is a classic university town with a vibrant student community. The AStA website and the Welcome Centre for international students are good starting points.",
+      "token_count": 68,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0049",
+        "source_reference": "advisory office, website",
+        "chunk_index": 0
+      }
+    },
+    {
+      "chunk_id": "faq-ao-ao-0050",
+      "chunk_type": "faq",
+      "text": "Question: Are there student clubs or groups related to computer science?\nAnswer: Yes. The Fachschaft (student council) of the Department of Mathematics and Computer Science organizes events, provides study materials, and represents student interests. There are also various student-run interest groups and hackathon teams.",
+      "token_count": 59,
+      "metadata": {
+        "faq_source": "faq-ao",
+        "source_file": "data/knowledgebase/faq-ao.json",
+        "faq_id": "ao-0050",
+        "source_reference": "advisory office",
+        "chunk_index": 0
+      }
+    }
+  ],
+  "stats": {
+    "total_chunks": 50,
+    "entries_total": 50,
+    "entries_processed": 50,
+    "entries_skipped": 0,
+    "min_tokens": 34,
+    "median_tokens": 51,
+    "max_tokens": 68,
+    "total_tokens": 2583
+  },
+  "quality_flags": []
+}

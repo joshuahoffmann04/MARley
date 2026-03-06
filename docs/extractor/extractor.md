@@ -10,7 +10,7 @@ The extractor converts the StPO PDF into a structured JSON file containing label
 
 ## Processing Pipeline
 
-The extractor runs five sequential stages:
+The extractor runs six sequential stages:
 
 ```
 PDF file
@@ -18,8 +18,9 @@ PDF file
   ├─ 1. Text extraction      (PyMuPDF)
   ├─ 2. Section detection     (regex-based marker scan)
   ├─ 3. Section assembly      (text slicing by marker boundaries)
-  ├─ 4. Table extraction      (pdfplumber)
-  ├─ 5. Table assignment      (page-range matching)
+  ├─ 4. Parent assignment     (document hierarchy)
+  ├─ 5. Table extraction      (pdfplumber)
+  ├─ 6. Table assignment      (page-range matching)
   │
   └── ExtractionResult → JSON
 ```
@@ -74,7 +75,22 @@ Converts markers into `Section` objects by computing page ranges and extracting 
    - `§23` → `"par-23"`
    - `Appendix 2` → `"appendix-2"`
 
-### Stage 4: Table Extraction
+### Stage 4: Parent Assignment
+
+**Function:** `_assign_parents(sections)`
+
+Establishes the hierarchical relationship between sections. The StPO document is organized into four numbered parts, each containing a range of paragraphs:
+
+| Part | Paragraphs | Topic |
+|---|---|---|
+| `part-I` | §1–§3 | General |
+| `part-II` | §4–§15 | Program-related rules |
+| `part-III` | §16–§36 | Examination-related provisions |
+| `part-IV` | §37–§38 | Final provisions |
+
+The function walks through the section list in document order and tracks the most recently encountered part. Each paragraph receives the current part as its `parent_section_id`. All other section kinds — preamble, table of contents, parts themselves, and appendices — are top-level sections with `parent_section_id` set to `None`.
+
+### Stage 5: Table Extraction
 
 **Library:** pdfplumber
 **Function:** `_extract_all_tables(pdf_path) → list[Table]`
@@ -108,7 +124,7 @@ All other tables are processed by `_process_generic_table`:
 3. Remove columns that are empty across all rows.
 4. First remaining row becomes headers, rest becomes data rows.
 
-### Stage 5: Table Assignment
+### Stage 6: Table Assignment
 
 **Function:** `_assign_tables(sections, tables)`
 
