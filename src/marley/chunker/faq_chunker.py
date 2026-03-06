@@ -7,12 +7,12 @@ chunks. Each valid question-answer entry becomes exactly one chunk.
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
 
 import tiktoken
 
-from src.marley.models import QualityFlag, compute_token_stats
+from src.marley.models import QualityFlag, compute_token_stats, save_json
 
 
 # ---------------------------------------------------------------------------
@@ -252,11 +252,4 @@ def chunk_faq(
 
 def save(result: FAQChunkingResult, output_path: str | Path) -> Path:
     """Save a FAQChunkingResult as JSON. Creates parent directories."""
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    payload = asdict(result)
-    output_path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    return output_path.resolve()
+    return save_json(result, output_path)

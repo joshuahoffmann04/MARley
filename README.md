@@ -28,7 +28,7 @@ PDF / FAQ Data
 src/marley/
 ├── models/          Shared data classes (ExtractionResult, QualityFlag, ...)
 ├── extractor/       PDF extraction (PyMuPDF + pdfplumber)
-├── chunker/         PDF chunking (sentence-aligned) + FAQ chunking
+├── chunker/         PDF chunking (sentence-aligned sliding window) + FAQ chunking
 └── retrieval/       Abstract Retriever interface + BM25 + Vector + Hybrid (RRF)
 
 evaluation/
@@ -50,7 +50,7 @@ data/
 
 | Knowledge Base | Source | Chunks | Description |
 |---|---|---|---|
-| StPO | `msc-computer-science.pdf` | 142 | Study and examination regulations (text + tables) |
+| StPO | `msc-computer-science.pdf` | 151 | Study and examination regulations (text + tables) |
 | FAQ-StPO | `faq-stpo.json` | 999 | Synthetic FAQ derived from the StPO |
 | FAQ-AO | `faq-ao.json` | 50 | Student questions answered by the advisory office |
 
@@ -101,13 +101,13 @@ print(report['metrics'])
 | Component | Tests | Test file |
 |---|---|---|
 | Extractor | 66 | `tests/extractor/test_extractor.py` |
-| PDF Chunker | 50 | `tests/chunker/test_pdf_chunker.py` |
+| PDF Chunker | 60 | `tests/chunker/test_pdf_chunker.py` |
 | FAQ Chunker | 36 | `tests/chunker/test_faq_chunker.py` |
 | BM25 Retrieval | 23 | `tests/retrieval/test_bm25.py` |
 | Vector Retrieval | 23 | `tests/retrieval/test_vector.py` |
 | Hybrid Retrieval | 23 | `tests/retrieval/test_hybrid.py` |
 | Evaluation | 34 | `evaluation/tests/retrieval/test_metrics.py`, `evaluation/tests/retrieval/test_evaluate.py` |
-| **Total** | **255** | |
+| **Total** | **265** | |
 
 Integration tests that require data files are skipped automatically in CI.
 

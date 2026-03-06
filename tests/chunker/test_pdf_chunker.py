@@ -18,12 +18,13 @@ from src.marley.chunker import (
     save,
 )
 from src.marley.chunker.pdf_chunker import (
-    _apply_heading_and_overlap,
+    _apply_heading_prefix,
     _build_heading_prefix,
     _build_table_chunks,
     _merge_undersized,
-    _pack_sentences,
+    _prepare_sentences,
     _serialize_table_row,
+    _sliding_window_chunks,
     _split_oversized_sentence,
     _split_sentences,
 )
@@ -105,30 +106,108 @@ class TestSplitOversizedSentence:
 
 
 # ---------------------------------------------------------------------------
-# Unit tests — packing and merging
+# Unit tests — sentence preparation
 # ---------------------------------------------------------------------------
 
-class TestPackSentences:
+class TestPrepareSentences:
     def test_empty_list(self):
-        assert _pack_sentences([], ENCODER, 100) == []
+        flat, counts = _prepare_sentences([], ENCODER, 100)
+        assert flat == []
+        assert counts == []
 
-    def test_single_sentence(self):
-        result = _pack_sentences(["Hello world."], ENCODER, 100)
-        assert result == ["Hello world."]
+    def test_normal_sentences(self):
+        sentences = ["Hello world.", "Goodbye."]
+        flat, counts = _prepare_sentences(sentences, ENCODER, 100)
+        assert flat == sentences
+        assert len(counts) == 2
+        assert all(c > 0 for c in counts)
 
-    def test_multiple_fit_in_one_chunk(self):
-        sentences = ["Short one.", "Another short.", "And more."]
-        result = _pack_sentences(sentences, ENCODER, 100)
+    def test_oversized_sentence_split(self):
+        long_text = "word " * 200
+        flat, counts = _prepare_sentences([long_text.strip()], ENCODER, 50)
+        assert len(flat) > 1
+        assert all(c <= 50 for c in counts)
+
+    def test_counts_match_encoder(self):
+        sentences = ["The quick brown fox.", "Lazy dog."]
+        flat, counts = _prepare_sentences(sentences, ENCODER, 200)
+        for sent, count in zip(flat, counts):
+            assert count == len(ENCODER.encode(sent))
+
+
+# ---------------------------------------------------------------------------
+# Unit tests — sliding window
+# ---------------------------------------------------------------------------
+
+class TestSlidingWindowChunks:
+    def test_empty_input(self):
+        assert _sliding_window_chunks([], [], 100, 10) == []
+
+    def test_single_sentence_fits(self):
+        result = _sliding_window_chunks(["Hello."], [3], 100, 10)
+        assert result == ["Hello."]
+
+    def test_all_sentences_fit_one_chunk(self):
+        sentences = ["A.", "B.", "C."]
+        counts = [2, 2, 2]
+        result = _sliding_window_chunks(sentences, counts, 100, 10)
         assert len(result) == 1
-        assert "Short one." in result[0]
+        assert result[0] == "A. B. C."
 
-    def test_overflow_to_next_chunk(self):
-        sentences = ["word " * 20, "more " * 20]
-        result = _pack_sentences(
-            [s.strip() for s in sentences], ENCODER, 25,
-        )
+    def test_overflow_creates_multiple_chunks(self):
+        sentences = [f"Sentence {i}." for i in range(10)]
+        counts = [len(ENCODER.encode(s)) for s in sentences]
+        result = _sliding_window_chunks(sentences, counts, 20, 0)
+        assert len(result) > 1
+
+    def test_overlap_repeats_trailing_sentences(self):
+        # 5 sentences, ~10 tokens each, window=25, overlap=10
+        sentences = ["Alpha bravo charlie.", "Delta echo foxtrot.",
+                     "Golf hotel india.", "Juliet kilo lima.",
+                     "Mike november oscar."]
+        counts = [len(ENCODER.encode(s)) for s in sentences]
+        result = _sliding_window_chunks(sentences, counts, 25, 10)
+        assert len(result) >= 2
+        # The last sentence(s) of chunk 0 should appear at start of chunk 1
+        words_0 = result[0].split()
+        words_1 = result[1].split()
+        # Find shared suffix/prefix
+        found_overlap = False
+        for n in range(min(len(words_0), len(words_1)), 0, -1):
+            if words_0[-n:] == words_1[:n]:
+                found_overlap = True
+                break
+        assert found_overlap, "Expected sentence-aligned overlap between chunks"
+
+    def test_zero_overlap_no_repetition(self):
+        sentences = ["First sentence here.", "Second sentence here.",
+                     "Third sentence here.", "Fourth sentence here."]
+        counts = [len(ENCODER.encode(s)) for s in sentences]
+        result = _sliding_window_chunks(sentences, counts, 15, 0)
+        assert len(result) >= 2
+        # With no overlap, end of chunk N should not equal start of chunk N+1
+        all_text = " ".join(result)
+        for sent in sentences:
+            assert all_text.count(sent) == 1
+
+    def test_oversized_sentence_gets_own_chunk(self):
+        sentences = ["Tiny.", "word " * 50]
+        counts = [len(ENCODER.encode(s)) for s in sentences]
+        result = _sliding_window_chunks(sentences, counts, 30, 10)
         assert len(result) >= 2
 
+    def test_forward_progress_guaranteed(self):
+        # Even with large overlap, the window must advance
+        sentences = [f"S{i}." for i in range(20)]
+        counts = [3] * 20
+        result = _sliding_window_chunks(sentences, counts, 10, 8)
+        # Must terminate and produce chunks
+        assert len(result) >= 2
+
+
+# ---------------------------------------------------------------------------
+# Unit tests — merge undersized
+# ---------------------------------------------------------------------------
 
 class TestMergeUndersized:
     def test_no_merging_needed(self):
@@ -143,7 +222,7 @@ class TestMergeUndersized:
         result = _merge_undersized(chunks, ENCODER, min_tokens=20, max_tokens=200)
         assert len(result) == 1
 
-    def test_merge_into_prev_last_chunk(self):
+    def test_merge_into_prev(self):
         chunks = ["This is a decent chunk with enough tokens for the minimum.", "Hi."]
         result = _merge_undersized(chunks, ENCODER, min_tokens=20, max_tokens=200)
         assert len(result) == 1
@@ -151,6 +230,14 @@ class TestMergeUndersized:
     def test_single_chunk(self):
         result = _merge_undersized(["Only one."], ENCODER, min_tokens=20, max_tokens=200)
         assert result == ["Only one."]
+
+    def test_middle_undersized_merged(self):
+        # Undersized chunk in the middle should be merged
+        chunks = ["word " * 30, "Hi.", "text " * 30]
+        result = _merge_undersized(
+            [c.strip() for c in chunks], ENCODER, min_tokens=10, max_tokens=400,
+        )
+        assert len(result) == 2
 
 
 # ---------------------------------------------------------------------------
@@ -193,41 +280,39 @@ class TestBuildHeadingPrefix:
 
 
 # ---------------------------------------------------------------------------
-# Unit tests — overlap and heading application
+# Unit tests — heading prefix application
 # ---------------------------------------------------------------------------
 
-class TestApplyHeadingAndOverlap:
-    def test_single_chunk_no_overlap(self):
-        result = _apply_heading_and_overlap(
-            ["Hello world."], ENCODER, max_tokens=100,
-            overlap_tokens=50, heading_prefix=None,
+class TestApplyHeadingPrefix:
+    def test_no_heading(self):
+        result = _apply_heading_prefix(
+            ["Hello world."], ENCODER, max_tokens=100, heading_prefix=None,
         )
-        assert len(result) == 1
-        assert "Hello" in result[0]
-
-    def test_multi_chunk_with_overlap(self):
-        c1 = "word " * 30
-        c2 = "text " * 30
-        result = _apply_heading_and_overlap(
-            [c1.strip(), c2.strip()], ENCODER, max_tokens=200,
-            overlap_tokens=10, heading_prefix=None,
-        )
-        assert len(result) == 2
+        assert result == ["Hello world."]
 
     def test_heading_prepended(self):
-        result = _apply_heading_and_overlap(
+        result = _apply_heading_prefix(
             ["Some content here."], ENCODER, max_tokens=200,
-            overlap_tokens=0, heading_prefix="§23 Master's Thesis\n\n",
+            heading_prefix="§23 Master's Thesis\n\n",
         )
         assert len(result) == 1
         assert "§23" in result[0]
         assert "Some content" in result[0]
 
     def test_empty_chunks(self):
-        result = _apply_heading_and_overlap(
-            [], ENCODER, max_tokens=100, overlap_tokens=0, heading_prefix=None,
+        result = _apply_heading_prefix(
+            [], ENCODER, max_tokens=100, heading_prefix=None,
         )
         assert result == []
+
+    def test_body_truncated_to_budget(self):
+        long_body = "word " * 200
+        result = _apply_heading_prefix(
+            [long_body.strip()], ENCODER, max_tokens=50,
+            heading_prefix="Heading\n\n",
+        )
+        assert len(result) == 1
+        assert len(ENCODER.encode(result[0])) <= 50
 
 
 # ---------------------------------------------------------------------------
@@ -379,6 +464,45 @@ class TestTokenBounds:
         assert chunking_result.stats.min_tokens == min(tokens)
         assert chunking_result.stats.max_tokens == max(tokens)
         assert chunking_result.stats.total_tokens == sum(tokens)
+
+
+@pytestmark_integration
+class TestSlidingWindowOverlap:
+    """Verify that consecutive text chunks share sentence-aligned overlap."""
+
+    def test_multi_chunk_sections_have_overlap(self, chunking_result):
+        from collections import Counter
+        section_ids = [
+            c.metadata.section_id for c in chunking_result.chunks
+            if c.chunk_type == "text"
+        ]
+        multi = [sid for sid, n in Counter(section_ids).items() if n >= 3]
+        assert multi, "Expected at least one section with 3+ text chunks"
+
+        for sid in multi:
+            chunks = [
+                c for c in chunking_result.chunks
+                if c.metadata.section_id == sid and c.chunk_type == "text"
+            ]
+            for i in range(len(chunks) - 1):
+                body_a = chunks[i].text.split("\n\n", 1)[-1]
+                body_b = chunks[i + 1].text.split("\n\n", 1)[-1]
+                words_a = body_a.split()
+                words_b = body_b.split()
+                overlap_found = any(
+                    words_a[-n:] == words_b[:n]
+                    for n in range(min(80, len(words_a), len(words_b)), 0, -1)
+                )
+                # Overlap may be absent when a single sentence fills the budget
+                if not overlap_found:
+                    # Verify this is the oversized-sentence edge case
+                    assert (
+                        chunks[i].token_count > 400
+                        or chunks[i + 1].token_count > 400
+                    ), (
+                        f"Missing overlap in {sid} chunks {i+1}->{i+2} "
+                        f"without oversized sentence justification"
+                    )
 
 
 @pytestmark_integration

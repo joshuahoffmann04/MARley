@@ -1,15 +1,26 @@
 """PDF chunker for the StPO document.
 
-Splits extracted StPO sections into retrieval-ready chunks using
-sentence-aligned sliding windows for text and row-based packing
-with header repetition for tables.
+Splits extracted StPO sections into retrieval-ready chunks using a
+sentence-aligned sliding window for text and row-based packing with
+header repetition for tables.
+
+Text chunking algorithm:
+    1. Split section text into sentences (syntok / regex fallback).
+    2. Split any oversized sentences at token boundaries.
+    3. Slide a window over the sentence list:
+       - Expand from the current start until *max_tokens* is reached.
+       - Record the window as a chunk.
+       - Advance the start so that approximately *overlap_tokens* worth
+         of trailing sentences are repeated in the next window.
+    4. Merge the last chunk into its predecessor if it falls below
+       *min_chunk_tokens* and the combined size fits.
+    5. Prepend the section heading path to every chunk.
 """
 
 from __future__ import annotations
 
-import json
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
 
 import tiktoken
@@ -20,6 +31,7 @@ from src.marley.models import (
     Section,
     Table,
     compute_token_stats,
+    save_json,
 )
 
 try:
@@ -129,36 +141,82 @@ def _split_oversized_sentence(
 
 
 # ---------------------------------------------------------------------------
-# Text chunking
+# Text chunking — sentence-aligned sliding window
 # ---------------------------------------------------------------------------
 
-def _pack_sentences(
+def _prepare_sentences(
     sentences: list[str],
     encoder: tiktoken.Encoding,
     max_tokens: int,
+) -> tuple[list[str], list[int]]:
+    """Split oversized sentences and pre-compute token counts.
+
+    Returns (flat_sentences, token_counts) with one entry per sentence.
+    """
+    flat: list[str] = []
+    counts: list[int] = []
+    for sentence in sentences:
+        parts = _split_oversized_sentence(sentence, encoder, max_tokens)
+        for part in parts:
+            flat.append(part)
+            counts.append(len(encoder.encode(part)))
+    return flat, counts
+
+
+def _sliding_window_chunks(
+    sentences: list[str],
+    token_counts: list[int],
+    max_tokens: int,
+    overlap_tokens: int,
 ) -> list[str]:
-    """Greedily pack sentences into chunks respecting max_tokens."""
+    """Build chunks by sliding a window over the sentence list.
+
+    Each window expands from its start index until adding the next
+    sentence would exceed *max_tokens*.  The window then advances so
+    that approximately *overlap_tokens* worth of trailing sentences
+    are shared with the next window.
+    """
     if not sentences:
         return []
 
     chunks: list[str] = []
-    current: list[str] = []
+    start = 0
 
-    for sentence in sentences:
-        parts = _split_oversized_sentence(sentence, encoder, max_tokens)
-        for piece in parts:
-            if not current:
-                current = [piece]
-                continue
-            candidate = " ".join([*current, piece])
-            if len(encoder.encode(candidate)) <= max_tokens:
-                current.append(piece)
-            else:
-                chunks.append(" ".join(current))
-                current = [piece]
+    while start < len(sentences):
+        # Expand window until max_tokens is reached.
+        end = start
+        total = 0
+        while end < len(sentences):
+            # +1 accounts for the joining space between sentences.
+            added = token_counts[end] + (1 if end > start else 0)
+            if total + added > max_tokens:
+                break
+            total += added
+            end += 1
 
-    if current:
-        chunks.append(" ".join(current))
+        # At least one sentence per chunk (may exceed budget if oversized).
+        if end == start:
+            end = start + 1
+
+        chunks.append(" ".join(sentences[start:end]))
+
+        if end >= len(sentences):
+            break
+
+        # Advance start: keep trailing sentences summing to ~overlap_tokens.
+        overlap_acc = 0
+        new_start = end
+        for i in range(end - 1, start, -1):
+            if overlap_acc + token_counts[i] > overlap_tokens:
+                break
+            overlap_acc += token_counts[i]
+            new_start = i
+
+        # Guarantee forward progress.
+        if new_start <= start:
+            new_start = start + 1
+
+        start = new_start
 
     return chunks
 
@@ -169,7 +227,11 @@ def _merge_undersized(
     min_tokens: int,
     max_tokens: int,
 ) -> list[str]:
-    """Merge chunks below min_tokens into their neighbors."""
+    """Merge chunks below *min_tokens* into their neighbours.
+
+    Tries merging forward first, then backward.  If neither merge
+    fits within *max_tokens*, the undersized chunk is kept as-is.
+    """
     if len(chunks) <= 1:
         return chunks
 
@@ -184,6 +246,7 @@ def _merge_undersized(
             i += 1
             continue
 
+        # Try merging forward.
         if i + 1 < len(chunks):
             candidate = f"{current} {chunks[i + 1]}"
             if len(encoder.encode(candidate)) <= max_tokens:
@@ -191,6 +254,7 @@ def _merge_undersized(
                 i += 1
                 continue
 
+        # Try merging backward.
         if merged:
             candidate = f"{merged[-1]} {current}"
             if len(encoder.encode(candidate)) <= max_tokens:
@@ -242,49 +306,30 @@ def _build_heading_prefix(
     return prefix, labels
 
 
-def _apply_heading_and_overlap(
+def _apply_heading_prefix(
     chunks: list[str],
     encoder: tiktoken.Encoding,
     max_tokens: int,
-    overlap_tokens: int,
     heading_prefix: str | None,
 ) -> list[str]:
-    """Prepend heading prefix and add token overlap between chunks."""
+    """Prepend a heading prefix to every chunk, respecting max_tokens."""
     if not chunks:
         return []
 
-    heading_token_ids = encoder.encode(heading_prefix) if heading_prefix else []
+    if not heading_prefix:
+        return [c for c in chunks if c.strip()]
+
+    heading_token_ids = encoder.encode(heading_prefix)
     body_budget = max_tokens - len(heading_token_ids)
     if body_budget <= 0:
-        body_budget = max_tokens
-        heading_token_ids = []
+        return [c for c in chunks if c.strip()]
 
     result: list[str] = []
-    prev_token_ids: list[int] = []
-
-    for i, chunk in enumerate(chunks):
-        current_token_ids = encoder.encode(chunk)
-        if len(current_token_ids) > body_budget:
-            current_token_ids = current_token_ids[:body_budget]
-
-        overlap_ids: list[int] = []
-        if i > 0 and overlap_tokens > 0 and prev_token_ids:
-            capacity = body_budget - len(current_token_ids)
-            n_overlap = min(overlap_tokens, max(capacity, 0))
-            if n_overlap > 0:
-                overlap_ids = prev_token_ids[-n_overlap:]
-
-        body_ids = [*overlap_ids, *current_token_ids]
-        if len(body_ids) > body_budget:
-            body_ids = body_ids[:body_budget]
-
-        final_ids = [*heading_token_ids, *body_ids] if heading_token_ids else body_ids
-        final_text = encoder.decode(final_ids).strip()
+    for chunk in chunks:
+        body_ids = encoder.encode(chunk)[:body_budget]
+        final_text = encoder.decode([*heading_token_ids, *body_ids]).strip()
         if final_text:
             result.append(final_text)
-
-        prev_token_ids = current_token_ids
-
     return result
 
 
@@ -307,12 +352,18 @@ def _chunk_section_text(
     if not text:
         return [], heading_prefix, path_labels
 
+    # Reserve space for the heading inside each chunk.
+    heading_tokens = len(encoder.encode(heading_prefix)) if heading_prefix else 0
+    body_budget = max_chunk_tokens - heading_tokens
+    if body_budget <= 0:
+        body_budget = max_chunk_tokens
+        heading_prefix = None
+
     sentences = _split_sentences(text)
-    packed = _pack_sentences(sentences, encoder, max_chunk_tokens)
-    merged = _merge_undersized(packed, encoder, min_chunk_tokens, max_chunk_tokens)
-    final = _apply_heading_and_overlap(
-        merged, encoder, max_chunk_tokens, overlap_tokens, heading_prefix,
-    )
+    flat, counts = _prepare_sentences(sentences, encoder, body_budget)
+    raw = _sliding_window_chunks(flat, counts, body_budget, overlap_tokens)
+    merged = _merge_undersized(raw, encoder, min_chunk_tokens, body_budget)
+    final = _apply_heading_prefix(merged, encoder, max_chunk_tokens, heading_prefix)
     return final, heading_prefix, path_labels
 
 
@@ -532,11 +583,4 @@ def chunk_stpo(
 
 def save(result: ChunkingResult, output_path: str | Path) -> Path:
     """Save a ChunkingResult as JSON. Creates parent directories."""
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    payload = asdict(result)
-    output_path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    return output_path.resolve()
+    return save_json(result, output_path)

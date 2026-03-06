@@ -18,7 +18,7 @@ The evaluation harness measures retrieval quality by comparing retrieved chunks 
 | **Recall@k** | \|relevant ∩ retrieved[:k]\| / \|relevant\| | Proportion of all relevant chunks found in top-k |
 | **MRR** | 1 / rank of first relevant result | How early the first relevant result appears |
 
-All metrics are averaged over all evaluated queries to produce macro-averages.
+All metrics are averaged over all evaluated queries to produce macro-averages. MRR is effectively bounded by k because the retriever returns at most k results.
 
 ### Query Handling
 
@@ -33,7 +33,7 @@ Three annotated evaluation files, one per knowledge base:
 
 | File | Knowledge Base | Annotated Questions |
 |---|---|---|
-| `data/testing/evaluation-stpo.json` | StPO chunks (142 text + table) | 75 |
+| `data/testing/evaluation-stpo.json` | StPO chunks (101 text + 50 table) | 75 |
 | `data/testing/evaluation-faq-stpo.json` | FAQ-StPO chunks (999 Q/A) | 75 |
 | `data/testing/evaluation-faq-ao.json` | FAQ-AO chunks (50 Q/A) | 21 |
 
@@ -116,25 +116,25 @@ print(report["metrics"])
 
 ### BM25 (Okapi BM25, lowercase whitespace tokenization)
 
-| Knowledge Base | P@1 | R@1 | MRR | P@5 | R@5 | MRR | Queries |
+| Knowledge Base | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
 |---|---|---|---|---|---|---|---|
-| StPO (142 chunks) | 0.320 | 0.238 | 0.320 | 0.117 | 0.438 | 0.400 | 75 |
+| StPO (151 chunks) | 0.280 | 0.213 | 0.280 | 0.112 | 0.420 | 0.365 | 75 |
 | FAQ-StPO (999 chunks) | 0.227 | 0.153 | 0.227 | 0.115 | 0.394 | 0.332 | 75 |
 | FAQ-AO (50 chunks) | 0.571 | 0.548 | 0.571 | 0.181 | 0.857 | 0.660 | 21 |
 
 ### Vector (all-mpnet-base-v2, cosine similarity)
 
-| Knowledge Base | P@1 | R@1 | MRR | P@5 | R@5 | MRR | Queries |
+| Knowledge Base | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
 |---|---|---|---|---|---|---|---|
-| StPO (142 chunks) | 0.400 | 0.286 | 0.400 | 0.157 | 0.512 | 0.477 | 75 |
+| StPO (151 chunks) | 0.387 | 0.281 | 0.387 | 0.152 | 0.501 | 0.464 | 75 |
 | FAQ-StPO (999 chunks) | 0.440 | 0.321 | 0.440 | 0.173 | 0.576 | 0.532 | 75 |
 | FAQ-AO (50 chunks) | 0.762 | 0.738 | 0.762 | 0.210 | 1.000 | 0.861 | 21 |
 
 ### Hybrid (BM25 + Vector, RRF with k_rrf=60)
 
-| Knowledge Base | P@1 | R@1 | MRR | P@5 | R@5 | MRR | Queries |
+| Knowledge Base | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
 |---|---|---|---|---|---|---|---|
-| StPO (142 chunks) | 0.320 | 0.238 | 0.320 | 0.171 | 0.567 | 0.469 | 75 |
+| StPO (151 chunks) | 0.280 | 0.213 | 0.280 | 0.160 | 0.547 | 0.443 | 75 |
 | FAQ-StPO (999 chunks) | 0.227 | 0.153 | 0.227 | 0.160 | 0.539 | 0.467 | 75 |
 | FAQ-AO (50 chunks) | 0.571 | 0.548 | 0.571 | 0.210 | 1.000 | 0.798 | 21 |
 
@@ -144,9 +144,9 @@ print(report["metrics"])
 
 Vector retrieval outperforms BM25 across all knowledge bases and all metrics:
 
-- **StPO:** R@5 improves from 0.438 to 0.512 (+17%), MRR from 0.400 to 0.477 (+19%).
-- **FAQ-StPO:** R@5 improves from 0.394 to 0.576 (+46%), MRR from 0.332 to 0.532 (+60%). This is the largest gain, since FAQ entries share many keywords but differ semantically — exactly where BM25 struggles.
-- **FAQ-AO:** R@5 reaches 1.000 (perfect recall), MRR jumps from 0.660 to 0.861 (+30%). The small corpus and direct questions make this the easiest task.
+- **StPO:** R@5 improves from 0.420 to 0.501 (+19%), MRR@5 from 0.365 to 0.464 (+27%).
+- **FAQ-StPO:** R@5 improves from 0.394 to 0.576 (+46%), MRR@5 from 0.332 to 0.532 (+60%). This is the largest gain, since FAQ entries share many keywords but differ semantically — exactly where BM25 struggles.
+- **FAQ-AO:** R@5 reaches 1.000 (perfect recall), MRR@5 jumps from 0.660 to 0.861 (+30%). The small corpus and direct questions make this the easiest task.
 
 The gains are especially pronounced for FAQ-StPO, where BM25's keyword matching is confused by the many similarly-worded FAQ entries. Dense embeddings capture semantic similarity more effectively in this setting.
 
@@ -154,11 +154,11 @@ The gains are especially pronounced for FAQ-StPO, where BM25's keyword matching 
 
 Hybrid retrieval (RRF) shows mixed results compared to the individual strategies:
 
-- **StPO:** R@5 improves to 0.567, the **best recall across all strategies** (+11% over Vector, +29% over BM25). However, P@1 and MRR@1 match BM25 (0.320) rather than Vector (0.400). MRR@5 of 0.469 sits between BM25 (0.400) and Vector (0.477).
+- **StPO:** R@5 improves to 0.547, the **best recall across all strategies** (+9% over Vector, +30% over BM25). However, P@1 and MRR@1 match BM25 (0.280) rather than Vector (0.387). MRR@5 of 0.443 sits between BM25 (0.365) and Vector (0.464).
 - **FAQ-StPO:** R@5 of 0.539 is better than BM25 (0.394, +37%) but slightly below Vector (0.576, −6%). MRR@5 of 0.467 improves over BM25 (0.332, +41%) but falls below Vector (0.532, −12%). The k@1 metrics match BM25, not Vector.
-- **FAQ-AO:** R@5 reaches 1.000 (matching Vector), but MRR drops from 0.861 (Vector) to 0.798 (−7%).
+- **FAQ-AO:** R@5 reaches 1.000 (matching Vector), but MRR@5 drops from 0.861 (Vector) to 0.798 (−7%).
 
-**Key insight:** RRF's P@1 and MRR@1 are identical to BM25 in all cases. This occurs because both retrievers contribute equally to the RRF score at rank 1 (score = 1/(k_rrf+1)), and when both agree on rank 1, BM25's candidate wins; when they disagree, the tie-breaking favors whichever document appears first in iteration order. Since BM25 results are processed first, its top-1 candidate dominates.
+**Key insight:** RRF's P@1 and MRR@1 are identical to BM25 in all cases. This occurs because both retrievers contribute equally to the RRF score at rank 1 (score = 1/(k_rrf+1)), and when both agree on rank 1, BM25's candidate wins; when they disagree, the tie-breaking favours whichever document appears first in iteration order. Since BM25 results are processed first, its top-1 candidate dominates.
 
 **Practical implication:** RRF excels at recall — it finds more relevant documents by combining both retriever pools. For the StPO knowledge base, this is the best strategy. However, for precision-sensitive use cases (where only the top-1 or top-2 results matter), pure Vector retrieval remains the better choice. For the downstream generation stage, the higher recall of hybrid retrieval may be more valuable, as the language model can select the most relevant information from a richer context.
 

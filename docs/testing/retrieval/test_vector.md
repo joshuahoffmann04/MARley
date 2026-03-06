@@ -10,7 +10,7 @@
 
 Tests are organized into two categories:
 
-1. **Unit tests** verify index building, retrieval behavior, score ranges, metadata handling, and persistence using synthetic corpora and temporary directories. These tests run without external data files.
+1. **Unit tests** verify the VectorRetriever using synthetic corpora and temporary directories. The `TestVectorRetrieverUnit` class inherits from `RetrieverContractTests` (defined in `tests/retrieval/conftest.py`), which provides 10 shared interface contract tests. Vector adds 5 specific tests for score range, metadata flattening, persistence, and initial size.
 2. **Integration tests** run vector retrieval against the real chunk JSON files and verify that relevant results are returned. These tests are skipped automatically if the chunk files are not present (`pytest.mark.skipif`).
 
 All tests use `tmp_path` / `tmp_path_factory` fixtures for ChromaDB storage, ensuring no test state leaks between runs.
@@ -23,7 +23,7 @@ All tests use `tmp_path` / `tmp_path_factory` fixtures for ChromaDB storage, ens
 
 | Class | Tests | What is verified |
 |---|---|---|
-| `TestVectorRetrieverUnit` | 15 | Index size, empty corpus, retrieve before index, result types, ranking order, top-1 relevance, k limit, score range [-1, 1], re-indexing, metadata preservation, None/list metadata flattening, persistence across instances, size property. |
+| `TestVectorRetrieverUnit` | 15 | 10 contract tests + score range [-1, 1], None metadata flattening, list metadata joining, persistence across instances, size zero before index. |
 
 ### Integration Tests (require chunk JSON files)
 
@@ -35,11 +35,17 @@ All tests use `tmp_path` / `tmp_path_factory` fixtures for ChromaDB storage, ens
 
 ---
 
+## Contract Test Mixin
+
+The `RetrieverContractTests` class in `tests/retrieval/conftest.py` defines 10 tests that verify the `Retriever` interface contract. Both `TestBM25RetrieverUnit` and `TestVectorRetrieverUnit` inherit from it, eliminating test duplication while ensuring consistent interface verification.
+
+---
+
 ## Fixtures
 
 | Fixture | Scope | Description |
 |---|---|---|
-| `_setup_teardown` | function (autouse) | Creates a temporary persist directory for each unit test. |
+| `_setup` | function (autouse) | Creates a temporary persist directory for each unit test. |
 | `retriever` | class | Loads chunks, builds vector index once per integration test class (using `tmp_path_factory`). |
 
 ---

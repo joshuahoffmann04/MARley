@@ -6,15 +6,14 @@ producing a JSON file for downstream chunking.
 
 from __future__ import annotations
 
-import json
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
 
 import fitz
 import pdfplumber
 
-from src.marley.models import ExtractionResult, Section, Table
+from src.marley.models import ExtractionResult, Section, Table, save_json
 
 
 # ---------------------------------------------------------------------------
@@ -525,11 +524,4 @@ def extract(pdf_path: str | Path) -> ExtractionResult:
 
 def save(result: ExtractionResult, output_path: str | Path) -> Path:
     """Save an ExtractionResult as JSON."""
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    payload = asdict(result)
-    output_path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    return output_path.resolve()
+    return save_json(result, output_path)

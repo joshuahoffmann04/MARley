@@ -13,7 +13,8 @@ src/marley/models/
 ├── __init__.py       # Re-exports all public symbols
 ├── extraction.py     # ExtractionResult, Section, Table
 ├── quality.py        # QualityFlag
-└── chunking.py       # compute_token_stats()
+├── chunking.py       # compute_token_stats()
+└── io.py             # save_json()
 ```
 
 ---
@@ -93,12 +94,24 @@ stats = compute_token_stats([100, 200, 300])
 
 Returns all zeros for an empty list.
 
+### `save_json(result, output_path)`
+
+Serializes a dataclass instance to a JSON file via `dataclasses.asdict`. Creates parent directories if they do not exist. Used by the extractor and both chunkers to persist their results.
+
+```python
+from src.marley.models import save_json
+
+path = save_json(extraction_result, "data/knowledgebase/stpo-extracted.json")
+```
+
+Returns the resolved absolute path of the written file.
+
 ---
 
 ## Usage
 
 ```python
-from src.marley.models import ExtractionResult, Section, Table, QualityFlag, compute_token_stats
+from src.marley.models import ExtractionResult, Section, Table, QualityFlag, compute_token_stats, save_json
 ```
 
 All symbols are re-exported from `src.marley.models`, so downstream modules never need to import from submodules directly.

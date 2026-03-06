@@ -4,7 +4,7 @@
 **Input:** `data/knowledgebase/stpo-extracted.json` (48 sections, 23 tables)
 **Output:** `data/chunks/stpo-chunks.json`
 
-The PDF chunker splits the extracted StPO document into retrieval-ready chunks. It handles both plain text (sentence-aligned sliding windows) and tables (row-based packing with header repetition). It is the second stage of the MARley pipeline.
+The PDF chunker splits the extracted StPO document into retrieval-ready chunks. It uses a sentence-aligned sliding window for text and row-based packing with header repetition for tables. It is the second stage of the MARley pipeline.
 
 ---
 
@@ -14,17 +14,17 @@ The PDF chunker splits the extracted StPO document into retrieval-ready chunks. 
 ExtractionResult
   │
   ├─ For each section:
-  │   ├─ 1. Heading prefix        (build hierarchy path from parent)
-  │   ├─ 2. Sentence splitting    (syntok, regex fallback)
-  │   ├─ 3. Oversized splitting   (token-level for long sentences)
-  │   ├─ 4. Greedy packing        (fill chunks up to max_tokens)
-  │   ├─ 5. Undersized merging    (merge small chunks into neighbors)
-  │   ├─ 6. Heading + overlap     (prepend path, add token overlap)
+  │   ├─ 1. Heading prefix        Build hierarchy path from parent
+  │   ├─ 2. Sentence splitting    syntok (preferred), regex fallback
+  │   ├─ 3. Oversized splitting   Token-level split for long sentences
+  │   ├─ 4. Sliding window        Sentence-aligned windows with overlap
+  │   ├─ 5. Undersized merging    Merge small chunks into neighbours
+  │   ├─ 6. Heading application   Prepend section path to each chunk
   │   │
   │   └─ For each table in section:
-  │       ├─ 7. Row serialization  (pipe-delimited format)
-  │       ├─ 8. Row packing        (fill chunks, repeat headers)
-  │       └─ 9. Heading prefix     (same as text chunks)
+  │       ├─ 7. Row serialization  Pipe-delimited format
+  │       ├─ 8. Row packing        Fill chunks, repeat headers
+  │       └─ 9. Heading prefix     Same as text chunks
   │
   └── ChunkingResult → JSON
 ```
@@ -39,7 +39,7 @@ Walks the section hierarchy via `parent_section_id` to build a breadcrumb path. 
 III. Examination-related provisions > §23 Master's Thesis
 ```
 
-The prefix is prepended to every chunk from that section, providing retrieval context. Top-level sections without a parent (parts, appendices, preamble, ToC) include only their own label and title.
+The prefix is prepended to every chunk from that section, providing retrieval context.
 
 ### Stage 2: Sentence Splitting
 
@@ -52,27 +52,46 @@ Splits section text into individual sentences using syntok's segmenter. If synto
 
 **Function:** `_split_oversized_sentence(sentence, encoder, max_tokens) → list[str]`
 
-Sentences exceeding `max_chunk_tokens` are split at the token level using tiktoken. Each resulting piece is at most `max_tokens` tokens.
+Sentences exceeding the token budget are split at the token level using tiktoken. Each resulting piece is at most `max_tokens` tokens.
 
-### Stage 4: Greedy Packing
+**Function:** `_prepare_sentences(sentences, encoder, max_tokens) → (flat_sentences, token_counts)`
 
-**Function:** `_pack_sentences(sentences, encoder, max_tokens) → list[str]`
+Applies oversized splitting to all sentences and pre-computes per-sentence token counts for efficient window construction.
 
-Sentences are packed into chunks greedily: each sentence is added to the current chunk if the combined token count stays within `max_tokens`. Otherwise, a new chunk begins. This ensures sentence boundaries are respected.
+### Stage 4: Sliding Window
+
+**Function:** `_sliding_window_chunks(sentences, token_counts, max_tokens, overlap_tokens) → list[str]`
+
+Builds chunks by sliding a window over the sentence list:
+
+1. **Expand:** Starting from the current position, add sentences until the next sentence would exceed the token budget.
+2. **Record:** The current window becomes a chunk.
+3. **Slide:** Advance the start position so that approximately `overlap_tokens` worth of trailing sentences are shared with the next window.
+
+This produces sentence-aligned overlap: the shared content between consecutive chunks always consists of complete sentences. This is preferable to token-level overlap (which can cut mid-sentence) because it preserves semantic coherence at chunk boundaries.
+
+**Overlap example** (overlap_tokens=50):
+```
+Chunk 1: [S1  S2  S3  S4  S5]
+                    ─────────── ~50 tokens overlap
+Chunk 2:           [S4  S5  S6  S7  S8]
+                              ────────── ~50 tokens overlap
+Chunk 3:                     [S7  S8  S9  S10]
+```
+
+**Edge case:** When a single sentence fills the entire budget, no overlap with the next chunk is possible. The algorithm guarantees forward progress (at least one sentence per iteration).
 
 ### Stage 5: Undersized Merging
 
 **Function:** `_merge_undersized(chunks, encoder, min_tokens, max_tokens) → list[str]`
 
-Chunks below `min_tokens` are merged into their forward neighbor if the combined size fits within `max_tokens`. If the forward merge would overflow, the chunk is merged backward into the previous chunk. This eliminates fragments that would be too small for meaningful retrieval.
+Chunks below `min_tokens` are merged into their forward neighbour if the combined size fits within `max_tokens`. If the forward merge would overflow, the chunk is merged backward into the previous chunk. This eliminates fragments that would be too small for meaningful retrieval.
 
-### Stage 6: Heading and Overlap Application
+### Stage 6: Heading Application
 
-**Function:** `_apply_heading_and_overlap(chunks, encoder, max_tokens, overlap_tokens, heading_prefix) → list[str]`
+**Function:** `_apply_heading_prefix(chunks, encoder, max_tokens, heading_prefix) → list[str]`
 
-For each chunk:
-1. The heading prefix is prepended (tokens are reserved from the budget).
-2. For chunks after the first, a token-level overlap from the tail of the previous chunk is inserted before the current chunk's content. This provides continuity across chunk boundaries.
+Prepends the heading prefix to every chunk. The heading token count is reserved from the budget before the sliding window runs, so the combined heading + body never exceeds `max_tokens`.
 
 ### Stages 7–9: Table Chunking
 
@@ -98,7 +117,7 @@ save(result, "data/chunks/stpo-chunks.json")
 | Function | Signature | Description |
 |---|---|---|
 | `chunk_stpo` | `(extraction: ExtractionResult, *, max_chunk_tokens=512, min_chunk_tokens=64, overlap_tokens=50, tokenizer="cl100k_base") → ChunkingResult` | Chunk an extracted StPO document. |
-| `save` | `(result: ChunkingResult, output_path: str \| Path) → Path` | Serialize to JSON. Creates parent directories. Returns the resolved output path. |
+| `save` | `(result: ChunkingResult, output_path: str \| Path) → Path` | Serialize to JSON. Delegates to `save_json` from `src.marley.models`. |
 
 ---
 
@@ -106,16 +125,16 @@ save(result, "data/chunks/stpo-chunks.json")
 
 | Parameter | Default | Description |
 |---|---|---|
-| `max_chunk_tokens` | 512 | Maximum tokens per chunk. Matches typical embedding model context (nomic-embed-text). |
-| `min_chunk_tokens` | 64 | Minimum tokens for a text chunk before merging into neighbors. |
-| `overlap_tokens` | 50 | Number of tokens from the previous chunk to repeat as overlap (~10%). |
-| `tokenizer` | `cl100k_base` | tiktoken encoding name. Used as a proxy for the Ollama embedding tokenizer. |
+| `max_chunk_tokens` | 512 | Maximum tokens per chunk (heading + body). |
+| `min_chunk_tokens` | 64 | Minimum tokens for a text chunk before merging into neighbours. |
+| `overlap_tokens` | 50 | Target token count for sentence-aligned overlap between consecutive windows (~10%). |
+| `tokenizer` | `cl100k_base` | tiktoken encoding name. Used as a proxy for the embedding model tokenizer. |
 
 ---
 
 ## Data Classes
 
-The chunker defines `ChunkMetadata`, `Chunk`, `ChunkingStats`, and `ChunkingResult` locally. It imports `ExtractionResult`, `Section`, `Table`, and `QualityFlag` from `src.marley.models/`, and uses `compute_token_stats` for statistics computation. See `docs/models/models.md` for the shared data classes.
+The chunker defines `ChunkMetadata`, `Chunk`, `ChunkingStats`, and `ChunkingResult` locally. It imports `ExtractionResult`, `Section`, `Table`, `QualityFlag`, `compute_token_stats`, and `save_json` from `src.marley.models/`. See `docs/models/models.md` for the shared data classes.
 
 ---
 
@@ -132,6 +151,8 @@ The chunker defines `ChunkMetadata`, `Chunk`, `ChunkingStats`, and `ChunkingResu
 
 - All section kinds are chunked (preamble, ToC, parts, paragraphs, appendices).
 - The preamble and some short paragraphs produce a single chunk each.
+- Sections with multiple text chunks share sentence-aligned overlap (~50 tokens).
+- When a single sentence fills the entire token budget, overlap with the adjacent chunk is not possible.
 - Appendix 2's module table (54 rows, 7 columns) is split into multiple table chunks with repeated headers.
 - Appendix 3's 14 separate tables each produce independent table chunks.
 - Quality flags are collected but no error-level flags are expected in normal operation.

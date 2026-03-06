@@ -1,7 +1,7 @@
 # PDF Chunker Test Documentation
 
 **Test file:** `tests/chunker/test_pdf_chunker.py`
-**Total tests:** 50
+**Total tests:** 60
 **Run command:** `python -m pytest tests/chunker/ -v`
 
 ---
@@ -25,10 +25,11 @@ Integration tests share a single `ChunkingResult` via module-scoped fixtures to 
 |---|---|---|
 | `TestSplitSentences` | 4 | `_split_sentences` |
 | `TestSplitOversizedSentence` | 3 | `_split_oversized_sentence` |
-| `TestPackSentences` | 4 | `_pack_sentences` |
-| `TestMergeUndersized` | 4 | `_merge_undersized` |
+| `TestPrepareSentences` | 4 | `_prepare_sentences` |
+| `TestSlidingWindowChunks` | 8 | `_sliding_window_chunks` |
+| `TestMergeUndersized` | 5 | `_merge_undersized` |
 | `TestBuildHeadingPrefix` | 4 | `_build_heading_prefix` |
-| `TestApplyHeadingAndOverlap` | 4 | `_apply_heading_and_overlap` |
+| `TestApplyHeadingPrefix` | 4 | `_apply_heading_prefix` |
 | `TestSerializeTableRow` | 2 | `_serialize_table_row` |
 | `TestBuildTableChunks` | 3 | `_build_table_chunks` |
 | `TestChunkId` | 2 | `chunk_stpo` (ID format verification) |
@@ -39,6 +40,7 @@ Integration tests share a single `ChunkingResult` via module-scoped fixtures to 
 |---|---|---|
 | `TestChunkingBasics` | 3 | Total chunk count positive, all chunks have text, all chunks have metadata. |
 | `TestTokenBounds` | 3 | No chunk exceeds max_tokens, stats match chunk counts, token stats consistent. |
+| `TestSlidingWindowOverlap` | 1 | Multi-chunk sections share sentence-aligned overlap between consecutive chunks. |
 | `TestSectionCoverage` | 3 | All sections produce chunks, paragraph chunks have heading path with part, all section kinds present. |
 | `TestTableChunking` | 4 | Appendix 2 produces table chunks, headers repeated, table chunk IDs contain section ID, table metadata has table_id. |
 | `TestHeadingPaths` | 3 | Paragraph paths include part numeral, appendix paths include "Appendix", preamble chunks have correct kind. |
@@ -59,5 +61,5 @@ Integration tests share a single `ChunkingResult` via module-scoped fixtures to 
 ## CI Considerations
 
 - All integration tests are guarded by `pytest.mark.skipif(not EXTRACTED_PATH.exists())`.
-- If `stpo-extracted.json` is not available (e.g., in CI without test data), only unit tests run. The JSON file depends on the copyrighted university PDF and is not committed to the repository.
+- If `stpo-extracted.json` is not available (e.g., in CI without test data), only unit tests run (39 tests). The JSON file depends on the copyrighted university PDF and is not committed to the repository.
 - The JSON path resolves to `{project_root}/data/knowledgebase/stpo-extracted.json`.
