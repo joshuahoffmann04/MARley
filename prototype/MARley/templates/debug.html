@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ app_name }} | Debug</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body data-page="debug">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Validierung</p>
+        <h1>{{ app_name }} Debug</h1>
+      </div>
+      <div class="topbar-actions">
+        <a class="ghost-link" href="/">Zurück zum Chat</a>
+      </div>
+    </header>
+
+    <main class="layout debug-layout">
+      <aside class="panel controls">
+        <h2>Verlauf</h2>
+        <p class="hint">Die letzten Chat-Antworten werden lokal im Browser gespeichert.</p>
+        <select id="trace-select" size="12" class="trace-select"></select>
+        <button id="clear-traces" class="btn subtle" type="button">Verlauf löschen</button>
+      </aside>
+
+      <section class="panel debug-panel">
+        <div class="tab-row">
+          <button class="tab active" data-target="generator-json">Generator JSON</button>
+          <button class="tab" data-target="retrieval-json">Retrieval JSON</button>
+        </div>
+        <pre id="generator-json" class="json-view"></pre>
+        <pre id="retrieval-json" class="json-view hidden"></pre>
+      </section>
+    </main>
+
+    <script src="/static/debug.js" defer></script>
+  </body>
+</html>

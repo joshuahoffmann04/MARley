@@ -1,10 +1,21 @@
-.venv/
-*/__pycache__/
-**/__pycache__/
+# Python
+__pycache__/
 *.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Testing
+.pytest_cache/
+
+# Environment
 .env
+
+# IDE
 .vscode/
-chroma/
-tmp/
-data/*/databases/
-data/*/databases/**
+
+# Data (PDFs and generated JSON are not committed)
+data/raw/
+data/knowledgebase/
+data/testing/
