@@ -19,3 +19,6 @@ build/
 data/raw/
 data/knowledgebase/
 data/testing/
+
+# Prototype databases (legacy)
+prototype/data/*/databases/
