@@ -18,7 +18,7 @@ PDF / FAQ Data
      └─ 5. Frontend       Chat interface for students
 ```
 
-**Implemented:** Stages 1–3 + Evaluation harness.
+**Implemented:** Stages 1–4 + Evaluation harness (retrieval + generation).
 
 ---
 
@@ -29,10 +29,12 @@ src/marley/
 ├── models/          Shared data classes (ExtractionResult, QualityFlag, ...)
 ├── extractor/       PDF extraction (PyMuPDF + pdfplumber)
 ├── chunker/         PDF chunking (sentence-aligned sliding window) + FAQ chunking
-└── retrieval/       Abstract Retriever interface + BM25 + Vector + Hybrid (RRF)
+├── retrieval/       Abstract Retriever interface + BM25 + Vector + Hybrid (RRF)
+└── generator/       Abstract Generator interface + Ollama LLM backend
 
 evaluation/
-└── retrieval/       Retrieval evaluation (Precision@k, Recall@k, MRR)
+├── retrieval/       Retrieval evaluation (Precision@k, Recall@k, MRR)
+└── generation/      Generation evaluation (LLM-as-Judge, distractor robustness)
 
 tests/               Unit and integration tests (mirrored by component)
 docs/                Component documentation (mirrored by component)
@@ -106,8 +108,10 @@ print(report['metrics'])
 | BM25 Retrieval | 23 | `tests/retrieval/test_bm25.py` |
 | Vector Retrieval | 23 | `tests/retrieval/test_vector.py` |
 | Hybrid Retrieval | 23 | `tests/retrieval/test_hybrid.py` |
-| Evaluation | 34 | `evaluation/tests/retrieval/test_metrics.py`, `evaluation/tests/retrieval/test_evaluate.py` |
-| **Total** | **265** | |
+| Generator | 23 | `tests/generator/test_generator.py` |
+| Retrieval Evaluation | 34 | `evaluation/tests/retrieval/test_metrics.py`, `evaluation/tests/retrieval/test_evaluate.py` |
+| Generation Evaluation | 34 | `evaluation/tests/generation/test_judge.py`, `evaluation/tests/generation/test_metrics.py`, `evaluation/tests/generation/test_evaluate.py` |
+| **Total** | **322** | |
 
 Integration tests that require data files are skipped automatically in CI.
 
@@ -124,7 +128,9 @@ Integration tests that require data files are skipped automatically in CI.
 | BM25 Retrieval | `docs/retrieval/bm25.md` |
 | Vector Retrieval | `docs/retrieval/vector.md` |
 | Hybrid Retrieval | `docs/retrieval/hybrid.md` |
+| Generator | `docs/generator/generator.md` |
 | Retrieval Evaluation | `docs/evaluation/retrieval.md` |
+| Generation Evaluation | `docs/evaluation/generation.md` |
 | Data Structures | `docs/data/data-structures.md` |
 | FAQ Coverage Plan | `docs/data/faq-stpo-coverage.md` |
 
@@ -139,5 +145,6 @@ Test documentation mirrors the component structure under `docs/testing/`.
 - syntok, tiktoken (text processing)
 - rank-bm25 (sparse retrieval)
 - sentence-transformers, chromadb (dense retrieval)
+- ollama (local LLM generation)
 
 See `requirements.txt` for the full list.

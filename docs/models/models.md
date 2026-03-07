@@ -14,6 +14,7 @@ src/marley/models/
 ├── extraction.py     # ExtractionResult, Section, Table
 ├── quality.py        # QualityFlag
 ├── chunking.py       # compute_token_stats()
+├── generation.py     # GenerationResult
 └── io.py             # save_json()
 ```
 
@@ -77,6 +78,20 @@ class QualityFlag:
     context: dict = {}    # Additional context (section_id, page, etc.)
 ```
 
+### GenerationResult
+
+Output of a single generation call.
+
+```python
+@dataclass
+class GenerationResult:
+    answer: str                        # Generated answer text
+    model: str                         # LLM model identifier
+    context_chunk_ids: list[str] = []  # Chunk IDs in the context
+    prompt_tokens: int = 0             # Tokens in the prompt
+    completion_tokens: int = 0         # Tokens generated
+```
+
 ---
 
 ## Utility Functions
@@ -111,7 +126,10 @@ Returns the resolved absolute path of the written file.
 ## Usage
 
 ```python
-from src.marley.models import ExtractionResult, Section, Table, QualityFlag, compute_token_stats, save_json
+from src.marley.models import (
+    ExtractionResult, Section, Table, QualityFlag,
+    GenerationResult, compute_token_stats, save_json,
+)
 ```
 
 All symbols are re-exported from `src.marley.models`, so downstream modules never need to import from submodules directly.
