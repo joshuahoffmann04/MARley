@@ -20,10 +20,10 @@ import json
 import logging
 import sys
 import time
-from dataclasses import asdict
 from pathlib import Path
 
 from evaluation.validate import EVAL_PATHS, validate_data_requirements
+from marley.models.retrieval import Retriever
 from src.marley.server.config import CHUNK_PATHS
 
 logging.basicConfig(
@@ -68,10 +68,12 @@ def _create_retriever(
     if retriever_type == "vector":
         return VectorRetriever(persist_directory=persist_dir)
     if retriever_type == "hybrid":
-        return HybridRetriever((
-            BM25Retriever(),
-            VectorRetriever(persist_directory=persist_dir),
-        ))
+        return HybridRetriever(
+            (
+                BM25Retriever(),
+                VectorRetriever(persist_directory=persist_dir),
+            )
+        )
     raise ValueError(f"Unknown retriever type: {retriever_type}")
 
 
@@ -126,8 +128,7 @@ def run_retrieval_step(output_dir: Path) -> None:
             eval_path = EVAL_PATHS[kb]
             chunks = load_chunks(chunk_path)
             if not chunks:
-                logger.info("  Skipping single-KB %s/%s (0 chunks)",
-                            retriever_type, kb)
+                logger.info("  Skipping single-KB %s/%s (0 chunks)", retriever_type, kb)
                 continue
             logger.info("  Single-KB: %s / %s", retriever_type, kb)
             persist_dir = str(persist_base / f"single-{retriever_type}-{kb}")
@@ -148,7 +149,9 @@ def run_retrieval_step(output_dir: Path) -> None:
             persist_dir = str(persist_base / f"merged-{retriever_type}")
             retriever = _create_retriever(retriever_type, persist_dir)
             report = run_merged_pool_evaluation(
-                retriever, chunk_paths, eval_paths,
+                retriever,
+                chunk_paths,
+                eval_paths,
             )
             reports.append(report)
 
@@ -161,7 +164,9 @@ def run_retrieval_step(output_dir: Path) -> None:
         for retriever_type in _RETRIEVER_TYPES:
             logger.info("  Fusion: %s / %s", retriever_type, combo_name)
             factory = _make_retriever_factory(
-                retriever_type, persist_base, "fusion",
+                retriever_type,
+                persist_base,
+                "fusion",
             )
             report = run_fusion_evaluation(
                 retriever_factory=factory,
@@ -194,12 +199,15 @@ def run_rrf_tuning_step(output_dir: Path) -> None:
         persist_base = output_dir / ".chromadb-rrf-tuning"
 
         def hybrid_factory(k_rrf, _kb=kb):
-            return HybridRetriever((
-                BM25Retriever(),
-                VectorRetriever(
-                    persist_directory=str(persist_base / f"hybrid-{_kb}-{k_rrf}"),
+            return HybridRetriever(
+                (
+                    BM25Retriever(),
+                    VectorRetriever(
+                        persist_directory=str(persist_base / f"hybrid-{_kb}-{k_rrf}"),
+                    ),
                 ),
-            ), k_rrf=k_rrf)
+                k_rrf=k_rrf,
+            )
 
         report = sweep_hybrid_k_rrf(
             retriever_factory=hybrid_factory,
@@ -250,7 +258,9 @@ def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) ->
 
 
 def run_abstention_step(
-    output_dir: Path, ollama_url: str, ollama_model: str,
+    output_dir: Path,
+    ollama_url: str,
+    ollama_model: str,
 ) -> None:
     """Run abstention evaluation: Level 1 sweep + full evaluation."""
     from evaluation.abstention.evaluate import (
@@ -277,14 +287,19 @@ def run_abstention_step(
 
         # Level 1 sweep
         sweep = run_level1_sweep(
-            retriever, chunks, questions,
+            retriever,
+            chunks,
+            questions,
             normalization_strategy="bm25",
         )
 
         # Full evaluation at best threshold
         best_threshold = max(sweep, key=lambda s: s["metrics"]["f1"])["threshold"]
         report = run_abstention_evaluation(
-            retriever, generator, chunks, questions,
+            retriever,
+            generator,
+            chunks,
+            questions,
             threshold=best_threshold,
             normalization_strategy="bm25",
         )
@@ -327,32 +342,46 @@ def main() -> None:
     )
 
     # Step selection
-    parser.add_argument("--check", action="store_true",
-                        help="Validate data requirements only")
-    parser.add_argument("--retrieval", action="store_true",
-                        help="Run retrieval evaluation")
-    parser.add_argument("--rrf-tuning", action="store_true",
-                        help="Sweep k_rrf for Hybrid and Fusion")
-    parser.add_argument("--generation", action="store_true",
-                        help="Run generation evaluation")
-    parser.add_argument("--abstention", action="store_true",
-                        help="Run abstention evaluation")
-    parser.add_argument("--e2e", action="store_true",
-                        help="Run end-to-end evaluation")
-    parser.add_argument("--all", action="store_true",
-                        help="Run all evaluation steps")
+    parser.add_argument(
+        "--check", action="store_true", help="Validate data requirements only"
+    )
+    parser.add_argument(
+        "--retrieval", action="store_true", help="Run retrieval evaluation"
+    )
+    parser.add_argument(
+        "--rrf-tuning", action="store_true", help="Sweep k_rrf for Hybrid and Fusion"
+    )
+    parser.add_argument(
+        "--generation", action="store_true", help="Run generation evaluation"
+    )
+    parser.add_argument(
+        "--abstention", action="store_true", help="Run abstention evaluation"
+    )
+    parser.add_argument("--e2e", action="store_true", help="Run end-to-end evaluation")
+    parser.add_argument("--all", action="store_true", help="Run all evaluation steps")
 
     # Common options
-    parser.add_argument("--output-dir", type=str, default="data/testing",
-                        help="Output directory (default: data/testing)")
-    parser.add_argument("--ollama-url", type=str,
-                        default="http://localhost:11434",
-                        help="Ollama server URL")
-    parser.add_argument("--ollama-model", type=str,
-                        default="llama3.1:latest",
-                        help="Ollama model name")
-    parser.add_argument("--config-filter", type=str, default=None,
-                        help="Only run E2E configs matching this substring")
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="data/testing",
+        help="Output directory (default: data/testing)",
+    )
+    parser.add_argument(
+        "--ollama-url",
+        type=str,
+        default="http://localhost:11434",
+        help="Ollama server URL",
+    )
+    parser.add_argument(
+        "--ollama-model", type=str, default="llama3.1:latest", help="Ollama model name"
+    )
+    parser.add_argument(
+        "--config-filter",
+        type=str,
+        default=None,
+        help="Only run E2E configs matching this substring",
+    )
 
     args = parser.parse_args()
     output_dir = Path(args.output_dir)
@@ -377,7 +406,9 @@ def main() -> None:
         # Validate and report
         check_steps = steps or ALL_STEPS
         errors = validate_data_requirements(
-            check_steps, output_dir, args.ollama_url,
+            check_steps,
+            output_dir,
+            args.ollama_url,
         )
         if errors:
             logger.error("Data validation failed:")
@@ -385,8 +416,9 @@ def main() -> None:
                 logger.error("  ERROR: %s", err)
             sys.exit(1)
         else:
-            logger.info("All data requirements satisfied for: %s",
-                        ", ".join(check_steps))
+            logger.info(
+                "All data requirements satisfied for: %s", ", ".join(check_steps)
+            )
             if args.check:
                 return
 
@@ -407,13 +439,20 @@ def main() -> None:
         "retrieval": lambda: run_retrieval_step(output_dir),
         "rrf-tuning": lambda: run_rrf_tuning_step(output_dir),
         "generation": lambda: run_generation_step(
-            output_dir, args.ollama_url, args.ollama_model,
+            output_dir,
+            args.ollama_url,
+            args.ollama_model,
         ),
         "abstention": lambda: run_abstention_step(
-            output_dir, args.ollama_url, args.ollama_model,
+            output_dir,
+            args.ollama_url,
+            args.ollama_model,
         ),
         "e2e": lambda: run_e2e_step(
-            output_dir, args.ollama_url, args.ollama_model, args.config_filter,
+            output_dir,
+            args.ollama_url,
+            args.ollama_model,
+            args.config_filter,
         ),
     }
 

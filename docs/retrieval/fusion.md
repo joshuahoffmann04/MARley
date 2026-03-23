@@ -172,5 +172,5 @@ fused = rrf_fuse([stpo_results, faq_results], weights=[2.0, 1.0], k=10)
 ## Imports
 
 ```python
-from src.marley.retrieval import FusionRetriever, rrf_fuse, Retriever, RetrievalResult, load_chunks
+from src.marley.retrieval import FusionRetriever, rrf_fuse, Retriever, RetrievalResult, load_chunks, validate_corpus
 ```

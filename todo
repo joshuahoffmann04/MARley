@@ -7,3 +7,5 @@ Plan: Abgabe 22.05-
 Nächste Woche: - Code Retrieval - Tests Retrieval - Doku Retrieval - Doku Tests Retrieval - Eval. Retrieval - Tests Eval. Retrieval - Doku Eval. Retrieval - Doku Tests Eval. Retrieval
 
     !!! Was ist mit der Gewichtung der einzelnen KB? Das habe ich aktuell nicht berücksichtigt. Eine Evaluation davon ist im aktuellen Vorhaben mit einer händischen Evaluation sehr komplex (man müsste händisch immer wieder erneut evaluieren und sich so näherungsweise eine optimalen Lösung annähern).
+
+Constants prüfen und erweitern (alle in models)

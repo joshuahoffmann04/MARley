@@ -136,5 +136,5 @@ hybrid = HybridRetriever(
 ## Imports
 
 ```python
-from src.marley.retrieval import HybridRetriever, BM25Retriever, VectorRetriever, Retriever, RetrievalResult, load_chunks
+from src.marley.retrieval import HybridRetriever, BM25Retriever, VectorRetriever, Retriever, RetrievalResult, load_chunks, validate_corpus
 ```

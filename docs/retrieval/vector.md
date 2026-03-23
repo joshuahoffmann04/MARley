@@ -139,5 +139,5 @@ faq_retriever = VectorRetriever(persist_directory="data/vectorstore/faq-stpo")
 ## Imports
 
 ```python
-from src.marley.retrieval import VectorRetriever, Retriever, RetrievalResult, load_chunks
+from src.marley.retrieval import VectorRetriever, Retriever, RetrievalResult, load_chunks, validate_corpus
 ```
