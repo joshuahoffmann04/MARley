@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARley &mdash; Debug UI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>MARley &mdash; Debug UI</h1>
+        <nav>
+            <a href="/">Chat</a>
+            <a href="/debug" class="active">Debug</a>
+            <a href="/evaluation">Evaluation</a>
+        </nav>
+    </header>
+
+    <div class="debug-layout">
+        <aside class="debug-sidebar">
+            <h3>Configuration</h3>
+
+            <div class="form-group">
+                <label for="retriever-type">Retriever Type</label>
+                <select id="retriever-type">
+                    <option value="bm25">BM25</option>
+                    <option value="vector">Vector</option>
+                    <option value="hybrid" selected>Hybrid</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Knowledge Bases</label>
+                <div class="checkbox-group" id="kb-checkboxes">
+                    <label><input type="checkbox" value="stpo" checked> StPO</label>
+                    <label><input type="checkbox" value="faq-stpo" checked> FAQ-StPO</label>
+                    <label><input type="checkbox" value="faq-ao" checked> FAQ-AO</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="strategy">Strategy</label>
+                <select id="strategy">
+                    <option value="single">Single</option>
+                    <option value="merged_pool" selected>Merged Pool</option>
+                    <option value="fusion">Fusion</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="k-value">Top-k</label>
+                <input type="number" id="k-value" value="5" min="1" max="50">
+            </div>
+
+            <div class="form-group">
+                <label for="threshold">Threshold (empty = auto)</label>
+                <input type="number" id="threshold" step="0.01" min="0" max="1" placeholder="auto">
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <h3>Server Status</h3>
+                <div id="server-status" style="font-size: 13px; color: var(--color-text-muted);">
+                    Loading...
+                </div>
+            </div>
+        </aside>
+
+        <main class="debug-main">
+            <form id="query-form" class="debug-query-form">
+                <input type="text" id="query" placeholder="Ask a question..." autocomplete="off">
+                <button type="submit" id="send-btn" class="btn btn-primary">Send</button>
+            </form>
+
+            <div id="result"></div>
+        </main>
+    </div>
+
+    <script src="/static/debug.js"></script>
+</body>
+</html>

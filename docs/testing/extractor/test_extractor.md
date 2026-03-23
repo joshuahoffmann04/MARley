@@ -1,0 +1,68 @@
+# Extractor Test Documentation
+
+**Test file:** `tests/extractor/test_extractor.py`
+**Total tests:** 81
+**Run command:** `python -m pytest tests/extractor/ -v`
+
+---
+
+## Test Strategy
+
+Tests are organized into two categories:
+
+1. **Unit tests** verify individual helper functions in isolation using synthetic inputs. These tests run without the PDF and are fast.
+2. **Integration tests** run the full extraction pipeline against the actual StPO PDF and verify structural properties of the output. These tests are skipped automatically if the PDF is not present (`pytest.mark.skipif`).
+
+Integration tests share a single `ExtractionResult` via module-scoped fixtures to avoid re-extracting the PDF for every test.
+
+---
+
+## Test Classes
+
+### Unit Tests (no PDF required)
+
+| Class | Tests | Functions covered |
+|---|---|---|
+| `TestStripPageNumber` | 3 | `_strip_page_number` |
+| `TestNormalizeWhitespace` | 2 | `_normalize_whitespace` |
+| `TestNormalizeUnicode` | 11 | `_normalize_unicode` |
+| `TestCellText` | 3 | `_cell_text` |
+| `TestIsHeaderRow` | 2 | `_is_header_row` |
+| `TestIsSectionLabelRow` | 5 | `_is_section_label_row` |
+| `TestIsContinuationRow` | 3 | `_is_continuation_row` |
+| `TestMergeContinuation` | 1 | `_merge_continuation` |
+| `TestMergeAppendix2Continuations` | 1 | `_merge_appendix2_continuations` |
+| `TestMakeSectionId` | 3 | `_make_section_id` |
+| `TestAssignParents` | 7 | `_assign_parents` |
+
+### Integration Tests (require PDF)
+
+| Class | Tests | What is verified |
+|---|---|---|
+| `TestExtractionBasics` | 3 | Total page count, source file path, section count. |
+| `TestSectionDetection` | 7 | Preamble, ToC, parts I–IV, all 38 paragraphs, section kinds, no duplicates. |
+| `TestSectionContent` | 3 | Preamble text length, non-empty paragraph text, §23 mentions thesis. |
+| `TestParentAssignment` | 8 | §1–§3 under part-I, §4–§15 under part-II, §16–§36 under part-III, §37–§38 under part-IV, parts/appendices/preamble/ToC have no parent. |
+| `TestPageRanges` | 2 | All 47 pages covered by sections, Appendix 2 spans ≥10 pages. |
+| `TestTableExtraction` | 12 | Total table count, Appendix 2 (1 table, 7 headers, 54 rows, 46 CS + 8 Conditional, no empty rows, numeric LP), Appendix 3 (≥10 tables), Appendix 4 (≥1 table), unique table IDs. |
+| `TestUnicodeNormalizationIntegration` | 2 | Scans all section text and table cells for remaining typographic Unicode characters. |
+| `TestSaveAndLoad` | 2 | JSON roundtrip preserves page count and section count, parent directory creation. |
+| `TestExtractErrors` | 1 | `FileNotFoundError` for missing PDF. |
+
+---
+
+## Fixtures
+
+| Fixture | Scope | Description |
+|---|---|---|
+| `result` | module | Runs `extract(PDF_PATH)` once for the entire test module. |
+| `sections` | module | `result.sections` list. |
+| `section_map` | module | Dictionary mapping `section_id → Section` for fast lookup. |
+
+---
+
+## CI Considerations
+
+- All tests are guarded by a module-level `pytestmark = pytest.mark.skipif(not PDF_PATH.exists())`.
+- If the PDF is not available (e.g., in CI without test data), all tests are skipped. This is by design: the PDF is copyrighted university material and not committed to the repository. Unit tests use synthetic inputs but still require the PDF marker to pass.
+- The PDF path resolves to `{project_root}/data/raw/msc-computer-science.pdf`.

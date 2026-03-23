@@ -1,0 +1,61 @@
+[project]
+name = "marley"
+version = "0.1.0"
+description = "MARburg Study Advising ChatBot — A RAG pipeline for the M.Sc. Computer Science program at Philipps-Universität Marburg."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.12"
+authors = [
+    {name = "Joshua Hoffmann"},
+]
+keywords = ["rag", "chatbot", "study-advising", "nlp", "information-retrieval"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "PyMuPDF>=1.24.0",
+    "pdfplumber>=0.11.0",
+    "syntok>=1.4.4",
+    "tiktoken>=0.7.0",
+    "rank-bm25>=0.2.2",
+    "chromadb>=0.5.0",
+    "sentence-transformers>=2.2.0",
+    "ollama>=0.4.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
+    "jinja2>=3.1.0",
+]
+
+[project.optional-dependencies]
+eval = ["ragas>=0.2.0"]
+dev = ["pytest>=8.0.0", "pytest-cov>=6.0.0"]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src.marley.*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "evaluation/tests"]
+python_files = "test_*.py"
+addopts = "--strict-markers --tb=short -q"
+markers = [
+    "integration: requires data files or external services (Ollama, ChromaDB)",
+]
+
+[tool.coverage.run]
+source = ["src/marley/retrieval", "src/marley/models/retrieval"]
+omit = ["*/__pycache__/*"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 1
+skip_empty = true

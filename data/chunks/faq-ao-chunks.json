@@ -1,0 +1,31 @@
+{
+  "faq_source": "faq-ao",
+  "source_file": "data/knowledgebase/faq-ao.json",
+  "chunks": [],
+  "stats": {
+    "total_chunks": 0,
+    "entries_total": 1,
+    "entries_processed": 0,
+    "entries_skipped": 1,
+    "min_tokens": 0,
+    "median_tokens": 0,
+    "max_tokens": 0,
+    "total_tokens": 0
+  },
+  "quality_flags": [
+    {
+      "code": "FAQ_EMPTY_QUESTION",
+      "message": "Entry 'ao-0001' has an empty question.",
+      "severity": "warning",
+      "context": {
+        "faq_id": "ao-0001"
+      }
+    },
+    {
+      "code": "FAQ_ALL_SKIPPED",
+      "message": "All FAQ entries were skipped; no chunks produced.",
+      "severity": "error",
+      "context": {}
+    }
+  ]
+}

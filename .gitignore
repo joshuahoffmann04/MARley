@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Testing
+.pytest_cache/
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.claude/
+
+# Derived data (large, rebuilt on demand)
+data/vectorstore/
+.chromadb-*/

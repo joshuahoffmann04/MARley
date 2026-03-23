@@ -1,0 +1,9 @@
+Zugang zu LLM
+Wie viel Einblick in Code ist gewollt, sowohl von euch, als auch in der BA
+Welche Struktur hat eine solche BA am Ende normalerweise? Gibt es da eine klassische Struktur (ähnlich wie beim Proposal), oder überlege ich mir da selbst was.
+Ablauf der nächsten Wochen
+Plan: Abgabe 22.05-
+
+Nächste Woche: - Code Retrieval - Tests Retrieval - Doku Retrieval - Doku Tests Retrieval - Eval. Retrieval - Tests Eval. Retrieval - Doku Eval. Retrieval - Doku Tests Eval. Retrieval
+
+    !!! Was ist mit der Gewichtung der einzelnen KB? Das habe ich aktuell nicht berücksichtigt. Eine Evaluation davon ist im aktuellen Vorhaben mit einer händischen Evaluation sehr komplex (man müsste händisch immer wieder erneut evaluieren und sich so näherungsweise eine optimalen Lösung annähern).

@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "source": "faq-ao",
+    "version": "1.0",
+    "created": "2026-03-18",
+    "description": "FAQ from the advisory office (Studienberatung) for the M.Sc. Computer Science program. These entries represent realistic student questions that would be answered by the advisory office."
+  },
+  "entries": [
+    {
+      "id": "ao-0001",
+      "question": "",
+      "answer": "",
+      "source": ""
+    }
+  ]
+}
