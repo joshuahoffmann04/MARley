@@ -308,7 +308,7 @@
       "reference_answer": "The StPO does not specify the language of the Diploma Supplement. It only states that the rules under §35 of the General Regulations apply.",
       "category": "direct",
       "relevant_chunks": [],
-      "expected_abstention": true
+      "expected_abstention": false
     },
     {
       "id": "eval-039",
@@ -664,11 +664,11 @@
     },
     {
       "id": "eval-083",
-      "question": "Is there a mandatory internship in the M.Sc. Computer Science program?",
-      "reference_answer": "No, there is no mandatory internship. §11 (2) states that the master's program in Computer Science does not include an external practical module. The only practical component is the internal Project Work in Computer Science (CS 697, 12 LP).",
-      "category": "direct",
+      "question": "What are the specific deadlines for module registration each semester?",
+      "reference_answer": "",
+      "category": "unanswerable",
       "relevant_chunks": [],
-      "expected_abstention": false
+      "expected_abstention": true
     },
     {
       "id": "eval-084",

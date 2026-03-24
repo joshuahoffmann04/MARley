@@ -399,7 +399,7 @@
       "relevant_chunks": [
         "par-35-txt-1"
       ],
-      "expected_abstention": true
+      "expected_abstention": false
     },
     {
       "id": "eval-039",
@@ -577,7 +577,8 @@
       "reference_answer": "Yes. §30(3) explicitly permits the one-time change of up to two definitively failed compulsory elective modules. This means that if you have exhausted all repeat attempts for a compulsory elective module, you can switch to a different module instead of losing your examination rights, but this option is limited to two modules total.",
       "category": "multi-source",
       "relevant_chunks": [
-        "par-30-txt-1"
+        "par-30-txt-1",
+        "par-31-txt-1"
       ],
       "expected_abstention": false
     },
@@ -656,7 +657,8 @@
       "reference_answer": "Yes. §38 contains transitional provisions. Students who started under a previous StPO may switch to the current regulations or continue under the old ones, subject to specific conditions defined in the transitional provisions.",
       "category": "multi-source",
       "relevant_chunks": [
-        "par-38-txt-1"
+        "par-38-txt-1",
+        "par-1-txt-1"
       ],
       "expected_abstention": false
     },
@@ -777,7 +779,8 @@
       "reference_answer": "Oral exams last 20-30 minutes, are conducted individually, and are assessed by one examiner and one observer. Written exams (Klausur) last 60-120 minutes and can be graded by a single examiner. Both follow the same grading scale and repetition rules.",
       "category": "multi-source",
       "relevant_chunks": [
-        "par-22-txt-1"
+        "par-22-txt-1",
+        "par-28-txt-1"
       ],
       "expected_abstention": false
     },
@@ -798,7 +801,8 @@
       "reference_answer": "Yes, part-time students have access to the same modules. However, they are expected to take fewer modules per semester. Some modules may not be offered every semester, which requires careful planning.",
       "category": "multi-source",
       "relevant_chunks": [
-        "par-26-txt-1"
+        "par-26-txt-1",
+        "par-7-txt-1"
       ],
       "expected_abstention": false
     },
@@ -808,7 +812,8 @@
       "reference_answer": "Under the transitional provisions (§38), grades from modules completed under the old StPO are generally transferred. The examination committee determines which completed modules are equivalent under the new regulations.",
       "category": "multi-source",
       "relevant_chunks": [
-        "par-38-txt-1"
+        "par-38-txt-1",
+        "par-19-txt-1"
       ],
       "expected_abstention": false
     },
@@ -870,13 +875,11 @@
     },
     {
       "id": "eval-083",
-      "question": "Is there a mandatory internship in the M.Sc. Computer Science program?",
-      "reference_answer": "No, there is no mandatory internship. §11 (2) states that the master's program in Computer Science does not include an external practical module. The only practical component is the internal Project Work in Computer Science (CS 697, 12 LP).",
-      "category": "direct",
-      "relevant_chunks": [
-        "par-11-txt-1"
-      ],
-      "expected_abstention": false
+      "question": "What are the specific deadlines for module registration each semester?",
+      "reference_answer": "",
+      "category": "unanswerable",
+      "relevant_chunks": [],
+      "expected_abstention": true
     },
     {
       "id": "eval-084",

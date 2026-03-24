@@ -396,7 +396,7 @@
       "relevant_chunks": [
         "faq-stpo-stpo-0527"
       ],
-      "expected_abstention": true
+      "expected_abstention": false
     },
     {
       "id": "eval-039",
@@ -549,7 +549,9 @@
       "reference_answer": "The master's program requires exactly 120 credits (§3(1)). The StPO does not explicitly address whether students can take modules beyond 120 credits or how additional modules would be handled on the transcript. This would fall under the General Regulations.",
       "category": "multi-source",
       "relevant_chunks": [
-        "faq-stpo-stpo-0478"
+        "faq-stpo-stpo-0478",
+        "faq-stpo-stpo-0091",
+        "faq-stpo-stpo-0469"
       ],
       "expected_abstention": false
     },
@@ -582,7 +584,10 @@
       "reference_answer": "For Profile Area Biology, you can import modules from B.Sc. Biology and LAaG Biology (Dept. 17). Among the profile areas, only Mathematics and Geography offer master-level source programs. Mathematics imports from M.Sc. Mathematics and M.Sc. Economic Mathematics; Geography from M.Sc. Physical Geography and M.Sc. Economic Geography. Economics and Business Administration only have bachelor-level source programs.",
       "category": "multi-source",
       "relevant_chunks": [
-        "faq-stpo-stpo-0951"
+        "faq-stpo-stpo-0951",
+        "faq-stpo-stpo-0943",
+        "faq-stpo-stpo-0945",
+        "faq-stpo-stpo-0941"
       ],
       "expected_abstention": false
     },
@@ -625,7 +630,10 @@
       "reference_answer": "Conditional modules must be completed in addition to the 120 regular credits and are typically taken in the first semester. They do not count toward the degree but must be passed to fulfill admission conditions (§4(4)).",
       "category": "multi-source",
       "relevant_chunks": [
-        "faq-stpo-stpo-0556"
+        "faq-stpo-stpo-0556",
+        "faq-stpo-stpo-0036",
+        "faq-stpo-stpo-0091",
+        "faq-stpo-stpo-1004"
       ],
       "expected_abstention": false
     },
@@ -635,7 +643,9 @@
       "reference_answer": "Importable modules from B.Sc. Computer Science include: Introduction to Bioinformatics, Introduction to Cryptography, Design and Administration of Databases, Graphics Programming, IT Security, NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management, and various Advanced Modules.",
       "category": "multi-source",
       "relevant_chunks": [
-        "faq-stpo-stpo-0936"
+        "faq-stpo-stpo-0936",
+        "faq-stpo-stpo-0933",
+        "faq-stpo-stpo-0932"
       ],
       "expected_abstention": false
     },
@@ -756,7 +766,10 @@
       "reference_answer": "If a student exceeds the maximum study duration without valid reasons for extension, they may lose their examination right and face exmatriculation (§25, §31).",
       "category": "multi-source",
       "relevant_chunks": [
-        "faq-stpo-stpo-0506"
+        "faq-stpo-stpo-0506",
+        "faq-stpo-stpo-0408",
+        "faq-stpo-stpo-0507",
+        "faq-stpo-stpo-0055"
       ],
       "expected_abstention": false
     },
@@ -777,7 +790,9 @@
       "reference_answer": "Theoretical exportable modules from Appendix 4 include Advanced Algorithmics (CS 627), Advanced Programming Concepts (CS 609), Advanced Topics in Cryptography (CS 556), Algorithmic Network Analysis (CS 529), Compiler Construction (CS 551), Computational Complexity Theory (CS 576), Formal Methods in Software Engineering (CS 510), Parameterized Algorithms (CS 531), and Large Specialization Modules Computer Science 2–5 (CS 525, CS 526, CS 623, CS 624). Note that Algorithm Engineering and Virtual Machines are classified as practical (P), not theoretical.",
       "category": "multi-source",
       "relevant_chunks": [
-        "faq-stpo-stpo-0956"
+        "faq-stpo-stpo-0956",
+        "faq-stpo-stpo-0998",
+        "faq-stpo-stpo-0120"
       ],
       "expected_abstention": false
     },
@@ -861,11 +876,11 @@
     },
     {
       "id": "eval-083",
-      "question": "Is there a mandatory internship in the M.Sc. Computer Science program?",
-      "reference_answer": "No, there is no mandatory internship. §11 (2) states that the master's program in Computer Science does not include an external practical module. The only practical component is the internal Project Work in Computer Science (CS 697, 12 LP).",
-      "category": "direct",
+      "question": "What are the specific deadlines for module registration each semester?",
+      "reference_answer": "",
+      "category": "unanswerable",
       "relevant_chunks": [],
-      "expected_abstention": false
+      "expected_abstention": true
     },
     {
       "id": "eval-084",
