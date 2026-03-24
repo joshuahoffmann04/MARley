@@ -76,5 +76,5 @@ class BM25Retriever(Retriever):
 
     @property
     def size(self) -> int:
-        """Return the number of indexed documents."""
+        """Return the number of indexed chunks."""
         return len(self._corpus)

@@ -144,7 +144,7 @@ class PipelineService:
             retriever.index(chunks)
 
         self._retriever_cache[cache_key] = retriever
-        logger.info("Retriever cached: %s (%d docs)", cache_key, retriever.size)
+        logger.info("Retriever cached: %s (%d chunks)", cache_key, retriever.size)
         return retriever
 
     def chat(

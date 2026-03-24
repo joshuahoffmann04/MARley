@@ -152,7 +152,7 @@ class VectorRetriever(Retriever):
 
     @property
     def size(self) -> int:
-        """Return the number of indexed documents."""
+        """Return the number of indexed chunks."""
         if self._collection is None:
             return 0
         return self._collection.count()

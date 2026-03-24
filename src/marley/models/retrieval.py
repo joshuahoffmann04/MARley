@@ -50,7 +50,7 @@ class Retriever(ABC):
     @property
     @abstractmethod
     def size(self) -> int:
-        """Return the number of indexed documents."""
+        """Return the number of indexed chunks."""
 
 
 # ---------------------------------------------------------------------------
@@ -80,7 +80,7 @@ def validate_corpus(corpus: list[dict]) -> None:
         missing = required - doc.keys()
         if missing:
             msg = (
-                f"Corpus document at index {i} is missing required "
+                f"Corpus item at index {i} is missing required "
                 f"keys: {', '.join(sorted(missing))}."
             )
             raise ValueError(msg)

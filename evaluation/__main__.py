@@ -23,7 +23,7 @@ import time
 from pathlib import Path
 
 from evaluation.validate import EVAL_PATHS, validate_data_requirements
-from marley.models.retrieval import Retriever
+from src.marley.models.retrieval import Retriever
 from src.marley.server.config import CHUNK_PATHS
 
 logging.basicConfig(

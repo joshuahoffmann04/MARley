@@ -31,6 +31,12 @@ class TestRRFFuse:
     def test_multiple_empty_lists_returns_empty(self):
         assert rrf_fuse([[], [], []], k=5) == []
 
+    def test_mixed_empty_and_nonempty_lists(self):
+        results = [_r("c1", 1.0), _r("c2", 0.5)]
+        fused = rrf_fuse([[], results, []], k=5)
+        assert len(fused) == 2
+        assert fused[0].chunk_id == "c1"
+
     # ------------------------------------------------------------------
     # Single list
     # ------------------------------------------------------------------

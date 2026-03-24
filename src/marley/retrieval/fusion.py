@@ -63,5 +63,5 @@ class FusionRetriever(Retriever):
 
     @property
     def size(self) -> int:
-        """Return the total number of indexed documents across all sub-retrievers."""
+        """Return the total number of indexed chunks across all sub-retrievers."""
         return sum(r.size for r in self._retrievers)

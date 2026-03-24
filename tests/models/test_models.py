@@ -14,6 +14,109 @@ from src.marley.models.extraction import ExtractionResult, Section, Table
 from src.marley.models.generation import GenerationResult
 from src.marley.models.io import save_json
 from src.marley.models.quality import QualityFlag
+from src.marley.models.retrieval import RetrievalResult, load_chunks, validate_corpus
+
+
+# ---------------------------------------------------------------------------
+# RetrievalResult
+# ---------------------------------------------------------------------------
+
+
+class TestRetrievalResult:
+    """Tests for the RetrievalResult dataclass."""
+
+    def test_construction(self) -> None:
+        r = RetrievalResult(chunk_id="c1", text="hello", score=0.9, metadata={"k": "v"})
+        assert r.chunk_id == "c1"
+        assert r.text == "hello"
+        assert r.score == 0.9
+        assert r.metadata == {"k": "v"}
+
+    def test_asdict(self) -> None:
+        r = RetrievalResult(chunk_id="c1", text="t", score=0.5, metadata={})
+        d = asdict(r)
+        assert d == {"chunk_id": "c1", "text": "t", "score": 0.5, "metadata": {}}
+
+
+# ---------------------------------------------------------------------------
+# load_chunks
+# ---------------------------------------------------------------------------
+
+
+class TestLoadChunks:
+    """Tests for the load_chunks utility."""
+
+    def test_loads_valid_file(self, tmp_path: Path) -> None:
+        data = {"chunks": [
+            {"chunk_id": "c1", "text": "hello", "metadata": {}},
+        ]}
+        f = tmp_path / "chunks.json"
+        f.write_text(json.dumps(data), encoding="utf-8")
+        result = load_chunks(f)
+        assert len(result) == 1
+        assert result[0]["chunk_id"] == "c1"
+
+    def test_file_not_found_raises(self) -> None:
+        with pytest.raises(FileNotFoundError):
+            load_chunks("nonexistent/file.json")
+
+    def test_missing_chunks_key_raises(self, tmp_path: Path) -> None:
+        f = tmp_path / "bad.json"
+        f.write_text(json.dumps({"data": []}), encoding="utf-8")
+        with pytest.raises(KeyError):
+            load_chunks(f)
+
+    def test_accepts_path_object(self, tmp_path: Path) -> None:
+        data = {"chunks": [{"chunk_id": "c1", "text": "t", "metadata": {}}]}
+        f = tmp_path / "chunks.json"
+        f.write_text(json.dumps(data), encoding="utf-8")
+        result = load_chunks(Path(f))
+        assert len(result) == 1
+
+    def test_empty_chunks_list(self, tmp_path: Path) -> None:
+        f = tmp_path / "empty.json"
+        f.write_text(json.dumps({"chunks": []}), encoding="utf-8")
+        assert load_chunks(f) == []
+
+
+# ---------------------------------------------------------------------------
+# validate_corpus
+# ---------------------------------------------------------------------------
+
+
+class TestValidateCorpus:
+    """Tests for the validate_corpus utility."""
+
+    def test_valid_corpus_passes(self) -> None:
+        corpus = [{"chunk_id": "c1", "text": "t", "metadata": {}}]
+        validate_corpus(corpus)  # should not raise
+
+    def test_empty_corpus_passes(self) -> None:
+        validate_corpus([])  # should not raise
+
+    def test_missing_chunk_id_raises(self) -> None:
+        with pytest.raises(ValueError, match="chunk_id"):
+            validate_corpus([{"text": "t", "metadata": {}}])
+
+    def test_missing_text_raises(self) -> None:
+        with pytest.raises(ValueError, match="text"):
+            validate_corpus([{"chunk_id": "c1", "metadata": {}}])
+
+    def test_missing_metadata_raises(self) -> None:
+        with pytest.raises(ValueError, match="metadata"):
+            validate_corpus([{"chunk_id": "c1", "text": "t"}])
+
+    def test_multiple_missing_keys_reported(self) -> None:
+        with pytest.raises(ValueError, match="missing required keys"):
+            validate_corpus([{}])
+
+    def test_error_reports_index(self) -> None:
+        corpus = [
+            {"chunk_id": "c1", "text": "t", "metadata": {}},
+            {"chunk_id": "c2", "text": "t"},  # missing metadata
+        ]
+        with pytest.raises(ValueError, match="index 1"):
+            validate_corpus(corpus)
 
 
 # ---------------------------------------------------------------------------

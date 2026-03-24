@@ -94,7 +94,7 @@ class Retriever(ABC):
 |---|---|
 | `index(corpus)` | Build the retrieval index from a list of chunk dicts (keys: `chunk_id`, `text`, `metadata`). |
 | `retrieve(query, k)` | Return the top-*k* most relevant chunks, sorted by descending score. |
-| `size` | Number of indexed documents (read-only property). |
+| `size` | Number of indexed chunks (read-only property). |
 
 ### RetrievalResult
 
@@ -135,13 +135,13 @@ Validate that every dict in the corpus has the required keys (`chunk_id`, `text`
 Fuse multiple ranked result lists into a single ranking using Reciprocal Rank Fusion (Cormack et al., 2009). Used by both `HybridRetriever` (within-KB) and `FusionRetriever` (cross-KB).
 
 ```
-score(d) = sum( weight_i / (k_rrf + rank_i(d)) )
+RRF_score(d) = Σ  weight_i / (k_rrf + rank_i(d))
 ```
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `result_lists` | `list[list[RetrievalResult]]` | — | Ranked result lists to fuse. |
-| `k_rrf` | `int` | `60` | RRF smoothing constant. |
+| `k_rrf` | `int` | `60` | RRF smoothing constant. Higher values flatten the rank distribution. |
 | `k` | `int` | `5` | Number of top results to return. |
 | `weights` | `list[float] \| None` | `None` | Optional per-list weights (uniform if None). |
 

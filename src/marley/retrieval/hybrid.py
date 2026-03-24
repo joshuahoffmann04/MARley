@@ -62,5 +62,5 @@ class HybridRetriever(Retriever):
 
     @property
     def size(self) -> int:
-        """Return the number of indexed documents (from the first retriever)."""
+        """Return the number of indexed chunks (from the first retriever)."""
         return self._retrievers[0].size

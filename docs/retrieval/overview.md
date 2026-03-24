@@ -48,7 +48,7 @@ All retrievers implement three operations:
 |---|---|
 | `index(corpus)` | Build the retrieval index from a list of chunk dicts. Each dict must contain `chunk_id`, `text`, and `metadata`. |
 | `retrieve(query, k)` | Return top-k results sorted by descending relevance score. |
-| `size` | Number of indexed documents. |
+| `size` | Number of indexed chunks (read-only property). |
 
 **Exception:** `FusionRetriever.index()` raises `NotImplementedError` because its sub-retrievers are pre-indexed against separate corpora.
 
@@ -138,7 +138,7 @@ src/marley/
     ├── bm25.py            # BM25Retriever
     ├── vector.py          # VectorRetriever
     ├── hybrid.py          # HybridRetriever (within-KB RRF)
-    └── fusion.py          # FusionRetriever, rrf_fuse() (cross-KB RRF)
+    └── fusion.py          # FusionRetriever (cross-KB RRF), re-exports rrf_fuse()
 ```
 
 ---
@@ -171,3 +171,16 @@ from src.marley.retrieval import (
 | [vector.md](vector.md) | Dense vector retrieval: embeddings, ChromaDB, persistence |
 | [hybrid.md](hybrid.md) | Within-KB RRF fusion: BM25 + Vector combination |
 | [fusion.md](fusion.md) | Cross-KB RRF fusion: merging results across knowledge bases |
+
+---
+
+## Glossary
+
+| Term | Meaning |
+|---|---|
+| **Chunk** | Atomic text unit produced by the chunking pipeline. Each chunk has a `chunk_id`, `text`, and `metadata`. Chunks are the items stored in retrieval indices. |
+| **Corpus** | A list of chunk dicts passed to `index()`. May contain chunks from one or multiple knowledge bases. |
+| **Knowledge base (KB)** | A named source of chunks (e.g., `stpo`, `faq-stpo`, `faq-ao`). Each KB has its own chunk file. |
+| **Sub-retriever** | A `Retriever` instance wrapped by HybridRetriever or FusionRetriever. |
+| **Score** | Raw relevance value from a retriever. Scale depends on retriever type (see Score Scales above). |
+| **Confidence** | Normalized score (0–1) used for abstention decisions. Computed from raw scores via `normalize_scores()`. |

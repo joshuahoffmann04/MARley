@@ -75,7 +75,7 @@ ChromaDB returns cosine distances (0 = identical, 2 = opposite). These are conve
 score = 1.0 - distance
 ```
 
-This produces scores in the range [-1, 1], where 1 means identical and -1 means opposite. Unlike BM25, all results are returned (no zero-score filtering), since even low-similarity results may carry useful semantic information. If `k <= 0`, an empty list is returned immediately.
+This produces scores in the theoretical range [-1, 1], where 1 means identical and -1 means maximally dissimilar. In practice, scores for real text queries are typically positive (0.0 to 0.8), since natural language texts are rarely semantically opposite. Unlike BM25, all results are returned (no zero-score filtering), since even low-similarity results may carry useful semantic information. If `k <= 0`, an empty list is returned immediately.
 
 ---
 

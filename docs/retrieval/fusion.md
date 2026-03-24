@@ -33,7 +33,7 @@ rrf_fuse()  [standalone function]
 RRF combines multiple ranked lists into a single ranking by assigning each document a fused score based on its rank position in each input list:
 
 ```
-RRF_score(d) = sum( weight_i / (k_rrf + rank_i(d)) )
+RRF_score(d) = Σ  weight_i / (k_rrf + rank_i(d))
 ```
 
 where:
@@ -68,7 +68,7 @@ def rrf_fuse(
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `result_lists` | `list[list[RetrievalResult]]` | — | Ranked result lists to fuse (any number). |
-| `k_rrf` | `int` | `60` | RRF smoothing constant. |
+| `k_rrf` | `int` | `60` | RRF smoothing constant. Higher values flatten the rank distribution. |
 | `k` | `int` | `5` | Number of top results to return. |
 | `weights` | `list[float] \| None` | `None` (uniform) | Optional per-list weights. Must be positive and match the length of `result_lists`. |
 
@@ -152,7 +152,7 @@ fused = rrf_fuse([stpo_results, faq_results], weights=[2.0, 1.0], k=10)
 | Parameter | Default | Description |
 |---|---|---|
 | `retrievers` | *(required)* | List of pre-indexed `Retriever` instances (>= 1). |
-| `k_rrf` | `60` | RRF smoothing constant for cross-KB fusion. |
+| `k_rrf` | `60` | RRF smoothing constant. Higher values flatten the rank distribution. |
 | `weights` | `None` (uniform) | Optional list of positive floats (one per retriever). Boosts or dampens individual knowledge bases. |
 
 ---
