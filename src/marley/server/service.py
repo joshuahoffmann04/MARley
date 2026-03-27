@@ -22,6 +22,7 @@ from src.marley.retrieval import (
     BM25Retriever,
     FusionRetriever,
     HybridRetriever,
+    MergedRetriever,
     Retriever,
     VectorRetriever,
     load_chunks,
@@ -139,7 +140,8 @@ class PipelineService:
                 sub_retrievers.append(r)
             retriever = FusionRetriever(sub_retrievers, k_rrf=k_rrf)
         else:
-            retriever = self._create_retriever(retriever_type, tag=f"{strategy}-{kb_tag}")
+            inner = self._create_retriever(retriever_type, tag=f"{strategy}-{kb_tag}")
+            retriever = MergedRetriever(inner)
             chunks = self._load_and_merge_chunks(knowledge_bases)
             retriever.index(chunks)
 

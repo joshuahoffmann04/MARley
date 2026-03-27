@@ -86,14 +86,14 @@ Wrapper that manages multiple pre-indexed retrievers and fuses their results via
 
 ### Key Differences from HybridRetriever
 
-| Aspect | HybridRetriever | FusionRetriever |
+| Aspect | HybridRetriever | MergedRetriever | FusionRetriever |
 |---|---|---|
-| Purpose | Fuse retrieval *strategies* (BM25 + Vector) | Fuse retrieval across *knowledge bases* |
-| Sub-retrievers | Exactly 2 (tuple) | Any number >= 1 (list) |
-| `index()` | Delegates to both sub-retrievers | Raises `NotImplementedError` |
-| `size` | Size of first sub-retriever | Sum of all sub-retriever sizes |
-| Default `k_rrf` | `DEFAULT_K_RRF_HYBRID` (60) | `DEFAULT_K_RRF_FUSION` (60) |
-| Corpus | Same corpus in both sub-retrievers | Different corpus per sub-retriever |
+| Purpose | Fuse retrieval *strategies* (BM25 + Vector) | Merge KBs into one corpus | Fuse retrieval across *knowledge bases* |
+| Sub-retrievers | Exactly 2 (tuple) | 1 (inner retriever) | Any number >= 1 (list) |
+| `index()` | Delegates to both sub-retrievers | Delegates to inner retriever | Raises `NotImplementedError` |
+| `size` | Size of first sub-retriever | Inner retriever's size | Sum of all sub-retriever sizes |
+| Default `k_rrf` | `DEFAULT_K_RRF_HYBRID` (60) | N/A (no fusion) | `DEFAULT_K_RRF_FUSION` (60) |
+| Corpus | Same corpus in both sub-retrievers | Concatenated from all KBs | Different corpus per sub-retriever |
 
 ### Why `index()` is Not Supported
 

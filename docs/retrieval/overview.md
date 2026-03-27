@@ -27,6 +27,10 @@ HybridRetriever(Retriever)      → hybrid.md
 ├── Wraps exactly two Retriever instances (within-KB)
 └── Fuses ranked lists via rrf_fuse()
 
+MergedRetriever(Retriever)      → merged.md
+├── Wraps a single inner Retriever instance (multi-KB)
+└── Delegates all operations to the inner retriever
+
 FusionRetriever(Retriever)      → fusion.md
 ├── Wraps N pre-indexed Retriever instances (cross-KB)
 └── Fuses ranked lists via rrf_fuse()
@@ -36,7 +40,7 @@ FusionRetriever(Retriever)      → fusion.md
 
 - **Strategy pattern:** A common `Retriever` interface allows the evaluation framework, server, and end-to-end pipeline to treat all retrieval strategies uniformly.
 - **Composition over inheritance:** HybridRetriever and FusionRetriever wrap other `Retriever` instances via dependency injection rather than extending them. This decouples strategy selection from corpus management.
-- **Separation of concerns:** BM25 and Vector are leaf retrievers (they own an index). Hybrid and Fusion are composite retrievers (they delegate to leaf retrievers and fuse results).
+- **Separation of concerns:** BM25 and Vector are leaf retrievers (they own an index). Hybrid, Merged, and Fusion are composite retrievers (they delegate to leaf retrievers).
 
 ---
 
@@ -50,7 +54,7 @@ All retrievers implement three operations:
 | `retrieve(query, k)` | Return top-k results sorted by descending relevance score. |
 | `size` | Number of indexed chunks (read-only property). |
 
-**Exception:** `FusionRetriever.index()` raises `NotImplementedError` because its sub-retrievers are pre-indexed against separate corpora.
+**Exceptions:** `FusionRetriever.index()` raises `NotImplementedError` because its sub-retrievers are pre-indexed against separate corpora. `MergedRetriever.index()` delegates to its inner retriever.
 
 ### RetrievalResult
 
@@ -106,7 +110,8 @@ RRF_score(d) = Σ  weight_i / (k_rrf + rank_i(d))
 | Use Case | Class | Sub-retrievers | Purpose |
 |---|---|---|---|
 | Within-KB fusion | HybridRetriever | Exactly 2 (e.g., BM25 + Vector) | Combine sparse + dense on the same corpus |
-| Cross-KB fusion | FusionRetriever | N >= 1 (one per KB) | Merge results across knowledge bases |
+| Multi-KB merged pool | MergedRetriever | 1 (inner retriever) | Concatenate KBs into one corpus, single ranking |
+| Multi-KB cross-KB fusion | FusionRetriever | N >= 1 (one per KB) | Per-KB ranking, fused via RRF |
 
 ---
 
@@ -138,6 +143,7 @@ src/marley/
     ├── bm25.py            # BM25Retriever
     ├── vector.py          # VectorRetriever
     ├── hybrid.py          # HybridRetriever (within-KB RRF)
+    ├── merged.py          # MergedRetriever (multi-KB merged pool)
     └── fusion.py          # FusionRetriever (cross-KB RRF), re-exports rrf_fuse()
 ```
 
@@ -153,6 +159,7 @@ from src.marley.retrieval import (
     VectorRetriever,
     HybridRetriever,
     FusionRetriever,
+    MergedRetriever,
     Retriever,
     RetrievalResult,
     rrf_fuse,
@@ -170,7 +177,8 @@ from src.marley.retrieval import (
 | [bm25.md](bm25.md) | BM25 sparse retrieval: theory, tokenization, scoring |
 | [vector.md](vector.md) | Dense vector retrieval: embeddings, ChromaDB, persistence |
 | [hybrid.md](hybrid.md) | Within-KB RRF fusion: BM25 + Vector combination |
-| [fusion.md](fusion.md) | Cross-KB RRF fusion: merging results across knowledge bases |
+| [merged.md](merged.md) | Merged-pool strategy: multi-KB single corpus |
+| [fusion.md](fusion.md) | Cross-KB RRF fusion: per-KB ranking fused via RRF |
 
 ---
 

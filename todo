@@ -3,3 +3,8 @@ Was ist mit der Gewichtung der einzelnen KB? Das habe ich aktuell nicht berücks
 Constants prüfen und erweitern (alle in models an einer Stelle)
 
 UML diagramm automatisch aus code generieren (ohne evaluation und tests)
+
+ollama serve
+python -m src.marley.server
+
+python -m coverage report
