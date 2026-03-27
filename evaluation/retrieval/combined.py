@@ -9,7 +9,7 @@ knowledge bases:
    instance; per-query results are fused via Reciprocal Rank Fusion.
 
 Both strategies reuse the existing retrieval metrics (Precision@k,
-Recall@k, MRR) and evaluation infrastructure.
+Recall@k, MRR, MAP, F1@k, Jaccard@k) and evaluation infrastructure.
 """
 
 from __future__ import annotations

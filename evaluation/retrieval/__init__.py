@@ -8,7 +8,10 @@ from evaluation.retrieval.evaluate import run_and_report, run_evaluation
 from evaluation.retrieval.rrf_tuning import sweep_fusion_k_rrf, sweep_hybrid_k_rrf
 from evaluation.retrieval.metrics import (
     RetrievalMetrics,
+    average_precision,
     evaluate_retriever,
+    f1_at_k,
+    jaccard_at_k,
     mrr,
     precision_at_k,
     recall_at_k,
@@ -16,7 +19,10 @@ from evaluation.retrieval.metrics import (
 
 __all__ = [
     "RetrievalMetrics",
+    "average_precision",
     "evaluate_retriever",
+    "f1_at_k",
+    "jaccard_at_k",
     "mrr",
     "precision_at_k",
     "recall_at_k",

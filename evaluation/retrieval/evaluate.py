@@ -2,7 +2,7 @@
 
 Loads an annotated evaluation dataset and a set of chunks, runs a
 retriever against all queries, and computes Precision@k, Recall@k,
-and MRR.
+MRR, MAP, F1@k, and Jaccard@k.
 """
 
 from __future__ import annotations

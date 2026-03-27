@@ -1,7 +1,7 @@
 # Combined Knowledge Base Retrieval Evaluation
 
 **Module:** `evaluation/retrieval/combined.py`
-**Metrics:** Precision@k, Recall@k, MRR
+**Metrics:** Precision@k, Recall@k, MRR, MAP, F1@k, Jaccard@k
 **Test file:** `evaluation/tests/retrieval/test_combined.py`
 
 This evaluation measures whether combining multiple knowledge bases improves retrieval quality compared to single-KB retrieval. Two combination strategies are compared: merged pool and separate retrieval with fusion.
@@ -80,61 +80,61 @@ All configurations evaluated with 75 queries at k=1 and k=5.
 
 #### Merged Pool
 
-| Combination | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
-|---|---|---|---|---|---|---|---|
-| stpo+faq-stpo | 0.253 | 0.102 | 0.253 | 0.125 | 0.225 | 0.347 | 75 |
-| stpo+faq-ao | 0.240 | 0.167 | 0.240 | 0.131 | 0.363 | 0.364 | 75 |
-| faq-stpo+faq-ao | 0.253 | 0.175 | 0.253 | 0.133 | 0.371 | 0.366 | 75 |
-| all | 0.267 | 0.103 | 0.267 | 0.149 | 0.232 | 0.386 | 75 |
+| Combination | P@1 | R@1 | F1@1 | MRR@1 | MAP@1 | J@1 | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stpo+faq-stpo | 0.307 | 0.111 | 0.160 | 0.307 | 0.111 | 0.111 | 0.139 | 0.237 | 0.168 | 0.392 | 0.179 | 0.103 |
+| stpo+faq-ao | 0.280 | 0.207 | 0.229 | 0.280 | 0.207 | 0.207 | 0.115 | 0.413 | 0.175 | 0.360 | 0.300 | 0.109 |
+| faq-stpo+faq-ao | 0.280 | 0.191 | 0.220 | 0.280 | 0.191 | 0.191 | 0.131 | 0.402 | 0.190 | 0.383 | 0.280 | 0.116 |
+| all | 0.307 | 0.111 | 0.160 | 0.307 | 0.111 | 0.111 | 0.139 | 0.237 | 0.168 | 0.392 | 0.179 | 0.103 |
 
 #### Fusion (RRF, k_rrf=60)
 
-| Combination | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
-|---|---|---|---|---|---|---|---|
-| stpo+faq-stpo | 0.267 | 0.117 | 0.267 | 0.168 | 0.294 | 0.380 | 75 |
-| stpo+faq-ao | 0.240 | 0.167 | 0.240 | 0.125 | 0.356 | 0.358 | 75 |
-| faq-stpo+faq-ao | 0.227 | 0.155 | 0.227 | 0.128 | 0.355 | 0.341 | 75 |
-| all | 0.267 | 0.117 | 0.267 | 0.195 | 0.301 | 0.395 | 75 |
+| Combination | P@1 | R@1 | F1@1 | MRR@1 | MAP@1 | J@1 | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stpo+faq-stpo | 0.280 | 0.098 | 0.141 | 0.280 | 0.098 | 0.098 | 0.171 | 0.307 | 0.213 | 0.394 | 0.223 | 0.140 |
+| stpo+faq-ao | 0.280 | 0.207 | 0.229 | 0.280 | 0.207 | 0.207 | 0.115 | 0.413 | 0.175 | 0.360 | 0.300 | 0.109 |
+| faq-stpo+faq-ao | 0.280 | 0.191 | 0.220 | 0.280 | 0.191 | 0.191 | 0.131 | 0.402 | 0.190 | 0.383 | 0.280 | 0.116 |
+| all | 0.280 | 0.098 | 0.141 | 0.280 | 0.098 | 0.098 | 0.171 | 0.307 | 0.213 | 0.394 | 0.223 | 0.140 |
 
 ### Vector (all-mpnet-base-v2)
 
 #### Merged Pool
 
-| Combination | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
-|---|---|---|---|---|---|---|---|
-| stpo+faq-stpo | 0.413 | 0.174 | 0.413 | 0.227 | 0.388 | 0.527 | 75 |
-| stpo+faq-ao | 0.387 | 0.257 | 0.387 | 0.179 | 0.480 | 0.503 | 75 |
-| faq-stpo+faq-ao | 0.453 | 0.316 | 0.453 | 0.197 | 0.571 | 0.569 | 75 |
-| all | 0.440 | 0.183 | 0.440 | 0.245 | 0.386 | 0.560 | 75 |
+| Combination | P@1 | R@1 | F1@1 | MRR@1 | MAP@1 | J@1 | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stpo+faq-stpo | 0.453 | 0.165 | 0.235 | 0.453 | 0.165 | 0.165 | 0.243 | 0.383 | 0.286 | 0.560 | 0.299 | 0.188 |
+| stpo+faq-ao | 0.400 | 0.281 | 0.319 | 0.400 | 0.281 | 0.281 | 0.152 | 0.494 | 0.225 | 0.474 | 0.388 | 0.144 |
+| faq-stpo+faq-ao | 0.453 | 0.319 | 0.361 | 0.453 | 0.319 | 0.319 | 0.184 | 0.557 | 0.267 | 0.557 | 0.444 | 0.170 |
+| all | 0.453 | 0.165 | 0.235 | 0.453 | 0.165 | 0.165 | 0.243 | 0.383 | 0.286 | 0.560 | 0.299 | 0.188 |
 
 #### Fusion (RRF, k_rrf=60)
 
-| Combination | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
-|---|---|---|---|---|---|---|---|
-| stpo+faq-stpo | 0.413 | 0.177 | 0.413 | 0.251 | 0.428 | 0.527 | 75 |
-| stpo+faq-ao | 0.373 | 0.240 | 0.373 | 0.181 | 0.472 | 0.472 | 75 |
-| faq-stpo+faq-ao | 0.413 | 0.293 | 0.413 | 0.200 | 0.556 | 0.545 | 75 |
-| all | 0.413 | 0.177 | 0.413 | 0.272 | 0.419 | 0.535 | 75 |
+| Combination | P@1 | R@1 | F1@1 | MRR@1 | MAP@1 | J@1 | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stpo+faq-stpo | 0.400 | 0.125 | 0.185 | 0.400 | 0.125 | 0.125 | 0.264 | 0.422 | 0.313 | 0.549 | 0.312 | 0.211 |
+| stpo+faq-ao | 0.400 | 0.281 | 0.319 | 0.400 | 0.281 | 0.281 | 0.152 | 0.494 | 0.225 | 0.474 | 0.388 | 0.144 |
+| faq-stpo+faq-ao | 0.453 | 0.319 | 0.361 | 0.453 | 0.319 | 0.319 | 0.184 | 0.557 | 0.267 | 0.557 | 0.444 | 0.170 |
+| all | 0.400 | 0.125 | 0.185 | 0.400 | 0.125 | 0.125 | 0.264 | 0.422 | 0.313 | 0.549 | 0.312 | 0.211 |
 
 ### Hybrid (BM25 + Vector, RRF with k_rrf=60)
 
 #### Merged Pool
 
-| Combination | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
-|---|---|---|---|---|---|---|---|
-| stpo+faq-stpo | 0.293 | 0.120 | 0.293 | 0.187 | 0.335 | 0.449 | 75 |
-| stpo+faq-ao | 0.320 | 0.214 | 0.320 | 0.173 | 0.479 | 0.455 | 75 |
-| faq-stpo+faq-ao | 0.333 | 0.231 | 0.333 | 0.187 | 0.536 | 0.482 | 75 |
-| all | 0.320 | 0.128 | 0.320 | 0.216 | 0.348 | 0.469 | 75 |
+| Combination | P@1 | R@1 | F1@1 | MRR@1 | MAP@1 | J@1 | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stpo+faq-stpo | 0.307 | 0.111 | 0.160 | 0.307 | 0.111 | 0.111 | 0.200 | 0.340 | 0.244 | 0.487 | 0.249 | 0.155 |
+| stpo+faq-ao | 0.280 | 0.207 | 0.229 | 0.280 | 0.207 | 0.207 | 0.160 | 0.540 | 0.239 | 0.446 | 0.373 | 0.151 |
+| faq-stpo+faq-ao | 0.280 | 0.191 | 0.220 | 0.280 | 0.191 | 0.191 | 0.168 | 0.533 | 0.248 | 0.497 | 0.387 | 0.156 |
+| all | 0.307 | 0.111 | 0.160 | 0.307 | 0.111 | 0.111 | 0.200 | 0.340 | 0.244 | 0.487 | 0.249 | 0.155 |
 
 #### Fusion (RRF, k_rrf=60)
 
-| Combination | P@1 | R@1 | MRR@1 | P@5 | R@5 | MRR@5 | Queries |
-|---|---|---|---|---|---|---|---|
-| stpo+faq-stpo | 0.347 | 0.158 | 0.347 | 0.245 | 0.422 | 0.473 | 75 |
-| stpo+faq-ao | 0.307 | 0.211 | 0.307 | 0.181 | 0.482 | 0.429 | 75 |
-| faq-stpo+faq-ao | 0.347 | 0.237 | 0.347 | 0.176 | 0.490 | 0.474 | 75 |
-| all | 0.347 | 0.150 | 0.347 | 0.253 | 0.390 | 0.467 | 75 |
+| Combination | P@1 | R@1 | F1@1 | MRR@1 | MAP@1 | J@1 | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| stpo+faq-stpo | 0.280 | 0.098 | 0.141 | 0.280 | 0.098 | 0.098 | 0.253 | 0.423 | 0.306 | 0.478 | 0.286 | 0.201 |
+| stpo+faq-ao | 0.280 | 0.207 | 0.229 | 0.280 | 0.207 | 0.207 | 0.160 | 0.540 | 0.239 | 0.446 | 0.373 | 0.151 |
+| faq-stpo+faq-ao | 0.280 | 0.191 | 0.220 | 0.280 | 0.191 | 0.191 | 0.168 | 0.533 | 0.248 | 0.497 | 0.387 | 0.156 |
+| all | 0.280 | 0.098 | 0.141 | 0.280 | 0.098 | 0.098 | 0.253 | 0.423 | 0.306 | 0.478 | 0.286 | 0.201 |
 
 ---
 
@@ -142,68 +142,60 @@ All configurations evaluated with 75 queries at k=1 and k=5.
 
 ### Single-KB Baselines (from [retrieval.md](retrieval.md))
 
-| Retriever | KB | P@5 | R@5 | MRR@5 |
-|---|---|---|---|---|
-| BM25 | StPO | 0.112 | 0.420 | 0.347 |
-| BM25 | FAQ-StPO | 0.119 | 0.407 | 0.357 |
-| BM25 | FAQ-AO | — | — | — |
-| Vector | StPO | 0.147 | 0.488 | 0.464 |
-| Vector | FAQ-StPO | 0.173 | 0.563 | 0.530 |
-| Vector | FAQ-AO | — | — | — |
-| Hybrid | StPO | 0.157 | 0.547 | 0.432 |
-| Hybrid | FAQ-StPO | 0.162 | 0.536 | 0.476 |
-| Hybrid | FAQ-AO | — | — | — |
+| Retriever | KB | P@5 | R@5 | F1@5 | MRR@5 | MAP@5 | J@5 |
+|---|---|---|---|---|---|---|---|
+| BM25 | StPO | 0.115 | 0.413 | 0.175 | 0.360 | 0.300 | 0.109 |
+| BM25 | FAQ-StPO | 0.131 | 0.402 | 0.190 | 0.383 | 0.280 | 0.116 |
+| Vector | StPO | 0.152 | 0.494 | 0.225 | 0.474 | 0.388 | 0.144 |
+| Vector | FAQ-StPO | 0.184 | 0.557 | 0.267 | 0.557 | 0.444 | 0.170 |
+| Hybrid | StPO | 0.160 | 0.540 | 0.239 | 0.446 | 0.373 | 0.151 |
+| Hybrid | FAQ-StPO | 0.168 | 0.533 | 0.248 | 0.497 | 0.387 | 0.156 |
 
-**Note:** Direct comparison requires care. Single-KB baselines evaluate only on questions with relevant chunks in that specific KB (75 for StPO/FAQ-StPO, 21 for FAQ-AO). Combined-KB results evaluate all 75 non-unanswerable questions with merged relevant_chunks. The query sets overlap but are not identical, as a question may gain relevant chunks from a newly included KB.
+**Note:** FAQ-AO currently has 0 chunks (placeholder). Combinations involving FAQ-AO effectively operate on only the non-empty KBs. These baselines will be updated when FAQ-AO content is available.
 
 ### Best Combined Results vs. Best Single-KB
 
 | Retriever | Best Combined (R@5) | Config | Best Single-KB (R@5) | KB |
 |---|---|---|---|---|
-| BM25 | 0.371 | faq-stpo+faq-ao merged | 0.420 | StPO |
-| Vector | 0.571 | faq-stpo+faq-ao merged | 0.563 | FAQ-StPO |
-| Hybrid | 0.536 | faq-stpo+faq-ao merged | 0.547 | StPO |
+| BM25 | 0.413 | stpo+faq-ao merged / fusion | 0.413 | StPO |
+| Vector | 0.557 | faq-stpo+faq-ao merged / fusion | 0.557 | FAQ-StPO |
+| Hybrid | 0.540 | stpo+faq-ao merged / fusion | 0.540 | StPO |
 
-**Note:** Combined-KB baseline results above were computed before the FAQ-AO content reset (0 chunks). Combinations involving FAQ-AO effectively operate on only the non-empty KBs. These combined results will be refreshed when FAQ-AO content is available.
-
-**Note:** FAQ-AO currently has 0 chunks (placeholder). Combined-KB results involving FAQ-AO reflect only the non-empty KBs. These baselines will be updated when FAQ-AO content is available.
+Since FAQ-AO has 0 chunks, combinations with FAQ-AO are identical to the single non-empty KB. The meaningful combined evaluation is **stpo+faq-stpo** and **all** (which are equivalent given FAQ-AO has 0 chunks).
 
 ---
 
 ## Analysis
 
-### Strategy Comparison: Merged Pool vs. Fusion
+### Strategy Comparison: Merged Pool vs. Fusion (stpo+faq-stpo)
+
+The only meaningful multi-KB combination is stpo+faq-stpo (153 + 1039 = 1192 chunks). The other combinations involving FAQ-AO effectively reduce to single-KB evaluation.
 
 **BM25:**
-- Fusion outperforms merged pool for stpo+faq-stpo (R@5: 0.294 vs 0.225, +31%) and for the all combination (R@5: 0.301 vs 0.232, +30%).
-- For stpo+faq-ao and faq-stpo+faq-ao, merged pool has a slight edge.
-- Overall, BM25 fusion benefits from preserving per-corpus IDF statistics.
+- Fusion outperforms merged pool (R@5: 0.307 vs 0.237, +30%; MAP@5: 0.223 vs 0.179, +25%). BM25 fusion benefits from preserving per-corpus IDF statistics.
 
 **Vector:**
-- Results are close between strategies. Fusion slightly improves stpo+faq-stpo (R@5: 0.428 vs 0.388, +10%) and all (R@5: 0.419 vs 0.386, +9%).
-- faq-stpo+faq-ao slightly favors merged pool (R@5: 0.571 vs 0.556).
-- Dense embeddings are less affected by corpus composition changes.
+- Fusion slightly outperforms merged pool (R@5: 0.422 vs 0.383, +10%; MAP@5: 0.312 vs 0.299, +4%). Dense embeddings are less affected by corpus composition changes.
 
 **Hybrid:**
-- Fusion consistently matches or improves over merged pool for stpo+faq-stpo (R@5: 0.422 vs 0.335, +26%) and all (R@5: 0.390 vs 0.348, +12%).
-- faq-stpo+faq-ao slightly favors merged pool (R@5: 0.536 vs 0.490).
+- Fusion outperforms merged pool (R@5: 0.423 vs 0.340, +24%; MAP@5: 0.286 vs 0.249, +15%).
 
-**Key insight:** Fusion tends to outperform merged pool when combining KBs of very different sizes (stpo+faq-stpo: 153 vs 1039 chunks), because per-KB retrieval preserves the smaller KB's results from being drowned out by the larger one.
+**Key insight:** Fusion consistently outperforms merged pool for stpo+faq-stpo across all retriever types. This is because per-KB retrieval preserves the smaller KB's (StPO, 153 chunks) results from being drowned out by the larger one (FAQ-StPO, 1039 chunks).
 
-### Combination Comparison
+### MAP Analysis
 
-**faq-stpo+faq-ao** consistently achieves the highest R@5 across all retrievers in the merged pool strategy (0.371, 0.571, 0.536). This combination benefits from having two complementary FAQ sources.
+MAP reveals ranking quality beyond first-hit (MRR) and set-level (P/R) metrics:
 
-**stpo+faq-ao** performs well across strategies, benefiting from the small FAQ-AO corpus that provides high-precision matches for direct student questions.
-
-**all (three KBs combined)** does not consistently outperform the best two-KB combinations. The large FAQ-StPO corpus (1039 chunks) can dilute results when merged with the smaller KBs.
+- **Best single-KB MAP@5:** Vector on FAQ-StPO (0.444) — consistent top-ranking of all relevant documents.
+- **Hybrid vs. Vector:** Hybrid MAP@5 (0.373/0.387) falls below Vector (0.388/0.444), confirming that while Hybrid finds more relevant docs (higher recall), it does not rank them as highly.
+- **Combined-KB:** Fusion MAP@5 for stpo+faq-stpo (0.223–0.312) is lower than single-KB MAP, reflecting the increased difficulty when relevant chunks span two KBs of very different sizes.
 
 ### Retriever Ranking
 
-Across all 24 configurations, the retriever ranking is consistent with single-KB findings:
+Across all configurations, the retriever ranking is consistent with single-KB findings:
 
-1. **Vector** — best overall (highest P@5, R@5, MRR@5 in most configurations)
-2. **Hybrid** — second, with strong recall
+1. **Vector** — best overall (highest MAP@5, F1@5, MRR@5 in most configurations)
+2. **Hybrid** — second, with the strongest recall (R@5)
 3. **BM25** — lowest metrics across all configurations
 
 ---
@@ -214,7 +206,7 @@ Across all 24 configurations, the retriever ranking is consistent with single-KB
 evaluation/retrieval/
 ├── combined.py             # Combined-KB evaluation (this module)
 ├── evaluate.py             # Single-KB evaluation runner
-└── metrics.py              # Shared metrics (Precision@k, Recall@k, MRR)
+└── metrics.py              # Shared metrics (P@k, R@k, F1@k, MRR, MAP, Jaccard@k)
 
 src/marley/retrieval/
 └── fusion.py               # RRF fusion utility (shared by HybridRetriever + combined eval)

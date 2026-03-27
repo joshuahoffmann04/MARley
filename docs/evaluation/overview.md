@@ -45,7 +45,10 @@ The evaluation framework is structured around the three proposal goals:
 **Retrieval metrics** (used by evaluations 1, 2):
 - **Precision@k** — proportion of top-k results that are relevant
 - **Recall@k** — proportion of all relevant chunks found in top-k
+- **F1@k** — harmonic mean of Precision@k and Recall@k
 - **MRR** — reciprocal rank of the first relevant result
+- **MAP** — mean average precision across all relevant hit positions
+- **Jaccard@k** — set overlap between retrieved and relevant chunks
 
 All retrieval metrics are macro-averaged over evaluated queries.
 
@@ -138,7 +141,7 @@ Combining knowledge bases generally maintains or improves retrieval quality comp
 
 | Test File | Tests | Evaluation Covered |
 |---|---|---|
-| `evaluation/tests/retrieval/test_metrics.py` | 21 | Retrieval metrics |
+| `evaluation/tests/retrieval/test_metrics.py` | 41 | Retrieval metrics |
 | `evaluation/tests/retrieval/test_evaluate.py` | 13 | Single-KB evaluation runner |
 | `evaluation/tests/retrieval/test_combined.py` | 25 | Combined-KB evaluation runner |
 | `evaluation/tests/retrieval/test_rrf_tuning.py` | 10 | RRF k-parameter sweep |
@@ -155,4 +158,4 @@ Combining knowledge bases generally maintains or improves retrieval quality comp
 | `evaluation/tests/end_to_end/test_prepare.py` | 8 | E2E item preparation |
 | `evaluation/tests/end_to_end/test_metrics.py` | 12 | E2E metrics aggregation |
 | `evaluation/tests/test_utils.py` | 16 | Shared utilities |
-| **Total** | **236** | |
+| **Total** | **256** | |
