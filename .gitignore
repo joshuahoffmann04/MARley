@@ -19,3 +19,4 @@ build/
 # Derived data (large, rebuilt on demand)
 data/vectorstore/
 .chromadb-*/
+data/chunks/.chromadb/

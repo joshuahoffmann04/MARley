@@ -42,7 +42,6 @@ class ServerConfig:
     default_knowledge_bases: list[str] = field(
         default_factory=lambda: ["stpo", "faq-stpo", "faq-ao"],
     )
-    evaluation_items_dir: str = "data/testing"
 
 
 def check_ollama(base_url: str, timeout: float = 5.0) -> dict:

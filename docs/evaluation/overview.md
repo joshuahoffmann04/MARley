@@ -14,8 +14,8 @@ The evaluation framework measures the quality of each pipeline stage independent
 | 1 | Single-KB Retrieval | `evaluation/retrieval/evaluate.py` | [retrieval.md](retrieval.md) | Complete |
 | 1a | RRF k_rrf Tuning | `evaluation/retrieval/rrf_tuning.py` | [rrf-tuning.md](rrf-tuning.md) | Complete |
 | 2 | Combined-KB Retrieval | `evaluation/retrieval/combined.py` | [combined-retrieval.md](combined-retrieval.md) | Complete |
-| 3 | Generation | `evaluation/generation/` | [generation.md](generation.md) | Complete |
-| 3a | Manual Evaluation | `evaluation/manual/` | [manual-evaluation.md](manual-evaluation.md) | Complete |
+| 3 | Generation (auto) | `evaluation/generation/` | [generation.md](generation.md) | Complete |
+| 3a | LLM Judge | `evaluation/judge/` | [judge.md](judge.md) | Complete |
 | 4 | Combined-KB Generation | `evaluation/generation/combined.py` | [combined-generation.md](combined-generation.md) | Complete |
 | 5 | Abstention | `evaluation/abstention/` | [abstention.md](abstention.md) | Complete |
 | 6 | End-to-End | `evaluation/end_to_end/` | [end-to-end.md](end-to-end.md) | Complete |
@@ -41,6 +41,13 @@ The evaluation framework is structured around the three proposal goals:
 | FAQ-AO | `faq-ao.json` | 0 | Student questions answered by the advisory office (placeholder, no chunks yet) |
 
 ### Shared Metrics
+
+**Generation metrics** (used by evaluation 3):
+- **ROUGE-1/2/L** — n-gram F1 overlap between generated and reference answer
+- **BERTScore F1** — BERT-embedding semantic similarity between generated and reference
+- **faithfulness** — LLM judge: answer grounded in retrieved context (0–1)
+- **answer_relevance** — LLM judge: answer addresses the question (0–1)
+- **correctness** — LLM judge: answer matches reference answer (0–1)
 
 **Retrieval metrics** (used by evaluations 1, 2):
 - **Precision@k** — proportion of top-k results that are relevant
@@ -135,6 +142,10 @@ Vector retrieval outperforms BM25 across all knowledge bases. Hybrid (RRF) achie
 
 Combining knowledge bases generally maintains or improves retrieval quality compared to single-KB baselines. The fusion strategy (per-KB retrievers + RRF) slightly outperforms the merged pool strategy for BM25 and Hybrid, while both strategies perform similarly for Vector. See [combined-retrieval.md](combined-retrieval.md) for full results.
 
+### Generation
+
+FAQ-StPO outperforms StPO on all metrics and is remarkably robust to distractor noise — faithfulness stays above 0.93 even at 10 distractors. StPO faithfulness collapses above 7 distractors (0.95 → 0.16). Combined-KB achieves the best correctness (0.47) and answer relevance (0.65). BERTScore F1 is consistently high (0.86–0.87) across all configurations. See [results/generation.md](results/generation.md) for full results.
+
 ---
 
 ## Test Coverage
@@ -145,17 +156,18 @@ Combining knowledge bases generally maintains or improves retrieval quality comp
 | `evaluation/tests/retrieval/test_evaluate.py` | 13 | Single-KB evaluation runner |
 | `evaluation/tests/retrieval/test_combined.py` | 25 | Combined-KB evaluation runner |
 | `evaluation/tests/retrieval/test_rrf_tuning.py` | 10 | RRF k-parameter sweep |
-| `evaluation/tests/generation/test_metrics.py` | 5 | Generation metrics |
-| `evaluation/tests/generation/test_evaluate.py` | 17 | Generation evaluation runner |
+| `evaluation/tests/generation/test_metrics.py` | 11 | Generation metrics + quality fields |
+| `evaluation/tests/generation/test_evaluate.py` | 22 | Generation evaluation runner + judge integration |
 | `evaluation/tests/generation/test_combined.py` | 14 | Combined-KB generation runner |
-| `evaluation/tests/manual/test_models.py` | 23 | Manual evaluation data model |
-| `evaluation/tests/manual/test_prepare.py` | 10 | Manual evaluation item preparation |
-| `evaluation/tests/manual/test_metrics.py` | 13 | Manual evaluation metrics |
+| `evaluation/tests/generation/test_hf_metrics.py` | 11 | ROUGE + BERTScore helpers |
+| `evaluation/tests/judge/test_base.py` | 9 | Judge ABC + JudgementResult |
+| `evaluation/tests/judge/test_prompts.py` | 15 | Judge prompt templates |
+| `evaluation/tests/judge/test_ollama_judge.py` | 19 | OllamaJudge unit + integration |
+| `evaluation/tests/judge/test_openai_judge.py` | 3 | OpenAIJudge import + validation |
 | `evaluation/tests/abstention/test_metrics.py` | 10 | Abstention metrics |
 | `evaluation/tests/abstention/test_evaluate.py` | 12 | Abstention evaluation runner |
 | `evaluation/tests/end_to_end/test_config.py` | 10 | E2E configuration generation |
 | `evaluation/tests/end_to_end/test_evaluate.py` | 17 | E2E evaluation runner |
-| `evaluation/tests/end_to_end/test_prepare.py` | 8 | E2E item preparation |
-| `evaluation/tests/end_to_end/test_metrics.py` | 12 | E2E metrics aggregation |
+| `evaluation/tests/end_to_end/test_metrics.py` | 13 | E2E automatic metrics aggregation |
 | `evaluation/tests/test_utils.py` | 16 | Shared utilities |
-| **Total** | **256** | |
+| **Total** | **271** | |

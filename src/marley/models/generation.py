@@ -25,6 +25,11 @@ class GenerationResult:
 class Generator(ABC):
     """Abstract base for all generation strategies."""
 
+    @property
+    @abstractmethod
+    def model(self) -> str:
+        """Identifier of the underlying model (e.g. 'llama3.1:latest')."""
+
     @abstractmethod
     def generate(self, query: str, context: list[dict]) -> GenerationResult:
         """Generate an answer given a query and context chunks.

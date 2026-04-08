@@ -2,7 +2,7 @@
 
 Iterates over every configuration from generate_all_configs(),
 builds the retriever, runs the full pipeline for 100 questions,
-and saves both the raw results and the manual evaluation items.
+and saves the raw results with automatic abstention metrics.
 
 Supports resuming: skips configs whose output files already exist.
 
@@ -34,8 +34,6 @@ from evaluation.end_to_end.evaluate import (
     save_report,
     sweep_threshold,
 )
-from evaluation.end_to_end.prepare import prepare_e2e_items
-from evaluation.manual.models import save_items
 from src.marley.generator.ollama import OllamaGenerator
 from src.marley.models.retrieval import Retriever
 from src.marley.retrieval import (
@@ -169,10 +167,9 @@ def run_all(
 
     for idx, config in enumerate(all_configs, 1):
         report_path = output_dir / f"e2e-results-{config.name}.json"
-        items_path = output_dir / f"manual-eval-items-e2e-{config.name}.json"
 
         # Resume support: skip if output already exists
-        if report_path.exists() and items_path.exists():
+        if report_path.exists():
             logger.info(
                 "[%d/%d] SKIP %s (output exists)", idx, total_configs, config.name,
             )
@@ -244,20 +241,6 @@ def run_all(
         }
         save_report(report, report_path)
         logger.info("  Report saved: %s", report_path)
-
-        # Step 4: Prepare and save manual evaluation items
-        items = prepare_e2e_items(results, config.name)
-        save_items(
-            items, str(items_path),
-            metadata={
-                "source": f"e2e-{config.name}",
-                "evaluation_type": "end_to_end",
-                "config": asdict(config),
-                "threshold": best_threshold,
-                "total_items": len(items),
-            },
-        )
-        logger.info("  Evaluation items saved: %s (%d items)", items_path, len(items))
 
         completed += 1
 

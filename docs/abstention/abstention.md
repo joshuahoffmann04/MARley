@@ -149,23 +149,32 @@ The `detect_abstention()` function performs a case-insensitive prefix
 match on the generated answer:
 
 ```python
-def detect_abstention(answer: str) -> tuple[bool, str | None]:
+def detect_abstention(answer: str) -> bool:
     """Detect whether the LLM output is an abstention.
 
-    Returns:
-        Tuple of (is_abstention, reason). If is_abstention is False,
-        reason is None.
+    Returns True if the answer starts with 'ABSTENTION:'
+    (case-insensitive, ignoring leading whitespace).
+    """
+    return answer.strip().upper().startswith("ABSTENTION:")
+
+
+def extract_abstention_reason(answer: str) -> str:
+    """Extract the reason from an abstention response.
+
+    Returns the text after 'ABSTENTION:', stripped of whitespace.
+    Returns an empty string if the answer is not an abstention.
     """
     stripped = answer.strip()
-    if stripped.upper().startswith("ABSTENTION:"):
-        reason = stripped[len("ABSTENTION:"):].strip()
-        return True, reason
-    return False, None
+    if not stripped.upper().startswith("ABSTENTION:"):
+        return ""
+    return stripped[len("ABSTENTION:"):].strip()
 ```
 
-The detection is deliberately simple: the structured prompt format
-guarantees that a compliant model will produce the exact prefix. No
-fuzzy matching or secondary classification is required.
+The two-function design separates detection from extraction: callers
+that only need to know *whether* the model abstained use
+`detect_abstention()`, while callers that also need the *reason* call
+`extract_abstention_reason()`. No fuzzy matching or secondary
+classification is required.
 
 ---
 
@@ -209,7 +218,7 @@ The abstention module is configured through the following parameters:
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `threshold` | `float` | `0.3` | Minimum normalized score for a passage to be considered relevant. |
-| `normalization_strategy` | `str` | `"auto"` | Score normalization strategy: `"bm25"`, `"vector"`, `"rrf"`, or `"auto"` (inferred from retriever type). |
+| `normalization_strategy` | `str` | `"vector"` | Score normalization strategy: `"bm25"`, `"vector"`, or `"rrf"`. Select based on the retriever type (see [Retrieval Overview](../retrieval/overview.md)). |
 | `bm25_k` | `float` | `1.0` | Saturation parameter for BM25 score normalization. |
 | `rrf_k` | `int` | `60` | RRF smoothing constant, must match the value used in the RRF retriever. |
 | `n_retrievers` | `int` | `2` | Number of retrievers fused in RRF, used for RRF score normalization. |
@@ -225,29 +234,30 @@ at which level.
 ```python
 @dataclass
 class AbstentionResult:
-    """Result of a query processed through the abstention pipeline."""
-
-    query: str
-    """The original user query."""
-
-    answer: str | None
-    """The generated answer, or None if the pipeline abstained."""
+    """Result of the abstention-aware pipeline."""
 
     abstained: bool
     """Whether the pipeline abstained from answering."""
 
-    abstention_level: int | None
-    """The level at which abstention occurred (1 or 2), or None."""
+    level: int | None
+    """Abstention level: 1 = retrieval confidence, 2 = LLM detection,
+    None = answered."""
 
-    abstention_reason: str | None
-    """The reason for abstention, or None if answered."""
+    reason: str
+    """Human-readable abstention reason (empty string if answered)."""
 
-    confidence: float | None
-    """The retrieval confidence score (max normalized score), or None
-    if no passages were retrieved."""
+    answer: str
+    """Generated answer text (empty string if abstained)."""
 
-    passages: list
-    """The filtered context passages used for generation."""
+    confidence: float
+    """Top-1 normalized retrieval score in [0, 1]."""
+
+    retrieval_results: list[dict]
+    """Retrieval results passed to (or filtered before) generation.
+    Each dict has 'chunk_id', 'text', and 'score'."""
+
+    model: str
+    """Model identifier of the generator used (empty if abstained at Level 1)."""
 ```
 
 ---

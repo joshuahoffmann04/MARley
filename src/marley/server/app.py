@@ -1,7 +1,6 @@
 """FastAPI application for the MARley pipeline server.
 
-Serves the production chat UI, debug UI, and manual evaluation UI
-under a single application. Run with::
+Serves the production chat UI and debug UI. Run with::
 
     python -m src.marley.server --port 8000
 
@@ -9,7 +8,6 @@ Or start individual components separately::
 
     python -m src.marley.server --mode chat --port 8001
     python -m src.marley.server --mode debug --port 8002
-    python -m evaluation.manual.app --port 8003
 """
 
 from __future__ import annotations
@@ -68,23 +66,6 @@ def create_app(config: ServerConfig | None = None) -> FastAPI:
     # Static files
     app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
     templates = Jinja2Templates(directory=str(_TEMPLATE_DIR))
-
-    # Mount manual evaluation sub-app
-    try:
-        from evaluation.manual.app import app as eval_app
-        from evaluation.manual.app import configure as eval_configure
-
-        eval_configure(config.evaluation_items_dir)
-        app.mount("/evaluation", eval_app)
-        logger.info("Manual evaluation UI mounted at /evaluation")
-    except ImportError:
-        logger.warning("evaluation.manual.app not available; /evaluation disabled")
-
-    # Redirect /evaluation (no trailing slash) to /evaluation/ so that
-    # the sub-app's relative static/API paths resolve correctly.
-    @app.get("/evaluation")
-    async def evaluation_redirect() -> RedirectResponse:
-        return RedirectResponse(url="/evaluation/", status_code=307)
 
     # --- UI Routes ---
 
@@ -180,7 +161,6 @@ def main() -> None:
     parser.add_argument("--ollama-url", default="http://localhost:11434")
     parser.add_argument("--ollama-model", default="llama3.1:latest")
     parser.add_argument("--chunk-dir", default="data/chunks")
-    parser.add_argument("--eval-items-dir", default="data/testing")
     parser.add_argument(
         "--mode",
         choices=["all", "chat", "debug"],
@@ -213,7 +193,6 @@ def main() -> None:
         ollama_base_url=args.ollama_url,
         ollama_model=args.ollama_model,
         chunk_dir=Path(args.chunk_dir),
-        evaluation_items_dir=args.eval_items_dir,
     )
 
     app = create_app(config)

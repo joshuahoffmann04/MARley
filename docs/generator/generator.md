@@ -35,11 +35,19 @@ All generator implementations inherit from the abstract `Generator` class:
 
 ```python
 class Generator(ABC):
+    @property
+    @abstractmethod
+    def model(self) -> str:
+        """Identifier of the underlying model (e.g. 'llama3.1:latest')."""
+
+    @abstractmethod
     def generate(self, query: str, context: list[dict]) -> GenerationResult:
         """Generate an answer given a query and context chunks."""
 ```
 
 Each context dict follows the standard chunk format with `chunk_id`, `text`, and `metadata` keys.
+The `model` property enables downstream code (e.g., the evaluation framework) to record which
+model produced a given answer without inspecting `GenerationResult`.
 
 ### GenerationResult (`src/marley/models/generation.py`)
 

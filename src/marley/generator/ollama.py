@@ -21,8 +21,12 @@ class OllamaGenerator(Generator):
         model: str = "llama3.1:latest",
         base_url: str = "http://localhost:11434",
     ) -> None:
-        self.model = model
+        self._model = model
         self._client = ollama_lib.Client(host=base_url)
+
+    @property
+    def model(self) -> str:
+        return self._model
 
     def generate(self, query: str, context: list[dict]) -> GenerationResult:
         """Generate an answer for the query using the provided context.

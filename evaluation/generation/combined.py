@@ -30,6 +30,7 @@ def run_combined_generation_evaluation(
     eval_paths: dict[str, str | Path],
     distractor_levels: list[int] | None = None,
     *,
+    judge: object | None = None,
     progress_callback=None,
 ) -> list[GenerationEvalResult]:
     """Run generation evaluation with merged multi-KB context.
@@ -48,6 +49,7 @@ def run_combined_generation_evaluation(
         chunk_paths: KB name → chunk file path mapping.
         eval_paths: KB name → evaluation file path mapping.
         distractor_levels: Distractor counts to test (default 0–10).
+        judge: Optional Judge instance for LLM-based quality scoring.
         progress_callback: Optional ``callable(question_id, num_distractors)``
             invoked before each generation call.
 
@@ -62,6 +64,7 @@ def run_combined_generation_evaluation(
         merged_corpus,
         questions,
         distractor_levels=distractor_levels,
+        judge=judge,
         progress_callback=progress_callback,
     )
 
@@ -73,6 +76,7 @@ def run_and_report_combined(
     distractor_levels: list[int] | None = None,
     *,
     combination_name: str = "",
+    judge: object | None = None,
     progress_callback=None,
 ) -> dict:
     """Merge data, run combined generation evaluation, and return a report.
@@ -88,6 +92,7 @@ def run_and_report_combined(
         distractor_levels: Distractor counts to test (default 0–10).
         combination_name: Human-readable combination label
             (default: KB names joined with ``+``).
+        judge: Optional Judge instance for LLM-based quality scoring.
         progress_callback: Optional ``callable(question_id, num_distractors)``
             invoked before each generation call.
 
@@ -103,6 +108,7 @@ def run_and_report_combined(
         merged_corpus,
         questions,
         distractor_levels=distractor_levels,
+        judge=judge,
         progress_callback=progress_callback,
     )
 
@@ -121,6 +127,7 @@ def run_and_report_combined(
         "config": {
             "distractor_levels": distractor_levels or list(range(11)),
             "generator_model": generator.model,
+            "judge_model": judge.model if judge is not None else None,
             "corpus_size": len(merged_corpus),
             "knowledge_bases": kb_names,
             "combination": combination,

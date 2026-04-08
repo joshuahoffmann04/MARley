@@ -6,13 +6,13 @@
 
 The end-to-end evaluation measures the complete MARley pipeline as a user would experience it: raw question in, answer (or abstention) out. No pre-selected chunks, no controlled distractors — just real retrieval feeding into real generation with real abstention.
 
-**See also:** [Evaluation Overview](overview.md) | [Retrieval Evaluation](retrieval.md) | [Generation Evaluation](generation.md) | [Abstention Evaluation](abstention.md) | [Manual Evaluation](manual-evaluation.md)
+**See also:** [Evaluation Overview](overview.md) | [Retrieval Evaluation](retrieval.md) | [Generation Evaluation](generation.md) | [Abstention Evaluation](abstention.md)
 
 ---
 
 ## Objective
 
-Evaluate every pipeline configuration (retriever x knowledge base x combination strategy) on all 100 evaluation questions. All results are manually evaluated for correctness via the Phase 2 manual evaluation UI.
+Evaluate every pipeline configuration (retriever x knowledge base x combination strategy) on all 100 evaluation questions. Automatic abstention metrics are computed from the `expected_abstention` field in the evaluation dataset.
 
 ---
 
@@ -113,7 +113,7 @@ This ensures each configuration uses its own optimal abstention threshold.
 | 32 | `fusion-all-vector` | Vector | StPO + FAQ-StPO + FAQ-AO | fusion | rrf |
 | 33 | `fusion-all-hybrid` | Hybrid | StPO + FAQ-StPO + FAQ-AO | fusion | rrf |
 
-**Total: 33 configurations x 100 questions = 3,300 pipeline runs + manual evaluation items.**
+**Total: 33 configurations x 100 questions = 3,300 pipeline runs.**
 
 **Note on fusion normalization:** All fusion configurations use `rrf` normalization because RRF fusion produces RRF scores regardless of the underlying per-KB retriever type.
 
@@ -172,47 +172,22 @@ class FusionRetriever(Retriever):
 @dataclass
 class E2EConfigMetrics:
     config_name: str
-    strict_accuracy: float
-    lenient_accuracy: float
-    strict_accuracy_by_category: dict[str, float]
-    lenient_accuracy_by_category: dict[str, float]
-    abstention_precision: float
-    abstention_recall: float
-    abstention_f1: float
-    judgement_distribution: dict[str, int]
-    num_judged: int
     num_total: int
+    num_abstained: int
+    abstention_rate: float
+    abstention_precision: float       # correct_abs / (correct_abs + incorrect_abs)
+    abstention_recall: float          # correct_abs / (correct_abs + missing_abs)
+    abstention_f1: float
+    abstention_by_category: dict[str, dict]   # per-category breakdown
+    avg_confidence: float
+    level1_abstentions: int
+    level2_abstentions: int
 ```
 
----
-
-## Manual Evaluation
-
-### Item Format
-
-E2E results are converted to `EvaluationItem` instances for the Phase 2 manual evaluation UI.
-
-- **Item ID format:** `e2e-{config_name}-{question_id}`
-- **Abstention display:** `[ABSTENTION Level {n}] {reason}`
-
-### Judgement Categories
-
-| Judgement | Meaning |
-|---|---|
-| `CORRECT` | Answer is semantically correct and complete |
-| `PARTIALLY_CORRECT` | Answer has some correct info but is incomplete |
-| `INCORRECT` | Answer is factually wrong or hallucinates |
-| `CORRECT_ABSTENTION` | System correctly refused an unanswerable question |
-| `INCORRECT_ABSTENTION` | System refused but should have been able to answer |
-| `MISSING_ABSTENTION` | System provided an answer but should have abstained |
-
-### Accuracy Metrics
-
-- **Strict accuracy:** `(CORRECT + CORRECT_ABSTENTION) / judged`
-- **Lenient accuracy:** `(CORRECT + PARTIALLY_CORRECT + CORRECT_ABSTENTION) / judged`
-- **Per-category accuracy:** Breakdown by `direct`, `multi_source`, `unanswerable`
-- **Abstention precision:** `correct_abstention / (correct_abstention + incorrect_abstention)`
-- **Abstention recall:** `correct_abstention / (correct_abstention + missing_abstention)`
+Abstention categories (derived from `expected_abstention` flag, no human labels needed):
+- **Correct abstention:** `expected_abstention=True` AND `abstained=True`
+- **Incorrect abstention:** `expected_abstention=False` AND `abstained=True`
+- **Missing abstention:** `expected_abstention=True` AND `abstained=False`
 
 ---
 
@@ -226,8 +201,7 @@ E2E results are converted to `EvaluationItem` instances for the Phase 2 manual e
 | `run_e2e_config()` | `evaluate.py` | Run full pipeline for one configuration |
 | `run_and_report()` | `evaluate.py` | Sweep + run + report in one call |
 | `save_report()` | `evaluate.py` | Save report to JSON |
-| `prepare_e2e_items()` | `prepare.py` | Convert E2EResults to EvaluationItems |
-| `compute_e2e_config_metrics()` | `metrics.py` | Compute per-config manual metrics |
+| `compute_e2e_config_metrics()` | `metrics.py` | Compute per-config automatic metrics |
 | `build_comparison_table()` | `metrics.py` | Build cross-config comparison table |
 
 ---
@@ -251,28 +225,21 @@ report = run_and_report(configs[0], retriever, generator, questions)
 save_report(report, "results/e2e/single-stpo-bm25.json")
 ```
 
-### Preparing Manual Evaluation Items
-
-```python
-from evaluation.end_to_end.evaluate import E2EResult, run_e2e_config
-from evaluation.end_to_end.prepare import prepare_e2e_items
-from evaluation.manual.models import save_items
-
-results = run_e2e_config(config, retriever, generator, questions, threshold=0.3)
-items = prepare_e2e_items(results, config.name)
-save_items(items, f"results/e2e/items-{config.name}.json")
-```
-
 ### Computing Comparison Metrics
 
 ```python
+import json
+from dataclasses import asdict
+from pathlib import Path
+from evaluation.end_to_end.evaluate import E2EResult
 from evaluation.end_to_end.metrics import build_comparison_table, compute_e2e_config_metrics
 
 all_metrics = []
-for config_name in config_names:
-    items = load_items(f"results/e2e/items-{config_name}.json")
-    judgements = load_judgements(f"results/e2e/judgements-{config_name}.json")
-    m = compute_e2e_config_metrics(items, judgements, config_name)
+for path in sorted(Path("results/e2e").glob("e2e-results-*.json")):
+    report = json.loads(path.read_text())
+    results = [E2EResult(**r) for r in report["results"]]
+    config_name = report["config"]["name"]
+    m = compute_e2e_config_metrics(results, config_name)
     all_metrics.append(m)
 
 table = build_comparison_table(all_metrics)
@@ -292,12 +259,12 @@ table = build_comparison_table(all_metrics)
 evaluation/end_to_end/
   __init__.py
   config.py           # E2EConfig, generate_all_configs()
-  evaluate.py          # E2EResult, load_questions(), sweep_threshold(),
-                       # run_e2e_config(), run_and_report(), save_report()
-  prepare.py           # prepare_e2e_items()
-  metrics.py           # E2EConfigMetrics, compute_e2e_config_metrics(),
-                       # build_comparison_table()
+  evaluate.py         # E2EResult, load_questions(), sweep_threshold(),
+                      # run_e2e_config(), run_and_report(), save_report()
+  metrics.py          # E2EConfigMetrics, compute_e2e_config_metrics(),
+                      # build_comparison_table()
+  run_all.py          # CLI: run all 33 configurations
 
 src/marley/retrieval/
-  fusion.py            # FusionRetriever (added alongside rrf_fuse)
+  fusion.py           # FusionRetriever (added alongside rrf_fuse)
 ```

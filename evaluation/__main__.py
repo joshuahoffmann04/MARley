@@ -232,11 +232,12 @@ def run_rrf_tuning_step(output_dir: Path) -> None:
 
 
 def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) -> None:
-    """Run generation evaluation: single-KB + combined."""
+    """Run generation evaluation: single-KB + combined, with LLM judge."""
+    from evaluation.generation.combined import run_and_report_combined
     from evaluation.generation.evaluate import (
         run_and_report as run_gen_report,
     )
-    from evaluation.utils import load_evaluation
+    from evaluation.judge import OllamaJudge
     from src.marley.generator.ollama import OllamaGenerator
     from src.marley.retrieval import load_chunks
 
@@ -244,17 +245,32 @@ def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) ->
     logger.info("GENERATION EVALUATION")
 
     generator = OllamaGenerator(model=ollama_model, base_url=ollama_url)
+    judge = OllamaJudge(model=ollama_model, base_url=ollama_url)
     reports = []
 
+    # Single-KB evaluation
     for kb, chunk_path in CHUNK_PATHS.items():
         eval_path = EVAL_PATHS[kb]
-        logger.info("  KB: %s", kb)
+        logger.info("  Single-KB: %s", kb)
         chunks = load_chunks(chunk_path)
-        questions = load_evaluation(eval_path)
-        report = run_gen_report(generator, chunks, questions, knowledge_base=kb)
+        report = run_gen_report(
+            generator, chunks, eval_path, knowledge_base=kb, judge=judge,
+        )
         reports.append(report)
 
     _save_json(reports, output_dir / "generation-evaluation.json")
+
+    # Combined-KB evaluation (all three KBs merged)
+    logger.info("  Combined-KB: stpo + faq-stpo + faq-ao")
+    combined_chunk_paths = dict(CHUNK_PATHS)
+    combined_eval_paths = dict(EVAL_PATHS)
+    combined_report = run_and_report_combined(
+        generator,
+        combined_chunk_paths,
+        combined_eval_paths,
+        judge=judge,
+    )
+    _save_json(combined_report, output_dir / "generation-evaluation-combined.json")
 
 
 def run_abstention_step(

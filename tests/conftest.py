@@ -108,8 +108,12 @@ class StubGenerator(Generator):
         abstain_keywords: set[str] | None = None,
     ) -> None:
         self._answer = answer
-        self.model = model
+        self._model = model
         self._abstain_keywords = abstain_keywords or set()
+
+    @property
+    def model(self) -> str:
+        return self._model
 
     def generate(self, query: str, context: list[dict]) -> GenerationResult:
         for kw in self._abstain_keywords:

@@ -184,6 +184,11 @@ class TestOllamaGeneratorUnit:
         assert gen.model == "mistral:7b"
 
     @patch("src.marley.generator.ollama.ollama_lib.Client")
+    def test_model_is_property(self, mock_client_cls):
+        gen = OllamaGenerator(model="llama3.1:latest")
+        assert isinstance(type(gen).model, property)
+
+    @patch("src.marley.generator.ollama.ollama_lib.Client")
     def test_chat_called_with_correct_model(self, mock_client_cls):
         mock_client = mock_client_cls.return_value
         mock_client.chat.return_value = _mock_chat_response()

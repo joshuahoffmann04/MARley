@@ -1,7 +1,7 @@
 # Generator Test Documentation
 
 **Test file:** `tests/generator/test_generator.py`
-**Total tests:** 23
+**Total tests:** 24
 **Run command:** `python -m pytest tests/generator/test_generator.py -v`
 
 ---
@@ -14,7 +14,7 @@
 |---|---|---|
 | `TestFormatContext` | 4 | Empty list fallback, single/multiple chunk numbering, chunk order preservation. |
 | `TestBuildMessages` | 5 | Message count, system prompt present, query in user message, context in user message, empty context handling. |
-| `TestOllamaGeneratorUnit` | 11 | Interface implementation, return type, answer content, model recording, chunk ID tracking, token counts, empty context, whitespace stripping, custom model, correct API call, None token defaults. |
+| `TestOllamaGeneratorUnit` | 12 | Interface implementation, return type, answer content, model recording, chunk ID tracking, token counts, empty context, whitespace stripping, custom model, correct API call, None token defaults, model is a property. |
 
 ### Integration Tests (require running Ollama server)
 
@@ -38,5 +38,5 @@ No shared fixtures — unit tests use `unittest.mock.patch` to stub the Ollama c
 
 ## CI Considerations
 
-- All unit tests (20) run without external dependencies.
+- All unit tests (21) run without external dependencies.
 - Integration tests (3) are skipped if Ollama is not reachable.

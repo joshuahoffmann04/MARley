@@ -211,3 +211,66 @@ class TestRunGenerationEvaluation:
             progress_callback=lambda qid, n: calls.append((qid, n)),
         )
         assert len(calls) == 2  # 2 answerable questions
+
+    def test_rouge_scores_populated(self):
+        results = run_generation_evaluation(
+            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            distractor_levels=[0],
+        )
+        # ROUGE scores should be floats in [0, 1]
+        for r in results:
+            assert 0.0 <= r.rouge1 <= 1.0
+            assert 0.0 <= r.rouge2 <= 1.0
+            assert 0.0 <= r.rougeL <= 1.0
+
+    def test_bertscore_populated(self):
+        results = run_generation_evaluation(
+            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            distractor_levels=[0],
+        )
+        for r in results:
+            assert isinstance(r.bertscore_f1, float)
+
+    def test_judge_scores_zero_without_judge(self):
+        results = run_generation_evaluation(
+            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            distractor_levels=[0],
+        )
+        for r in results:
+            assert r.faithfulness == 0.0
+            assert r.answer_relevance == 0.0
+            assert r.correctness == 0.0
+
+    def test_judge_scores_populated_with_judge(self):
+        from evaluation.judge.base import Judge, JudgementResult
+
+        class _FixedJudge(Judge):
+            @property
+            def model(self) -> str:
+                return "fixed-judge"
+
+            def judge(self, question_id, question, context, generated_answer, reference_answer):
+                return JudgementResult(
+                    question_id=question_id,
+                    faithfulness=0.9,
+                    answer_relevance=0.85,
+                    correctness=0.8,
+                    model=self.model,
+                )
+
+        results = run_generation_evaluation(
+            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            distractor_levels=[0],
+            judge=_FixedJudge(),
+        )
+        for r in results:
+            assert r.faithfulness == pytest.approx(0.9)
+            assert r.answer_relevance == pytest.approx(0.85)
+            assert r.correctness == pytest.approx(0.8)
+
+    def test_empty_corpus_no_results(self):
+        results = run_generation_evaluation(
+            StubGenerator(answer="stub answer"), [], QUESTIONS,
+            distractor_levels=[0],
+        )
+        assert results == []
