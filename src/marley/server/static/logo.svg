@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <!-- Placeholder seal circle -->
+  <circle cx="24" cy="24" r="21" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+  <circle cx="24" cy="24" r="16" stroke="rgba(255,255,255,0.4)" stroke-width="0.75"/>
+  <!-- Phi symbol -->
+  <text x="24" y="31" text-anchor="middle" font-family="Georgia, Cambria, serif" font-size="22" fill="white">&#x3A6;</text>
+  <!-- University name -->
+  <text x="56" y="17" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="white" letter-spacing="0.2">Philipps-Universit&#228;t</text>
+  <text x="56" y="33" font-family="Arial, Helvetica, sans-serif" font-size="11.5" fill="rgba(255,255,255,0.85)" letter-spacing="0.2">Marburg</text>
+</svg>

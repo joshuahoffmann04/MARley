@@ -36,6 +36,7 @@ class ServerConfig:
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = "llama3.1:latest"
     chunk_dir: Path = field(default_factory=lambda: Path("data/chunks"))
+    pdf_path: Path | None = field(default_factory=lambda: Path("data/raw/msc-computer-science.pdf"))
     k: int = DEFAULT_K
     default_retriever_type: str = "hybrid"
     default_strategy: str = "merged_pool"

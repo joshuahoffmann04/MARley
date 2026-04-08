@@ -211,12 +211,17 @@ class PipelineService:
             normalization_params=norm_params,
         )
 
-        # Build source references
+        # Build source references (include page metadata for PDF viewer)
         sources = [
             {
                 "chunk_id": r["chunk_id"],
                 "text": r["text"][:SOURCE_TEXT_TRUNCATION],
                 "score": round(r["score"], 4),
+                "metadata": {
+                    "start_page": r.get("metadata", {}).get("start_page"),
+                    "end_page": r.get("metadata", {}).get("end_page"),
+                    "section_title": r.get("metadata", {}).get("section_title"),
+                },
             }
             for r in result.retrieval_results
         ]

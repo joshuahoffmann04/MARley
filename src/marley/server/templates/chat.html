@@ -1,37 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MARley &mdash; Study Advising Assistant</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARley &mdash; Study Advising Assistant</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header class="header">
-        <h1>MARley &mdash; Study Advising Assistant</h1>
-        <nav>
-            <a href="/" class="active">Chat</a>
-            <a href="/debug">Debug</a>
-            <a href="/evaluation">Evaluation</a>
-        </nav>
-    </header>
 
-    <div class="chat-container">
-        <div id="chat-log" class="chat-log"></div>
+  <!-- Decorative bubbles (Philipps-Uni Marburg design) -->
+  <div class="bubbles" aria-hidden="true">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+  </div>
 
-        <div class="chat-input-area">
-            <form id="chat-form" class="chat-form">
-                <textarea
-                    id="query"
-                    placeholder="Ask a question about the M.Sc. Computer Science program..."
-                    rows="1"
-                    autocomplete="off"
-                ></textarea>
-                <button type="submit" id="send-btn" class="btn btn-primary">Send</button>
-            </form>
-        </div>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="/" class="header-logo" title="Philipps-Universität Marburg">
+        <img src="/static/logo.svg" alt="Philipps-Universität Marburg">
+      </a>
+      <div class="header-divider"></div>
+      <span class="header-app-name">MARley</span>
     </div>
+    <div class="header-right">
+      <nav class="header-nav">
+        <a href="/" class="active">Chat</a>
+        <a href="/debug">Debug</a>
+      </nav>
+      <div class="stateless-badge" title="Each question is answered independently. MARley has no memory of previous questions.">
+        <span class="stateless-dot"></span>
+        <span class="stateless-text">Stateless &mdash; No conversation memory</span>
+      </div>
+    </div>
+  </header>
 
-    <script src="/static/chat.js"></script>
+  <!-- Chat layout -->
+  <div class="chat-layout">
+
+    <!-- Main chat area -->
+    <div class="chat-main" id="chat-main">
+
+      <!-- Query log -->
+      <div class="query-log" id="query-log">
+        <div class="query-log-inner" id="query-log-inner">
+
+          <!-- Welcome state (hidden once first query is sent) -->
+          <div class="welcome-state" id="welcome-state">
+            <h2>Welcome to MARley</h2>
+            <p>
+              Your study advising assistant for the M.Sc. Computer Science programme
+              at Philipps-Universität Marburg. Ask any question about the study
+              regulations, examination rules, or degree requirements.
+            </p>
+            <div class="welcome-note">
+              <span class="welcome-note-dot"></span>
+              Each question is answered independently &mdash; MARley has no memory of previous questions.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Input bar -->
+      <div class="chat-input-bar">
+        <div class="chat-input-inner">
+          <form class="chat-input-form" id="chat-form">
+            <textarea
+              id="query"
+              placeholder="Ask a question about the M.Sc. CS programme &hellip; (each question is independent)"
+              rows="1"
+              autocomplete="off"
+            ></textarea>
+            <button type="submit" id="send-btn" class="btn btn-primary">Ask</button>
+          </form>
+          <div class="chat-hint">Press Enter to send &bull; Shift+Enter for newline</div>
+        </div>
+      </div>
+
+    </div><!-- /chat-main -->
+
+    <!-- PDF slide-in panel -->
+    <aside class="pdf-panel" id="pdf-panel" aria-label="StPO PDF viewer">
+      <div class="pdf-panel-header">
+        <span class="pdf-panel-title" id="pdf-panel-title">M.Sc. CS Study Regulations (StPO)</span>
+        <button class="pdf-panel-close" id="pdf-panel-close" title="Close PDF viewer">&times;</button>
+      </div>
+      <iframe id="pdf-frame" src="" title="StPO PDF"></iframe>
+    </aside>
+
+  </div><!-- /chat-layout -->
+
+  <script src="/static/chat.js"></script>
 </body>
 </html>

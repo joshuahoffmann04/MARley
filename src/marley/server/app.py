@@ -19,7 +19,7 @@ from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -78,6 +78,18 @@ def create_app(config: ServerConfig | None = None) -> FastAPI:
     async def debug_page(request: Request) -> HTMLResponse:
         """Serve the debug UI."""
         return templates.TemplateResponse(request, "debug.html")
+
+    @app.get("/api/pdf/stpo")
+    async def serve_pdf() -> FileResponse:
+        """Serve the StPO PDF for the in-browser viewer."""
+        pdf_path = config.pdf_path
+        if pdf_path is None or not pdf_path.exists():
+            raise HTTPException(404, "PDF not configured or not found.")
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            content_disposition_type="inline",
+        )
 
     # --- API Routes ---
 
@@ -162,6 +174,11 @@ def main() -> None:
     parser.add_argument("--ollama-model", default="llama3.1:latest")
     parser.add_argument("--chunk-dir", default="data/chunks")
     parser.add_argument(
+        "--pdf-path",
+        default="data/raw/msc-computer-science.pdf",
+        help="Path to the StPO PDF for the in-browser viewer",
+    )
+    parser.add_argument(
         "--mode",
         choices=["all", "chat", "debug"],
         default="all",
@@ -193,6 +210,7 @@ def main() -> None:
         ollama_base_url=args.ollama_url,
         ollama_model=args.ollama_model,
         chunk_dir=Path(args.chunk_dir),
+        pdf_path=Path(args.pdf_path),
     )
 
     app = create_app(config)

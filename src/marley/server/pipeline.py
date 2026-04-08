@@ -82,7 +82,7 @@ def run_with_abstention(
             answer="",
             confidence=confidence,
             retrieval_results=[
-                {"chunk_id": r.chunk_id, "text": r.text, "score": r.score}
+                {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
                 for r in normalized
             ],
             model="",
@@ -104,7 +104,7 @@ def run_with_abstention(
             answer="",
             confidence=confidence,
             retrieval_results=[
-                {"chunk_id": r.chunk_id, "text": r.text, "score": r.score}
+                {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
                 for r in filtered
             ],
             model=gen_result.model,
@@ -118,7 +118,7 @@ def run_with_abstention(
         answer=gen_result.answer,
         confidence=confidence,
         retrieval_results=[
-            {"chunk_id": r.chunk_id, "text": r.text, "score": r.score}
+            {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
             for r in filtered
         ],
         model=gen_result.model,
