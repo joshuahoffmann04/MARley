@@ -27,7 +27,7 @@ def run_level1_sweep(
     retriever: Retriever,
     corpus: list[dict],
     questions: list[dict],
-    thresholds: list[float],
+    thresholds: list[float] | None = None,
     *,
     k: int = 5,
     normalization_strategy: str = "vector",
@@ -42,7 +42,7 @@ def run_level1_sweep(
     Args:
         retriever: Retriever instance (must be indexed with corpus).
         corpus: Chunk corpus (used to index the retriever).
-        questions: Evaluation questions, each with 'question_id', 'question',
+        questions: Evaluation questions, each with 'id', 'question',
             and 'expected_abstention'.
         thresholds: List of threshold values to sweep.
         k: Number of chunks to retrieve per query.
@@ -53,6 +53,8 @@ def run_level1_sweep(
         List of dicts, one per threshold, each containing 'threshold'
         and 'metrics' (AbstentionMetrics as dict).
     """
+    if thresholds is None:
+        thresholds = [round(i * 0.05, 2) for i in range(21)]
     norm_params = normalization_params or {}
 
     # Index the retriever
@@ -65,7 +67,7 @@ def run_level1_sweep(
         normalized = normalize_scores(raw_results, normalization_strategy, **norm_params)
         confidence = compute_confidence(normalized)
         question_scores.append({
-            "question_id": q["question_id"],
+            "question_id": q["id"],
             "expected_abstention": q.get("expected_abstention", False),
             "confidence": confidence,
             "normalized_results": normalized,
@@ -142,7 +144,7 @@ def run_abstention_evaluation(
         if not filtered:
             # Level 1 abstention
             per_question_results.append({
-                "question_id": q["question_id"],
+                "question_id": q["id"],
                 "expected_abstention": q.get("expected_abstention", False),
                 "system_abstained": True,
                 "abstention_level": 1,
@@ -161,7 +163,7 @@ def run_abstention_evaluation(
             if detect_abstention(gen_result.answer):
                 # Level 2 abstention
                 per_question_results.append({
-                    "question_id": q["question_id"],
+                    "question_id": q["id"],
                     "expected_abstention": q.get("expected_abstention", False),
                     "system_abstained": True,
                     "abstention_level": 2,
@@ -172,7 +174,7 @@ def run_abstention_evaluation(
             else:
                 # Normal answer
                 per_question_results.append({
-                    "question_id": q["question_id"],
+                    "question_id": q["id"],
                     "expected_abstention": q.get("expected_abstention", False),
                     "system_abstained": False,
                     "abstention_level": None,

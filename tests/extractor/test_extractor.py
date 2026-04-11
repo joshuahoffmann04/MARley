@@ -29,10 +29,9 @@ PDF_PATH = (
     / "raw"
     / "msc-computer-science.pdf"
 )
-pytestmark = [
-    pytest.mark.skipif(not PDF_PATH.exists(), reason="StPO PDF not found"),
-    pytest.mark.integration,
-]
+
+_integration = pytest.mark.integration
+_needs_pdf = pytest.mark.skipif(not PDF_PATH.exists(), reason="StPO PDF not found")
 
 
 @pytest.fixture(scope="module")
@@ -297,6 +296,8 @@ class TestAssignParents:
         assert sections == []
 
 
+@_needs_pdf
+@_integration
 class TestExtractionBasics:
     def test_total_pages(self, result):
         assert result.total_pages == 47
@@ -308,6 +309,8 @@ class TestExtractionBasics:
         assert len(sections) == 48
 
 
+@_needs_pdf
+@_integration
 class TestSectionDetection:
     def test_preamble_exists(self, section_map):
         s = section_map["preamble"]
@@ -338,6 +341,8 @@ class TestSectionDetection:
         assert len(ids) == len(set(ids))
 
 
+@_needs_pdf
+@_integration
 class TestSectionContent:
     def test_preamble_has_text(self, section_map):
         assert len(section_map["preamble"].text) > 50
@@ -352,6 +357,8 @@ class TestSectionContent:
         assert "thesis" in text or "master" in text
 
 
+@_needs_pdf
+@_integration
 class TestParentAssignment:
     def test_par_1_to_3_parent_is_part_I(self, section_map):
         for num in range(1, 4):
@@ -390,6 +397,8 @@ class TestParentAssignment:
         assert appendix["parent_section_id"] is None
 
 
+@_needs_pdf
+@_integration
 class TestPageRanges:
     def test_sections_cover_all_pages(self, sections):
         covered = set()
@@ -403,6 +412,8 @@ class TestPageRanges:
         assert s.end_page - s.start_page >= 10
 
 
+@_needs_pdf
+@_integration
 class TestTableExtraction:
     def test_total_tables(self, sections):
         total = sum(len(s.tables) for s in sections)
@@ -455,6 +466,8 @@ class TestTableExtraction:
                 assert s.section_id in t.table_id
 
 
+@_needs_pdf
+@_integration
 class TestUnicodeNormalizationIntegration:
     """Verify that no typographic Unicode characters remain in extracted output."""
 
@@ -501,6 +514,8 @@ class TestUnicodeNormalizationIntegration:
         )
 
 
+@_needs_pdf
+@_integration
 class TestSaveAndLoad:
     def test_save_roundtrip(self, result, tmp_path):
         out = save(result, tmp_path / "test-output.json")

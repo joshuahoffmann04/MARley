@@ -6,6 +6,8 @@ and server URL are configurable via constructor parameters.
 
 from __future__ import annotations
 
+from typing import Any
+
 import ollama as ollama_lib
 
 from src.marley.generator.base import Generator
@@ -28,7 +30,7 @@ class OllamaGenerator(Generator):
     def model(self) -> str:
         return self._model
 
-    def generate(self, query: str, context: list[dict]) -> GenerationResult:
+    def generate(self, query: str, context: list[dict[str, Any]]) -> GenerationResult:
         """Generate an answer for the query using the provided context.
 
         Sends a chat request to the Ollama server and returns a

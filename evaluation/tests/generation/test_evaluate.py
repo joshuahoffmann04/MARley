@@ -1,20 +1,22 @@
 """Tests for the generation evaluation runner.
 
-Uses a stub Generator implementation to test the evaluation pipeline
-without requiring a running Ollama server.
+Uses a stub Generator and a monkeypatched _score_with_ragas to test
+the evaluation pipeline without requiring Ollama or RAGAS dependencies.
 """
 
 from __future__ import annotations
+
+from unittest.mock import patch
 
 import pytest
 
 from evaluation.generation.evaluate import (
     _assemble_context,
-    load_evaluation,
     run_generation_evaluation,
     select_distractors,
 )
 from evaluation.generation.metrics import GenerationEvalResult
+from evaluation.tests.conftest import fake_ragas_scores
 from tests.conftest import StubGenerator
 
 
@@ -81,7 +83,6 @@ class TestSelectDistractors:
         assert distractors == []
 
     def test_returns_at_most_available(self):
-        # Only 4 non-relevant chunks, but requesting 10
         distractors = select_distractors("study period", {"c1"}, CORPUS, 10)
         assert len(distractors) <= 4
 
@@ -131,8 +132,9 @@ class TestAssembleContext:
 # ---------------------------------------------------------------------------
 
 
+@patch("evaluation.generation.evaluate._score_with_ragas", fake_ragas_scores)
 class TestRunGenerationEvaluation:
-    """Tests for run_generation_evaluation()."""
+    """Tests for run_generation_evaluation() with stubbed RAGAS scoring."""
 
     def test_skips_unanswerable(self):
         results = run_generation_evaluation(
@@ -157,7 +159,7 @@ class TestRunGenerationEvaluation:
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
             distractor_levels=levels,
         )
-        # 2 answerable questions × 3 levels = 6 results
+        # 2 answerable questions x 3 levels = 6 results
         assert len(results) == 6
 
     def test_result_type(self):
@@ -181,10 +183,8 @@ class TestRunGenerationEvaluation:
         )
         for r in results:
             if r.num_distractors == 0:
-                # Only relevant chunks
                 assert len(r.context_chunk_ids) == 1
             elif r.num_distractors == 3:
-                # Relevant + up to 3 distractors
                 assert len(r.context_chunk_ids) >= 2
 
     def test_skips_questions_without_relevant_chunks(self):
@@ -198,7 +198,7 @@ class TestRunGenerationEvaluation:
             },
         ]
         results = run_generation_evaluation(
-            StubGenerator(answer="stub answer"), CORPUS, questions,
+            StubGenerator(answer="stub answer"), [], questions,
             distractor_levels=[0],
         )
         assert len(results) == 0
@@ -212,56 +212,11 @@ class TestRunGenerationEvaluation:
         )
         assert len(calls) == 2  # 2 answerable questions
 
-    def test_rouge_scores_populated(self):
+    def test_ragas_scores_populated(self):
+        """RAGAS scores from _score_with_ragas are propagated to results."""
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
             distractor_levels=[0],
-        )
-        # ROUGE scores should be floats in [0, 1]
-        for r in results:
-            assert 0.0 <= r.rouge1 <= 1.0
-            assert 0.0 <= r.rouge2 <= 1.0
-            assert 0.0 <= r.rougeL <= 1.0
-
-    def test_bertscore_populated(self):
-        results = run_generation_evaluation(
-            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
-            distractor_levels=[0],
-        )
-        for r in results:
-            assert isinstance(r.bertscore_f1, float)
-
-    def test_judge_scores_zero_without_judge(self):
-        results = run_generation_evaluation(
-            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
-            distractor_levels=[0],
-        )
-        for r in results:
-            assert r.faithfulness == 0.0
-            assert r.answer_relevance == 0.0
-            assert r.correctness == 0.0
-
-    def test_judge_scores_populated_with_judge(self):
-        from evaluation.judge.base import Judge, JudgementResult
-
-        class _FixedJudge(Judge):
-            @property
-            def model(self) -> str:
-                return "fixed-judge"
-
-            def judge(self, question_id, question, context, generated_answer, reference_answer):
-                return JudgementResult(
-                    question_id=question_id,
-                    faithfulness=0.9,
-                    answer_relevance=0.85,
-                    correctness=0.8,
-                    model=self.model,
-                )
-
-        results = run_generation_evaluation(
-            StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
-            distractor_levels=[0],
-            judge=_FixedJudge(),
         )
         for r in results:
             assert r.faithfulness == pytest.approx(0.9)

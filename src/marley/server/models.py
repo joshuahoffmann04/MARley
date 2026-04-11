@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -36,7 +38,7 @@ class SourceReference(BaseModel):
     chunk_id: str
     text: str
     score: float
-    metadata: dict = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class ChatConfigInfo(BaseModel):
@@ -69,7 +71,7 @@ class OptionsResponse(BaseModel):
     retriever_types: list[str]
     knowledge_bases: list[str]
     strategies: list[str]
-    defaults: dict
+    defaults: dict[str, Any]
     ollama_model: str
     ollama_status: str
 

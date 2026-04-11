@@ -12,9 +12,9 @@ from src.marley.server.config import CHUNK_PATHS, check_ollama
 
 # Evaluation file paths (relative to project root)
 EVAL_PATHS: dict[str, str] = {
-    "stpo": "data/testing/evaluation-stpo.json",
-    "faq-stpo": "data/testing/evaluation-faq-stpo.json",
-    "faq-ao": "data/testing/evaluation-faq-ao.json",
+    "stpo": "data/evaluation/evaluation-stpo.json",
+    "faq-stpo": "data/evaluation/evaluation-faq-stpo.json",
+    "faq-ao": "data/evaluation/evaluation-faq-ao.json",
 }
 
 # Steps that require Ollama
@@ -23,7 +23,7 @@ OLLAMA_STEPS: set[str] = {"generation", "abstention", "e2e"}
 
 def validate_data_requirements(
     steps: list[str],
-    output_dir: str | Path = "data/testing",
+    output_dir: str | Path = "data/evaluation",
     ollama_url: str = "http://localhost:11434",
 ) -> list[str]:
     """Check that all required files exist for the given evaluation steps.

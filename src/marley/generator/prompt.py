@@ -6,6 +6,8 @@ to answer student questions based solely on provided context chunks.
 
 from __future__ import annotations
 
+from typing import Any
+
 SYSTEM_PROMPT = (
     "You are a study advisor for the M.Sc. Computer Science program "
     "at Philipps-Universit\u00e4t Marburg.\n\n"
@@ -22,7 +24,7 @@ SYSTEM_PROMPT = (
 )
 
 
-def format_context(chunks: list[dict]) -> str:
+def format_context(chunks: list[dict[str, Any]]) -> str:
     """Format a list of chunk dicts into a numbered context string.
 
     Each chunk dict must have a 'text' key. The chunks are numbered
@@ -37,7 +39,7 @@ def format_context(chunks: list[dict]) -> str:
     return "\n\n".join(parts)
 
 
-def build_messages(query: str, chunks: list[dict]) -> list[dict]:
+def build_messages(query: str, chunks: list[dict[str, Any]]) -> list[dict[str, str]]:
     """Build the message list for an LLM chat call.
 
     Returns a list of message dicts with 'role' and 'content' keys,

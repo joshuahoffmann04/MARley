@@ -22,17 +22,17 @@ CORPUS = [
 
 QUESTIONS = [
     {
-        "question_id": "q1",
+        "id": "q1",
         "question": "How long is the study period?",
         "expected_abstention": False,
     },
     {
-        "question_id": "q2",
+        "id": "q2",
         "question": "Where can I park my bicycle?",
         "expected_abstention": True,
     },
     {
-        "question_id": "q3",
+        "id": "q3",
         "question": "Is a thesis required for students?",
         "expected_abstention": False,
     },

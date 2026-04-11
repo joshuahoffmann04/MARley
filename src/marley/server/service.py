@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
+from typing import Any
 
 from src.marley.server.pipeline import run_with_abstention
 from src.marley.generator.ollama import OllamaGenerator
@@ -89,9 +90,9 @@ class PipelineService:
             ), k_rrf=k_rrf_hybrid)
         raise ValueError(f"Unknown retriever type: {retriever_type}")
 
-    def _load_and_merge_chunks(self, knowledge_bases: list[str]) -> list[dict]:
+    def _load_and_merge_chunks(self, knowledge_bases: list[str]) -> list[dict[str, Any]]:
         """Load and merge chunks from the specified knowledge bases."""
-        all_chunks: list[dict] = []
+        all_chunks: list[dict[str, Any]] = []
         for kb in knowledge_bases:
             path = CHUNK_PATHS.get(kb)
             if not path:
@@ -159,7 +160,7 @@ class PipelineService:
         k: int = 5,
         threshold: float | None = None,
         k_rrf: int = DEFAULT_K_RRF,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Run the full pipeline and return a structured result.
 
         Args:
@@ -195,7 +196,7 @@ class PipelineService:
         retriever = self.get_retriever(retriever_type, kbs, strategy, k_rrf)
 
         # Determine normalization params
-        norm_params: dict = {}
+        norm_params: dict[str, Any] = {}
         if norm_strategy == "rrf":
             n_retrievers = len(kbs) if strategy == "fusion" else 2
             norm_params = {"rrf_n_retrievers": n_retrievers, "rrf_k": k_rrf}

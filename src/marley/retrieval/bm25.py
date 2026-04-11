@@ -6,6 +6,8 @@ tokenization as the baseline sparse retrieval method.
 
 from __future__ import annotations
 
+from typing import Any
+
 from rank_bm25 import BM25Okapi
 
 from src.marley.models.retrieval import load_chunks, validate_corpus
@@ -31,10 +33,10 @@ class BM25Retriever(Retriever):
     """
 
     def __init__(self) -> None:
-        self._corpus: list[dict] = []
+        self._corpus: list[dict[str, Any]] = []
         self._bm25: BM25Okapi | None = None
 
-    def index(self, corpus: list[dict]) -> None:
+    def index(self, corpus: list[dict[str, Any]]) -> None:
         """Build the BM25 index from a list of chunk dicts."""
         if not corpus:
             self._corpus = []

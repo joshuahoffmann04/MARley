@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 
 @dataclass
@@ -20,5 +21,5 @@ class AbstentionResult:
     reason: str             # Abstention reason (empty string if answered)
     answer: str             # Generated answer (empty string if abstained)
     confidence: float       # Top-1 normalized retrieval score
-    retrieval_results: list[dict] = field(default_factory=list)
+    retrieval_results: list[dict[str, Any]] = field(default_factory=list)
     model: str = ""

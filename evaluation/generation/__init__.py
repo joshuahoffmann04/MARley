@@ -8,7 +8,6 @@ from evaluation.generation.evaluate import (
     run_and_report,
     run_generation_evaluation,
 )
-from evaluation.generation.hf_metrics import compute_bertscore, compute_rouge
 from evaluation.generation.metrics import (
     GenerationEvalResult,
     GenerationMetrics,
@@ -18,9 +17,7 @@ from evaluation.generation.metrics import (
 __all__ = [
     "GenerationEvalResult",
     "GenerationMetrics",
-    "compute_bertscore",
     "compute_generation_metrics",
-    "compute_rouge",
     "run_and_report",
     "run_and_report_combined",
     "run_combined_generation_evaluation",

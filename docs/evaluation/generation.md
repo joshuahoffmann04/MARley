@@ -1,191 +1,157 @@
 # Generation Evaluation
 
-**Module:** `evaluation/generation/`
-**Test files:** `evaluation/tests/generation/`
+> Evaluates answer generation quality using RAGAS metrics with controlled distractor testing.
 
-The generation evaluation measures how well the generator produces answers when provided
-with ground-truth context chunks and a variable number of distractor chunks. Quality is
-assessed automatically via ROUGE, BERTScore, and an optional LLM judge.
+## RAGAS Integration
 
-**See also:** [LLM Judge](judge.md) | [Evaluation Overview](overview.md) | [Combined-KB Generation](combined-generation.md) | [Abstention Evaluation](abstention.md)
+Generation quality is measured via [RAGAS](https://docs.ragas.io/) 0.4.x (Retrieval-Augmented Generation Assessment), using a local Ollama LLM as the evaluator.
 
----
+### Metrics
 
-## Evaluation Methodology
-
-### Core Idea
-
-For each answerable question in the evaluation dataset:
-
-1. The ground-truth **relevant chunks** are always included in the context.
-2. A variable number of **distractor chunks** (0 to 10) are added.
-3. The generator produces an answer from this mixed context.
-4. Quality scores are computed automatically.
-
-By varying the distractor count from 0 (pure gold context) to 10 (heavily diluted context),
-the evaluation produces answers under increasingly noisy conditions, revealing how retrieval
-noise degrades generation quality.
-
-### Distractor Selection
-
-Distractors are selected **deterministically** using BM25 similarity:
-
-1. All chunks not in `relevant_chunks` form the distractor pool.
-2. A BM25 retriever indexes the pool and ranks chunks by similarity to the question.
-3. The top-N most similar non-relevant chunks are selected as distractors.
-
-This produces the **hardest possible distractors** — chunks topically similar to the question
-but not containing the answer — simulating realistic retrieval noise.
-
-Context order is shuffled with a fixed seed derived from the question ID, ensuring
-reproducibility across evaluation runs.
-
----
-
-## Quality Metrics
-
-### Automatic Text-Similarity Metrics (HuggingFace `evaluate`)
-
-| Metric | Type | What it measures |
+| Metric | RAGAS Class | What It Measures |
 |---|---|---|
-| **ROUGE-1** | N-gram overlap | Unigram F1 between generated and reference answer |
-| **ROUGE-2** | N-gram overlap | Bigram F1 between generated and reference answer |
-| **ROUGE-L** | N-gram overlap | Longest-common-subsequence F1 |
-| **BERTScore F1** | Semantic similarity | BERT-embedding cosine similarity between generated and reference |
+| **Faithfulness** | `Faithfulness` | Answer only uses information from the provided context |
+| **Answer Relevancy** | `AnswerRelevancy` | Answer directly addresses the user's question |
+| **Factual Correctness** | `FactualCorrectness` | Answer matches the reference answer |
 
-ROUGE is deterministic and fast. BERTScore is model-based and more robust to
-paraphrasing — it captures semantic equivalence that pure n-gram metrics miss.
+All metrics produce scores in the range 0-1, where 1 is best.
 
-Both are computed in **batch** over all results to minimise model loading overhead.
+### RAGAS Evaluation Pipeline
 
-### LLM Judge Scores (optional)
+The RAGAS evaluation is performed in `_score_with_ragas()` (`evaluation/generation/evaluate.py`):
 
-When a `Judge` instance is passed to the evaluation runner, three additional scores
-are computed per answer using a second LLM call:
+1. Create an `InstructorLLM` via `llm_factory()` using Ollama's OpenAI-compatible API (`/v1`) with `AsyncOpenAI`
+2. Create `HuggingFaceEmbeddings` (all-mpnet-base-v2) for answer relevancy
+3. Create RAGAS Collections metric instances: `Faithfulness`, `AnswerRelevancy`, `FactualCorrectness`
+4. Score each metric in chunks via `_chunked_batch_score()` (batch_size=10) to avoid overwhelming the local Ollama server
+5. Failed batches fall back to per-sample scoring with up to 3 retries; permanently failed samples receive NaN
+6. Merge per-sample scores into a unified result dict
 
-| Score | What it measures |
+### Chunked Scoring and Error Handling
+
+Ollama processes requests sequentially. Sending all samples at once causes massive retry storms.
+`_chunked_batch_score()` splits the workload:
+
+- **Batch size**: 10 samples per `batch_score()` call (`_RAGAS_BATCH_SIZE`)
+- **Batch failure**: Falls back to per-sample `score()` calls
+- **Per-sample retries**: Up to 3 attempts (`_SAMPLE_MAX_RETRIES`)
+- **Final fallback**: `MetricResult(value=float("nan"))` for permanently failed samples
+- **Aggregation**: `compute_generation_metrics()` excludes NaN values from averages
+
+### RAGAS Input Schema
+
+Each metric receives specific input fields:
+
+| Metric | Input Fields |
 |---|---|
-| **faithfulness** | Does the answer only use information from the provided context? |
-| **answer_relevance** | Does the answer address the question asked? |
-| **correctness** | Does the answer agree with the reference answer? |
+| Faithfulness | `user_input`, `response`, `retrieved_contexts` |
+| Answer Relevancy | `user_input`, `response` |
+| Factual Correctness | `response`, `reference` |
 
-All scores are in [0.0, 1.0]. See [LLM Judge](judge.md) for architecture and usage.
+### LLM Backend Configuration
 
----
+| Parameter | Default | CLI Flag |
+|---|---|---|
+| `ollama_model` | `llama3.1:latest` | `--ollama-model` |
+| `ollama_url` | `http://localhost:11434` | `--ollama-url` |
+
+The evaluator LLM uses Ollama via its OpenAI-compatible API (`/v1`). Embeddings use `sentence-transformers/all-mpnet-base-v2` via RAGAS `HuggingFaceEmbeddings` (local, no Ollama needed).
+
+## Distractor Testing
+
+Generation evaluation uses a controlled methodology to test robustness against retrieval noise.
+
+### Methodology
+
+For each answerable question:
+
+1. **Relevant chunks**: Ground-truth chunks from the evaluation dataset
+2. **Distractor selection**: Non-relevant chunks ranked by BM25 similarity to the question (hardest distractors first)
+3. **Context assembly**: Relevant chunks + N distractors, shuffled with a deterministic seed
+4. **Generation**: LLM generates an answer from the assembled context
+5. **Scoring**: RAGAS evaluates the generated answer
+
+### Distractor Levels
+
+By default, each question is evaluated at 11 distractor levels: 0, 1, 2, ..., 10.
+
+- **Level 0**: Only ground-truth relevant chunks (ideal retrieval)
+- **Level 10**: Ground-truth chunks + 10 BM25-ranked distractors (noisy retrieval)
+
+This reveals how generation quality degrades as retrieval noise increases.
+
+### Distractor Selection (`select_distractors()`)
+
+- Indexes only non-relevant chunks into a temporary BM25 retriever
+- Retrieves the top-`max_distractors` by query similarity
+- Produces the **hardest** (most confusing) distractors first
+
+### Context Assembly (`_assemble_context()`)
+
+- Combines relevant chunks with the selected distractors
+- Shuffles using a fixed seed per question (`hash(q["id"]) & 0xFFFFFFFF + n_distractors`)
+- Deterministic but unpredictable ordering for the LLM
 
 ## Data Classes
 
 ### GenerationEvalResult
 
-```python
-@dataclass
-class GenerationEvalResult:
-    question_id: str
-    num_distractors: int
-    generated_answer: str
-    reference_answer: str
-    context_chunk_ids: list[str]
-    # ROUGE (n-gram overlap)
-    rouge1: float = 0.0
-    rouge2: float = 0.0
-    rougeL: float = 0.0
-    # BERTScore (semantic similarity)
-    bertscore_f1: float = 0.0
-    # LLM judge scores
-    faithfulness: float = 0.0
-    answer_relevance: float = 0.0
-    correctness: float = 0.0
-```
+Per-question, per-distractor-level result:
+
+| Field | Type | Description |
+|---|---|---|
+| `question_id` | `str` | Question identifier |
+| `num_distractors` | `int` | Number of distractor chunks in context |
+| `generated_answer` | `str` | LLM-generated answer |
+| `reference_answer` | `str` | Ground-truth reference answer |
+| `context_chunk_ids` | `list[str]` | Chunk IDs in the assembled context |
+| `faithfulness` | `float` | RAGAS faithfulness score (0-1, NaN on failure) |
+| `answer_relevance` | `float` | RAGAS answer relevancy score (0-1, NaN on failure) |
+| `correctness` | `float` | RAGAS factual correctness score (0-1, NaN on failure) |
 
 ### GenerationMetrics
 
-```python
-@dataclass
-class GenerationMetrics:
-    num_results: int
-    results_by_distractors: dict[int, int]
-    num_queries: int
-    knowledge_base: str
-    model: str
-    # Macro-averaged quality scores
-    avg_rouge1: float = 0.0
-    avg_rouge2: float = 0.0
-    avg_rougeL: float = 0.0
-    avg_bertscore_f1: float = 0.0
-    avg_faithfulness: float = 0.0
-    avg_answer_relevance: float = 0.0
-    avg_correctness: float = 0.0
-```
+Aggregated metrics over all results (NaN values excluded from averages):
 
----
+| Field | Type | Description |
+|---|---|---|
+| `num_results` | `int` | Total number of results (including NaN) |
+| `num_queries` | `int` | Number of unique questions |
+| `results_by_distractors` | `dict[int, int]` | Count of results per distractor level |
+| `avg_faithfulness` | `float` | Mean faithfulness (NaN excluded) |
+| `avg_answer_relevance` | `float` | Mean answer relevancy (NaN excluded) |
+| `avg_correctness` | `float` | Mean factual correctness (NaN excluded) |
 
-## Usage
+Implementation: `evaluation/generation/metrics.py` (`compute_generation_metrics()`)
 
-### Without judge (ROUGE + BERTScore only)
+## Evaluation Modes
 
-```python
-from src.marley.generator import OllamaGenerator
-from src.marley.retrieval import load_chunks
-from evaluation.generation.evaluate import run_and_report
+### Single-KB Evaluation
 
-chunks = load_chunks("data/chunks/stpo-chunks.json")
-generator = OllamaGenerator(model="llama3.1:latest")
+Evaluates generation for each KB independently.
 
-report = run_and_report(
-    generator, chunks,
-    "data/testing/evaluation-stpo.json",
-    distractor_levels=[0, 1, 3, 5, 10],
-    knowledge_base="stpo",
-)
-print(report["metrics"])
-```
+**Process**: Load corpus -> Load questions -> Run generation evaluation -> Score with RAGAS -> Aggregate metrics
 
-### With LLM judge (full metrics)
+### Combined-KB Evaluation
 
-```python
-from evaluation.judge import OllamaJudge
+Evaluates generation with merged multi-KB context.
 
-judge = OllamaJudge(model="llama3.1:latest")
+**Process**:
+1. Merge chunks from all KBs (`merge_chunks()`)
+2. Merge evaluation data (`merge_evaluation_data()`)
+3. Run standard generation evaluation on the merged data
 
-report = run_and_report(
-    generator, chunks,
-    "data/testing/evaluation-stpo.json",
-    distractor_levels=[0, 5, 10],
-    knowledge_base="stpo",
-    judge=judge,
-)
-# report["metrics"] now includes avg_faithfulness, avg_answer_relevance, avg_correctness
-```
+The merged corpus provides harder distractors from a larger pool, testing robustness in a realistic multi-KB scenario.
 
-### Functions
+Implementation: `evaluation/generation/combined.py`
 
-| Function | Description |
+## CLI Usage
+
+
+
+## Output Files
+
+| File | Content |
 |---|---|
-| `select_distractors(question, relevant_ids, corpus, max)` | BM25-ranked distractor selection. |
-| `run_generation_evaluation(generator, corpus, questions, levels, judge)` | Run evaluation over all questions × levels. |
-| `run_and_report(generator, corpus, eval_path, levels, judge)` | Full pipeline: load, run, aggregate, report. |
-
----
-
-## Module Structure
-
-```
-evaluation/
-├── generation/
-│   ├── __init__.py             # Exports for single-KB and combined-KB functions
-│   ├── metrics.py              # GenerationEvalResult, GenerationMetrics, compute_generation_metrics()
-│   ├── hf_metrics.py           # ROUGE + BERTScore via HuggingFace evaluate
-│   ├── evaluate.py             # Single-KB runner: select_distractors(), run_generation_evaluation()
-│   └── combined.py             # Combined-KB runner (see combined-generation.md)
-├── judge/                      # LLM judge module (see judge.md)
-│   ├── base.py                 # Judge ABC + JudgementResult
-│   ├── prompts.py              # Judge prompt templates
-│   ├── ollama_judge.py         # OllamaJudge
-│   └── openai_judge.py         # OpenAIJudge
-└── tests/
-    └── generation/
-        ├── test_metrics.py     # 11 tests for metric aggregation + quality fields
-        ├── test_evaluate.py    # 22 tests for single-KB generation + judge integration
-        ├── test_combined.py    # 14 tests for combined-KB generation
-        └── test_hf_metrics.py  # 11 tests for ROUGE + BERTScore helpers
-```
+| `generation-evaluation.json` | Per-KB results with RAGAS scores per question x distractor level |
+| `generation-evaluation-combined.json` | Combined-KB results |

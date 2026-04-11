@@ -7,6 +7,8 @@ into a single corpus and indexed by one inner retriever.
 
 from __future__ import annotations
 
+from typing import Any
+
 from src.marley.retrieval.base import RetrievalResult, Retriever
 
 
@@ -24,7 +26,7 @@ class MergedRetriever(Retriever):
     def __init__(self, retriever: Retriever) -> None:
         self._retriever = retriever
 
-    def index(self, corpus: list[dict]) -> None:
+    def index(self, corpus: list[dict[str, Any]]) -> None:
         """Index the merged corpus in the inner retriever."""
         self._retriever.index(corpus)
 

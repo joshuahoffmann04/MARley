@@ -5,8 +5,6 @@ __pycache__/
 dist/
 build/
 .venv/
-
-# Testing
 .pytest_cache/
 
 # Environment
@@ -15,6 +13,7 @@ build/
 # IDE
 .vscode/
 .claude/
+CLAUDE.md
 
 # Derived data (large, rebuilt on demand)
 data/vectorstore/

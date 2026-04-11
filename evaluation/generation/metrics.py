@@ -4,16 +4,15 @@ Defines the result types used to track per-question and aggregate
 generation evaluation outcomes across distractor levels and quality
 dimensions.
 
-Quality metrics per answer:
-  ROUGE-1/2/L   -- n-gram overlap with the reference answer (deterministic)
-  BERTScore F1  -- semantic similarity via BERT embeddings (model-based)
-  faithfulness  -- LLM judge: answer grounded in retrieved context (0-1)
-  answer_relevance -- LLM judge: answer addresses the question (0-1)
-  correctness   -- LLM judge: answer matches the reference answer (0-1)
+Quality metrics per answer (via RAGAS):
+  faithfulness      -- answer grounded in retrieved context (0-1)
+  answer_relevance  -- answer addresses the question (0-1)
+  correctness       -- answer matches the reference answer (0-1)
 """
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 
@@ -27,29 +26,15 @@ class GenerationEvalResult:
     reference_answer: str
     context_chunk_ids: list[str] = field(default_factory=list)
 
-    # --- ROUGE (n-gram overlap) ---
-    rouge1: float = 0.0
-    """ROUGE-1 F1 score (unigram overlap with reference)."""
-
-    rouge2: float = 0.0
-    """ROUGE-2 F1 score (bigram overlap with reference)."""
-
-    rougeL: float = 0.0
-    """ROUGE-L F1 score (longest common subsequence with reference)."""
-
-    # --- BERTScore (semantic similarity) ---
-    bertscore_f1: float = 0.0
-    """BERTScore F1 (semantic similarity between generated and reference)."""
-
-    # --- LLM judge scores ---
+    # --- RAGAS scores ---
     faithfulness: float = 0.0
-    """LLM judge: answer only uses information from the context (0-1)."""
+    """RAGAS: answer only uses information from the context (0-1)."""
 
     answer_relevance: float = 0.0
-    """LLM judge: answer addresses the question (0-1)."""
+    """RAGAS: answer addresses the question (0-1)."""
 
     correctness: float = 0.0
-    """LLM judge: answer matches the reference answer (0-1)."""
+    """RAGAS: answer matches the reference answer (0-1)."""
 
 
 @dataclass
@@ -62,15 +47,7 @@ class GenerationMetrics:
     knowledge_base: str
     model: str
 
-    # --- Aggregated ROUGE ---
-    avg_rouge1: float = 0.0
-    avg_rouge2: float = 0.0
-    avg_rougeL: float = 0.0
-
-    # --- Aggregated BERTScore ---
-    avg_bertscore_f1: float = 0.0
-
-    # --- Aggregated LLM judge ---
+    # --- Aggregated RAGAS scores ---
     avg_faithfulness: float = 0.0
     avg_answer_relevance: float = 0.0
     avg_correctness: float = 0.0
@@ -84,8 +61,7 @@ def compute_generation_metrics(
     """Compute aggregated metrics from a list of generation results.
 
     Groups results by distractor count and macro-averages all quality
-    scores over all results with non-zero values (abstained answers
-    with score 0.0 are included in the average).
+    scores over all results.
 
     Args:
         results: List of per-question results from run_generation_evaluation.
@@ -112,7 +88,8 @@ def compute_generation_metrics(
     unique_questions = len({r.question_id for r in results})
 
     def _avg(attr: str) -> float:
-        return sum(getattr(r, attr) for r in results) / n
+        values = [getattr(r, attr) for r in results if not math.isnan(getattr(r, attr))]
+        return sum(values) / len(values) if values else 0.0
 
     return GenerationMetrics(
         num_results=n,
@@ -120,10 +97,6 @@ def compute_generation_metrics(
         num_queries=unique_questions,
         knowledge_base=knowledge_base,
         model=model,
-        avg_rouge1=_avg("rouge1"),
-        avg_rouge2=_avg("rouge2"),
-        avg_rougeL=_avg("rougeL"),
-        avg_bertscore_f1=_avg("bertscore_f1"),
         avg_faithfulness=_avg("faithfulness"),
         avg_answer_relevance=_avg("answer_relevance"),
         avg_correctness=_avg("correctness"),

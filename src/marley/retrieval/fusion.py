@@ -7,6 +7,8 @@ and is re-exported here for backward compatibility.
 
 from __future__ import annotations
 
+from typing import Any
+
 from src.marley.models.constants import DEFAULT_K_RRF_FUSION
 from src.marley.models.retrieval import rrf_fuse
 from src.marley.retrieval.base import RetrievalResult, Retriever
@@ -47,7 +49,7 @@ class FusionRetriever(Retriever):
         self._k_rrf = k_rrf
         self._weights = weights
 
-    def index(self, corpus: list[dict]) -> None:
+    def index(self, corpus: list[dict[str, Any]]) -> None:
         """Not supported — index each sub-retriever independently."""
         raise NotImplementedError(
             "FusionRetriever wraps pre-indexed retrievers. "

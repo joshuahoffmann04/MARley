@@ -10,6 +10,8 @@ pipeline stages (retrieval, generation, abstention detection).
 
 from __future__ import annotations
 
+from typing import Any
+
 from src.marley.abstention.detection import detect_abstention, extract_abstention_reason
 from src.marley.models.abstention import AbstentionResult
 from src.marley.models.constants import DEFAULT_K, DEFAULT_THRESHOLD
@@ -24,6 +26,14 @@ from src.marley.models.scoring import (
 _LEVEL1_REASON = "retrieval confidence below threshold"
 
 
+def _results_to_dicts(results: list) -> list[dict[str, Any]]:
+    """Serialize RetrievalResult objects to plain dicts."""
+    return [
+        {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
+        for r in results
+    ]
+
+
 def run_with_abstention(
     query: str,
     retriever: Retriever,
@@ -32,7 +42,7 @@ def run_with_abstention(
     k: int = DEFAULT_K,
     threshold: float = DEFAULT_THRESHOLD,
     normalization_strategy: str = "vector",
-    normalization_params: dict | None = None,
+    normalization_params: dict[str, Any] | None = None,
 ) -> AbstentionResult:
     """Run the full abstention-aware pipeline.
 
@@ -81,10 +91,7 @@ def run_with_abstention(
             reason=_LEVEL1_REASON,
             answer="",
             confidence=confidence,
-            retrieval_results=[
-                {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
-                for r in normalized
-            ],
+            retrieval_results=_results_to_dicts(normalized),
             model="",
         )
 
@@ -103,10 +110,7 @@ def run_with_abstention(
             reason=extract_abstention_reason(gen_result.answer),
             answer="",
             confidence=confidence,
-            retrieval_results=[
-                {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
-                for r in filtered
-            ],
+            retrieval_results=_results_to_dicts(filtered),
             model=gen_result.model,
         )
 
@@ -117,9 +121,6 @@ def run_with_abstention(
         reason="",
         answer=gen_result.answer,
         confidence=confidence,
-        retrieval_results=[
-            {"chunk_id": r.chunk_id, "text": r.text, "score": r.score, "metadata": r.metadata}
-            for r in filtered
-        ],
+        retrieval_results=_results_to_dicts(filtered),
         model=gen_result.model,
     )

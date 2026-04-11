@@ -37,7 +37,7 @@ class Retriever(ABC):
     """
 
     @abstractmethod
-    def index(self, corpus: list[dict]) -> None:
+    def index(self, corpus: list[dict[str, Any]]) -> None:
         """Build the retrieval index from a list of chunk dicts."""
 
     @abstractmethod
@@ -58,10 +58,10 @@ class Retriever(ABC):
 # ---------------------------------------------------------------------------
 
 
-def load_chunks(chunk_path: str | Path) -> list[dict]:
-    """Load chunks from a JSON file produced by the chunking pipeline.
+def load_chunks(chunk_path: str | Path) -> list[dict[str, Any]]:
+    """Load the ``chunks`` list from a JSON file produced by the chunking pipeline.
 
-    Supports both StPO chunk format and FAQ chunk format.  Returns
+    The JSON file must contain a top-level ``chunks`` key whose value is
     a list of dicts with ``chunk_id``, ``text``, and ``metadata`` keys.
     """
     path = Path(chunk_path)
@@ -69,7 +69,7 @@ def load_chunks(chunk_path: str | Path) -> list[dict]:
     return data["chunks"]
 
 
-def validate_corpus(corpus: list[dict]) -> None:
+def validate_corpus(corpus: list[dict[str, Any]]) -> None:
     """Validate that every dict in the corpus has the required keys.
 
     Raises ``ValueError`` with a descriptive message if any dict is

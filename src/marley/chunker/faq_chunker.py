@@ -168,7 +168,15 @@ def _compute_stats(
 def load(faq_path: str | Path) -> FAQDataset:
     """Load a FAQ JSON file into a FAQDataset.
 
-    Expects the JSON structure: {"metadata": {"source": "..."}, "entries": [...]}.
+    Expects the JSON structure::
+
+        {"metadata": {"source": "..."}, "entries": [...]}
+
+    Args:
+        faq_path: Path to the FAQ JSON file.
+
+    Returns:
+        A FAQDataset with parsed entries.
     """
     path = Path(faq_path)
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -195,7 +203,20 @@ def chunk_faq(
     *,
     tokenizer: str = DEFAULT_TOKENIZER,
 ) -> FAQChunkingResult:
-    """Chunk a FAQ dataset. Each valid entry becomes one chunk."""
+    """Chunk a FAQ dataset into retrieval-ready pieces.
+
+    Each valid question-answer entry becomes exactly one chunk.
+    Invalid entries (missing id, duplicate id, empty question/answer)
+    are skipped and recorded as quality flags.
+
+    Args:
+        dataset: The FAQ dataset to chunk.
+        source_file: Original file path for metadata tracking.
+        tokenizer: Tiktoken encoding name for token counting.
+
+    Returns:
+        A FAQChunkingResult with chunks, statistics, and quality flags.
+    """
     encoder = tiktoken.get_encoding(tokenizer)
     flags: list[QualityFlag] = []
     chunks: list[FAQChunk] = []

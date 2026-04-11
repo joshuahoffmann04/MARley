@@ -10,3 +10,15 @@ from tests.conftest import (  # noqa: F401
     KeywordRetriever,
     StubGenerator,
 )
+
+
+def fake_ragas_scores(raw_results, ollama_model, ollama_url):
+    """Stub for _score_with_ragas returning fixed RAGAS scores.
+
+    Returns one score dict per raw result with deterministic values,
+    avoiding any external service calls (Ollama, RAGAS).
+    """
+    return [
+        {"faithfulness": 0.9, "answer_relevancy": 0.85, "factual_correctness": 0.8}
+        for _ in raw_results
+    ]

@@ -9,7 +9,7 @@ Supports resuming: skips configs whose output files already exist.
 Usage::
 
     python -m evaluation.end_to_end.run_all
-    python -m evaluation.end_to_end.run_all --output-dir data/testing
+    python -m evaluation.end_to_end.run_all --output-dir data/evaluation
     python -m evaluation.end_to_end.run_all --config-filter "single-stpo"
 """
 
@@ -143,7 +143,7 @@ def run_all(
     logger.info("Ollama connected at %s (model: %s)", ollama_url, ollama_model)
 
     # Load questions from master evaluation dataset
-    eval_path = Path("data/testing/evaluation.json")
+    eval_path = Path("data/evaluation/evaluation.json")
     if not eval_path.exists():
         logger.error("Evaluation dataset not found: %s", eval_path)
         sys.exit(1)
@@ -263,8 +263,8 @@ def main() -> None:
         description="Run all MARley end-to-end evaluation configurations.",
     )
     parser.add_argument(
-        "--output-dir", type=str, default="data/testing",
-        help="Directory for output files (default: data/testing)",
+        "--output-dir", type=str, default="data/evaluation",
+        help="Directory for output files (default: data/evaluation)",
     )
     parser.add_argument(
         "--ollama-url", type=str, default="http://localhost:11434",

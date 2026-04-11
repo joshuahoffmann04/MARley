@@ -1,142 +1,224 @@
 # Abstention Evaluation
 
-**Module:** `evaluation/abstention/`
-**Metric:** Abstention quality (precision, recall, F1)
-**Test files:** `evaluation/tests/abstention/test_metrics.py`, `evaluation/tests/abstention/test_evaluate.py`
+> Evaluates the two-level abstention mechanism: retrieval confidence threshold (Level 1) and LLM-based detection (Level 2).
 
-The abstention evaluation measures how well the system distinguishes answerable from unanswerable questions using a two-level abstention mechanism. Level 1 operates on retrieval confidence scores (no LLM required), while Level 2 detects abstentions produced by the language model during generation.
+## Two-Level Abstention
 
-**See also:** [Evaluation Overview](overview.md) | [Abstention Pipeline](../abstention/abstention.md)
+The MARley pipeline uses a two-level abstention system:
 
----
-
-## Objective
-
-The goal is to evaluate the system's ability to correctly refuse unanswerable questions while still answering those it can. A well-calibrated abstention mechanism should:
-
-1. **Abstain** when the question falls outside the knowledge base scope (high recall).
-2. **Not abstain** when the question is answerable (low false abstention rate).
-3. **Balance** both objectives, measured via the F1 score.
-
-The two-level design allows Level 1 to catch clearly unanswerable questions cheaply (no LLM call), while Level 2 provides a safety net for borderline cases that pass Level 1 but still cannot be answered from the retrieved context.
-
----
-
-## Methodology
-
-### Level 1: Threshold Sweep
-
-Level 1 abstention is **automatic and requires no LLM**. It operates on normalized retrieval confidence scores:
-
-1. For each question, the retriever returns ranked results with scores.
-2. The top score is normalized to [0, 1] using a retriever-specific normalization strategy.
-3. If the normalized score falls below a threshold, the system abstains (Level 1 abstention).
-
-The **threshold sweep** evaluates all thresholds in [0.0, 0.05, 0.10, ..., 1.0] to find the optimal operating point:
-
-- Retrieval scores are **pre-computed once** for all questions.
-- For each threshold, the sweep determines which questions trigger Level 1 abstention.
-- Predictions are compared against the `expected_abstention` ground truth from the evaluation dataset.
-- Abstention metrics (precision, recall, F1) are computed at each threshold.
-
-This design makes the sweep **fast**: no LLM calls, no generation, just score comparisons across 21 threshold values.
-
-### Level 2: Full Evaluation
-
-At the best Level 1 threshold (selected from the sweep), the full pipeline runs:
-
-1. Questions below the threshold are abstained at Level 1 (no generation).
-2. Questions above the threshold proceed to generation.
-3. The generated answer is inspected for Level 2 (LLM) abstention markers — phrases indicating the model could not answer from the provided context.
-4. Both levels are combined to produce the final abstention decision.
-
-This provides the complete picture: Level 1 efficiency plus Level 2 coverage.
-
----
+1. **Level 1 -- Retrieval Confidence**: Before generation, retrieval scores are normalized and a confidence score is computed. If confidence falls below a threshold, the system abstains without calling the LLM.
+2. **Level 2 -- LLM Detection**: If Level 1 passes, the LLM generates an answer. If the answer contains an `ABSTENTION:` prefix, the system detects and extracts the abstention reason.
 
 ## Metrics
 
-| Metric | Formula | Interpretation |
-|---|---|---|
-| **Abstention Precision** | correct_abstention / (correct + incorrect) | Of all abstentions, how many were justified? |
-| **Abstention Recall** | correct_abstention / (correct + missing) | Of all unanswerable questions, how many did we abstain on? |
-| **F1** | 2 * P * R / (P + R) | Harmonic mean of precision and recall |
-| **False Abstention Rate** | incorrect / answerable | How often the system incorrectly refuses an answerable question |
-| **Coverage** | answered / total | Proportion of questions that receive an answer |
+Five metrics evaluate abstention quality. These are shared between the abstention evaluation and the end-to-end evaluation via the `AbstentionMetrics` dataclass in `evaluation/utils.py`.
 
-- **correct_abstention**: Unanswerable questions where the system abstained (true positive).
-- **incorrect**: Answerable questions where the system abstained (false positive).
-- **missing**: Unanswerable questions where the system failed to abstain (false negative).
+### Precision
 
----
+```
+Precision = correct_abstention / (correct_abstention + incorrect_abstention)
+```
 
-## Level 1 Sweep
+When the system decides to abstain, how often is it correct? Returns 1.0 if there are no abstentions (vacuous truth).
 
-The `run_level1_sweep()` function pre-computes retrieval scores once, then sweeps all thresholds without any LLM calls.
+### Recall
 
-**Scope:** 3 retrievers x 3 KBs x 21 thresholds x 100 questions = 18,900 evaluations
+```
+Recall = correct_abstention / (correct_abstention + missing_abstention)
+```
 
-For each retriever-KB combination, the sweep produces a table of metrics across thresholds, enabling selection of the optimal threshold that maximizes F1 (or any other target metric).
+Of all truly unanswerable questions, how many does the system correctly identify? Returns 1.0 if there are no unanswerable questions.
 
----
+### F1
 
-## Level 2 Evaluation
+```
+F1 = 2 * Precision * Recall / (Precision + Recall)
+```
 
-The `run_abstention_evaluation()` function runs the full two-level pipeline at a selected threshold.
+Harmonic mean of precision and recall. The primary optimization target for threshold selection.
 
-**Scope:** 3 retrievers x 3 KBs x 100 questions = 900 pipeline runs
+### False Abstention Rate
 
-Each run involves retrieval, threshold checking, and (if above threshold) generation. The evaluation captures both Level 1 and Level 2 abstention decisions and computes the combined metrics.
+```
+False Abstention Rate = incorrect_abstention / (answered + incorrect_abstention)
+```
 
----
+Of all answerable questions, how many does the system wrongly refuse to answer? Lower is better.
 
-## Usage
+### Coverage
 
-### Programmatic
+```
+Coverage = (answered + missing_abstention) / total
+```
+
+Proportion of questions that receive an answer (correct or not). A system that never abstains has Coverage = 1.0.
+
+## Implementation
+
+### AbstentionMetrics Dataclass
 
 ```python
-from src.marley.retrieval import BM25Retriever, load_chunks
-from evaluation.abstention.evaluate import run_level1_sweep, run_abstention_evaluation
-
-chunks = load_chunks("data/chunks/stpo-chunks.json")
-retriever = BM25Retriever()
-
-# Level 1 sweep
-sweep = run_level1_sweep(
-    retriever, chunks, questions,
-    thresholds=[0.0, 0.1, 0.2, 0.3, 0.4, 0.5],
-    normalization_strategy="bm25",
-)
-
-# Full evaluation
-report = run_abstention_evaluation(
-    retriever, generator, chunks, questions,
-    threshold=0.3, normalization_strategy="bm25",
-)
+@dataclass
+class AbstentionMetrics:
+    precision: float
+    recall: float
+    f1: float
+    false_abstention_rate: float
+    coverage: float
+    num_correct_abstention: int
+    num_incorrect_abstention: int
+    num_missing_abstention: int
+    num_answered: int
+    num_total: int
+    threshold: float
 ```
 
-### Functions
+Location: `evaluation/utils.py`
 
-| Function | Description |
+### compute_abstention_metrics()
+
+```python
+def compute_abstention_metrics(
+    results: list[dict],
+    threshold: float,
+) -> AbstentionMetrics:
+```
+
+Input: list of dicts with `expected_abstention` (bool) and `system_abstained` (bool).
+
+The four-way classification:
+
+| Expected \ System | Abstained | Answered |
+|---|---|---|
+| **Unanswerable** | correct_abstention | missing_abstention |
+| **Answerable** | incorrect_abstention | answered |
+
+## Evaluation Modes
+
+### Level 1 Sweep (Fast, No LLM)
+
+Sweeps threshold values to find the optimal Level 1 threshold using only retrieval scores.
+
+```python
+def run_level1_sweep(
+    retriever: Retriever,
+    corpus: list[dict],
+    questions: list[dict],
+    thresholds: list[float],
+    *,
+    k: int = 5,
+    normalization_strategy: str = "vector",
+    normalization_params: dict | None = None,
+) -> list[dict]:
+```
+
+**Process**:
+1. Index the retriever on the corpus
+2. For each question: retrieve, normalize scores, compute confidence
+3. For each threshold: determine which questions would trigger Level 1 abstention
+4. Compute abstention metrics at each threshold
+
+**Default thresholds**: 0.0 to 1.0 in 0.05 steps (21 values)
+
+**Output**: List of `{threshold, metrics}` dicts
+
+Implementation: `evaluation/abstention/evaluate.py` (`run_level1_sweep()`)
+
+### Full Two-Level Evaluation
+
+Runs the complete abstention pipeline including LLM generation.
+
+```python
+def run_abstention_evaluation(
+    retriever: Retriever,
+    generator: Generator,
+    corpus: list[dict],
+    questions: list[dict],
+    *,
+    k: int = 5,
+    threshold: float = 0.3,
+    normalization_strategy: str = "vector",
+    normalization_params: dict | None = None,
+    progress_callback: Callable[[int, int], None] | None = None,
+) -> dict:
+```
+
+**Process per question**:
+1. Retrieve top-k chunks and normalize scores
+2. Compute confidence and apply Level 1 threshold
+3. If filtered results are empty -> Level 1 abstention
+4. If results pass -> generate answer -> check for `ABSTENTION:` prefix (Level 2)
+5. Record outcome: abstained/answered, level, confidence, reason
+
+**Output**: Report dict with `config`, `metrics`, and `results` keys
+
+### Combined Pipeline (`run_and_report()`)
+
+Convenience function that chains Level 1 sweep -> best threshold -> full evaluation:
+
+1. Sweep Level 1 thresholds (no LLM)
+2. Find threshold that maximizes F1
+3. Run full two-level evaluation at that threshold
+
+## Threshold Optimization
+
+The threshold is optimized by maximizing F1 on the evaluation dataset:
+
+```python
+best = max(sweep, key=lambda s: s["metrics"]["f1"])
+best_threshold = best["threshold"]
+```
+
+The default threshold in the production pipeline is 0.3 (from `models/constants.py: DEFAULT_THRESHOLD`). The evaluation sweep tests whether a different threshold would perform better on the evaluation data.
+
+## CLI Entry Point
+
+In the unified CLI (`__main__.py`), the abstention step:
+
+1. Creates a `BM25Retriever` and `OllamaGenerator`
+2. For each KB: indexes, runs Level 1 sweep, determines best threshold
+3. Runs full evaluation at the best threshold
+4. Saves results
+
+```bash
+# Run abstention evaluation
+python -m evaluation --abstention
+
+# With custom model
+python -m evaluation --abstention --ollama-model mistral:latest
+```
+
+## Output File
+
+| File | Content |
 |---|---|
-| `run_level1_sweep()` | Sweep thresholds, Level 1 only. |
-| `run_abstention_evaluation()` | Full two-level evaluation at a given threshold. |
-| `run_and_report()` | Complete pipeline with sweep + evaluation. |
-| `compute_abstention_metrics()` | Compute precision, recall, F1 from results. |
+| `abstention-evaluation.json` | Per-KB results with Level 1 sweep and full evaluation metrics |
 
----
+### Report Format
 
-## Module Structure
-
-```
-evaluation/
-├── abstention/
-│   ├── __init__.py
-│   ├── metrics.py          # AbstentionMetrics + compute_abstention_metrics()
-│   └── evaluate.py         # Level 1 sweep + Level 2 runner
-└── tests/
-    └── abstention/
-        ├── __init__.py
-        ├── test_metrics.py  # 10 tests for metric computation
-        └── test_evaluate.py # 12 tests for sweep and evaluation runner
+```json
+{
+  "config": {
+    "k": 5,
+    "threshold": 0.35,
+    "normalization_strategy": "bm25",
+    "normalization_params": {}
+  },
+  "metrics": {
+    "precision": 0.85,
+    "recall": 0.90,
+    "f1": 0.87,
+    "false_abstention_rate": 0.05,
+    "coverage": 0.92,
+    "num_correct_abstention": 18,
+    "num_incorrect_abstention": 3,
+    "num_missing_abstention": 2,
+    "num_answered": 77,
+    "num_total": 100,
+    "threshold": 0.35
+  },
+  "results": [ "..." ],
+  "level1_sweep": [ "..." ],
+  "knowledge_base": "stpo"
+}
 ```

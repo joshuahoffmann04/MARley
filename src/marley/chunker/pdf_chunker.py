@@ -10,6 +10,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import tiktoken
 
@@ -89,7 +90,7 @@ class ChunkingResult:
 # Sentence splitting
 # ---------------------------------------------------------------------------
 
-def _join_sentence_tokens(sentence) -> str:
+def _join_sentence_tokens(sentence: Any) -> str:
     """Reconstruct a sentence string from syntok tokens."""
     return "".join(token.value + token.spacing for token in sentence).strip()
 
@@ -479,7 +480,23 @@ def chunk_stpo(
     overlap_tokens: int = DEFAULT_OVERLAP_TOKENS,
     tokenizer: str = DEFAULT_TOKENIZER,
 ) -> ChunkingResult:
-    """Chunk an extracted StPO document into retrieval-ready pieces."""
+    """Chunk an extracted StPO document into retrieval-ready pieces.
+
+    Splits section text via a sentence-aligned sliding window and packs
+    table rows with repeated headers.  Each chunk is prefixed with its
+    hierarchical heading path for retrieval context.
+
+    Args:
+        extraction: The extraction result to chunk.
+        max_chunk_tokens: Maximum token budget per chunk.
+        min_chunk_tokens: Minimum tokens; smaller chunks are merged.
+        overlap_tokens: Token overlap between consecutive text chunks.
+        tokenizer: Tiktoken encoding name for token counting.
+
+    Returns:
+        A ChunkingResult containing all chunks, statistics, and
+        quality flags.
+    """
     encoder = tiktoken.get_encoding(tokenizer)
     section_map = {s.section_id: s for s in extraction.sections}
     quality_flags: list[QualityFlag] = []

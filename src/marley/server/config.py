@@ -10,6 +10,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 from src.marley.models.constants import (
     DEFAULT_K,
@@ -45,7 +46,7 @@ class ServerConfig:
     )
 
 
-def check_ollama(base_url: str, timeout: float = 5.0) -> dict:
+def check_ollama(base_url: str, timeout: float = 5.0) -> dict[str, Any]:
     """Check Ollama server connectivity.
 
     Returns:

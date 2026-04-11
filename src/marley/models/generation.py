@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from typing import Any
 
 
 @dataclass
@@ -31,7 +32,7 @@ class Generator(ABC):
         """Identifier of the underlying model (e.g. 'llama3.1:latest')."""
 
     @abstractmethod
-    def generate(self, query: str, context: list[dict]) -> GenerationResult:
+    def generate(self, query: str, context: list[dict[str, Any]]) -> GenerationResult:
         """Generate an answer given a query and context chunks.
 
         Args:

@@ -30,7 +30,8 @@ def run_combined_generation_evaluation(
     eval_paths: dict[str, str | Path],
     distractor_levels: list[int] | None = None,
     *,
-    judge: object | None = None,
+    ollama_model: str = "llama3.1:latest",
+    ollama_url: str = "http://localhost:11434",
     progress_callback=None,
 ) -> list[GenerationEvalResult]:
     """Run generation evaluation with merged multi-KB context.
@@ -46,15 +47,16 @@ def run_combined_generation_evaluation(
 
     Args:
         generator: The generator to evaluate.
-        chunk_paths: KB name → chunk file path mapping.
-        eval_paths: KB name → evaluation file path mapping.
-        distractor_levels: Distractor counts to test (default 0–10).
-        judge: Optional Judge instance for LLM-based quality scoring.
+        chunk_paths: KB name -> chunk file path mapping.
+        eval_paths: KB name -> evaluation file path mapping.
+        distractor_levels: Distractor counts to test (default 0-10).
+        ollama_model: Ollama model name for RAGAS evaluator LLM.
+        ollama_url: Ollama server URL for RAGAS evaluator LLM.
         progress_callback: Optional ``callable(question_id, num_distractors)``
             invoked before each generation call.
 
     Returns:
-        List of GenerationEvalResult for every question × level.
+        List of GenerationEvalResult for every question x level.
     """
     merged_corpus = merge_chunks(*chunk_paths.values())
     questions = merge_evaluation_data(eval_paths)
@@ -64,7 +66,8 @@ def run_combined_generation_evaluation(
         merged_corpus,
         questions,
         distractor_levels=distractor_levels,
-        judge=judge,
+        ollama_model=ollama_model,
+        ollama_url=ollama_url,
         progress_callback=progress_callback,
     )
 
@@ -76,7 +79,8 @@ def run_and_report_combined(
     distractor_levels: list[int] | None = None,
     *,
     combination_name: str = "",
-    judge: object | None = None,
+    ollama_model: str = "llama3.1:latest",
+    ollama_url: str = "http://localhost:11434",
     progress_callback=None,
 ) -> dict:
     """Merge data, run combined generation evaluation, and return a report.
@@ -87,12 +91,13 @@ def run_and_report_combined(
 
     Args:
         generator: The generator to evaluate.
-        chunk_paths: KB name → chunk file path mapping.
-        eval_paths: KB name → evaluation file path mapping.
-        distractor_levels: Distractor counts to test (default 0–10).
+        chunk_paths: KB name -> chunk file path mapping.
+        eval_paths: KB name -> evaluation file path mapping.
+        distractor_levels: Distractor counts to test (default 0-10).
         combination_name: Human-readable combination label
             (default: KB names joined with ``+``).
-        judge: Optional Judge instance for LLM-based quality scoring.
+        ollama_model: Ollama model name for RAGAS evaluator LLM.
+        ollama_url: Ollama server URL for RAGAS evaluator LLM.
         progress_callback: Optional ``callable(question_id, num_distractors)``
             invoked before each generation call.
 
@@ -108,7 +113,8 @@ def run_and_report_combined(
         merged_corpus,
         questions,
         distractor_levels=distractor_levels,
-        judge=judge,
+        ollama_model=ollama_model,
+        ollama_url=ollama_url,
         progress_callback=progress_callback,
     )
 
@@ -127,7 +133,7 @@ def run_and_report_combined(
         "config": {
             "distractor_levels": distractor_levels or list(range(11)),
             "generator_model": generator.model,
-            "judge_model": judge.model if judge is not None else None,
+            "ragas_model": ollama_model,
             "corpus_size": len(merged_corpus),
             "knowledge_bases": kb_names,
             "combination": combination,

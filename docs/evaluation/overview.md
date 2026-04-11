@@ -1,173 +1,190 @@
 # Evaluation Overview
 
-**Module:** `evaluation/`
-**Entry point:** `python -m evaluation [OPTIONS]`
-
-The evaluation framework measures the quality of each pipeline stage independently and as a whole. All evaluations use the same annotated dataset of 100 questions across three categories: direct (40), multi-source (35), and unanswerable (25).
-
----
-
-## Evaluation Types
-
-| # | Evaluation | Module | Document | Status |
-|---|---|---|---|---|
-| 1 | Single-KB Retrieval | `evaluation/retrieval/evaluate.py` | [retrieval.md](retrieval.md) | Complete |
-| 1a | RRF k_rrf Tuning | `evaluation/retrieval/rrf_tuning.py` | [rrf-tuning.md](rrf-tuning.md) | Complete |
-| 2 | Combined-KB Retrieval | `evaluation/retrieval/combined.py` | [combined-retrieval.md](combined-retrieval.md) | Complete |
-| 3 | Generation (auto) | `evaluation/generation/` | [generation.md](generation.md) | Complete |
-| 3a | LLM Judge | `evaluation/judge/` | [judge.md](judge.md) | Complete |
-| 4 | Combined-KB Generation | `evaluation/generation/combined.py` | [combined-generation.md](combined-generation.md) | Complete |
-| 5 | Abstention | `evaluation/abstention/` | [abstention.md](abstention.md) | Complete |
-| 6 | End-to-End | `evaluation/end_to_end/` | [end-to-end.md](end-to-end.md) | Complete |
-
----
+> Documentation of the MARley evaluation pipeline.
+> Covers retrieval, generation, abstention, and end-to-end evaluation.
 
 ## Evaluation Strategy
 
-### Proposal Goals
+The MARley evaluation framework systematically measures pipeline quality across four dimensions:
 
-The evaluation framework is structured around the three proposal goals:
+| Dimension | What Is Evaluated | Metrics |
+|---|---|---|
+| **Retrieval** | Chunk retrieval accuracy | Precision@k, Recall@k, MRR, F1@k, Jaccard@k |
+| **Generation** | Answer quality (via RAGAS) | Faithfulness, Answer Relevancy, Factual Correctness |
+| **Abstention** | Abstention decision quality | Precision, Recall, F1, False Abstention Rate, Coverage |
+| **End-to-End** | Full pipeline (33 configs) | Abstention metrics + per-category breakdown |
 
-- **G1 (Knowledge Preparation):** Measured indirectly through retrieval quality — better chunking leads to better retrieval metrics.
-- **G2 (Retrieval Strategy Comparison):** Single-KB evaluation (9 configurations) and combined-KB evaluation (24 configurations) compare BM25, Vector, and Hybrid retrieval across all knowledge bases and combination strategies.
-- **G3 (Generation + Abstention):** Generation evaluation measures answer quality with varying context quality. Abstention evaluation measures the system's ability to refuse unanswerable questions.
+Each dimension can be evaluated independently or as part of a full evaluation run.
 
-### Knowledge Bases
+## Metrics Landscape
 
-| Knowledge Base | Source | Chunks | Description |
-|---|---|---|---|
-| StPO | `msc-computer-science.pdf` | 153 | Study and examination regulations (text + tables) |
-| FAQ-StPO | `faq-stpo.json` | 1039 | Synthetic FAQ derived from the StPO |
-| FAQ-AO | `faq-ao.json` | 0 | Student questions answered by the advisory office (placeholder, no chunks yet) |
+### Retrieval (5 metrics)
 
-### Shared Metrics
+All metrics are computed at cutoff `k` (default: 5) and macro-averaged over all answerable queries.
 
-**Generation metrics** (used by evaluation 3):
-- **ROUGE-1/2/L** — n-gram F1 overlap between generated and reference answer
-- **BERTScore F1** — BERT-embedding semantic similarity between generated and reference
-- **faithfulness** — LLM judge: answer grounded in retrieved context (0–1)
-- **answer_relevance** — LLM judge: answer addresses the question (0–1)
-- **correctness** — LLM judge: answer matches reference answer (0–1)
+| Metric | Formula | Interpretation |
+|---|---|---|
+| **Precision@k** | \|relevant ∩ retrieved[:k]\| / k | Fraction of retrieved chunks that are relevant |
+| **Recall@k** | \|relevant ∩ retrieved[:k]\| / \|relevant\| | Fraction of relevant chunks that were retrieved |
+| **MRR** | 1 / rank of first relevant chunk | How quickly the first relevant chunk appears |
+| **F1@k** | 2 · P@k · R@k / (P@k + R@k) | Harmonic mean of precision and recall |
+| **Jaccard@k** | \|relevant ∩ retrieved[:k]\| / \|relevant ∪ retrieved[:k]\| | Set similarity between relevant and retrieved |
 
-**Retrieval metrics** (used by evaluations 1, 2):
-- **Precision@k** — proportion of top-k results that are relevant
-- **Recall@k** — proportion of all relevant chunks found in top-k
-- **F1@k** — harmonic mean of Precision@k and Recall@k
-- **MRR** — reciprocal rank of the first relevant result
-- **MAP** — mean average precision across all relevant hit positions
-- **Jaccard@k** — set overlap between retrieved and relevant chunks
+Implementation: `evaluation/retrieval/metrics.py`
 
-All retrieval metrics are macro-averaged over evaluated queries.
+### Generation (3 RAGAS metrics)
 
-### Evaluation Dataset
+Quality is measured via [RAGAS](https://docs.ragas.io/) using a local Ollama LLM as the evaluator.
 
-All evaluations draw from the same master dataset of 100 questions (`data/testing/evaluation.json`), with per-KB annotations in:
-- `data/testing/evaluation-stpo.json` (75 evaluable questions)
-- `data/testing/evaluation-faq-stpo.json` (75 evaluable questions)
-- `data/testing/evaluation-faq-ao.json` (21 evaluable questions)
+| Metric | What It Measures | Scale |
+|---|---|---|
+| **Faithfulness** | Answer only uses information from the provided context | 0-1 |
+| **Answer Relevancy** | Answer directly addresses the user's question | 0-1 |
+| **Factual Correctness** | Answer matches the reference answer | 0-1 |
 
----
+Implementation: `evaluation/generation/evaluate.py` (RAGAS scoring in `_score_with_ragas()`)
 
-## CLI Entry Point
+### Abstention (5 metrics)
 
-The unified CLI (`evaluation/__main__.py`) provides a single entry point for all evaluation steps.
+Evaluates the two-level abstention mechanism (Level 1: retrieval confidence, Level 2: LLM detection).
 
-### Usage
+| Metric | Formula | Interpretation |
+|---|---|---|
+| **Precision** | correct_abstention / all_abstentions | When the system abstains, is it right? |
+| **Recall** | correct_abstention / all_unanswerable | Does the system catch unanswerable questions? |
+| **F1** | 2 · Precision · Recall / (Precision + Recall) | Harmonic mean of precision and recall |
+| **False Abstention Rate** | incorrect_abstention / all_answerable | How often does it wrongly refuse to answer? |
+| **Coverage** | (answered + missing_abstention) / total | Proportion of questions receiving an answer |
+
+Implementation: `evaluation/utils.py` (`AbstentionMetrics`, `compute_abstention_metrics()`)
+
+## CLI Usage
+
+All evaluation is driven through a unified CLI:
 
 ```bash
-python -m evaluation [OPTIONS]
+python -m evaluation --help
 ```
 
-### Step Selection Flags
+### Available Commands
 
-| Flag | Description |
-|---|---|
-| `--check` | Validate data requirements only (no evaluation). |
-| `--retrieval` | Run retrieval evaluation (single-KB + combined). |
-| `--rrf-tuning` | Sweep `k_rrf` for Hybrid and Fusion retrievers. |
-| `--generation` | Run generation evaluation. |
-| `--abstention` | Run abstention evaluation (Level 1 sweep + full). |
-| `--e2e` | Run end-to-end evaluation. |
-| `--all` | Run all steps in order. |
+```bash
+# Validate data requirements (chunks, eval files, Ollama)
+python -m evaluation --check
+
+# Individual evaluation steps
+python -m evaluation --retrieval       # Retrieval metrics (P@k, R@k, MRR, F1@k, Jaccard@k)
+python -m evaluation --rrf-tuning      # k_rrf parameter sweep for Hybrid and Fusion
+python -m evaluation --generation      # Generation quality via RAGAS
+python -m evaluation --abstention      # Abstention metrics with threshold sweep
+python -m evaluation --e2e             # End-to-end (33 configs x 100 questions)
+
+# Run all steps in order
+python -m evaluation --all
+```
 
 ### Common Options
 
-| Option | Default | Description |
+| Flag | Default | Description |
 |---|---|---|
-| `--output-dir` | `data/testing` | Output directory for evaluation results. |
-| `--ollama-url` | `http://localhost:11434` | Ollama server URL. |
-| `--ollama-model` | `llama3.1:latest` | LLM model name for generation/abstention/E2E. |
-| `--config-filter` | `None` | Only run E2E configs matching this substring. |
+| `--output-dir` | `data/evaluation` | Directory for evaluation output files |
+| `--ollama-url` | `http://localhost:11434` | Ollama server URL |
+| `--ollama-model` | `llama3.1:latest` | Ollama model for generation and RAGAS |
+| `--config-filter` | `None` | Only run E2E configs matching this substring |
 
 ### Execution Order
 
-When `--all` is used, steps execute in this order: `retrieval` -> `rrf-tuning` -> `generation` -> `abstention` -> `e2e`. Each step validates data requirements before running.
+When using `--all`, steps run in this order:
 
----
+```
+retrieval -> rrf-tuning -> generation -> abstention -> e2e
+```
 
-## Shared Utilities
+Each step validates data requirements before running. Steps that need an LLM (`generation`, `abstention`, `e2e`) require a running Ollama server.
 
-### `evaluation/utils.py`
+## Data Prerequisites
 
-Common functions used across all evaluation modules.
+### Required Files
 
-| Function / Class | Description |
+| File | Purpose |
 |---|---|
-| `load_json(path)` | Load a JSON file and return its contents as a dict. |
-| `load_evaluation(eval_path)` | Load an annotated evaluation JSON file; returns the list of question dicts. |
-| `merge_chunks(*chunk_paths)` | Load and concatenate chunks from multiple files; raises `ValueError` on duplicate chunk IDs. |
-| `merge_evaluation_data(eval_paths)` | Merge evaluation datasets across KBs; unions `relevant_chunks` per question. |
-| `compute_abstention_metrics(results, threshold)` | Compute abstention precision, recall, F1, false abstention rate, and coverage. |
-| `AbstentionMetrics` | Dataclass holding abstention evaluation results (precision, recall, F1, false_abstention_rate, coverage, counts, threshold). |
+| `data/chunks/stpo-chunks.json` | StPO chunk corpus |
+| `data/chunks/faq-stpo-chunks.json` | FAQ-StPO chunk corpus |
+| `data/chunks/faq-ao-chunks.json` | FAQ-AO chunk corpus |
+| `data/evaluation/evaluation-stpo.json` | StPO evaluation dataset |
+| `data/evaluation/evaluation-faq-stpo.json` | FAQ-StPO evaluation dataset |
+| `data/evaluation/evaluation-faq-ao.json` | FAQ-AO evaluation dataset |
 
-### `evaluation/validate.py`
+### Evaluation Dataset Format
 
-Pre-flight validation that checks all required files and services before running evaluation steps.
+Each evaluation JSON file contains:
 
-| Symbol | Description |
+```json
+{
+  "questions": [
+    {
+      "id": "q-001",
+      "question": "What are the admission requirements?",
+      "reference_answer": "The program requires...",
+      "relevant_chunks": ["stpo-sec-3-chunk-1", "stpo-sec-3-chunk-2"],
+      "category": "admission",
+      "expected_abstention": false
+    }
+  ]
+}
+```
+
+### Ollama Requirement
+
+Steps that involve generation (`--generation`, `--abstention`, `--e2e`) require a running Ollama server. The `--check` command validates Ollama availability.
+
+## Output Files
+
+All evaluation results are saved as JSON in the output directory:
+
+| File | Produced By |
 |---|---|
-| `EVAL_PATHS` | Dict mapping KB names to evaluation file paths (`data/testing/evaluation-*.json`). |
-| `OLLAMA_STEPS` | Set of step names requiring Ollama (`{"generation", "abstention", "e2e"}`). |
-| `validate_data_requirements(steps, output_dir, ollama_url)` | Returns a list of error messages (empty = all OK). Checks chunk files, evaluation files, and Ollama connectivity. |
+| `retrieval-evaluation.json` | `--retrieval` |
+| `rrf-tuning.json` | `--rrf-tuning` |
+| `generation-evaluation.json` | `--generation` |
+| `generation-evaluation-combined.json` | `--generation` (combined KB) |
+| `abstention-evaluation.json` | `--abstention` |
+| `e2e-results-{config-name}.json` | `--e2e` (one file per config) |
 
----
+## Module Structure
 
-## Key Findings Summary
+```
+evaluation/
++-- __init__.py              # Package init, exports validate_data_requirements
++-- __main__.py              # Unified CLI entry point
++-- validate.py              # Data requirement validation (EVAL_PATHS, CHUNK_PATHS)
++-- utils.py                 # Shared utilities (load_json, merge_chunks, AbstentionMetrics)
++-- retrieval/
+|   +-- metrics.py           # RetrievalMetrics dataclass + 5 metric functions
+|   +-- evaluate.py          # Single-KB retrieval evaluation runner
+|   +-- combined.py          # Merged pool + Fusion evaluation strategies
+|   +-- rrf_tuning.py        # k_rrf parameter sweep (Hybrid + Fusion)
++-- generation/
+|   +-- __init__.py          # Public API re-exports
+|   +-- metrics.py           # GenerationEvalResult + GenerationMetrics dataclasses
+|   +-- evaluate.py          # Single-KB generation evaluation + RAGAS scoring
+|   +-- combined.py          # Combined-KB generation evaluation
++-- abstention/
+|   +-- evaluate.py          # Level 1 sweep + full two-level evaluation
+|   +-- metrics.py           # Re-exports AbstentionMetrics from utils.py
++-- end_to_end/
+|   +-- __init__.py          # Package init
+|   +-- config.py            # E2EConfig dataclass + 33-config generator
+|   +-- evaluate.py          # E2EResult + sweep_threshold + run_e2e_config
+|   +-- metrics.py           # E2EConfigMetrics + comparison table builder
+|   +-- run_all.py           # Main runner with resume support
++-- tests/                   # Evaluation unit tests (see evaluation-testing docs)
+```
 
-### Single-KB Retrieval
+## Related Documentation
 
-Vector retrieval outperforms BM25 across all knowledge bases. Hybrid (RRF) achieves the best recall but lower precision than pure Vector. See [retrieval.md](retrieval.md) for full results.
-
-### Combined-KB Retrieval
-
-Combining knowledge bases generally maintains or improves retrieval quality compared to single-KB baselines. The fusion strategy (per-KB retrievers + RRF) slightly outperforms the merged pool strategy for BM25 and Hybrid, while both strategies perform similarly for Vector. See [combined-retrieval.md](combined-retrieval.md) for full results.
-
-### Generation
-
-FAQ-StPO outperforms StPO on all metrics and is remarkably robust to distractor noise — faithfulness stays above 0.93 even at 10 distractors. StPO faithfulness collapses above 7 distractors (0.95 → 0.16). Combined-KB achieves the best correctness (0.47) and answer relevance (0.65). BERTScore F1 is consistently high (0.86–0.87) across all configurations. See [results/generation.md](results/generation.md) for full results.
-
----
-
-## Test Coverage
-
-| Test File | Tests | Evaluation Covered |
-|---|---|---|
-| `evaluation/tests/retrieval/test_metrics.py` | 41 | Retrieval metrics |
-| `evaluation/tests/retrieval/test_evaluate.py` | 13 | Single-KB evaluation runner |
-| `evaluation/tests/retrieval/test_combined.py` | 25 | Combined-KB evaluation runner |
-| `evaluation/tests/retrieval/test_rrf_tuning.py` | 10 | RRF k-parameter sweep |
-| `evaluation/tests/generation/test_metrics.py` | 11 | Generation metrics + quality fields |
-| `evaluation/tests/generation/test_evaluate.py` | 22 | Generation evaluation runner + judge integration |
-| `evaluation/tests/generation/test_combined.py` | 14 | Combined-KB generation runner |
-| `evaluation/tests/generation/test_hf_metrics.py` | 11 | ROUGE + BERTScore helpers |
-| `evaluation/tests/judge/test_base.py` | 9 | Judge ABC + JudgementResult |
-| `evaluation/tests/judge/test_prompts.py` | 15 | Judge prompt templates |
-| `evaluation/tests/judge/test_ollama_judge.py` | 19 | OllamaJudge unit + integration |
-| `evaluation/tests/judge/test_openai_judge.py` | 3 | OpenAIJudge import + validation |
-| `evaluation/tests/abstention/test_metrics.py` | 10 | Abstention metrics |
-| `evaluation/tests/abstention/test_evaluate.py` | 12 | Abstention evaluation runner |
-| `evaluation/tests/end_to_end/test_config.py` | 10 | E2E configuration generation |
-| `evaluation/tests/end_to_end/test_evaluate.py` | 17 | E2E evaluation runner |
-| `evaluation/tests/end_to_end/test_metrics.py` | 13 | E2E automatic metrics aggregation |
-| `evaluation/tests/test_utils.py` | 16 | Shared utilities |
-| **Total** | **271** | |
+- [Retrieval Evaluation](retrieval.md) -- Detailed retrieval metrics and strategies
+- [Generation Evaluation](generation.md) -- RAGAS integration and distractor testing
+- [Abstention Evaluation](abstention.md) -- Two-level abstention evaluation
+- [End-to-End Evaluation](end-to-end.md) -- 33-config matrix evaluation
+- [Results](results/) -- Evaluation results (populated in Phase 8)

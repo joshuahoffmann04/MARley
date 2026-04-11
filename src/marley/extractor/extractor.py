@@ -96,7 +96,17 @@ def _normalize_whitespace(text: str) -> str:
 
 
 def extract_page_texts(pdf_path: Path) -> list[tuple[int, str]]:
-    """Extract cleaned text for each page. Returns list of (page_number, text)."""
+    """Extract cleaned text for each page using PyMuPDF.
+
+    Applies page-number stripping, whitespace normalization, and
+    Unicode normalization to each page.
+
+    Args:
+        pdf_path: Path to the PDF file.
+
+    Returns:
+        List of ``(page_number, cleaned_text)`` tuples (1-indexed).
+    """
     pages: list[tuple[int, str]] = []
     with fitz.open(pdf_path) as doc:
         for i, page in enumerate(doc):
@@ -568,7 +578,21 @@ def _assign_tables(sections: list[Section], tables: list[Table]) -> None:
 
 
 def extract(pdf_path: str | Path) -> ExtractionResult:
-    """Extract the StPO PDF into structured sections with text and tables."""
+    """Extract the StPO PDF into structured sections with text and tables.
+
+    Pipeline: page-text extraction (PyMuPDF) -> section detection ->
+    section assembly -> parent assignment -> table extraction (pdfplumber)
+    -> table-to-section assignment.
+
+    Args:
+        pdf_path: Path to the StPO PDF file.
+
+    Returns:
+        Complete extraction result with all sections and embedded tables.
+
+    Raises:
+        FileNotFoundError: If the PDF file does not exist.
+    """
     pdf_path = Path(pdf_path)
     if not pdf_path.exists():
         raise FileNotFoundError(f"PDF not found: {pdf_path}")
@@ -588,5 +612,13 @@ def extract(pdf_path: str | Path) -> ExtractionResult:
 
 
 def save(result: ExtractionResult, output_path: str | Path) -> Path:
-    """Save an ExtractionResult as JSON."""
+    """Save an ExtractionResult as JSON.
+
+    Args:
+        result: The extraction result to persist.
+        output_path: Destination file path (parent dirs are created).
+
+    Returns:
+        The resolved absolute path of the written file.
+    """
     return save_json(result, output_path)

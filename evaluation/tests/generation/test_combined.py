@@ -1,13 +1,15 @@
 """Tests for the combined knowledge base generation evaluation module.
 
-Uses a stub Generator implementation and temporary JSON files to test
-the combined-KB generation pipeline without requiring Ollama or real data.
+Uses a stub Generator implementation, monkeypatched _score_with_ragas,
+and temporary JSON files to test the combined-KB generation pipeline
+without requiring Ollama, RAGAS, or real data.
 """
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -16,6 +18,7 @@ from evaluation.generation.combined import (
     run_combined_generation_evaluation,
 )
 from evaluation.generation.metrics import GenerationEvalResult
+from evaluation.tests.conftest import fake_ragas_scores
 from tests.conftest import StubGenerator
 
 
@@ -61,7 +64,7 @@ def _question(qid: str, relevant: list[str], **kwargs) -> dict:
 @pytest.fixture()
 def two_kb_setup(tmp_path):
     """Set up two KBs with distinct chunks and shared questions."""
-    # KB1: stpo — 3 chunks
+    # KB1: stpo -- 3 chunks
     cp1 = tmp_path / "stpo-chunks.json"
     _write_chunks(cp1, [
         _chunk("stpo-1", "Study period is 4 semesters."),
@@ -75,7 +78,7 @@ def two_kb_setup(tmp_path):
         _question("q3", []),
     ])
 
-    # KB2: faq — 3 chunks
+    # KB2: faq -- 3 chunks
     cp2 = tmp_path / "faq-chunks.json"
     _write_chunks(cp2, [
         _chunk("faq-1", "The program lasts 4 semesters."),
@@ -100,9 +103,10 @@ def two_kb_setup(tmp_path):
 # ---------------------------------------------------------------------------
 
 
+@patch("evaluation.generation.evaluate._score_with_ragas", fake_ragas_scores)
 class TestRunCombinedGenerationEvaluation:
     def test_result_count(self, two_kb_setup):
-        """3 answerable questions × 2 distractor levels = 6 results."""
+        """3 answerable questions x 2 distractor levels = 6 results."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
             distractor_levels=[0, 1],
@@ -119,7 +123,6 @@ class TestRunCombinedGenerationEvaluation:
         )
         q1_results = [r for r in results if r.question_id == "q1"]
         assert len(q1_results) == 1
-        # With 0 distractors, context should contain both relevant chunks
         assert set(q1_results[0].context_chunk_ids) == {"stpo-1", "faq-1"}
 
     def test_question_with_single_kb_relevance(self, two_kb_setup):
@@ -135,7 +138,6 @@ class TestRunCombinedGenerationEvaluation:
 
     def test_distractors_from_merged_corpus(self, tmp_path):
         """With distractors, context includes non-relevant chunks."""
-        # Use texts with keyword overlap so BM25 ranks distractors
         cp1 = tmp_path / "kb1.json"
         _write_chunks(cp1, [
             _chunk("r1", "The study period is four semesters."),
@@ -159,18 +161,16 @@ class TestRunCombinedGenerationEvaluation:
             distractor_levels=[2],
         )
         chunk_ids = set(results[0].context_chunk_ids)
-        # Relevant chunk always present
         assert "r1" in chunk_ids
-        # Distractors added from merged pool (could be from either KB)
         assert len(chunk_ids) == 3
 
     def test_all_distractor_levels(self, two_kb_setup):
-        """Default distractor levels 0–10 produce 11 results per question."""
+        """Default distractor levels 0-10 produce 11 results per question."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
             **two_kb_setup,
         )
-        # 3 answerable questions × 11 levels = 33
+        # 3 answerable questions x 11 levels = 33
         assert len(results) == 33
 
     def test_skips_unanswerable(self, tmp_path):
@@ -191,7 +191,7 @@ class TestRunCombinedGenerationEvaluation:
         assert results == []
 
     def test_progress_callback(self, two_kb_setup):
-        """Progress callback is invoked for each question × level pair."""
+        """Progress callback is invoked for each question x level pair."""
         calls = []
 
         def callback(qid, n_dist):
@@ -223,6 +223,7 @@ class TestRunCombinedGenerationEvaluation:
 # ---------------------------------------------------------------------------
 
 
+@patch("evaluation.generation.evaluate._score_with_ragas", fake_ragas_scores)
 class TestRunAndReportCombined:
     def test_report_structure(self, two_kb_setup):
         """Report contains all expected top-level keys."""
@@ -278,7 +279,7 @@ class TestRunAndReportCombined:
             **two_kb_setup,
         )
         metrics = report["metrics"]
-        assert metrics["num_results"] == 3  # 3 answerable questions × 1 level
+        assert metrics["num_results"] == 3  # 3 answerable questions x 1 level
         assert metrics["num_queries"] == 3
         assert metrics["knowledge_base"] == "faq+stpo"
         assert metrics["model"] == "stub-model"
@@ -297,3 +298,15 @@ class TestRunAndReportCombined:
             assert "reference_answer" in r
             assert "num_distractors" in r
             assert "context_chunk_ids" in r
+
+    def test_ragas_scores_in_report(self, two_kb_setup):
+        """RAGAS scores are included in serialised results."""
+        report = run_and_report_combined(
+            generator=StubGenerator(answer="stub answer"),
+            distractor_levels=[0],
+            **two_kb_setup,
+        )
+        for r in report["results"]:
+            assert "faithfulness" in r
+            assert "answer_relevance" in r
+            assert "correctness" in r

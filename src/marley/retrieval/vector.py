@@ -7,6 +7,7 @@ vector storage with cosine similarity search.
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import chromadb
 from sentence_transformers import SentenceTransformer
@@ -66,7 +67,7 @@ class VectorRetriever(Retriever):
         else:
             self._collection = None
 
-    def index(self, corpus: list[dict]) -> None:
+    def index(self, corpus: list[dict[str, Any]]) -> None:
         """Embed and store chunks in a persistent ChromaDB collection.
 
         Replaces any existing collection in the same persist_directory.
@@ -158,15 +159,15 @@ class VectorRetriever(Retriever):
         return self._collection.count()
 
 
-def _flatten_metadatas(metadatas: list[dict]) -> list[dict | None]:
+def _flatten_metadatas(metadatas: list[dict[str, Any]]) -> list[dict[str, Any] | None]:
     """Flatten metadata dicts for ChromaDB compatibility.
 
     ChromaDB only supports str, int, float, and bool values.
     Lists and None values must be converted.
     """
-    flat = []
+    flat: list[dict[str, Any] | None] = []
     for meta in metadatas:
-        clean: dict = {}
+        clean: dict[str, Any] = {}
         for key, value in meta.items():
             if value is None:
                 clean[key] = ""

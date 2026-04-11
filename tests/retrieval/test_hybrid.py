@@ -1,7 +1,5 @@
 """Tests for the hybrid retrieval module."""
 
-from pathlib import Path
-
 import pytest
 
 from src.marley.retrieval import (
@@ -13,11 +11,12 @@ from src.marley.retrieval import (
 )
 from src.marley.models.retrieval import Retriever
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-STPO_CHUNKS_PATH = PROJECT_ROOT / "data" / "chunks" / "stpo-chunks.json"
-FAQ_STPO_CHUNKS_PATH = PROJECT_ROOT / "data" / "chunks" / "faq-stpo-chunks.json"
-FAQ_AO_CHUNKS_PATH = PROJECT_ROOT / "data" / "chunks" / "faq-ao-chunks.json"
-VECTORSTORE_DIR = PROJECT_ROOT / "data" / "vectorstore"
+from tests.retrieval.conftest import (
+    FAQ_AO_CHUNKS_PATH,
+    FAQ_STPO_CHUNKS_PATH,
+    STPO_CHUNKS_PATH,
+    VECTORSTORE_DIR,
+)
 
 
 # ---------------------------------------------------------------------------

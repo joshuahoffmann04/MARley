@@ -13,6 +13,8 @@ Clarke & Buettcher, 2009).
 
 from __future__ import annotations
 
+from typing import Any
+
 from src.marley.models.constants import DEFAULT_K_RRF_HYBRID
 from src.marley.models.retrieval import rrf_fuse
 from src.marley.retrieval.base import RetrievalResult, Retriever
@@ -44,7 +46,7 @@ class HybridRetriever(Retriever):
         self._k_rrf = k_rrf
         self._weights = weights
 
-    def index(self, corpus: list[dict]) -> None:
+    def index(self, corpus: list[dict[str, Any]]) -> None:
         """Index the corpus in both sub-retrievers."""
         for retriever in self._retrievers:
             retriever.index(corpus)

@@ -232,12 +232,11 @@ def run_rrf_tuning_step(output_dir: Path) -> None:
 
 
 def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) -> None:
-    """Run generation evaluation: single-KB + combined, with LLM judge."""
+    """Run generation evaluation: single-KB + combined, scored by RAGAS."""
     from evaluation.generation.combined import run_and_report_combined
     from evaluation.generation.evaluate import (
         run_and_report as run_gen_report,
     )
-    from evaluation.judge import OllamaJudge
     from src.marley.generator.ollama import OllamaGenerator
     from src.marley.retrieval import load_chunks
 
@@ -245,7 +244,6 @@ def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) ->
     logger.info("GENERATION EVALUATION")
 
     generator = OllamaGenerator(model=ollama_model, base_url=ollama_url)
-    judge = OllamaJudge(model=ollama_model, base_url=ollama_url)
     reports = []
 
     # Single-KB evaluation
@@ -254,7 +252,10 @@ def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) ->
         logger.info("  Single-KB: %s", kb)
         chunks = load_chunks(chunk_path)
         report = run_gen_report(
-            generator, chunks, eval_path, knowledge_base=kb, judge=judge,
+            generator, chunks, eval_path,
+            knowledge_base=kb,
+            ollama_model=ollama_model,
+            ollama_url=ollama_url,
         )
         reports.append(report)
 
@@ -268,7 +269,8 @@ def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) ->
         generator,
         combined_chunk_paths,
         combined_eval_paths,
-        judge=judge,
+        ollama_model=ollama_model,
+        ollama_url=ollama_url,
     )
     _save_json(combined_report, output_dir / "generation-evaluation-combined.json")
 
@@ -380,8 +382,8 @@ def main() -> None:
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="data/testing",
-        help="Output directory (default: data/testing)",
+        default="data/evaluation",
+        help="Output directory (default: data/evaluation)",
     )
     parser.add_argument(
         "--ollama-url",
