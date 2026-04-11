@@ -20,7 +20,10 @@ SYSTEM_PROMPT = (
     "to fully answer the question, respond with exactly:\n"
     "   ABSTENTION: <reason>\n"
     "4. Never guess, speculate, or supplement with knowledge not present "
-    "in the context."
+    "in the context.\n"
+    "5. Write your answer as plain text for the student. Do NOT reference "
+    "context passage numbers (e.g. [1], [2]), chunk IDs, or source labels "
+    "in your answer. The student does not see the context passages."
 )
 
 

@@ -4,34 +4,43 @@
  * Design principle: each Q&A is rendered as an independent "query card"
  * (not a messenger thread) to make the stateless nature visually obvious.
  * The PDF slide-in panel opens when a user clicks a source page reference.
+ *
+ * Security note: All user-generated and API-returned text is escaped via
+ * the esc() helper (textContent-based) before insertion into innerHTML.
+ * No raw user input is ever inserted into the DOM unescaped.
  */
 
 (function () {
   "use strict";
 
-  const queryLog     = document.getElementById("query-log-inner");
-  const welcomeState = document.getElementById("welcome-state");
-  const chatForm     = document.getElementById("chat-form");
-  const queryInput   = document.getElementById("query");
-  const sendBtn      = document.getElementById("send-btn");
-  const chatMain     = document.getElementById("chat-main");
-  const pdfPanel     = document.getElementById("pdf-panel");
-  const pdfFrame     = document.getElementById("pdf-frame");
-  const pdfTitle     = document.getElementById("pdf-panel-title");
-  const pdfClose     = document.getElementById("pdf-panel-close");
+  var queryLog     = document.getElementById("query-log-inner");
+  var welcomeState = document.getElementById("welcome-state");
+  var chatForm     = document.getElementById("chat-form");
+  var queryInput   = document.getElementById("query");
+  var sendBtn      = document.getElementById("send-btn");
+  var chatMain     = document.getElementById("chat-main");
+  var pdfPanel     = document.getElementById("pdf-panel");
+  var pdfFrame     = document.getElementById("pdf-frame");
+  var pdfTitle     = document.getElementById("pdf-panel-title");
+  var pdfClose     = document.getElementById("pdf-panel-close");
 
-  let queryCount = 0;
+  var queryCount = 0;
 
   // ---------------------------------------------------------------------------
   // PDF panel
   // ---------------------------------------------------------------------------
 
-  function openPdf(page, chunkId) {
-    const url = "/api/pdf/stpo#page=" + (page || 1);
-    if (pdfFrame.src !== url) {
+  function openPdf(page) {
+    // Always force-reload by clearing src first, then setting the new URL.
+    // This fixes the bug where re-opening with a different page still showed
+    // the old page because the browser cached the iframe src.
+    var url = "/api/pdf/stpo#page=" + (page || 1);
+    pdfFrame.src = "";
+    // Use a microtask to ensure the browser registers the src change
+    setTimeout(function () {
       pdfFrame.src = url;
-    }
-    pdfTitle.textContent = "StPO \u2014 Page " + page + (chunkId ? " \u00b7 " + chunkId : "");
+    }, 0);
+    pdfTitle.textContent = "StPO \u2014 Page " + page;
     pdfPanel.classList.add("open");
     chatMain.classList.add("pdf-open");
   }
@@ -48,13 +57,13 @@
   // ---------------------------------------------------------------------------
 
   async function sendChat(query) {
-    const resp = await fetch("/api/chat", {
+    var resp = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query: query }),
     });
     if (!resp.ok) {
-      const detail = await resp.json().catch(() => null);
+      var detail = await resp.json().catch(function () { return null; });
       throw new Error(detail && detail.detail ? detail.detail : "Request failed (" + resp.status + ")");
     }
     return resp.json();
@@ -64,8 +73,9 @@
   // Helpers
   // ---------------------------------------------------------------------------
 
+  /** Escape text for safe insertion into innerHTML (XSS prevention). */
   function esc(text) {
-    const d = document.createElement("div");
+    var d = document.createElement("div");
     d.textContent = text;
     return d.innerHTML;
   }
@@ -82,40 +92,65 @@
     return "Low confidence";
   }
 
+  /** Determine the human-readable source name from chunk metadata. */
+  function sourceName(source) {
+    var meta = source.metadata || {};
+    if (meta.faq_source) return meta.faq_source.toUpperCase();
+    if (meta.source_file && meta.source_file.indexOf("msc-computer-science") !== -1) return "StPO";
+    // Fallback: derive from chunk_id prefix
+    var id = source.chunk_id || "";
+    if (id.startsWith("faq-ao"))   return "FAQ-AO";
+    if (id.startsWith("faq-stpo")) return "FAQ-STPO";
+    return "StPO";
+  }
+
+  /** Check if a source is an FAQ chunk. */
+  function isFaq(source) {
+    var meta = source.metadata || {};
+    return !!meta.faq_source || (source.chunk_id || "").startsWith("faq-");
+  }
+
   // ---------------------------------------------------------------------------
   // Rendering
   // ---------------------------------------------------------------------------
 
+  /**
+   * Render a complete query card.
+   *
+   * All dynamic text (question, answer, source text, chunk IDs, scores)
+   * is escaped via esc() before innerHTML insertion. Only static markup
+   * strings and pre-escaped values are used in innerHTML assignments.
+   */
   function renderQueryCard(question, data) {
     queryCount += 1;
-    const n = queryCount;
+    var n = queryCount;
 
     // --- header ---
-    const header = document.createElement("div");
+    var header = document.createElement("div");
     header.className = "query-card-header";
     header.innerHTML =
       '<span class="query-number">#' + n + '</span>' +
       '<span class="query-independent-tag">Independent query &mdash; no context from other questions</span>';
 
     // --- body ---
-    const body = document.createElement("div");
+    var body = document.createElement("div");
     body.className = "query-body";
 
-    // Question row
+    // Question row (plain text, no highlight)
     body.innerHTML +=
       '<div class="query-question-row">' +
         '<div class="row-label">Your question</div>' +
         '<div class="query-question-text">' + esc(question) + '</div>' +
       '</div>';
 
-    // Answer row
-    let answerHtml = '<div class="row-label"><span class="answer-label-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c-primary);margin-right:5px;"></span>MARley</div>';
+    // Answer row (no dot before MARley)
+    var answerHtml = '<div class="row-label">MARley</div>';
     if (data.abstained) {
-      const level  = data.abstention_level || "?";
-      const reason = data.abstention_reason || "No sufficient information found in the study regulations.";
+      var level  = data.abstention_level || "?";
+      var reason = data.abstention_reason || "No sufficient information found in the study regulations.";
       answerHtml +=
         '<div class="abstention-box">' +
-          '<div class="abstention-title">Unable to answer (Level ' + level + ')</div>' +
+          '<div class="abstention-title">Unable to answer (Level ' + esc(String(level)) + ')</div>' +
           '<div class="abstention-reason">' + esc(reason) + '</div>' +
           '<div class="abstention-hint">' +
             'For questions not covered by the study regulations, please contact the ' +
@@ -127,95 +162,102 @@
     }
     body.innerHTML += answerHtml;
 
-    // --- footer ---
-    const footer = document.createElement("div");
-    footer.className = "query-card-footer";
-
-    const cls   = confClass(data.confidence);
-    const label = confLabel(data.confidence);
-    const pct   = (data.confidence * 100).toFixed(1);
-    footer.innerHTML =
-      '<span class="conf-badge ' + cls + '">' + label + ' &mdash; ' + pct + '%</span>';
-
-    const hasSources = data.sources && data.sources.length > 0;
-    if (hasSources) {
-      const srcBtn = document.createElement("button");
-      srcBtn.className = "sources-btn";
-      srcBtn.textContent = "Sources (" + data.sources.length + ")";
-      footer.appendChild(srcBtn);
-    }
-
-    // --- sources list ---
-    const sourcesList = document.createElement("div");
-    sourcesList.className = "sources-list";
-
-    if (hasSources) {
-      data.sources.forEach(function (s) {
-        const item = document.createElement("div");
-        item.className = "source-item";
-
-        const meta   = s.metadata || {};
-        const page   = meta.start_page;
-        const title  = meta.section_title || "";
-
-        let headerHtml =
-          '<div class="source-item-header">' +
-            '<span class="source-chunk-id">' + esc(s.chunk_id) + '</span>' +
-            '<span class="source-meta">' +
-              '<span class="source-score">' + s.score.toFixed(4) + '</span>';
-
-        if (page != null) {
-          headerHtml +=
-            '<button class="source-page-btn" data-page="' + page + '" data-id="' + esc(s.chunk_id) + '">' +
-              'Open PDF \u2192 p.' + page +
-            '</button>';
-        }
-
-        headerHtml += '</span></div>';
-
-        if (title) {
-          headerHtml += '<div class="source-section">' + esc(title) + '</div>';
-        }
-
-        headerHtml +=
-          '<div class="source-text-preview">' + esc(s.text.substring(0, 280)) + '</div>';
-
-        item.innerHTML = headerHtml;
-        sourcesList.appendChild(item);
-      });
-
-      // Attach PDF open listeners
-      sourcesList.querySelectorAll(".source-page-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          openPdf(parseInt(btn.dataset.page, 10), btn.dataset.id);
-        });
-      });
-    }
-
     // --- assemble card ---
-    const card = document.createElement("div");
+    var card = document.createElement("div");
     card.className = "query-card";
     card.appendChild(header);
     card.appendChild(body);
-    card.appendChild(footer);
-    card.appendChild(sourcesList);
 
-    // Sources toggle
-    if (hasSources) {
-      const srcBtn = footer.querySelector(".sources-btn");
-      srcBtn.addEventListener("click", function () {
-        const open = sourcesList.classList.toggle("open");
-        srcBtn.textContent = open
-          ? "Hide sources"
-          : "Sources (" + data.sources.length + ")";
-      });
+    // --- footer: confidence + sources (hidden on abstention) ---
+    if (!data.abstained) {
+      var footer = document.createElement("div");
+      footer.className = "query-card-footer";
+
+      var cls   = confClass(data.confidence);
+      var label = confLabel(data.confidence);
+      var pct   = (data.confidence * 100).toFixed(1);
+      footer.innerHTML =
+        '<span class="conf-badge ' + cls + '">' + esc(label) + ' &mdash; ' + esc(pct) + '%</span>';
+
+      var hasSources = data.sources && data.sources.length > 0;
+      if (hasSources) {
+        var srcBtn = document.createElement("button");
+        srcBtn.className = "sources-btn";
+        srcBtn.textContent = "Sources (" + data.sources.length + ")";
+        footer.appendChild(srcBtn);
+      }
+
+      card.appendChild(footer);
+
+      // --- sources list ---
+      if (hasSources) {
+        var sourcesList = document.createElement("div");
+        sourcesList.className = "sources-list";
+
+        data.sources.forEach(function (s) {
+          var item = document.createElement("div");
+          item.className = "source-item";
+
+          var meta = s.metadata || {};
+          var page = meta.start_page;
+          var name = sourceName(s);
+          var scoreStr = (s.score * 100).toFixed(1) + "%";
+          var sourceRef = meta.source_reference || meta.section_label || "";
+
+          // Source header: source name + confidence + optional reference
+          var headerHtml =
+            '<div class="source-item-header">' +
+              '<span class="source-name">' + esc(name) +
+                (sourceRef ? ' &middot; ' + esc(sourceRef) : '') +
+              '</span>' +
+              '<span class="source-meta">' +
+                '<span class="source-score">' + esc(scoreStr) + '</span>';
+
+          // StPO: "Open PDF" button
+          if (page != null) {
+            headerHtml +=
+              '<button class="source-page-btn" data-page="' + parseInt(page, 10) + '">' +
+                'Open PDF \u2192 p.' + parseInt(page, 10) +
+              '</button>';
+          }
+
+          headerHtml += '</span></div>';
+
+          if (isFaq(s)) {
+            // FAQ sources: show question + answer text
+            headerHtml +=
+              '<div class="source-text-preview">' + esc(s.text) + '</div>';
+          }
+          // StPO sources: no text preview, just the button
+
+          item.innerHTML = headerHtml;
+          sourcesList.appendChild(item);
+        });
+
+        // Attach PDF open listeners
+        sourcesList.querySelectorAll(".source-page-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            openPdf(parseInt(btn.dataset.page, 10));
+          });
+        });
+
+        card.appendChild(sourcesList);
+
+        // Sources toggle
+        srcBtn.addEventListener("click", function () {
+          var open = sourcesList.classList.toggle("open");
+          srcBtn.textContent = open
+            ? "Hide sources"
+            : "Sources (" + data.sources.length + ")";
+        });
+      }
     }
 
     return card;
   }
 
   function renderLoadingCard() {
-    const el = document.createElement("div");
+    var el = document.createElement("div");
     el.className = "loading-card";
     el.id = "loading-card";
     el.innerHTML =
@@ -225,7 +267,7 @@
   }
 
   function renderErrorCard(message) {
-    const card = document.createElement("div");
+    var card = document.createElement("div");
     card.className = "query-card";
     card.innerHTML =
       '<div class="query-card-header">' +
@@ -239,7 +281,7 @@
   }
 
   function scrollBottom() {
-    const log = document.getElementById("query-log");
+    var log = document.getElementById("query-log");
     log.scrollTop = log.scrollHeight;
   }
 
@@ -264,7 +306,7 @@
 
   chatForm.addEventListener("submit", async function (e) {
     e.preventDefault();
-    const query = queryInput.value.trim();
+    var query = queryInput.value.trim();
     if (!query) return;
 
     // Hide welcome state on first query
@@ -274,14 +316,14 @@
     queryInput.style.height = "auto";
     setLoading(true);
 
-    const loadingEl = renderLoadingCard();
+    var loadingEl = renderLoadingCard();
     queryLog.appendChild(loadingEl);
     scrollBottom();
 
     try {
-      const data = await sendChat(query);
+      var data = await sendChat(query);
       loadingEl.remove();
-      const card = renderQueryCard(query, data);
+      var card = renderQueryCard(query, data);
       queryLog.appendChild(card);
     } catch (err) {
       loadingEl.remove();

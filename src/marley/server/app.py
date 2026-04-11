@@ -69,6 +69,14 @@ def create_app(config: ServerConfig | None = None) -> FastAPI:
 
     # --- UI Routes ---
 
+    @app.get("/favicon.ico", include_in_schema=False)
+    async def favicon() -> FileResponse:
+        """Serve the favicon from the static directory."""
+        return FileResponse(
+            _STATIC_DIR / "logo-uni-marburg.png",
+            media_type="image/png",
+        )
+
     @app.get("/", response_class=HTMLResponse)
     async def chat_page(request: Request) -> HTMLResponse:
         """Serve the production chat UI."""
