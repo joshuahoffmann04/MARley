@@ -67,14 +67,25 @@ cp .env.example .env
 ### Ollama setup
 
 Set `OLLAMA_NUM_PARALLEL=2` before starting the server. Two parallel slots
-maximise generation throughput without thrashing the GPU for RAGAS judging.
+are the sweet spot for an 8B model on a 16 GB GPU: more causes VRAM
+contention, fewer leaves GPU cycles idle. The RAGAS judge batch size of
+20 (= 2 × 10 waves) is tuned to match this setting.
 
-On Windows (PowerShell):
+Ollama reads the variable **only at startup**, so any running instance
+must be restarted after setting it. On Windows the cleanest flow is:
 
 ```powershell
+# 1. Stop the tray app + server
+Stop-Process -Name 'ollama','ollama app' -Force -ErrorAction SilentlyContinue
+
+# 2. Set the variable for this shell + start the server
 $env:OLLAMA_NUM_PARALLEL = "2"
 ollama serve
 ```
+
+To make the setting survive reboots, add `OLLAMA_NUM_PARALLEL=2` as a
+user environment variable (Windows: "Edit environment variables for
+your account") and restart Ollama once.
 
 On Linux/macOS:
 
@@ -96,13 +107,36 @@ save_faq(chunk_faq('data/knowledgebase/faq-stpo.json'), 'data/chunks/faq-stpo-ch
 "
 ```
 
-### Start the Server
+### Startup checklist
+
+The full cold-start sequence for running evaluation or the chat server:
+
+1. **Ollama with 2 parallel slots** — see the "Ollama setup" section
+   above. Verify with `curl http://localhost:11434/api/tags`; the model
+   list should include `llama3.1:latest`.
+2. **GPU + venv sanity check** (optional but fast):
+   ```bash
+   python -c "import torch; assert torch.cuda.is_available()"
+   ```
+3. **For evaluation only** — validate data and environment in one go:
+   ```bash
+   python -m evaluation --check
+   ```
+   This confirms the GPU is detected, all eval/chunk files are present,
+   and Ollama is reachable.
+4. **Start whichever you need**:
+   - Chat server: `python -m src.marley.server --port 8000`
+   - Evaluation: one of the `python -m evaluation ...` commands in the
+     ["Run Evaluation"](#run-evaluation) section below.
+
+### Start the Chat Server
 
 ```bash
-# Start Ollama (in a separate terminal)
+# Start Ollama with 2 parallel slots (see Ollama setup)
+$env:OLLAMA_NUM_PARALLEL = "2"
 ollama serve
 
-# Start MARley
+# In a second terminal: start MARley
 python -m src.marley.server --port 8000
 ```
 
