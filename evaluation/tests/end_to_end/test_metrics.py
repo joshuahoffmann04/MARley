@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+
 from evaluation.end_to_end.evaluate import E2EResult
 from evaluation.end_to_end.metrics import (
     E2EConfigMetrics,
@@ -17,6 +19,9 @@ def _result(
     abstained: bool = False,
     abstention_level: int | None = None,
     confidence: float = 0.5,
+    faithfulness: float = float("nan"),
+    answer_relevance: float = float("nan"),
+    correctness: float = float("nan"),
 ) -> E2EResult:
     return E2EResult(
         question_id=question_id,
@@ -31,6 +36,9 @@ def _result(
         confidence=confidence,
         retrieval_chunk_ids=["c1"],
         model="stub-model",
+        faithfulness=faithfulness,
+        answer_relevance=answer_relevance,
+        correctness=correctness,
     )
 
 
@@ -176,6 +184,8 @@ class TestBuildComparisonTable:
             "config_name", "num_total", "num_abstained", "abstention_rate",
             "abstention_precision", "abstention_recall", "abstention_f1",
             "avg_confidence", "level1_abstentions", "level2_abstentions",
+            "num_scored", "avg_faithfulness", "avg_answer_relevance",
+            "avg_correctness",
         }
         assert set(table[0].keys()) == expected_keys
 
@@ -192,3 +202,85 @@ class TestBuildComparisonTable:
         table = build_comparison_table(metrics_list)
         assert table[0]["abstention_rate"] == 0.3333
         assert table[0]["abstention_f1"] == 0.6667
+
+    def test_nan_generation_metrics_pass_through(self):
+        metrics_list = [
+            E2EConfigMetrics(
+                config_name="a", num_total=2, num_abstained=2,
+                abstention_rate=1.0, abstention_precision=1.0,
+                abstention_recall=1.0, abstention_f1=1.0,
+                num_scored=0,
+            ),
+        ]
+        table = build_comparison_table(metrics_list)
+        assert math.isnan(table[0]["avg_faithfulness"])
+        assert math.isnan(table[0]["avg_answer_relevance"])
+        assert math.isnan(table[0]["avg_correctness"])
+        assert table[0]["num_scored"] == 0
+
+    def test_generation_metrics_rounded(self):
+        metrics_list = [
+            E2EConfigMetrics(
+                config_name="a", num_total=2, num_abstained=0,
+                abstention_rate=0.0, abstention_precision=0.0,
+                abstention_recall=0.0, abstention_f1=0.0,
+                num_scored=2,
+                avg_faithfulness=0.123456,
+                avg_answer_relevance=0.987654,
+                avg_correctness=0.500001,
+            ),
+        ]
+        table = build_comparison_table(metrics_list)
+        assert table[0]["avg_faithfulness"] == 0.1235
+        assert table[0]["avg_answer_relevance"] == 0.9877
+        assert table[0]["avg_correctness"] == 0.5
+
+
+class TestGenerationMetrics:
+    """Tests for the new Phase-11 aggregation of RAGAS scores."""
+
+    def test_num_scored_counts_non_nan_results(self):
+        results = [
+            _result(expected_abstention=False, abstained=False,
+                    faithfulness=0.9, answer_relevance=0.8, correctness=0.7),
+            _result(expected_abstention=False, abstained=False,
+                    faithfulness=0.6, answer_relevance=0.5, correctness=0.4),
+            _result(expected_abstention=True, abstained=True),  # all NaN
+        ]
+        m = compute_e2e_config_metrics(results, "cfg")
+        assert m.num_scored == 2
+
+    def test_nan_excluded_from_averages(self):
+        results = [
+            _result(expected_abstention=False, abstained=False,
+                    faithfulness=0.8, answer_relevance=0.6, correctness=0.4),
+            _result(expected_abstention=True, abstained=True),  # NaN
+        ]
+        m = compute_e2e_config_metrics(results, "cfg")
+        assert m.avg_faithfulness == 0.8
+        assert m.avg_answer_relevance == 0.6
+        assert m.avg_correctness == 0.4
+
+    def test_all_nan_yields_nan_average(self):
+        results = [
+            _result(expected_abstention=True, abstained=True),
+            _result(expected_abstention=True, abstained=True),
+        ]
+        m = compute_e2e_config_metrics(results, "cfg")
+        assert m.num_scored == 0
+        assert math.isnan(m.avg_faithfulness)
+        assert math.isnan(m.avg_answer_relevance)
+        assert math.isnan(m.avg_correctness)
+
+    def test_mixed_scored_averaged_correctly(self):
+        results = [
+            _result(expected_abstention=False, abstained=False,
+                    faithfulness=0.6, answer_relevance=0.6, correctness=0.6),
+            _result(expected_abstention=False, abstained=False,
+                    faithfulness=0.8, answer_relevance=0.8, correctness=0.8),
+        ]
+        m = compute_e2e_config_metrics(results, "cfg")
+        assert m.avg_faithfulness == 0.7
+        assert m.avg_answer_relevance == 0.7
+        assert m.avg_correctness == 0.7
+        assert m.num_scored == 2

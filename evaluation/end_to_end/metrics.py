@@ -1,12 +1,21 @@
 """End-to-end evaluation metrics aggregation.
 
-Computes automatic metrics from E2EResult lists and builds a comparison
-matrix across all configurations. All metrics are derived directly from
-pipeline outputs — no human judgements required.
+Computes automatic metrics from ``E2EResult`` lists and builds a
+comparison matrix across all configurations. Two metric families are
+aggregated side by side:
+
+* **Abstention metrics** — precision / recall / F1 derived from the
+  orchestration decisions (answer vs. abstain), plus per-category
+  breakdowns. Deterministic, no LLM involved.
+* **Generation metrics** — RAGAS Faithfulness, Answer Relevancy,
+  Factual Correctness averaged over non-abstained answerable samples
+  (Option-A scoring scope, see ``run_e2e_config``). NaN values are
+  excluded from the averages.
 """
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 from evaluation.end_to_end.evaluate import E2EResult
@@ -27,6 +36,16 @@ class E2EConfigMetrics:
     avg_confidence: float = 0.0
     level1_abstentions: int = 0
     level2_abstentions: int = 0
+    num_scored: int = 0
+    avg_faithfulness: float = float("nan")
+    avg_answer_relevance: float = float("nan")
+    avg_correctness: float = float("nan")
+
+
+def _nanmean(values: list[float]) -> float:
+    """Mean over values, excluding NaN. Returns NaN if the list is empty."""
+    clean = [v for v in values if not math.isnan(v)]
+    return sum(clean) / len(clean) if clean else float("nan")
 
 
 def compute_e2e_config_metrics(
@@ -35,8 +54,9 @@ def compute_e2e_config_metrics(
 ) -> E2EConfigMetrics:
     """Compute automatic E2E metrics from pipeline results.
 
-    Computes abstention precision, recall, F1, and per-category breakdown
-    directly from E2EResult instances — no human judgements required.
+    Computes abstention precision, recall, F1, and per-category
+    breakdown from the orchestration decisions; then aggregates the
+    RAGAS scores attached to non-abstained answerable samples.
 
     Abstention categories:
     - Correct abstention: expected_abstention=True AND abstained=True
@@ -110,6 +130,17 @@ def compute_e2e_config_metrics(
             "abstention_f1": round(cat_f1, 4),
         }
 
+    # RAGAS aggregates over the Option-A scored subset.
+    num_scored = sum(
+        1 for r in results
+        if not math.isnan(r.faithfulness)
+        or not math.isnan(r.answer_relevance)
+        or not math.isnan(r.correctness)
+    )
+    avg_faith = _nanmean([r.faithfulness for r in results])
+    avg_relev = _nanmean([r.answer_relevance for r in results])
+    avg_correct = _nanmean([r.correctness for r in results])
+
     return E2EConfigMetrics(
         config_name=config_name,
         num_total=num_total,
@@ -122,7 +153,16 @@ def compute_e2e_config_metrics(
         avg_confidence=avg_confidence,
         level1_abstentions=level1,
         level2_abstentions=level2,
+        num_scored=num_scored,
+        avg_faithfulness=avg_faith,
+        avg_answer_relevance=avg_relev,
+        avg_correctness=avg_correct,
     )
+
+
+def _round_or_nan(value: float, digits: int = 4) -> float:
+    """Round a float to ``digits`` decimals; pass NaN through untouched."""
+    return value if math.isnan(value) else round(value, digits)
 
 
 def build_comparison_table(
@@ -133,10 +173,11 @@ def build_comparison_table(
     Returns a list of dicts (one per config) suitable for tabular
     display or DataFrame conversion, sorted by abstention_f1 descending.
 
-    Each dict contains:
-        config_name, num_total, num_abstained, abstention_rate,
-        abstention_precision, abstention_recall, abstention_f1,
-        avg_confidence, level1_abstentions, level2_abstentions.
+    Each dict contains abstention columns (config_name, num_total,
+    num_abstained, abstention_rate, abstention_precision,
+    abstention_recall, abstention_f1, avg_confidence, level1_abstentions,
+    level2_abstentions) **and** generation columns (num_scored,
+    avg_faithfulness, avg_answer_relevance, avg_correctness).
     """
     rows: list[dict] = []
     for m in config_metrics:
@@ -151,6 +192,10 @@ def build_comparison_table(
             "avg_confidence": round(m.avg_confidence, 4),
             "level1_abstentions": m.level1_abstentions,
             "level2_abstentions": m.level2_abstentions,
+            "num_scored": m.num_scored,
+            "avg_faithfulness": _round_or_nan(m.avg_faithfulness),
+            "avg_answer_relevance": _round_or_nan(m.avg_answer_relevance),
+            "avg_correctness": _round_or_nan(m.avg_correctness),
         })
     rows.sort(key=lambda r: r["abstention_f1"], reverse=True)
     return rows

@@ -2,26 +2,45 @@
 
 Single entry point for all evaluation steps:
 
-    python -m evaluation --check          # Validate data requirements
-    python -m evaluation --retrieval      # Run retrieval evaluation
-    python -m evaluation --rrf-tuning     # Sweep k_rrf for Hybrid and Fusion
-    python -m evaluation --generation     # Run generation evaluation
-    python -m evaluation --abstention     # Run abstention evaluation
-    python -m evaluation --e2e            # Run end-to-end evaluation
-    python -m evaluation --all            # Run everything in order
+    python -m evaluation --check                     # Validate data requirements
+    python -m evaluation --retrieval                 # Run retrieval evaluation
+    python -m evaluation --rrf-tuning                # Sweep k_rrf for Hybrid and Fusion
+    python -m evaluation --generation                # Run generation evaluation
+    python -m evaluation --generation --judge openai # Use OpenAI gpt-4o-mini as judge
+    python -m evaluation --abstention                # Run abstention evaluation
+    python -m evaluation --e2e                       # Run end-to-end evaluation
+    python -m evaluation --e2e --judge openai        # Same, with OpenAI judge for E2E scoring
+    python -m evaluation --all --judge openai        # Full run, OpenAI judge for generation + E2E
+
+The pipeline runs on GPU (CUDA baseline); the runner fails fast if CUDA
+is unavailable. The ``--judge`` flag affects every step that scores
+free-form answers with RAGAS — currently ``--generation`` and
+``--e2e`` — and, by extension, the generation and E2E phases of
+``--all``. Abstention, retrieval, and RRF tuning measure deterministic
+booleans and set operations; they ignore the flag.
 
 Execution order: retrieval -> rrf-tuning -> generation -> abstention -> e2e.
 """
 
 from __future__ import annotations
 
+# Load .env before anything else so that OPENAI_API_KEY is visible to
+# every downstream import (notably the judge factory).
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import argparse
 import json
 import logging
+import os
 import sys
 import time
 from pathlib import Path
 
+import torch
+
+from evaluation.judge import Judge, make_judge
 from evaluation.validate import EVAL_PATHS, validate_data_requirements
 from src.marley.models.retrieval import Retriever
 from src.marley.server.config import CHUNK_PATHS
@@ -44,6 +63,75 @@ def _save_json(data: dict | list, path: Path) -> None:
         encoding="utf-8",
     )
     logger.info("  Saved: %s", path)
+
+
+def _parse_distractor_levels(raw: str | None) -> list[int] | None:
+    """Parse a comma-separated distractor-level string.
+
+    Returns ``None`` when unset so downstream code applies its default
+    (``0..10``). Invalid input aborts with a clear argparse-style error.
+    """
+    if raw is None or raw.strip() == "":
+        return None
+    try:
+        levels = [int(x.strip()) for x in raw.split(",") if x.strip()]
+    except ValueError as exc:
+        raise SystemExit(
+            f"--distractor-levels must be comma-separated integers, got {raw!r}"
+        ) from exc
+    if any(n < 0 for n in levels):
+        raise SystemExit(
+            f"--distractor-levels must be non-negative integers, got {raw!r}"
+        )
+    return levels
+
+
+# ---------------------------------------------------------------------------
+# Pre-flight checks
+# ---------------------------------------------------------------------------
+
+
+def _require_cuda() -> None:
+    """Abort unless CUDA is available.
+
+    The pipeline treats GPU as the baseline, not an optimisation. A missing
+    GPU means the evaluation cannot run — bail out with an actionable hint.
+    """
+    if not torch.cuda.is_available():
+        logger.error(
+            "GPU required. Install CUDA PyTorch: "
+            "pip install torch --index-url https://download.pytorch.org/whl/cu121"
+        )
+        sys.exit(1)
+    logger.info(
+        "GPU detected: %s (torch %s)",
+        torch.cuda.get_device_name(0),
+        torch.__version__,
+    )
+
+
+def _require_openai_key(judge_backend: str) -> None:
+    """Abort if the OpenAI backend is requested but no API key is set."""
+    if judge_backend == "openai" and not os.environ.get("OPENAI_API_KEY"):
+        logger.error(
+            "OPENAI_API_KEY not set. Add it to .env or use --judge ollama."
+        )
+        sys.exit(1)
+
+
+def _warn_ollama_parallel() -> None:
+    """Warn if ``OLLAMA_NUM_PARALLEL`` is not set to 2.
+
+    Two slots are the throughput sweet spot: RAGAS batches fill both slots
+    without queueing, while more slots contend on the same GPU and stall.
+    """
+    value = os.environ.get("OLLAMA_NUM_PARALLEL")
+    if value != "2":
+        logger.warning(
+            "OLLAMA_NUM_PARALLEL=%s detected. For best performance, "
+            "set to 2 and restart Ollama.",
+            value or "<unset>",
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -231,8 +319,30 @@ def run_rrf_tuning_step(output_dir: Path) -> None:
     _save_json(results, output_dir / "rrf-tuning.json")
 
 
-def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) -> None:
-    """Run generation evaluation: single-KB + combined, scored by RAGAS."""
+def run_generation_step(
+    output_dir: Path,
+    ollama_url: str,
+    ollama_model: str,
+    judge: Judge,
+    *,
+    subset: int | None = None,
+    distractor_levels: list[int] | None = None,
+    kb_filter: str | None = None,
+) -> None:
+    """Run generation evaluation: single-KB + combined, scored via the judge.
+
+    Args:
+        output_dir: Where JSON reports are written.
+        ollama_url: URL of the Ollama server powering the generator.
+        ollama_model: Ollama model used as the generator (never the judge).
+        judge: Pre-constructed judge (Ollama or OpenAI) for RAGAS scoring.
+        subset: Optional cap on number of questions (per KB) — useful for
+            quick subset verification runs. ``None`` means full eval set.
+        distractor_levels: Optional override for distractor counts, e.g.
+            ``[0, 5, 10]``. ``None`` means the library default ``0..10``.
+        kb_filter: Optional single-KB name. When set, only this KB is run
+            and the combined-KB evaluation is skipped.
+    """
     from evaluation.generation.combined import run_and_report_combined
     from evaluation.generation.evaluate import (
         run_and_report as run_gen_report,
@@ -241,38 +351,42 @@ def run_generation_step(output_dir: Path, ollama_url: str, ollama_model: str) ->
     from src.marley.retrieval import load_chunks
 
     logger.info("=" * 60)
-    logger.info("GENERATION EVALUATION")
+    logger.info("GENERATION EVALUATION (judge batch_size=%d)", judge.batch_size)
 
     generator = OllamaGenerator(model=ollama_model, base_url=ollama_url)
     reports = []
 
+    kbs = {kb_filter: CHUNK_PATHS[kb_filter]} if kb_filter else CHUNK_PATHS
+
     # Single-KB evaluation
-    for kb, chunk_path in CHUNK_PATHS.items():
+    for kb, chunk_path in kbs.items():
         eval_path = EVAL_PATHS[kb]
         logger.info("  Single-KB: %s", kb)
         chunks = load_chunks(chunk_path)
         report = run_gen_report(
-            generator, chunks, eval_path,
+            generator, chunks, eval_path, judge,
+            distractor_levels=distractor_levels,
             knowledge_base=kb,
-            ollama_model=ollama_model,
-            ollama_url=ollama_url,
+            subset=subset,
         )
         reports.append(report)
 
     _save_json(reports, output_dir / "generation-evaluation.json")
 
-    # Combined-KB evaluation (all three KBs merged)
-    logger.info("  Combined-KB: stpo + faq-stpo + faq-ao")
-    combined_chunk_paths = dict(CHUNK_PATHS)
-    combined_eval_paths = dict(EVAL_PATHS)
-    combined_report = run_and_report_combined(
-        generator,
-        combined_chunk_paths,
-        combined_eval_paths,
-        ollama_model=ollama_model,
-        ollama_url=ollama_url,
-    )
-    _save_json(combined_report, output_dir / "generation-evaluation-combined.json")
+    # Combined-KB evaluation (skipped on subset or single-KB filter runs —
+    # those are verification shortcuts, not production reports).
+    if kb_filter is None and subset is None:
+        logger.info("  Combined-KB: stpo + faq-stpo + faq-ao")
+        combined_chunk_paths = dict(CHUNK_PATHS)
+        combined_eval_paths = dict(EVAL_PATHS)
+        combined_report = run_and_report_combined(
+            generator,
+            combined_chunk_paths,
+            combined_eval_paths,
+            judge,
+            distractor_levels=distractor_levels,
+        )
+        _save_json(combined_report, output_dir / "generation-evaluation-combined.json")
 
 
 def run_abstention_step(
@@ -280,7 +394,11 @@ def run_abstention_step(
     ollama_url: str,
     ollama_model: str,
 ) -> None:
-    """Run abstention evaluation: Level 1 sweep + full evaluation."""
+    """Run abstention evaluation: Level 1 sweep + full evaluation.
+
+    Abstention uses deterministic metrics (regex + score thresholds), no
+    LLM judge, so the ``--judge`` flag does not apply here.
+    """
     from evaluation.abstention.evaluate import (
         run_abstention_evaluation,
         run_level1_sweep,
@@ -332,16 +450,24 @@ def run_e2e_step(
     output_dir: Path,
     ollama_url: str,
     ollama_model: str,
+    judge: Judge,
     config_filter: str | None = None,
 ) -> None:
-    """Run end-to-end evaluation (delegates to existing run_all)."""
+    """Run end-to-end evaluation.
+
+    For each of the 33 configurations, runs the full pipeline and scores
+    every non-abstained answerable answer with RAGAS via ``judge``.
+    Abstention metrics (deterministic) and generation metrics (RAGAS)
+    appear side by side in the per-config report.
+    """
     from evaluation.end_to_end.run_all import run_all
 
     logger.info("=" * 60)
-    logger.info("END-TO-END EVALUATION")
+    logger.info("END-TO-END EVALUATION (judge batch_size=%d)", judge.batch_size)
 
     run_all(
         output_dir=output_dir,
+        judge=judge,
         ollama_url=ollama_url,
         ollama_model=ollama_model,
         config_filter=config_filter,
@@ -401,8 +527,54 @@ def main() -> None:
         help="Only run E2E configs matching this substring",
     )
 
+    # Judge + generation-specific options
+    parser.add_argument(
+        "--judge",
+        choices=["ollama", "openai"],
+        default="ollama",
+        help=(
+            "RAGAS judge backend for answer scoring. "
+            "Default: ollama (local). Affects --generation, --e2e, and the "
+            "corresponding phases of --all. --judge openai uses gpt-4o-mini "
+            "and requires OPENAI_API_KEY."
+        ),
+    )
+    parser.add_argument(
+        "--subset",
+        type=int,
+        default=None,
+        help=(
+            "Limit the generation eval to the first N questions per KB. "
+            "Useful for quick subset-verification runs. Generation-only."
+        ),
+    )
+    parser.add_argument(
+        "--distractor-levels",
+        type=str,
+        default=None,
+        help=(
+            "Comma-separated distractor counts for the generation step, "
+            "e.g. '0,5,10'. Default is the full sweep 0..10. "
+            "Generation-only."
+        ),
+    )
+    parser.add_argument(
+        "--kb-filter",
+        type=str,
+        default=None,
+        choices=["stpo", "faq-stpo", "faq-ao"],
+        help=(
+            "Restrict the generation step to a single knowledge base and "
+            "skip the combined-KB run. Generation-only."
+        ),
+    )
+
     args = parser.parse_args()
     output_dir = Path(args.output_dir)
+    distractor_levels = _parse_distractor_levels(args.distractor_levels)
+
+    # GPU is the baseline — abort early if it's missing.
+    _require_cuda()
 
     # Determine which steps to run
     if args.all:
@@ -448,6 +620,21 @@ def main() -> None:
             logger.error("  ERROR: %s", err)
         sys.exit(1)
 
+    # Build the judge lazily — only when at least one judge-consuming
+    # step (generation, e2e) is scheduled, and only after the required
+    # secrets are confirmed present. Both steps share the same Judge
+    # instance so the HuggingFaceEmbeddings model is loaded once.
+    judge: Judge | None = None
+    if "generation" in steps or "e2e" in steps:
+        _require_openai_key(args.judge)
+        _warn_ollama_parallel()
+        logger.info("Judge backend: %s", args.judge)
+        judge = make_judge(
+            args.judge,
+            ollama_model=args.ollama_model,
+            ollama_url=args.ollama_url,
+        )
+
     start = time.time()
     logger.info("Running evaluation steps: %s", ", ".join(steps))
     logger.info("Output directory: %s", output_dir)
@@ -460,6 +647,10 @@ def main() -> None:
             output_dir,
             args.ollama_url,
             args.ollama_model,
+            judge,
+            subset=args.subset,
+            distractor_levels=distractor_levels,
+            kb_filter=args.kb_filter,
         ),
         "abstention": lambda: run_abstention_step(
             output_dir,
@@ -470,6 +661,7 @@ def main() -> None:
             output_dir,
             args.ollama_url,
             args.ollama_model,
+            judge,
             args.config_filter,
         ),
     }

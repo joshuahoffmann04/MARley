@@ -19,3 +19,7 @@ CLAUDE.md
 data/vectorstore/
 .chromadb-*/
 data/chunks/.chromadb/
+data/evaluation/subset-*/
+
+# Coverage artifacts
+.coverage

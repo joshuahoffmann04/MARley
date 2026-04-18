@@ -28,20 +28,58 @@ PDF / FAQ Data
 ### Prerequisites
 
 - **Python 3.12+**
+- **NVIDIA GPU with CUDA 12.1 driver** (16 GB VRAM recommended; used by the embedding model and RAGAS evaluator)
 - **Ollama** (local LLM server, required for generation and the chat server)
 
 ### Installation
 
+Install PyTorch with CUDA support first, then the rest of the dependencies:
+
 ```bash
 git clone https://github.com/joshuahoffmann04/MARley.git
 cd MARley
+
+# 1. CUDA-enabled PyTorch (required)
+pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+# 2. Project + remaining dependencies
 pip install -e .
 ```
 
-Or without editable install:
+Verify the GPU is picked up:
 
 ```bash
-pip install -r requirements.txt
+python -c "import torch; assert torch.cuda.is_available(); print(torch.cuda.get_device_name(0))"
+```
+
+### Configuration
+
+Copy `.env.example` to `.env` and fill in any secrets you need. The only
+supported variable is `OPENAI_API_KEY`, which is required when running the
+generation evaluation with the OpenAI judge (`--judge openai`); the default
+Ollama judge needs no configuration.
+
+```bash
+cp .env.example .env
+# then edit .env and paste your sk-... key if you plan to use --judge openai
+```
+
+### Ollama setup
+
+Set `OLLAMA_NUM_PARALLEL=2` before starting the server. Two parallel slots
+maximise generation throughput without thrashing the GPU for RAGAS judging.
+
+On Windows (PowerShell):
+
+```powershell
+$env:OLLAMA_NUM_PARALLEL = "2"
+ollama serve
+```
+
+On Linux/macOS:
+
+```bash
+OLLAMA_NUM_PARALLEL=2 ollama serve
 ```
 
 ### Data Preparation
@@ -73,7 +111,7 @@ Open http://localhost:8000 in your browser.
 ### Run Tests
 
 ```bash
-# Run all tests (655 tests)
+# Run all tests (674 tests)
 python -m pytest tests/ evaluation/tests/
 
 # Unit tests only (fast, no data files or services needed)
@@ -86,13 +124,40 @@ python -m pytest -m integration
 ### Run Evaluation
 
 ```bash
-python -m evaluation --check              # Validate data requirements
-python -m evaluation --retrieval           # Retrieval metrics (Precision@k, Recall@k, MRR)
-python -m evaluation --rrf-tuning          # Sweep k_rrf for Hybrid and Fusion
-python -m evaluation --generation          # Generation quality (RAGAS: faithfulness, relevancy)
-python -m evaluation --abstention          # Abstention metrics (precision, recall, F1)
-python -m evaluation --e2e                 # End-to-end (33 configs x 100 questions)
-python -m evaluation --all                 # Run all evaluation steps
+python -m evaluation --check                        # Validate data requirements
+python -m evaluation --retrieval                    # Retrieval metrics (Precision@k, Recall@k, MRR)
+python -m evaluation --rrf-tuning                   # Sweep k_rrf for Hybrid and Fusion
+python -m evaluation --generation                   # Generation quality (RAGAS, Ollama judge)
+python -m evaluation --generation --judge openai    # Same, judged by OpenAI gpt-4o-mini
+python -m evaluation --abstention                   # Abstention metrics (precision, recall, F1)
+python -m evaluation --e2e                          # End-to-end (33 configs x 100 questions, RAGAS-scored)
+python -m evaluation --e2e --judge openai           # Same, OpenAI judge for answer scoring
+python -m evaluation --all --judge openai           # Full run, OpenAI judge for generation + E2E
+```
+
+**Judge backends.** The generator under evaluation is always Ollama. The
+RAGAS judge that scores its answers is swappable via `--judge`:
+
+| Backend | Model | Batch size | Requires |
+|---|---|---|---|
+| `ollama` (default) | Your local Ollama model | 20 | `OLLAMA_NUM_PARALLEL=2` |
+| `openai` | `gpt-4o-mini` | 50 | `OPENAI_API_KEY` in `.env` |
+
+The `--judge` flag affects every step that scores free-form answers with
+RAGAS — `--generation` and `--e2e` — and, through `--all`, both of those
+phases at once. Abstention, retrieval, and RRF tuning measure
+deterministic booleans and set operations; they ignore the flag.
+
+In E2E, RAGAS is applied only to samples where the system answered an
+answerable question (Faithfulness, Answer Relevancy, Factual
+Correctness). Abstained results and hallucinations on unanswerable
+questions keep `NaN` on those fields and are excluded from the averages.
+
+For quick iteration on the generation step, restrict the sweep with
+`--subset` and `--distractor-levels`:
+
+```bash
+python -m evaluation --generation --subset 10 --distractor-levels 0,5,10 --judge openai
 ```
 
 ---
@@ -148,7 +213,7 @@ docs/
 
 ## Tests
 
-**655 tests** (650 passed, 5 skipped) across source code and evaluation.
+**674 tests** (672 passed, 2 skipped) across source code and evaluation.
 
 ### Source Tests (447)
 
@@ -171,7 +236,7 @@ docs/
 | Server Pipeline | 10 | `tests/server/test_pipeline.py` |
 | Server Service | 10 | `tests/server/test_service.py` |
 
-### Evaluation Tests (208)
+### Evaluation Tests (227)
 
 | Component | Tests | Test Files |
 |---|---|---|
@@ -182,11 +247,12 @@ docs/
 | Generation Metrics | 15 | `evaluation/tests/generation/test_metrics.py` |
 | Generation Evaluate | 19 | `evaluation/tests/generation/test_evaluate.py` |
 | Generation Combined | 15 | `evaluation/tests/generation/test_combined.py` |
+| Judge Factory | 8 | `evaluation/tests/test_judge.py` |
 | Abstention Metrics | 10 | `evaluation/tests/abstention/test_metrics.py` |
 | Abstention Evaluate | 12 | `evaluation/tests/abstention/test_evaluate.py` |
 | E2E Config | 10 | `evaluation/tests/end_to_end/test_config.py` |
-| E2E Evaluate | 17 | `evaluation/tests/end_to_end/test_evaluate.py` |
-| E2E Metrics | 13 | `evaluation/tests/end_to_end/test_metrics.py` |
+| E2E Evaluate | 22 | `evaluation/tests/end_to_end/test_evaluate.py` |
+| E2E Metrics | 19 | `evaluation/tests/end_to_end/test_metrics.py` |
 | Utilities | 16 | `evaluation/tests/test_utils.py` |
 
 Integration tests (`@pytest.mark.integration`) require data files or external services and are skipped when using `-m "not integration"`.
@@ -195,7 +261,7 @@ Integration tests (`@pytest.mark.integration`) require data files or external se
 
 ## Test Coverage
 
-Overall coverage: **87.7%** (3807 statements, 467 missed).
+Overall coverage: **87.1%** (3950 statements, 509 missed).
 
 | Component | Coverage | Notes |
 |---|---|---|
@@ -254,8 +320,7 @@ Conscious gaps: Server app routes and the evaluation CLI require a running Ollam
 | Generation Evaluation | `docs/evaluation/generation.md` |
 | Abstention Evaluation | `docs/evaluation/abstention.md` |
 | End-to-End Evaluation | `docs/evaluation/end-to-end.md` |
-| Retrieval Results | `docs/evaluation/results/retrieval-results.md` |
-| Generation Results | `docs/evaluation/results/generation-results.md` |
+| Results Overview | `docs/evaluation/results/README.md` |
 
 ### Evaluation Test Documentation
 
@@ -293,7 +358,8 @@ Conscious gaps: Server app routes and the evaluation CLI require a running Ollam
 | Package | Purpose |
 |---|---|
 | ragas | RAG evaluation metrics (faithfulness, answer relevancy) |
-| openai | OpenAI API client (for RAGAS LLM backend) |
+| openai | OpenAI API client (used by the configurable RAGAS judge) |
+| python-dotenv | Loads `OPENAI_API_KEY` from `.env` into the CLI environment |
 
 ### Development
 

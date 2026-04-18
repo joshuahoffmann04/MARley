@@ -1,3 +1,9 @@
+# CUDA 12.1 PyTorch wheels (GPU baseline).
+# The `+cu121` suffix exists only on PyTorch's CUDA index, which forces pip
+# to fetch the GPU wheel instead of the default CPU build from PyPI.
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.5.1+cu121
+
 # PDF extraction
 PyMuPDF>=1.24.0
 pdfplumber>=0.11.0
@@ -22,6 +28,7 @@ jinja2>=3.1.0
 # Evaluation
 ragas>=0.4.0
 openai>=1.0.0
+python-dotenv>=1.0.0
 
 # Testing
 pytest>=8.0.0

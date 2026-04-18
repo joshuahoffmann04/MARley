@@ -25,6 +25,7 @@ from evaluation.generation.metrics import (
     GenerationEvalResult,
     compute_generation_metrics,
 )
+from evaluation.judge import Judge
 from evaluation.utils import load_evaluation
 from src.marley.models.generation import Generator
 from src.marley.retrieval import BM25Retriever
@@ -37,14 +38,6 @@ logger = logging.getLogger(__name__)
 _RAGAS_KEY_FAITHFULNESS = "faithfulness"
 _RAGAS_KEY_ANSWER_RELEVANCY = "answer_relevancy"
 _RAGAS_KEY_FACTUAL_CORRECTNESS = "factual_correctness"
-
-_RAGAS_BATCH_SIZE = 10
-"""Samples per RAGAS batch_score() call.
-
-Ollama processes requests sequentially, so sending all samples at once
-causes massive retry storms. Small batches keep concurrency low and
-avoid wasted retry wait time.
-"""
 
 _SAMPLE_MAX_RETRIES = 3
 """Maximum retries for a single failed RAGAS sample before using NaN."""
@@ -105,8 +98,8 @@ def _assemble_context(
 # --- RAGAS scoring -----------------------------------------------------------
 
 
-def _chunked_batch_score(metric, inputs: list[dict], batch_size: int = _RAGAS_BATCH_SIZE):
-    """Score inputs in small chunks to avoid overwhelming Ollama.
+def _chunked_batch_score(metric, inputs: list[dict], batch_size: int):
+    """Score inputs in small chunks sized to the active judge backend.
 
     If a batch fails (e.g. LLM producing invalid structured output),
     retries each failed sample individually up to 3 times before
@@ -115,7 +108,8 @@ def _chunked_batch_score(metric, inputs: list[dict], batch_size: int = _RAGAS_BA
     Args:
         metric: A RAGAS Collections metric with batch_score().
         inputs: List of input dicts for the metric.
-        batch_size: Number of samples per batch_score() call.
+        batch_size: Number of samples per batch_score() call. Comes from
+            the active :class:`~evaluation.judge.Judge` (Ollama: 20, OpenAI: 50).
 
     Returns:
         List of MetricResult objects (one per input).
@@ -149,40 +143,34 @@ def _chunked_batch_score(metric, inputs: list[dict], batch_size: int = _RAGAS_BA
 
 def _score_with_ragas(
     raw_results: list[dict],
-    ollama_model: str,
-    ollama_url: str,
+    judge: Judge,
 ) -> list[dict]:
     """Score generation results using RAGAS metrics.
 
-    Uses RAGAS 0.4.x Collections API with chunked batch_score() calls
-    to avoid overwhelming the local Ollama server. Each chunk is scored
-    independently and results are merged per sample.
+    Uses RAGAS 0.4.x Collections API with chunked batch_score() calls.
+    The chunk size comes from ``judge.batch_size``, which is tuned per
+    backend so the Ollama path stays sequential-friendly and the OpenAI
+    path exploits its async concurrency.
 
     Args:
         raw_results: List of dicts with 'question', 'generated_answer',
             'reference_answer', and 'context' keys.
-        ollama_model: Ollama model name for the RAGAS evaluator LLM.
-        ollama_url: Ollama server URL.
+        judge: The active judge (LLM + embeddings + batch size) from
+            :func:`evaluation.judge.make_judge`.
 
     Returns:
         List of score dicts with 'faithfulness', 'answer_relevancy',
         and 'factual_correctness' keys (one per result).
     """
-    from openai import AsyncOpenAI
-    from ragas.embeddings import HuggingFaceEmbeddings
-    from ragas.llms import llm_factory
-    from ragas.metrics.collections import AnswerRelevancy, Faithfulness, FactualCorrectness
-
-    client = AsyncOpenAI(base_url=f"{ollama_url}/v1", api_key="ollama")
-    evaluator_llm = llm_factory(ollama_model, provider="openai", client=client)
-
-    evaluator_embeddings = HuggingFaceEmbeddings(
-        model="sentence-transformers/all-mpnet-base-v2",
+    from ragas.metrics.collections import (
+        AnswerRelevancy,
+        Faithfulness,
+        FactualCorrectness,
     )
 
-    faithfulness_metric = Faithfulness(llm=evaluator_llm)
-    relevancy_metric = AnswerRelevancy(llm=evaluator_llm, embeddings=evaluator_embeddings)
-    correctness_metric = FactualCorrectness(llm=evaluator_llm)
+    faithfulness_metric = Faithfulness(llm=judge.llm)
+    relevancy_metric = AnswerRelevancy(llm=judge.llm, embeddings=judge.embeddings)
+    correctness_metric = FactualCorrectness(llm=judge.llm)
 
     faithfulness_inputs = [
         {
@@ -209,15 +197,24 @@ def _score_with_ragas(
         for r in raw_results
     ]
 
-    logger.info("  Running RAGAS evaluation (%d samples, batch_size=%d)...",
-                len(raw_results), _RAGAS_BATCH_SIZE)
+    logger.info(
+        "  Running RAGAS evaluation (%d samples, batch_size=%d)...",
+        len(raw_results),
+        judge.batch_size,
+    )
 
     logger.info("    Scoring faithfulness...")
-    faith_results = _chunked_batch_score(faithfulness_metric, faithfulness_inputs)
+    faith_results = _chunked_batch_score(
+        faithfulness_metric, faithfulness_inputs, judge.batch_size
+    )
     logger.info("    Scoring answer relevancy...")
-    relev_results = _chunked_batch_score(relevancy_metric, relevancy_inputs)
+    relev_results = _chunked_batch_score(
+        relevancy_metric, relevancy_inputs, judge.batch_size
+    )
     logger.info("    Scoring factual correctness...")
-    correct_results = _chunked_batch_score(correctness_metric, correctness_inputs)
+    correct_results = _chunked_batch_score(
+        correctness_metric, correctness_inputs, judge.batch_size
+    )
 
     scores = []
     for i in range(len(raw_results)):
@@ -237,24 +234,24 @@ def run_generation_evaluation(
     generator: Generator,
     corpus: list[dict],
     questions: list[dict],
+    judge: Judge,
     distractor_levels: list[int] | None = None,
     *,
-    ollama_model: str = "llama3.1:latest",
-    ollama_url: str = "http://localhost:11434",
     progress_callback=None,
 ) -> list[GenerationEvalResult]:
     """Run generation evaluation over all questions and distractor levels.
 
     Generates answers for each (question, distractor_level) pair and
-    scores them using RAGAS (Faithfulness, Answer Relevancy, Correctness).
+    scores them using RAGAS (Faithfulness, Answer Relevancy, Correctness)
+    via the supplied ``judge``.
 
     Args:
-        generator: The generator to evaluate.
+        generator: The generator to evaluate (always Ollama-backed).
         corpus: Full chunk corpus for distractor selection.
         questions: Annotated question dicts from an evaluation file.
+        judge: Judge object from :func:`evaluation.judge.make_judge` that
+            scores the generated answers.
         distractor_levels: List of distractor counts to test (default 0-10).
-        ollama_model: Ollama model name for RAGAS evaluator LLM.
-        ollama_url: Ollama server URL for RAGAS evaluator LLM.
         progress_callback: Optional callable(question_id, num_distractors)
             invoked before each generation call.
 
@@ -309,7 +306,7 @@ def run_generation_evaluation(
         return []
 
     # --- Score with RAGAS ---
-    ragas_scores = _score_with_ragas(raw_results, ollama_model, ollama_url)
+    ragas_scores = _score_with_ragas(raw_results, judge)
 
     # --- Assemble final results ---
     results: list[GenerationEvalResult] = []
@@ -333,24 +330,37 @@ def run_and_report(
     generator: Generator,
     corpus: list[dict],
     eval_path: str | Path,
+    judge: Judge,
     distractor_levels: list[int] | None = None,
     *,
     knowledge_base: str = "",
-    ollama_model: str = "llama3.1:latest",
-    ollama_url: str = "http://localhost:11434",
+    subset: int | None = None,
     progress_callback=None,
 ) -> dict:
     """Load evaluation data, run generation evaluation, and return a report.
 
-    Returns a dict with 'eval_file', 'config', 'metrics', and 'results'.
+    Args:
+        generator: The generator under evaluation (always Ollama).
+        corpus: Chunk corpus used as both ground truth and distractor pool.
+        eval_path: Path to the JSON eval file for this KB.
+        judge: Judge object from :func:`evaluation.judge.make_judge`.
+        distractor_levels: Distractor counts to test (default 0-10).
+        knowledge_base: KB label stored in the output report.
+        subset: If set, use only the first N questions — intended for
+            quick subset-verification runs, not production reports.
+        progress_callback: Optional progress callback.
+
+    Returns:
+        Dict with ``eval_file``, ``config``, ``metrics``, and ``results``.
     """
     questions = load_evaluation(eval_path)
+    if subset is not None:
+        questions = questions[:subset]
 
     eval_results = run_generation_evaluation(
         generator, corpus, questions,
+        judge,
         distractor_levels=distractor_levels,
-        ollama_model=ollama_model,
-        ollama_url=ollama_url,
         progress_callback=progress_callback,
     )
 
@@ -360,15 +370,19 @@ def run_and_report(
         model=generator.model,
     )
 
+    config: dict = {
+        "distractor_levels": distractor_levels or list(range(11)),
+        "generator_model": generator.model,
+        "judge_batch_size": judge.batch_size,
+        "corpus_size": len(corpus),
+        "knowledge_base": knowledge_base,
+    }
+    if subset is not None:
+        config["subset"] = subset
+
     return {
         "eval_file": str(eval_path),
-        "config": {
-            "distractor_levels": distractor_levels or list(range(11)),
-            "generator_model": generator.model,
-            "ragas_model": ollama_model,
-            "corpus_size": len(corpus),
-            "knowledge_base": knowledge_base,
-        },
+        "config": config,
         "metrics": asdict(metrics),
         "results": [asdict(r) for r in eval_results],
     }

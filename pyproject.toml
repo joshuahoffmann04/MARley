@@ -18,6 +18,7 @@ classifiers = [
 ]
 
 dependencies = [
+    "torch>=2.5.0",
     "PyMuPDF>=1.24.0",
     "pdfplumber>=0.11.0",
     "syntok>=1.4.4",
@@ -35,12 +36,13 @@ dependencies = [
 eval = [
     "ragas>=0.4.0",
     "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
 ]
 dev = ["pytest>=8.0.0", "pytest-cov>=6.0.0"]
 
 [build-system]
 requires = ["setuptools>=68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]

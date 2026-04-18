@@ -34,7 +34,10 @@ Implementation: `evaluation/retrieval/metrics.py`
 
 ### Generation (3 RAGAS metrics)
 
-Quality is measured via [RAGAS](https://docs.ragas.io/) using a local Ollama LLM as the evaluator.
+Quality is measured via [RAGAS](https://docs.ragas.io/). The judge is
+configurable per run: the default Ollama backend scores answers with the
+same local model used for generation, while `--judge openai` routes
+scoring to OpenAI's `gpt-4o-mini`. Embeddings always run on the GPU.
 
 | Metric | What It Measures | Scale |
 |---|---|---|
@@ -42,7 +45,8 @@ Quality is measured via [RAGAS](https://docs.ragas.io/) using a local Ollama LLM
 | **Answer Relevancy** | Answer directly addresses the user's question | 0-1 |
 | **Factual Correctness** | Answer matches the reference answer | 0-1 |
 
-Implementation: `evaluation/generation/evaluate.py` (RAGAS scoring in `_score_with_ragas()`)
+Implementation: `evaluation/generation/evaluate.py` (RAGAS scoring in
+`_score_with_ragas()`), `evaluation/judge.py` (judge factory).
 
 ### Abstention (5 metrics)
 
@@ -85,12 +89,32 @@ python -m evaluation --all
 
 ### Common Options
 
-| Flag | Default | Description |
-|---|---|---|
-| `--output-dir` | `data/evaluation` | Directory for evaluation output files |
-| `--ollama-url` | `http://localhost:11434` | Ollama server URL |
-| `--ollama-model` | `llama3.1:latest` | Ollama model for generation and RAGAS |
-| `--config-filter` | `None` | Only run E2E configs matching this substring |
+| Flag | Default | Scope | Description |
+|---|---|---|---|
+| `--output-dir` | `data/evaluation` | all | Directory for evaluation output files |
+| `--ollama-url` | `http://localhost:11434` | all | Ollama server URL (used by the generator) |
+| `--ollama-model` | `llama3.1:latest` | all | Ollama model for generation (always Ollama) |
+| `--config-filter` | `None` | e2e | Only run E2E configs matching this substring |
+| `--judge` | `ollama` | generation, e2e | RAGAS judge backend (`ollama` or `openai`) |
+| `--subset` | `None` | generation | Cap generation eval to first N questions per KB |
+| `--distractor-levels` | `None` | generation | Comma-separated distractor counts, e.g. `0,5,10` |
+| `--kb-filter` | `None` | generation | Restrict generation to a single KB |
+
+`--subset`, `--distractor-levels`, and `--kb-filter` are accepted on any
+run but only take effect in the generation step. `--judge` takes effect
+in both the generation and E2E steps.
+
+### How evaluation runs
+
+The pipeline runs on the GPU. `python -m evaluation` loads `.env` (for
+`OPENAI_API_KEY`), verifies `torch.cuda.is_available()`, and aborts with
+a diagnostic error if no GPU is present. When the generation or E2E
+step is scheduled, the CLI builds a single `Judge` via
+`evaluation.judge.make_judge()` — either the local Ollama server or
+OpenAI's `gpt-4o-mini` — and reuses the same instance for both, so the
+shared CUDA embedding model is loaded once per run. Retrieval, RRF
+tuning, and abstention use deterministic metrics and ignore the judge
+flag.
 
 ### Execution Order
 
@@ -100,7 +124,11 @@ When using `--all`, steps run in this order:
 retrieval -> rrf-tuning -> generation -> abstention -> e2e
 ```
 
-Each step validates data requirements before running. Steps that need an LLM (`generation`, `abstention`, `e2e`) require a running Ollama server.
+Each step validates data requirements before running. Steps that need
+an LLM (`generation`, `abstention`, `e2e`) require a running Ollama
+server. When `--judge openai` is requested and the run includes
+`generation` or `e2e`, the CLI also checks for `OPENAI_API_KEY` before
+starting.
 
 ## Data Prerequisites
 
@@ -187,4 +215,4 @@ evaluation/
 - [Generation Evaluation](generation.md) -- RAGAS integration and distractor testing
 - [Abstention Evaluation](abstention.md) -- Two-level abstention evaluation
 - [End-to-End Evaluation](end-to-end.md) -- 33-config matrix evaluation
-- [Results](results/) -- Evaluation results (populated in Phase 8)
+- [Results](results/) -- Evaluation results (populated after the final runs)

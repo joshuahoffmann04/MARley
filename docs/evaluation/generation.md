@@ -4,7 +4,10 @@
 
 ## RAGAS Integration
 
-Generation quality is measured via [RAGAS](https://docs.ragas.io/) 0.4.x (Retrieval-Augmented Generation Assessment), using a local Ollama LLM as the evaluator.
+Generation quality is measured via [RAGAS](https://docs.ragas.io/) 0.4.x
+(Retrieval-Augmented Generation Assessment). The LLM that RAGAS uses as a
+judge is configurable at the CLI level; the generator under evaluation is
+always the Ollama-served chat model.
 
 ### Metrics
 
@@ -16,27 +19,36 @@ Generation quality is measured via [RAGAS](https://docs.ragas.io/) 0.4.x (Retrie
 
 All metrics produce scores in the range 0-1, where 1 is best.
 
-### RAGAS Evaluation Pipeline
+### Scoring
 
-The RAGAS evaluation is performed in `_score_with_ragas()` (`evaluation/generation/evaluate.py`):
+The judge is built in `evaluation/judge.py::make_judge()` and passed down
+as a single `Judge` object to `_score_with_ragas()`. The factory accepts
+one of two backends:
 
-1. Create an `InstructorLLM` via `llm_factory()` using Ollama's OpenAI-compatible API (`/v1`) with `AsyncOpenAI`
-2. Create `HuggingFaceEmbeddings` (all-mpnet-base-v2) for answer relevancy
-3. Create RAGAS Collections metric instances: `Faithfulness`, `AnswerRelevancy`, `FactualCorrectness`
-4. Score each metric in chunks via `_chunked_batch_score()` (batch_size=10) to avoid overwhelming the local Ollama server
-5. Failed batches fall back to per-sample scoring with up to 3 retries; permanently failed samples receive NaN
-6. Merge per-sample scores into a unified result dict
+| Backend | Judge LLM | Client | Batch size | Notes |
+|---|---|---|---|---|
+| `ollama` (default) | `--ollama-model` via Ollama's OpenAI-compatible API | `AsyncOpenAI(base_url=<ollama>/v1)` | 20 | Assumes `OLLAMA_NUM_PARALLEL=2` |
+| `openai` | `gpt-4o-mini` | `AsyncOpenAI(api_key=<OPENAI_API_KEY>)` | 50 | Requires `.env` with the key |
 
-### Chunked Scoring and Error Handling
+Both backends use the same embedding model for Answer Relevancy:
+`sentence-transformers/all-mpnet-base-v2`, loaded on the GPU via
+`HuggingFaceEmbeddings(..., device="cuda")`.
 
-Ollama processes requests sequentially. Sending all samples at once causes massive retry storms.
-`_chunked_batch_score()` splits the workload:
+`_score_with_ragas()` then runs each RAGAS collection metric
+(`Faithfulness`, `AnswerRelevancy`, `FactualCorrectness`) through
+`_chunked_batch_score()`, which splits the sample list into chunks of
+`judge.batch_size`. The batch size is tuned per backend: Ollama's
+2-parallel serving stalls on bigger queues, while OpenAI is rate-limit
+bound and benefits from the larger window.
 
-- **Batch size**: 10 samples per `batch_score()` call (`_RAGAS_BATCH_SIZE`)
-- **Batch failure**: Falls back to per-sample `score()` calls
-- **Per-sample retries**: Up to 3 attempts (`_SAMPLE_MAX_RETRIES`)
-- **Final fallback**: `MetricResult(value=float("nan"))` for permanently failed samples
-- **Aggregation**: `compute_generation_metrics()` excludes NaN values from averages
+### Failure handling
+
+`_chunked_batch_score()` is resilient against transient judge failures:
+
+- **Batch failure**: Falls back to per-sample `score()` calls for the chunk.
+- **Per-sample retries**: Up to 3 attempts (`_SAMPLE_MAX_RETRIES`).
+- **Final fallback**: `MetricResult(value=float("nan"))` for permanently failed samples.
+- **Aggregation**: `compute_generation_metrics()` excludes NaN values from averages.
 
 ### RAGAS Input Schema
 
@@ -48,14 +60,23 @@ Each metric receives specific input fields:
 | Answer Relevancy | `user_input`, `response` |
 | Factual Correctness | `response`, `reference` |
 
-### LLM Backend Configuration
+### CLI flags that control the judge
 
-| Parameter | Default | CLI Flag |
+| Flag | Default | Description |
 |---|---|---|
-| `ollama_model` | `llama3.1:latest` | `--ollama-model` |
-| `ollama_url` | `http://localhost:11434` | `--ollama-url` |
+| `--judge` | `ollama` | Judge backend (`ollama` or `openai`) |
+| `--ollama-model` | `llama3.1:latest` | Ollama model used as judge (only when `--judge ollama`) |
+| `--ollama-url` | `http://localhost:11434` | Ollama server URL (always used for the generator; also for the Ollama judge) |
 
-The evaluator LLM uses Ollama via its OpenAI-compatible API (`/v1`). Embeddings use `sentence-transformers/all-mpnet-base-v2` via RAGAS `HuggingFaceEmbeddings` (local, no Ollama needed).
+`--ollama-model` never controls the OpenAI judge; the OpenAI backend is
+hard-wired to `gpt-4o-mini`. The generator model is also always the
+Ollama model.
+
+The same judge factory is used by the E2E evaluation, which scores
+every non-abstained answerable answer with these three metrics. See
+[end-to-end.md](end-to-end.md#answer-quality-scoring) for the
+scoring-scope matrix and how the metrics are aggregated per E2E
+configuration.
 
 ## Distractor Testing
 
@@ -147,7 +168,30 @@ Implementation: `evaluation/generation/combined.py`
 
 ## CLI Usage
 
+```bash
+# Default Ollama judge over the full eval set
+python -m evaluation --generation
 
+# OpenAI judge (requires OPENAI_API_KEY in .env)
+python -m evaluation --generation --judge openai
+
+# Quick subset: 10 questions × distractor levels {0, 5, 10} on stpo only
+python -m evaluation --generation --subset 10 --distractor-levels 0,5,10 \
+    --judge openai --kb-filter stpo --output-dir data/evaluation/subset-openai
+```
+
+| Flag | Default | Purpose |
+|---|---|---|
+| `--judge {ollama,openai}` | `ollama` | Judge backend (generator is always Ollama) |
+| `--subset N` | `None` | Limit the eval to the first N questions per KB |
+| `--distractor-levels 0,5,10` | `0..10` | Comma-separated distractor counts |
+| `--kb-filter {stpo,faq-stpo,faq-ao}` | `None` | Restrict to a single KB; skips the combined-KB run |
+| `--ollama-model` | `llama3.1:latest` | Generator model (and Ollama judge model) |
+| `--ollama-url` | `http://localhost:11434` | Ollama server URL |
+
+The combined-KB run is automatically skipped when `--subset` or
+`--kb-filter` is active — those are verification shortcuts, not
+production reports.
 
 ## Output Files
 

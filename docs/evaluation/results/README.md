@@ -1,28 +1,59 @@
 # Evaluation Results
 
-> Phase 8 evaluation results for the MARley RAG pipeline.
-> Model: llama3.1:latest (8B, Q4_K_M) on CPU | RAGAS 0.4.3
+> This directory holds the thesis-grade evaluation results once the
+> final pipeline runs complete. The tree is intentionally empty ahead
+> of those runs — prior artefacts have been cleared for Phase 11 so
+> that only the final numbers appear here.
 
-## Completed Evaluations
+## Pipeline configuration for the final runs
 
-| File                                           | Content                                                           | Status   |
-| ---------------------------------------------- | ----------------------------------------------------------------- | -------- |
-| [retrieval-results.md](retrieval-results.md)   | Retrieval metrics (12 configs: 3 retrievers x 2 KBs + 6 multi-KB) | Complete |
-| [generation-results.md](generation-results.md) | RAGAS scores (2 KBs x 11 distractor levels = 1650 samples)        | Complete |
+| Component | Value |
+|---|---|
+| Generator | Ollama `llama3.1:latest` (8B, Q4_K_M) on CUDA |
+| Embeddings | `sentence-transformers/all-mpnet-base-v2` on CUDA |
+| RAGAS version | 0.4.x |
+| Judge (primary) | Ollama `llama3.1:latest` |
+| Judge (alternative) | OpenAI `gpt-4o-mini` |
+| Hardware | NVIDIA GeForce RTX 4070 Ti SUPER (16 GB) |
 
-## Pending Evaluations
+## Commands that produce these results
 
-| Evaluation | CLI Command                         |
-| ---------- | ----------------------------------- |
-| Abstention | `python -m evaluation --abstention` |
-| End-to-End | `python -m evaluation --e2e`        |
+Two overnight runs, one per judge backend:
 
-## Data Files
+```bash
+# 1. Local-only run (Ollama judge)
+python -m evaluation --all --judge ollama \
+    --output-dir data/evaluation-ollama
 
-All JSON results are stored in `data/evaluation/`:
+# 2. OpenAI-judge run
+python -m evaluation --all --judge openai \
+    --output-dir data/evaluation-openai
+```
 
-| File                         | Size   | Content                                            |
-| ---------------------------- | ------ | -------------------------------------------------- |
-| `retrieval-evaluation.json`  | 6 KB   | 12 retriever configs with P@5, R@5, MRR, F1@5, J@5 |
-| `rrf-tuning.json`            | 17 KB  | k_rrf sweep (11 values x 4 configs)                |
-| `generation-evaluation.json` | 1.8 MB | 1650 samples with per-sample RAGAS scores          |
+Each run writes:
+
+| Artefact | Produced by |
+|---|---|
+| `retrieval-evaluation.json` | `--retrieval` |
+| `rrf-tuning.json` | `--rrf-tuning` |
+| `generation-evaluation.json` | `--generation` |
+| `generation-evaluation-combined.json` | `--generation` (combined KB) |
+| `abstention-evaluation.json` | `--abstention` |
+| `e2e-results-{config-name}.json` | `--e2e` (one file per config) |
+
+In the E2E artefacts, every non-abstained answerable answer carries
+three RAGAS scores (Faithfulness, Answer Relevancy, Factual
+Correctness) in addition to the abstention decision — see
+[end-to-end.md § Answer Quality Scoring](../end-to-end.md#answer-quality-scoring).
+
+## Files to appear here after the runs
+
+| File | Source |
+|---|---|
+| `retrieval-results.md` | Summary of retrieval metrics |
+| `generation-results.md` | RAGAS scores by KB × distractor level, both judges side by side |
+| `abstention-results.md` | Level-1 sweep + final abstention metrics |
+| `e2e-results.md` | Ranked comparison table across all 33 E2E configurations, with abstention and answer-quality columns |
+
+Each summary is written from the JSON artefacts in
+`data/evaluation-ollama/` and `data/evaluation-openai/`.

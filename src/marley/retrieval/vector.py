@@ -1,7 +1,9 @@
 """Vector retrieval strategy for the MARley pipeline.
 
-Uses sentence-transformers for embedding and ChromaDB for persistent
-vector storage with cosine similarity search.
+Embeddings are produced by a sentence-transformers model that runs on
+the GPU (CUDA). ChromaDB provides persistent vector storage with cosine
+similarity search; query and index paths both share the same GPU-hosted
+encoder for throughput.
 """
 
 from __future__ import annotations
@@ -23,11 +25,11 @@ _DEFAULT_COLLECTION = "chunks"
 class VectorRetriever(Retriever):
     """Dense vector retrieval over chunked documents.
 
-    Uses a sentence-transformer model (default: all-mpnet-base-v2, 768-dim)
-    to embed chunks and queries, and ChromaDB for persistent vector storage
-    with cosine similarity search.  Each knowledge base should use its own
-    persist_directory.  Scores range from -1.0 to 1.0 (cosine similarity,
-    computed as 1 - ChromaDB distance).
+    Embeddings are produced on the GPU by a sentence-transformer model
+    (default: all-mpnet-base-v2, 768-dim). ChromaDB stores the embeddings
+    persistently with cosine similarity search. Each knowledge base
+    should use its own persist_directory. Scores range from -1.0 to 1.0
+    (cosine similarity, computed as 1 - ChromaDB distance).
     """
 
     def __init__(
@@ -49,9 +51,9 @@ class VectorRetriever(Retriever):
             self._connect()
 
     def _get_model(self) -> SentenceTransformer:
-        """Lazy-load the embedding model."""
+        """Lazy-load the embedding model onto the GPU."""
         if self._model is None:
-            self._model = SentenceTransformer(self._model_name)
+            self._model = SentenceTransformer(self._model_name, device="cuda")
         return self._model
 
     def _connect(self) -> None:

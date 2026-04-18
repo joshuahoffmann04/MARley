@@ -82,35 +82,79 @@ For each question in the evaluation dataset:
 
 Implementation: `evaluation/end_to_end/evaluate.py` (`run_e2e_config()`)
 
-### Step 4: Compute Metrics and Save
+### Step 4: Score Answers with RAGAS
 
-- Compute abstention metrics via `compute_abstention_metrics()`
-- Save report JSON with config, threshold, sweep results, and per-question results
+After all questions are generated, the runner batches every
+non-abstained answerable answer (Option A — see "Answer Quality
+Scoring" below) and hands them to `_score_e2e_answers()`. This function
+shares its RAGAS stack with the generation eval, so Ollama and OpenAI
+judges behave identically in both pipelines. Scores are written back
+into the matching `E2EResult` slots; samples outside the scoring scope
+keep their `NaN` defaults.
+
+### Step 5: Compute Metrics and Save
+
+- Compute abstention metrics via `compute_abstention_metrics()`.
+- Compute generation metrics (`num_scored`, `avg_faithfulness`,
+  `avg_answer_relevance`, `avg_correctness`) via
+  `_aggregate_generation_metrics()` — NaN-excluded averages over the
+  scored subset.
+- Save report JSON with config, threshold, sweep results, abstention
+  metrics, generation metrics, `judge_batch_size`, and per-question
+  results (each carrying its three RAGAS fields, NaN when unscored).
 
 ### E2EResult Dataclass
 
 
 
+## Answer Quality Scoring
+
+Every E2E configuration reports **two metric families** side by side:
+abstention decisions (deterministic) and answer quality (RAGAS).
+Phase-11 "Option A" defines the scoring scope so each score has a
+meaningful reference:
+
+| `expected_abstention` | `abstained` | Scored? | Why |
+|---|---|---|---|
+| False | False | **yes** | Answerable, answered — has both a generated answer and a reference |
+| False | True | no | Answerable but refused — no text to judge |
+| True | True | no | Correct abstention — no text to judge |
+| True | False | no | Hallucination — no reference, Factual Correctness undefined |
+
+Only cell 1 receives RAGAS scores. All others keep `NaN` on the three
+fields (`faithfulness`, `answer_relevance`, `correctness`) and are
+excluded from the averages. The RAGAS judge is selected with
+`--judge ollama` (default, local) or `--judge openai`
+(`gpt-4o-mini`) — identical to the generation eval.
+
+Implementation: `evaluation/end_to_end/evaluate.py::_score_e2e_answers`.
+
 ## Aggregation and Comparison
 
 ### E2EConfigMetrics
 
-Automatic metrics per configuration (no human judgement required):
+Automatic metrics per configuration (no human judgement required).
+Abstention fields come from the orchestration decisions; generation
+fields come from the Option-A scored subset:
 
-
+| Field | Source |
+|---|---|
+| `abstention_precision`, `abstention_recall`, `abstention_f1` | Confusion matrix over `expected_abstention` vs. `abstained` |
+| `level1_abstentions`, `level2_abstentions` | Per-level counts |
+| `abstention_by_category` | Same computation, grouped by `category` |
+| `num_scored` | Samples that received RAGAS scores |
+| `avg_faithfulness`, `avg_answer_relevance`, `avg_correctness` | Means over non-NaN RAGAS values |
 
 Implementation: `evaluation/end_to_end/metrics.py` (`compute_e2e_config_metrics()`)
 
 ### Comparison Table
 
-`build_comparison_table()` produces a sortable comparison across all configs:
-
-
-
-Returns rows sorted by `abstention_f1` descending, with columns:
-`config_name`, `num_total`, `num_abstained`, `abstention_rate`,
-`abstention_precision`, `abstention_recall`, `abstention_f1`,
-`avg_confidence`, `level1_abstentions`, `level2_abstentions`
+`build_comparison_table()` produces a sortable comparison across all
+configs. Rows are sorted by `abstention_f1` descending (orchestration
+ranking); callers can re-sort by `avg_correctness` for an answer-quality
+ranking. Each row contains every abstention column plus the four
+generation columns: `num_scored`, `avg_faithfulness`,
+`avg_answer_relevance`, `avg_correctness`.
 
 ### Per-Category Breakdown
 
@@ -129,24 +173,21 @@ The runner supports resuming interrupted evaluations:
 
 
 
-The E2E module also has its own standalone CLI:
+Prefer the unified CLI:
 
-usage: run_all.py [-h] [--output-dir OUTPUT_DIR] [--ollama-url OLLAMA_URL]
-                  [--ollama-model OLLAMA_MODEL]
-                  [--config-filter CONFIG_FILTER]
+```bash
+python -m evaluation --e2e                       # Ollama judge (default)
+python -m evaluation --e2e --judge openai        # OpenAI gpt-4o-mini judge
+python -m evaluation --e2e --config-filter single-stpo-bm25
+```
 
-Run all MARley end-to-end evaluation configurations.
+A standalone entry point is also available for ad-hoc runs; it reuses
+the same judge factory and accepts a `--judge` flag with an Ollama
+default:
 
-options:
-  -h, --help            show this help message and exit
-  --output-dir OUTPUT_DIR
-                        Directory for output files (default: data/evaluation)
-  --ollama-url OLLAMA_URL
-                        Ollama server URL (default: http://localhost:11434)
-  --ollama-model OLLAMA_MODEL
-                        Ollama model name (default: llama3.1:latest)
-  --config-filter CONFIG_FILTER
-                        Only run configs whose name contains this substring
+```bash
+python -m evaluation.end_to_end.run_all --judge ollama
+```
 
 ## Output Files
 

@@ -136,49 +136,55 @@ class TestAssembleContext:
 class TestRunGenerationEvaluation:
     """Tests for run_generation_evaluation() with stubbed RAGAS scoring."""
 
-    def test_skips_unanswerable(self):
+    def test_skips_unanswerable(self, stub_judge):
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
         )
         question_ids = {r.question_id for r in results}
         assert "eval-076" not in question_ids
 
-    def test_evaluates_answerable_questions(self):
+    def test_evaluates_answerable_questions(self, stub_judge):
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
         )
         question_ids = {r.question_id for r in results}
         assert "eval-001" in question_ids
         assert "eval-002" in question_ids
 
-    def test_all_distractor_levels(self):
+    def test_all_distractor_levels(self, stub_judge):
         levels = [0, 1, 2]
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=levels,
         )
         # 2 answerable questions x 3 levels = 6 results
         assert len(results) == 6
 
-    def test_result_type(self):
+    def test_result_type(self, stub_judge):
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
         )
         assert all(isinstance(r, GenerationEvalResult) for r in results)
 
-    def test_records_generated_answer(self):
+    def test_records_generated_answer(self, stub_judge):
         results = run_generation_evaluation(
             StubGenerator(answer="test answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
         )
         assert all(r.generated_answer == "test answer" for r in results)
 
-    def test_context_grows_with_distractors(self):
+    def test_context_grows_with_distractors(self, stub_judge):
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0, 3],
         )
         for r in results:
@@ -187,7 +193,7 @@ class TestRunGenerationEvaluation:
             elif r.num_distractors == 3:
                 assert len(r.context_chunk_ids) >= 2
 
-    def test_skips_questions_without_relevant_chunks(self):
+    def test_skips_questions_without_relevant_chunks(self, stub_judge):
         questions = [
             {
                 "id": "eval-099",
@@ -199,23 +205,26 @@ class TestRunGenerationEvaluation:
         ]
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), [], questions,
+            stub_judge,
             distractor_levels=[0],
         )
         assert len(results) == 0
 
-    def test_progress_callback_called(self):
+    def test_progress_callback_called(self, stub_judge):
         calls = []
         run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
             progress_callback=lambda qid, n: calls.append((qid, n)),
         )
         assert len(calls) == 2  # 2 answerable questions
 
-    def test_ragas_scores_populated(self):
+    def test_ragas_scores_populated(self, stub_judge):
         """RAGAS scores from _score_with_ragas are propagated to results."""
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), CORPUS, QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
         )
         for r in results:
@@ -223,9 +232,10 @@ class TestRunGenerationEvaluation:
             assert r.answer_relevance == pytest.approx(0.85)
             assert r.correctness == pytest.approx(0.8)
 
-    def test_empty_corpus_no_results(self):
+    def test_empty_corpus_no_results(self, stub_judge):
         results = run_generation_evaluation(
             StubGenerator(answer="stub answer"), [], QUESTIONS,
+            stub_judge,
             distractor_levels=[0],
         )
         assert results == []

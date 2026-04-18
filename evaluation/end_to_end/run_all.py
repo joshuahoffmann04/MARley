@@ -29,11 +29,13 @@ from evaluation.end_to_end.config import (
     generate_all_configs,
 )
 from evaluation.end_to_end.evaluate import (
+    _aggregate_generation_metrics,
     load_questions,
     run_e2e_config,
     save_report,
     sweep_threshold,
 )
+from evaluation.judge import Judge
 from src.marley.generator.ollama import OllamaGenerator
 from src.marley.models.retrieval import Retriever
 from src.marley.retrieval import (
@@ -118,6 +120,7 @@ def build_retriever(
 
 def run_all(
     output_dir: Path,
+    judge: Judge,
     ollama_url: str = "http://localhost:11434",
     ollama_model: str = "llama3.1:latest",
     config_filter: str | None = None,
@@ -126,6 +129,8 @@ def run_all(
 
     Args:
         output_dir: Directory for output files.
+        judge: Judge for RAGAS scoring of non-abstained answerable
+            answers (Option-A scope).
         ollama_url: Ollama server URL.
         ollama_model: Model name for generation.
         config_filter: If set, only run configs whose name contains this substring.
@@ -209,18 +214,19 @@ def run_all(
                 logger.info("  Progress: %d/%d questions", current, total)
 
         results = run_e2e_config(
-            config, retriever, generator, questions,
+            config, retriever, generator, questions, judge,
             threshold=best_threshold,
             normalization_params=norm_params,
             progress_callback=progress,
         )
 
-        # Compute abstention summary
+        # Compute abstention + generation summaries
         abstained_count = sum(1 for r in results if r.abstained)
         elapsed = time.time() - start_time
+        gen_metrics = _aggregate_generation_metrics(results)
         logger.info(
-            "  Done: %d questions, %d abstentions, %.1fs",
-            len(results), abstained_count, elapsed,
+            "  Done: %d questions, %d abstentions, %d scored, %.1fs",
+            len(results), abstained_count, gen_metrics["num_scored"], elapsed,
         )
 
         # Step 3: Save report
@@ -236,7 +242,9 @@ def run_all(
             "threshold": best_threshold,
             "level1_sweep": sweep,
             "abstention_metrics": asdict(abstention_metrics),
+            "generation_metrics": gen_metrics,
             "generator_model": ollama_model,
+            "judge_batch_size": judge.batch_size,
             "results": [asdict(r) for r in results],
         }
         save_report(report, report_path)
@@ -259,6 +267,19 @@ def run_all(
 
 
 def main() -> None:
+    """Standalone E2E runner.
+
+    Prefer ``python -m evaluation --e2e`` for normal use — it includes
+    GPU pre-flight checks and shares the ``--judge`` flag with the
+    generation eval. This entry point remains for ad-hoc runs and
+    reuses the same judge factory with an Ollama default.
+    """
+    from dotenv import load_dotenv
+
+    from evaluation.judge import make_judge
+
+    load_dotenv()
+
     parser = argparse.ArgumentParser(
         description="Run all MARley end-to-end evaluation configurations.",
     )
@@ -278,11 +299,22 @@ def main() -> None:
         "--config-filter", type=str, default=None,
         help="Only run configs whose name contains this substring",
     )
+    parser.add_argument(
+        "--judge", choices=["ollama", "openai"], default="ollama",
+        help="RAGAS judge backend for answer-quality scoring",
+    )
 
     args = parser.parse_args()
 
+    judge = make_judge(
+        args.judge,
+        ollama_model=args.ollama_model,
+        ollama_url=args.ollama_url,
+    )
+
     run_all(
         output_dir=Path(args.output_dir),
+        judge=judge,
         ollama_url=args.ollama_url,
         ollama_model=args.ollama_model,
         config_filter=args.config_filter,

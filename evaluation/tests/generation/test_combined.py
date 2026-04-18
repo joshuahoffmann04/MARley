@@ -105,19 +105,21 @@ def two_kb_setup(tmp_path):
 
 @patch("evaluation.generation.evaluate._score_with_ragas", fake_ragas_scores)
 class TestRunCombinedGenerationEvaluation:
-    def test_result_count(self, two_kb_setup):
+    def test_result_count(self, two_kb_setup, stub_judge):
         """3 answerable questions x 2 distractor levels = 6 results."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0, 1],
             **two_kb_setup,
         )
         assert len(results) == 6
 
-    def test_merges_relevant_chunks_from_both_kbs(self, two_kb_setup):
+    def test_merges_relevant_chunks_from_both_kbs(self, two_kb_setup, stub_judge):
         """Question q1 has relevant chunks in both KBs (stpo-1, faq-1)."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
@@ -125,10 +127,11 @@ class TestRunCombinedGenerationEvaluation:
         assert len(q1_results) == 1
         assert set(q1_results[0].context_chunk_ids) == {"stpo-1", "faq-1"}
 
-    def test_question_with_single_kb_relevance(self, two_kb_setup):
+    def test_question_with_single_kb_relevance(self, two_kb_setup, stub_judge):
         """Question q2 only has relevant chunks in stpo (stpo-2)."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
@@ -136,7 +139,7 @@ class TestRunCombinedGenerationEvaluation:
         assert len(q2_results) == 1
         assert "stpo-2" in q2_results[0].context_chunk_ids
 
-    def test_distractors_from_merged_corpus(self, tmp_path):
+    def test_distractors_from_merged_corpus(self, tmp_path, stub_judge):
         """With distractors, context includes non-relevant chunks."""
         cp1 = tmp_path / "kb1.json"
         _write_chunks(cp1, [
@@ -158,22 +161,24 @@ class TestRunCombinedGenerationEvaluation:
             generator=StubGenerator(answer="stub answer"),
             chunk_paths={"kb1": cp1, "kb2": cp2},
             eval_paths={"kb1": ep1, "kb2": ep2},
+            judge=stub_judge,
             distractor_levels=[2],
         )
         chunk_ids = set(results[0].context_chunk_ids)
         assert "r1" in chunk_ids
         assert len(chunk_ids) == 3
 
-    def test_all_distractor_levels(self, two_kb_setup):
+    def test_all_distractor_levels(self, two_kb_setup, stub_judge):
         """Default distractor levels 0-10 produce 11 results per question."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             **two_kb_setup,
         )
         # 3 answerable questions x 11 levels = 33
         assert len(results) == 33
 
-    def test_skips_unanswerable(self, tmp_path):
+    def test_skips_unanswerable(self, tmp_path, stub_judge):
         """Questions with expected_abstention=True are skipped."""
         cp = tmp_path / "chunks.json"
         ep = tmp_path / "eval.json"
@@ -186,11 +191,12 @@ class TestRunCombinedGenerationEvaluation:
             generator=StubGenerator(answer="stub answer"),
             chunk_paths={"kb1": cp},
             eval_paths={"kb1": ep},
+            judge=stub_judge,
             distractor_levels=[0],
         )
         assert results == []
 
-    def test_progress_callback(self, two_kb_setup):
+    def test_progress_callback(self, two_kb_setup, stub_judge):
         """Progress callback is invoked for each question x level pair."""
         calls = []
 
@@ -199,16 +205,18 @@ class TestRunCombinedGenerationEvaluation:
 
         run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0, 1],
             progress_callback=callback,
             **two_kb_setup,
         )
         assert len(calls) == 6
 
-    def test_returns_generation_eval_results(self, two_kb_setup):
+    def test_returns_generation_eval_results(self, two_kb_setup, stub_judge):
         """All returned objects are GenerationEvalResult instances."""
         results = run_combined_generation_evaluation(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
@@ -225,10 +233,11 @@ class TestRunCombinedGenerationEvaluation:
 
 @patch("evaluation.generation.evaluate._score_with_ragas", fake_ragas_scores)
 class TestRunAndReportCombined:
-    def test_report_structure(self, two_kb_setup):
+    def test_report_structure(self, two_kb_setup, stub_judge):
         """Report contains all expected top-level keys."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
@@ -238,19 +247,21 @@ class TestRunAndReportCombined:
         assert "metrics" in report
         assert "results" in report
 
-    def test_combination_from_kb_names(self, two_kb_setup):
+    def test_combination_from_kb_names(self, two_kb_setup, stub_judge):
         """Default combination name is KB names joined with +."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
         assert report["combination"] == "faq+stpo"
 
-    def test_custom_combination_name(self, two_kb_setup):
+    def test_custom_combination_name(self, two_kb_setup, stub_judge):
         """Custom combination name overrides default."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             combination_name="stpo+faq-custom",
             **two_kb_setup,
@@ -258,10 +269,11 @@ class TestRunAndReportCombined:
         assert report["combination"] == "stpo+faq-custom"
         assert report["config"]["combination"] == "stpo+faq-custom"
 
-    def test_config_fields(self, two_kb_setup):
+    def test_config_fields(self, two_kb_setup, stub_judge):
         """Config contains all expected fields."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0, 1, 2],
             **two_kb_setup,
         )
@@ -270,11 +282,13 @@ class TestRunAndReportCombined:
         assert config["generator_model"] == "stub-model"
         assert config["corpus_size"] == 6  # 3 + 3 chunks
         assert sorted(config["knowledge_bases"]) == ["faq", "stpo"]
+        assert config["judge_batch_size"] == stub_judge.batch_size
 
-    def test_metrics_fields(self, two_kb_setup):
+    def test_metrics_fields(self, two_kb_setup, stub_judge):
         """Metrics contain expected aggregation fields."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
@@ -284,10 +298,11 @@ class TestRunAndReportCombined:
         assert metrics["knowledge_base"] == "faq+stpo"
         assert metrics["model"] == "stub-model"
 
-    def test_results_serialised(self, two_kb_setup):
+    def test_results_serialised(self, two_kb_setup, stub_judge):
         """Results are serialised as plain dicts (not dataclasses)."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
@@ -299,10 +314,11 @@ class TestRunAndReportCombined:
             assert "num_distractors" in r
             assert "context_chunk_ids" in r
 
-    def test_ragas_scores_in_report(self, two_kb_setup):
+    def test_ragas_scores_in_report(self, two_kb_setup, stub_judge):
         """RAGAS scores are included in serialised results."""
         report = run_and_report_combined(
             generator=StubGenerator(answer="stub answer"),
+            judge=stub_judge,
             distractor_levels=[0],
             **two_kb_setup,
         )
