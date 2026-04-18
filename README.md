@@ -1,8 +1,6 @@
 # MARley
 
-**MAR**burg Study Advising Chatbot — a Retrieval-Augmented Generation pipeline
-that answers questions about the M.Sc. Informatik program at
-Philipps-Universität Marburg.
+**MAR**ley: A RAG-Based Chatbot for Answering Questions About University Study Regulations
 
 > Bachelor thesis, Department of Mathematics and Computer Science,
 > Philipps-Universität Marburg, 2026 · Joshua Hoffmann
@@ -48,27 +46,27 @@ PDF / FAQ sources
         └─ 5. Server      FastAPI chat UI in Philipps-Uni Marburg design
 ```
 
-| Component | Module | Notes |
-|---|---|---|
-| Extractor | `src/marley/extractor/` | PDF → sections, tables, text |
-| Chunker | `src/marley/chunker/` | PDF + FAQ chunkers, sliding window |
-| Retrieval | `src/marley/retrieval/` | Five strategies, ChromaDB for vectors |
-| Generator | `src/marley/generator/` | Ollama HTTP backend + prompt template |
-| Abstention | `src/marley/abstention/` | Two-level detection module |
-| Server | `src/marley/server/` | FastAPI pipeline + chat UI |
-| Evaluation | `evaluation/` | Unified CLI for all eval steps |
+| Component  | Module                   | Notes                                 |
+| ---------- | ------------------------ | ------------------------------------- |
+| Extractor  | `src/marley/extractor/`  | PDF → sections, tables, text          |
+| Chunker    | `src/marley/chunker/`    | PDF + FAQ chunkers, sliding window    |
+| Retrieval  | `src/marley/retrieval/`  | Five strategies, ChromaDB for vectors |
+| Generator  | `src/marley/generator/`  | Ollama HTTP backend + prompt template |
+| Abstention | `src/marley/abstention/` | Two-level detection module            |
+| Server     | `src/marley/server/`     | FastAPI pipeline + chat UI            |
+| Evaluation | `evaluation/`            | Unified CLI for all eval steps        |
 
 ---
 
 ## Prerequisites
 
-| Resource | Requirement |
-|---|---|
-| OS | Windows 10/11, Linux, or macOS |
-| Python | 3.12 or newer |
-| GPU | NVIDIA with CUDA 12.1 driver, 16 GB VRAM recommended |
-| Ollama | Installed and reachable on `http://localhost:11434` |
-| Disk | ~4 GB for models and ChromaDB stores |
+| Resource | Requirement                                          |
+| -------- | ---------------------------------------------------- |
+| OS       | Windows 10/11, Linux, or macOS                       |
+| Python   | 3.12 or newer                                        |
+| GPU      | NVIDIA with CUDA 12.1 driver, 16 GB VRAM recommended |
+| Ollama   | Installed and reachable on `http://localhost:11434`  |
+| Disk     | ~4 GB for models and ChromaDB stores                 |
 
 The pipeline treats CUDA as baseline — there is no CPU fallback for
 embeddings or RAGAS. A missing GPU causes an early exit with a clear
@@ -105,8 +103,8 @@ Copy the template and fill in only what you need:
 cp .env.example .env
 ```
 
-| Variable | Used by | Required? |
-|---|---|---|
+| Variable         | Used by                                     | Required?                 |
+| ---------------- | ------------------------------------------- | ------------------------- |
 | `OPENAI_API_KEY` | `--judge openai` (generation + E2E scoring) | Only for the OpenAI judge |
 
 The default Ollama judge needs no configuration.
@@ -195,10 +193,10 @@ same command (completed configs are skipped).
 The generator is always Ollama. The RAGAS judge that scores its answers
 is swappable via `--judge`:
 
-| Backend | Model | Batch size | Requires |
-|---|---|---|---|
-| `ollama` (default) | your local Ollama model | 20 | `OLLAMA_NUM_PARALLEL=2` |
-| `openai` | `gpt-4o-mini` | 50 | `OPENAI_API_KEY` in `.env` |
+| Backend            | Model                   | Batch size | Requires                   |
+| ------------------ | ----------------------- | ---------- | -------------------------- |
+| `ollama` (default) | your local Ollama model | 20         | `OLLAMA_NUM_PARALLEL=2`    |
+| `openai`           | `gpt-4o-mini`           | 50         | `OPENAI_API_KEY` in `.env` |
 
 `--judge` takes effect in `--generation`, `--e2e`, and the corresponding
 phases of `--all`. Abstention, retrieval, and RRF tuning measure
@@ -213,12 +211,12 @@ remain `NaN` on those fields and are excluded from the averages.
 
 For rapid iteration on the generation step:
 
-| Flag | Effect |
-|---|---|
-| `--subset N` | Use only the first N questions per KB |
+| Flag                         | Effect                                                              |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `--subset N`                 | Use only the first N questions per KB                               |
 | `--distractor-levels 0,5,10` | Comma-separated distractor counts, overrides the default 0…10 sweep |
-| `--kb-filter stpo` | Restrict to a single KB, skips the combined-KB run |
-| `--config-filter <substr>` | Run only E2E configs whose name contains this substring |
+| `--kb-filter stpo`           | Restrict to a single KB, skips the combined-KB run                  |
+| `--config-filter <substr>`   | Run only E2E configs whose name contains this substring             |
 
 Example:
 
@@ -288,11 +286,11 @@ docs/
 
 ## Knowledge Bases
 
-| KB | Source | Chunks | Description |
-|---|---|---|---|
-| `stpo` | `msc-computer-science.pdf` | 153 | Study and examination regulations (text + tables) |
-| `faq-stpo` | `faq-stpo.json` | 1039 | Synthetic FAQ derived from the StPO |
-| `faq-ao` | `faq-ao.json` | 0 | Questions answered by the advisory office (placeholder) |
+| KB         | Source                     | Chunks | Description                                             |
+| ---------- | -------------------------- | ------ | ------------------------------------------------------- |
+| `stpo`     | `msc-computer-science.pdf` | 153    | Study and examination regulations (text + tables)       |
+| `faq-stpo` | `faq-stpo.json`            | 1039   | Synthetic FAQ derived from the StPO                     |
+| `faq-ao`   | `faq-ao.json`              | 0      | Questions answered by the advisory office (placeholder) |
 
 Evaluation datasets live in `data/evaluation/` (100 questions per KB,
 plus a combined 100-question master set for E2E).
@@ -320,43 +318,43 @@ python -m pytest -m integration
 
 ### Source tests
 
-| Component | Tests | File |
-|---|---|---|
-| Extractor | 81 | `tests/extractor/test_extractor.py` |
-| PDF Chunker | 60 | `tests/chunker/test_pdf_chunker.py` |
-| FAQ Chunker | 35 | `tests/chunker/test_faq_chunker.py` |
-| BM25 Retrieval | 27 | `tests/retrieval/test_bm25.py` |
-| Vector Retrieval | 25 | `tests/retrieval/test_vector.py` |
-| Hybrid Retrieval | 26 | `tests/retrieval/test_hybrid.py` |
-| Fusion Retrieval | 37 | `tests/retrieval/test_fusion.py` |
-| Merged Retrieval | 14 | `tests/retrieval/test_merged.py` |
-| Generator | 24 | `tests/generator/test_generator.py` |
-| Data Models | 34 | `tests/models/test_models.py` |
-| Score Normalization | 20 | `tests/models/test_scoring.py` |
-| Abstention Detection | 12 | `tests/abstention/test_detection.py` |
-| Server API | 17 | `tests/server/test_api.py` |
-| Server Models | 15 | `tests/server/test_models.py` |
-| Server Pipeline | 10 | `tests/server/test_pipeline.py` |
-| Server Service | 10 | `tests/server/test_service.py` |
+| Component            | Tests | File                                 |
+| -------------------- | ----- | ------------------------------------ |
+| Extractor            | 81    | `tests/extractor/test_extractor.py`  |
+| PDF Chunker          | 60    | `tests/chunker/test_pdf_chunker.py`  |
+| FAQ Chunker          | 35    | `tests/chunker/test_faq_chunker.py`  |
+| BM25 Retrieval       | 27    | `tests/retrieval/test_bm25.py`       |
+| Vector Retrieval     | 25    | `tests/retrieval/test_vector.py`     |
+| Hybrid Retrieval     | 26    | `tests/retrieval/test_hybrid.py`     |
+| Fusion Retrieval     | 37    | `tests/retrieval/test_fusion.py`     |
+| Merged Retrieval     | 14    | `tests/retrieval/test_merged.py`     |
+| Generator            | 24    | `tests/generator/test_generator.py`  |
+| Data Models          | 34    | `tests/models/test_models.py`        |
+| Score Normalization  | 20    | `tests/models/test_scoring.py`       |
+| Abstention Detection | 12    | `tests/abstention/test_detection.py` |
+| Server API           | 17    | `tests/server/test_api.py`           |
+| Server Models        | 15    | `tests/server/test_models.py`        |
+| Server Pipeline      | 10    | `tests/server/test_pipeline.py`      |
+| Server Service       | 10    | `tests/server/test_service.py`       |
 
 ### Evaluation tests
 
-| Component | Tests | File |
-|---|---|---|
-| Retrieval Metrics | 33 | `evaluation/tests/retrieval/test_metrics.py` |
-| Retrieval Combined | 25 | `evaluation/tests/retrieval/test_combined.py` |
-| Retrieval Evaluate | 13 | `evaluation/tests/retrieval/test_evaluate.py` |
-| RRF Tuning | 10 | `evaluation/tests/retrieval/test_rrf_tuning.py` |
-| Generation Metrics | 15 | `evaluation/tests/generation/test_metrics.py` |
-| Generation Evaluate | 19 | `evaluation/tests/generation/test_evaluate.py` |
-| Generation Combined | 15 | `evaluation/tests/generation/test_combined.py` |
-| Judge Factory | 8 | `evaluation/tests/test_judge.py` |
-| Abstention Metrics | 10 | `evaluation/tests/abstention/test_metrics.py` |
-| Abstention Evaluate | 12 | `evaluation/tests/abstention/test_evaluate.py` |
-| E2E Config | 10 | `evaluation/tests/end_to_end/test_config.py` |
-| E2E Evaluate | 22 | `evaluation/tests/end_to_end/test_evaluate.py` |
-| E2E Metrics | 19 | `evaluation/tests/end_to_end/test_metrics.py` |
-| Utilities | 16 | `evaluation/tests/test_utils.py` |
+| Component           | Tests | File                                            |
+| ------------------- | ----- | ----------------------------------------------- |
+| Retrieval Metrics   | 33    | `evaluation/tests/retrieval/test_metrics.py`    |
+| Retrieval Combined  | 25    | `evaluation/tests/retrieval/test_combined.py`   |
+| Retrieval Evaluate  | 13    | `evaluation/tests/retrieval/test_evaluate.py`   |
+| RRF Tuning          | 10    | `evaluation/tests/retrieval/test_rrf_tuning.py` |
+| Generation Metrics  | 15    | `evaluation/tests/generation/test_metrics.py`   |
+| Generation Evaluate | 19    | `evaluation/tests/generation/test_evaluate.py`  |
+| Generation Combined | 15    | `evaluation/tests/generation/test_combined.py`  |
+| Judge Factory       | 8     | `evaluation/tests/test_judge.py`                |
+| Abstention Metrics  | 10    | `evaluation/tests/abstention/test_metrics.py`   |
+| Abstention Evaluate | 12    | `evaluation/tests/abstention/test_evaluate.py`  |
+| E2E Config          | 10    | `evaluation/tests/end_to_end/test_config.py`    |
+| E2E Evaluate        | 22    | `evaluation/tests/end_to_end/test_evaluate.py`  |
+| E2E Metrics         | 19    | `evaluation/tests/end_to_end/test_metrics.py`   |
+| Utilities           | 16    | `evaluation/tests/test_utils.py`                |
 
 </details>
 
