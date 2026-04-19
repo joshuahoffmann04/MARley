@@ -20,6 +20,7 @@ data/vectorstore/
 .chromadb-*/
 data/chunks/.chromadb/
 data/evaluation/subset-*/
+data/evaluation-*/.chromadb-*/
 
 # Coverage artifacts
 .coverage
