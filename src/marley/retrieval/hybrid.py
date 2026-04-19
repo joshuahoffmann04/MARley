@@ -7,15 +7,16 @@ and Vector) by fusing their ranked lists using the weighted RRF formula:
 
 where rank_i(d) is the 1-based rank of document d in retriever i's
 result list, weight_i defaults to 1.0 (uniform), and k_rrf is a
-smoothing constant (default 60, from the original paper by Cormack,
-Clarke & Buettcher, 2009).
+smoothing constant. MARley's default ``DEFAULT_K_RRF_HYBRID = 1`` was
+selected empirically from the RRF sweep; the classic value from the
+original paper (Cormack, Clarke & Buettcher, 2009) is 60.
 """
 
 from __future__ import annotations
 
 from typing import Any
 
-from src.marley.models.constants import DEFAULT_K_RRF_HYBRID
+from src.marley.models.constants import DEFAULT_K, DEFAULT_K_RRF_HYBRID
 from src.marley.models.retrieval import rrf_fuse
 from src.marley.retrieval.base import RetrievalResult, Retriever
 
@@ -51,7 +52,7 @@ class HybridRetriever(Retriever):
         for retriever in self._retrievers:
             retriever.index(corpus)
 
-    def retrieve(self, query: str, k: int = 5) -> list[RetrievalResult]:
+    def retrieve(self, query: str, k: int = DEFAULT_K) -> list[RetrievalResult]:
         """Retrieve top-k results by fusing ranked lists from both retrievers.
 
         Each sub-retriever is queried for k results.  The results are fused

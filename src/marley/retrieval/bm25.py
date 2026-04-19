@@ -10,6 +10,7 @@ from typing import Any
 
 from rank_bm25 import BM25Okapi
 
+from src.marley.models.constants import DEFAULT_K
 from src.marley.models.retrieval import load_chunks, validate_corpus
 from src.marley.retrieval.base import RetrievalResult, Retriever
 
@@ -48,12 +49,15 @@ class BM25Retriever(Retriever):
         tokenized = [_tokenize(doc["text"]) for doc in corpus]
         self._bm25 = BM25Okapi(tokenized)
 
-    def retrieve(self, query: str, k: int = 5) -> list[RetrievalResult]:
+    def retrieve(self, query: str, k: int = DEFAULT_K) -> list[RetrievalResult]:
         """Retrieve the top-k chunks most relevant to the query."""
         if self._bm25 is None or not self._corpus:
             return []
 
         tokenized_query = _tokenize(query)
+        if not tokenized_query:
+            return []
+
         scores = self._bm25.get_scores(tokenized_query)
 
         top_indices = sorted(

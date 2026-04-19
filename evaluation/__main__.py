@@ -15,7 +15,7 @@ Single entry point for all evaluation steps:
 The pipeline runs on GPU (CUDA baseline); the runner fails fast if CUDA
 is unavailable. The ``--judge`` flag affects every step that scores
 free-form answers with RAGAS — currently ``--generation`` and
-``--e2e`` — and, by extension, the generation and E2E phases of
+``--e2e`` — and, by extension, the generation and E2E steps of
 ``--all``. Abstention, retrieval, and RRF tuning measure deterministic
 booleans and set operations; they ignore the flag.
 
@@ -547,7 +547,7 @@ def main() -> None:
         help=(
             "RAGAS judge backend for answer scoring. "
             "Default: ollama (local). Affects --generation, --e2e, and the "
-            "corresponding phases of --all. --judge openai uses gpt-4o-mini "
+            "corresponding steps of --all. --judge openai uses gpt-4o-mini "
             "and requires OPENAI_API_KEY."
         ),
     )

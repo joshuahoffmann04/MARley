@@ -2,10 +2,17 @@
 
 Checks that all required files and services are available before
 running evaluation steps, providing clear actionable error messages.
+
+Importable as a library (:func:`validate_data_requirements`) or
+runnable as a CLI::
+
+    python -m evaluation.validate --steps retrieval generation abstention e2e
 """
 
 from __future__ import annotations
 
+import argparse
+import sys
 from pathlib import Path
 
 from src.marley.server.config import CHUNK_PATHS, check_ollama
@@ -68,3 +75,43 @@ def validate_data_requirements(
             )
 
     return errors
+
+
+def _cli(argv: list[str] | None = None) -> int:
+    """CLI wrapper: run validation and exit non-zero on any error."""
+    parser = argparse.ArgumentParser(
+        description="Validate MARley evaluation prerequisites.",
+    )
+    parser.add_argument(
+        "--steps",
+        nargs="+",
+        default=["retrieval", "rrf-tuning", "generation", "abstention", "e2e"],
+        help="Evaluation steps to validate (default: all).",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default="data/evaluation",
+        help="Base directory for evaluation output.",
+    )
+    parser.add_argument(
+        "--ollama-url",
+        default="http://localhost:11434",
+        help="Ollama base URL (checked for steps that need it).",
+    )
+    args = parser.parse_args(argv)
+
+    errors = validate_data_requirements(
+        args.steps,
+        output_dir=args.output_dir,
+        ollama_url=args.ollama_url,
+    )
+    if errors:
+        for msg in errors:
+            print(msg, file=sys.stderr)
+        return 1
+    print("All evaluation prerequisites satisfied.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(_cli())

@@ -27,7 +27,13 @@ ROMAN_PATTERN = re.compile(r"^\s*([IVXLC]+)\.\s*$")
 PAGE_NUMBER_PATTERN = re.compile(r"^\s*\d{1,2}\s*$")
 TOC_MARKER = "table of contents"
 
-# Appendix 2 has 13 pdfplumber columns; these indices map to the 7 real columns.
+# pdfplumber detects 13 columns in the Appendix-2 module-catalogue table
+# because visual rulers split the "Qualification goals" and "Prerequisites"
+# cells into sub-columns (for bullet rendering). The 7 indices below are the
+# ones whose positions carry the actual logical content; every other column
+# is a continuation of its left neighbour and is joined back by the caller.
+# Order here matches APPENDIX2_HEADERS: name, LP, obligation, level, goals,
+# prerequisites, prerequisites-for-LP.
 APPENDIX2_COL_INDICES = [0, 3, 4, 7, 8, 9, 10]
 APPENDIX2_HEADERS = [
     "Name of module / German translation",
@@ -95,7 +101,7 @@ def _normalize_whitespace(text: str) -> str:
     return "\n".join(result).strip()
 
 
-def extract_page_texts(pdf_path: Path) -> list[tuple[int, str]]:
+def extract_page_texts(pdf_path: str | Path) -> list[tuple[int, str]]:
     """Extract cleaned text for each page using PyMuPDF.
 
     Applies page-number stripping, whitespace normalization, and
@@ -256,6 +262,8 @@ def _build_sections(
 ) -> list[Section]:
     """Assemble full text for each section from marker boundaries."""
     if not markers:
+        return []
+    if not pages:
         return []
 
     page_map: dict[int, str] = {p: t for p, t in pages}

@@ -15,6 +15,10 @@ from src.marley.generator.prompt import build_messages
 from src.marley.models.generation import GenerationResult
 
 
+class GenerationError(RuntimeError):
+    """Raised when the Ollama server fails to produce a usable response."""
+
+
 class OllamaGenerator(Generator):
     """Generate answers using an Ollama-hosted LLM."""
 
@@ -34,15 +38,28 @@ class OllamaGenerator(Generator):
         """Generate an answer for the query using the provided context.
 
         Sends a chat request to the Ollama server and returns a
-        structured GenerationResult.
+        structured :class:`GenerationResult`. Any underlying Ollama
+        client, HTTP, or response-shape error is re-raised as a
+        :class:`GenerationError` so the server layer can produce a
+        generic 5xx response without leaking internals.
         """
         messages = build_messages(query, context)
         chunk_ids = [c["chunk_id"] for c in context if "chunk_id" in c]
 
-        response = self._client.chat(model=self.model, messages=messages)
+        try:
+            response = self._client.chat(model=self.model, messages=messages)
+        except Exception as exc:  # network, timeout, JSON decode, etc.
+            raise GenerationError(f"Ollama chat failed: {exc}") from exc
+
+        try:
+            content = response.message.content
+        except AttributeError as exc:
+            raise GenerationError("Ollama response missing message.content") from exc
+        if not isinstance(content, str) or not content.strip():
+            raise GenerationError("Ollama returned an empty or non-string answer")
 
         return GenerationResult(
-            answer=response.message.content.strip(),
+            answer=content.strip(),
             model=response.model or self.model,
             context_chunk_ids=chunk_ids,
             prompt_tokens=response.prompt_eval_count or 0,

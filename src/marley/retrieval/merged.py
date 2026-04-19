@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from src.marley.models.constants import DEFAULT_K
 from src.marley.retrieval.base import RetrievalResult, Retriever
 
 
@@ -30,7 +31,7 @@ class MergedRetriever(Retriever):
         """Index the merged corpus in the inner retriever."""
         self._retriever.index(corpus)
 
-    def retrieve(self, query: str, k: int = 5) -> list[RetrievalResult]:
+    def retrieve(self, query: str, k: int = DEFAULT_K) -> list[RetrievalResult]:
         """Retrieve top-k results from the merged corpus."""
         return self._retriever.retrieve(query, k=k)
 

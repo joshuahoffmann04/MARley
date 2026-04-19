@@ -141,7 +141,7 @@ Insgesamt **481 gescorte Samples** über alle Configs (Ø 14.6 pro Config, min 0
 
 - **Generator** (Ollama, unverändert): wird den gleichen Zeitanteil haben wie im Ollama-Lauf — also grob ~9–10 h von den 12.3 h (Rest war Judge-Zeit).
 - **Judge-Calls bei OpenAI:** ~8 868 Calls (3 Metriken × 2 956 Samples), aufgeteilt in 178 Batches à 50. RAGAS-Async-Client nutzt Parallelität, aber Rate-Limits drosseln. Schätzung: **2–4 h Judge-Zeit**.
-- **Gesamt OpenAI-`--all`:** **~11–14 h** — in der gleichen Größenordnung wie der Ollama-Lauf, eher leicht schneller, weil die OpenAI-Scoring-Phase pro Sample effizienter ist als Ollama.
+- **Gesamt OpenAI-`--all`:** **~11–14 h** — in der gleichen Größenordnung wie der Ollama-Lauf, eher leicht schneller, weil der OpenAI-Scoring-Schritt pro Sample effizienter ist als Ollama.
 
 **Praxis-Empfehlung:** Nächster Run kann wieder über Nacht laufen. Resume-Support ist aktiv — falls die API mal 429'ed, einfach das gleiche Kommando neu starten.
 

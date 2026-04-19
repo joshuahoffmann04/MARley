@@ -12,7 +12,7 @@
 
 ## Guiding principles
 
-1. **Evidence before claims.** No phase is "done" without verification output
+1. **Evidence before claims.** No stage is "done" without verification output
    (test run, grep result, doc build, etc.).
 2. **Consistency across layers.** Code ↔ tests ↔ evaluation ↔ docs ↔ README
    must tell the *same* story. Discrepancies are the #1 audit target.
@@ -197,10 +197,10 @@ Deliverable: "Verification" block at the bottom of this file, dated,
 
 ## Findings & Resolutions
 
-_Populated as phases run. Template per finding:_
+_Populated as stages run. Template per finding:_
 
 ```
-### F-<phase>-<nn> · <short title>
+### F-<stage>-<nn> · <short title>
 - **Severity:** blocker | major | minor | nit
 - **Source:** <file:line or doc path>
 - **Observation:** <what was seen>

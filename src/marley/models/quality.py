@@ -7,7 +7,10 @@ non-fatal issues encountered during processing.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Literal
+
+
+Severity = Literal["info", "warning", "error"]
 
 
 @dataclass
@@ -23,5 +26,5 @@ class QualityFlag:
 
     code: str
     message: str
-    severity: str
+    severity: Severity
     context: dict[str, Any] = field(default_factory=dict)

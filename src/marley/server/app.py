@@ -3,11 +3,6 @@
 Serves the production chat UI and debug UI. Run with::
 
     python -m src.marley.server --port 8000
-
-Or start individual components separately::
-
-    python -m src.marley.server --mode chat --port 8001
-    python -m src.marley.server --mode debug --port 8002
 """
 
 from __future__ import annotations
@@ -150,7 +145,10 @@ def create_app(config: ServerConfig | None = None) -> FastAPI:
             raise HTTPException(422, str(exc)) from exc
         except Exception as exc:
             logger.exception("Chat request failed")
-            raise HTTPException(500, f"Pipeline error: {exc}") from exc
+            raise HTTPException(
+                500,
+                "An internal error occurred while processing the query.",
+            ) from exc
 
         return ChatResponse(
             answer=result["answer"],
@@ -185,12 +183,6 @@ def main() -> None:
         "--pdf-path",
         default="data/raw/msc-computer-science.pdf",
         help="Path to the StPO PDF for the in-browser viewer",
-    )
-    parser.add_argument(
-        "--mode",
-        choices=["all", "chat", "debug"],
-        default="all",
-        help="Which UIs to serve (default: all)",
     )
 
     args = parser.parse_args()

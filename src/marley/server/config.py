@@ -20,11 +20,16 @@ from src.marley.models.constants import (
     STRATEGIES,
 )
 
-# Default chunk file paths (relative to project root)
+# Project root, resolved once relative to this file so chunk lookups
+# succeed no matter what the current working directory is when the
+# server is launched.
+_PROJECT_ROOT: Path = Path(__file__).resolve().parents[3]
+
+# Default chunk file paths (anchored at the project root)
 CHUNK_PATHS: dict[str, str] = {
-    "stpo": "data/chunks/stpo-chunks.json",
-    "faq-stpo": "data/chunks/faq-stpo-chunks.json",
-    "faq-ao": "data/chunks/faq-ao-chunks.json",
+    "stpo": str(_PROJECT_ROOT / "data" / "chunks" / "stpo-chunks.json"),
+    "faq-stpo": str(_PROJECT_ROOT / "data" / "chunks" / "faq-stpo-chunks.json"),
+    "faq-ao": str(_PROJECT_ROOT / "data" / "chunks" / "faq-ao-chunks.json"),
 }
 
 

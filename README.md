@@ -199,7 +199,7 @@ is swappable via `--judge`:
 | `openai`           | `gpt-4o-mini`           | 50         | `OPENAI_API_KEY` in `.env` |
 
 `--judge` takes effect in `--generation`, `--e2e`, and the corresponding
-phases of `--all`. Abstention, retrieval, and RRF tuning measure
+steps of `--all`. Abstention, retrieval, and RRF tuning measure
 deterministic booleans and set operations — they ignore the flag.
 
 In E2E, RAGAS scores only the samples where the system answered an

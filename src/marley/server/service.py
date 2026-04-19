@@ -135,13 +135,21 @@ class PipelineService:
         if strategy == "fusion":
             sub_retrievers: list[Retriever] = []
             for kb in knowledge_bases:
-                r = self._create_retriever(retriever_type, tag=f"fusion-{kb}")
+                r = self._create_retriever(
+                    retriever_type,
+                    tag=f"fusion-{kb}",
+                    k_rrf_hybrid=k_rrf,
+                )
                 chunks = load_chunks(CHUNK_PATHS[kb])
                 r.index(chunks)
                 sub_retrievers.append(r)
             retriever = FusionRetriever(sub_retrievers, k_rrf=k_rrf)
         else:
-            inner = self._create_retriever(retriever_type, tag=f"{strategy}-{kb_tag}")
+            inner = self._create_retriever(
+                retriever_type,
+                tag=f"{strategy}-{kb_tag}",
+                k_rrf_hybrid=k_rrf,
+            )
             retriever = MergedRetriever(inner)
             chunks = self._load_and_merge_chunks(knowledge_bases)
             retriever.index(chunks)

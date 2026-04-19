@@ -14,7 +14,7 @@ from typing import Any
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-from src.marley.models.constants import CHROMADB_BATCH_SIZE
+from src.marley.models.constants import CHROMADB_BATCH_SIZE, DEFAULT_K
 from src.marley.retrieval.base import RetrievalResult, Retriever
 from src.marley.models.retrieval import validate_corpus
 
@@ -121,7 +121,7 @@ class VectorRetriever(Retriever):
                 metadatas=metadatas[start:end],
             )
 
-    def retrieve(self, query: str, k: int = 5) -> list[RetrievalResult]:
+    def retrieve(self, query: str, k: int = DEFAULT_K) -> list[RetrievalResult]:
         """Retrieve the top-k chunks most relevant to the query."""
         if k <= 0:
             return []

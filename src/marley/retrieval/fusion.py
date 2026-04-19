@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from src.marley.models.constants import DEFAULT_K_RRF_FUSION
+from src.marley.models.constants import DEFAULT_K, DEFAULT_K_RRF_FUSION
 from src.marley.models.retrieval import rrf_fuse
 from src.marley.retrieval.base import RetrievalResult, Retriever
 
@@ -72,7 +72,7 @@ class FusionRetriever(Retriever):
             "Index the individual retrievers before constructing FusionRetriever."
         )
 
-    def retrieve(self, query: str, k: int = 5) -> list[RetrievalResult]:
+    def retrieve(self, query: str, k: int = DEFAULT_K) -> list[RetrievalResult]:
         """Retrieve top-k results by fusing ranked lists from all sub-retrievers.
 
         The raw sub-retriever outputs are cached on the instance and can
