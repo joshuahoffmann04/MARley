@@ -263,7 +263,7 @@ Run once after cloning — derived files land under `data/chunks/`:
 # 1. Extract sections and tables from the StPO PDF
 python -c "
 from src.marley.extractor import extract, save
-save(extract('data/raw/msc-computer-science.pdf'), 'data/knowledgebase/stpo.json')
+save(extract('data/raw/msc-computer-science.pdf'), 'data/knowledgebase/stpo-extracted.json')
 "
 
 # 2. Chunk the extracted data (StPO + FAQ knowledge bases)
