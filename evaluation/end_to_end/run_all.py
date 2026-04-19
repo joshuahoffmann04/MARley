@@ -201,10 +201,18 @@ def run_all(
                 n_retrievers = 2  # hybrid has 2 sub-retrievers
             norm_params = {"rrf_n_retrievers": n_retrievers, "rrf_k": config.k_rrf}
 
+        # Fusion configs require sub-retriever-aware confidence; pass the
+        # underlying retriever type so the eval picks the right
+        # normalisation strategy for the sub-retrievers.
+        fusion_sub = (
+            config.retriever_type if config.strategy == "fusion" else None
+        )
+
         # Step 1: Sweep threshold (no LLM)
         best_threshold, sweep = sweep_threshold(
             retriever, questions, config.normalization_strategy,
             k=config.k, normalization_params=norm_params,
+            fusion_sub_retriever_type=fusion_sub,
         )
         logger.info("  Optimal threshold: %.2f", best_threshold)
 
@@ -218,6 +226,7 @@ def run_all(
             threshold=best_threshold,
             normalization_params=norm_params,
             progress_callback=progress,
+            fusion_sub_retriever_type=fusion_sub,
         )
 
         # Compute abstention + generation summaries

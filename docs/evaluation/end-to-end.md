@@ -65,7 +65,18 @@ Optimize the Level 1 abstention threshold without LLM calls:
 
 
 
-Default sweep: 0.0 to 1.0 in 0.05 steps. Selects threshold maximizing F1.
+Default sweep: 0.0 to 1.0 in 0.05 steps. Selects threshold maximising
+**F0.5** (precision weighted 2× over recall). On the 25 %-unanswerable
+evaluation dataset, F1-maximisation tended to choose very aggressive
+thresholds (≥ 0.95) that traded away answers on answerable questions;
+F0.5 keeps recall near its natural ceiling while preferring a slightly
+less trigger-happy abstention.
+
+For :class:`FusionRetriever` configs, the sweep uses a **Fusion-aware
+confidence** computed from the sub-retrievers' top-1 normalised scores
+(see [fusion.md](../source/retrieval/fusion.md#fusion-aware-confidence))
+rather than the degenerate fused RRF score. The abstention decision is
+then all-or-nothing per query, gated by that confidence.
 
 Implementation: `evaluation/end_to_end/evaluate.py` (`sweep_threshold()`)
 

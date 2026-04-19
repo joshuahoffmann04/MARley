@@ -429,8 +429,8 @@ def run_abstention_step(
             normalization_strategy="bm25",
         )
 
-        # Full evaluation at best threshold
-        best_threshold = max(sweep, key=lambda s: s["metrics"]["f1"])["threshold"]
+        # Full evaluation at best threshold (F0.5-optimal, precision-weighted)
+        best_threshold = max(sweep, key=lambda s: s["metrics"]["f0_5"])["threshold"]
         report = run_abstention_evaluation(
             retriever,
             generator,
@@ -519,6 +519,18 @@ def main() -> None:
     )
     parser.add_argument(
         "--ollama-model", type=str, default="llama3.1:latest", help="Ollama model name"
+    )
+    parser.add_argument(
+        "--ollama-judge-model",
+        type=str,
+        default=None,
+        help=(
+            "Optional Ollama model used as the RAGAS judge when "
+            "--judge=ollama. Defaults to --ollama-model. A larger model "
+            "(e.g. qwen2.5:14b) typically produces fewer NaN scores and "
+            "better-calibrated Factual Correctness verdicts than the 8B "
+            "generator. Must be pulled on the Ollama server first."
+        ),
     )
     parser.add_argument(
         "--config-filter",
@@ -633,7 +645,13 @@ def main() -> None:
             args.judge,
             ollama_model=args.ollama_model,
             ollama_url=args.ollama_url,
+            ollama_judge_model=args.ollama_judge_model,
         )
+        if args.ollama_judge_model and args.judge == "ollama":
+            logger.info(
+                "Judge model override: %s (generator remains %s)",
+                args.ollama_judge_model, args.ollama_model,
+            )
 
     start = time.time()
     logger.info("Running evaluation steps: %s", ", ".join(steps))

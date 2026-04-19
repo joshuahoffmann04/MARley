@@ -355,3 +355,67 @@ class TestFusionRetriever:
         stub = self._StubRetriever([_r("c1", 1.0)])
         with pytest.raises(ValueError, match="Expected 1 weights"):
             FusionRetriever([stub], weights=[1.0, 2.0])
+
+
+class TestFusionRetrieverSubResultsCache:
+    """Phase 12: FusionRetriever caches raw sub-retriever outputs so that
+    downstream code can compute a Fusion-aware confidence without re-running
+    the sub-queries."""
+
+    class _StubRetriever:
+        def __init__(self, results):
+            self._results = results
+            self._size = len(results)
+
+        def index(self, corpus):
+            self._size = len(corpus)
+
+        def retrieve(self, query, k=5):
+            return self._results[:k]
+
+        @property
+        def size(self):
+            return self._size
+
+    def test_last_sub_results_empty_before_retrieve(self):
+        from src.marley.retrieval.fusion import FusionRetriever
+
+        stub = self._StubRetriever([_r("c1", 1.0)])
+        fusion = FusionRetriever([stub])
+        assert fusion.last_sub_results == []
+
+    def test_last_sub_results_populated_after_retrieve(self):
+        from src.marley.retrieval.fusion import FusionRetriever
+
+        stub_a = self._StubRetriever([_r("a1", 0.9)])
+        stub_b = self._StubRetriever([_r("b1", 0.4)])
+        fusion = FusionRetriever([stub_a, stub_b])
+        fusion.retrieve("query", k=1)
+
+        subs = fusion.last_sub_results
+        assert len(subs) == 2
+        assert subs[0][0].chunk_id == "a1"
+        assert subs[1][0].chunk_id == "b1"
+
+    def test_last_sub_results_reflects_latest_query(self):
+        from src.marley.retrieval.fusion import FusionRetriever
+
+        stub_a = self._StubRetriever([_r("a1", 0.9), _r("a2", 0.2)])
+        fusion = FusionRetriever([stub_a])
+        fusion.retrieve("q1", k=2)
+        first = fusion.last_sub_results
+        fusion.retrieve("q2", k=1)
+        second = fusion.last_sub_results
+        assert len(first[0]) == 2
+        assert len(second[0]) == 1
+
+    def test_sub_retrievers_property_is_read_only_view(self):
+        from src.marley.retrieval.fusion import FusionRetriever
+
+        stub = self._StubRetriever([_r("c1", 1.0)])
+        fusion = FusionRetriever([stub])
+        view = fusion.sub_retrievers
+        assert len(view) == 1
+        # Mutating the returned list must not affect the retriever.
+        view.clear()
+        assert len(fusion.sub_retrievers) == 1

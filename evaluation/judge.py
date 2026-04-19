@@ -59,6 +59,7 @@ def make_judge(
     *,
     ollama_model: str = "llama3.1:latest",
     ollama_url: str = "http://localhost:11434",
+    ollama_judge_model: str | None = None,
 ) -> Judge:
     """Build a :class:`Judge` for the requested backend.
 
@@ -67,9 +68,18 @@ def make_judge(
     backend:
         ``"ollama"`` (default pipeline) or ``"openai"`` (faster, external).
     ollama_model:
-        Ignored when ``backend == "openai"``.
+        The Ollama model used by the *generator* (the system being
+        evaluated). Ignored by the OpenAI judge. Used as the default
+        judge model when ``ollama_judge_model`` is not provided.
     ollama_url:
-        Ignored when ``backend == "openai"``.
+        Ollama server URL. Ignored by the OpenAI judge.
+    ollama_judge_model:
+        Optional: when set and ``backend == "ollama"``, the judge runs
+        on this model instead of ``ollama_model``. The intended use is
+        to pair a small generator (e.g. ``llama3.1:latest``) with a
+        larger, more structured-output-capable judge (e.g.
+        ``qwen2.5:14b``). Must be pulled on the Ollama server before
+        the run. Ignored when ``backend == "openai"``.
 
     Raises
     ------
@@ -94,8 +104,9 @@ def make_judge(
     )
 
     if backend == "ollama":
+        judge_model = ollama_judge_model or ollama_model
         client = AsyncOpenAI(base_url=f"{ollama_url}/v1", api_key="ollama")
-        llm = llm_factory(ollama_model, provider="openai", client=client)
+        llm = llm_factory(judge_model, provider="openai", client=client)
         return Judge(llm=llm, embeddings=embeddings, batch_size=_OLLAMA_BATCH_SIZE)
 
     api_key = os.environ.get("OPENAI_API_KEY")

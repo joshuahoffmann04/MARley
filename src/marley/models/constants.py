@@ -13,14 +13,23 @@ from __future__ import annotations
 DEFAULT_K: int = 5
 """Default number of chunks to retrieve."""
 
-DEFAULT_K_RRF: int = 60
-"""General default RRF smoothing constant (backward compatibility)."""
+DEFAULT_K_RRF: int = 1
+"""General default RRF smoothing constant.
 
-DEFAULT_K_RRF_HYBRID: int = 60
-"""Default RRF smoothing constant for HybridRetriever (BM25 + Vector)."""
+Set to 1 based on the Phase-11 RRF sweep: on all three knowledge bases
+(stpo, faq-stpo, faq-ao) and for both Hybrid (BM25+Vector) and Fusion
+(cross-KB), k_rrf = 1 maximises F1@5. Lower k_rrf sharpens RRF towards
+a max-join, which rewards strong top-1 agreement more than the classic
+IR-literature default of 60.
+"""
 
-DEFAULT_K_RRF_FUSION: int = 60
-"""Default RRF smoothing constant for FusionRetriever (cross-KB)."""
+DEFAULT_K_RRF_HYBRID: int = 1
+"""Default RRF smoothing constant for HybridRetriever (BM25 + Vector).
+See :data:`DEFAULT_K_RRF` for the empirical justification."""
+
+DEFAULT_K_RRF_FUSION: int = 1
+"""Default RRF smoothing constant for FusionRetriever (cross-KB).
+See :data:`DEFAULT_K_RRF` for the empirical justification."""
 
 RETRIEVER_TYPES: list[str] = ["bm25", "vector", "hybrid"]
 """Supported retriever type identifiers."""

@@ -107,6 +107,11 @@ class AbstentionMetrics:
         precision: correct_abstention / all_abstentions (1.0 if none).
         recall: correct_abstention / all_unanswerable (0.0 if none).
         f1: Harmonic mean of precision and recall.
+        f0_5: F-beta score with beta=0.5 — precision weighted 2x more
+            than recall. Used as the default threshold-selection target
+            (see ``sweep_threshold``) because false abstentions degrade
+            user experience more than an occasional hallucination risk
+            when the recall floor is already near perfect.
         false_abstention_rate: incorrect_abstention / all_answerable.
         coverage: answered / total (proportion receiving an answer).
         num_correct_abstention: Unanswerable questions correctly abstained.
@@ -120,6 +125,7 @@ class AbstentionMetrics:
     precision: float
     recall: float
     f1: float
+    f0_5: float
     false_abstention_rate: float
     coverage: float
     num_correct_abstention: int
@@ -147,7 +153,7 @@ def compute_abstention_metrics(
     """
     if not results:
         return AbstentionMetrics(
-            precision=1.0, recall=1.0, f1=1.0,
+            precision=1.0, recall=1.0, f1=1.0, f0_5=1.0,
             false_abstention_rate=0.0, coverage=1.0,
             num_correct_abstention=0, num_incorrect_abstention=0,
             num_missing_abstention=0, num_answered=0, num_total=0,
@@ -189,6 +195,11 @@ def compute_abstention_metrics(
         2 * precision * recall / (precision + recall)
         if (precision + recall) > 0 else 0.0
     )
+    # F_beta = (1 + b^2) * P * R / (b^2 * P + R); b=0.5 weights precision 2x.
+    f0_5 = (
+        1.25 * precision * recall / (0.25 * precision + recall)
+        if (0.25 * precision + recall) > 0 else 0.0
+    )
 
     total_answerable = num_answered + num_incorrect_abstention
     false_abstention_rate = (
@@ -200,7 +211,7 @@ def compute_abstention_metrics(
     coverage = total_answered / num_total
 
     return AbstentionMetrics(
-        precision=precision, recall=recall, f1=f1,
+        precision=precision, recall=recall, f1=f1, f0_5=f0_5,
         false_abstention_rate=false_abstention_rate, coverage=coverage,
         num_correct_abstention=num_correct_abstention,
         num_incorrect_abstention=num_incorrect_abstention,

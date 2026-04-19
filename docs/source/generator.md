@@ -67,7 +67,19 @@ class GenerationResult:
 
 The prompt follows a system/user message structure:
 
-**System prompt:** Instructs the LLM to act as a study advisor for the M.Sc. Computer Science program at Philipps-Universität Marburg. The LLM is directed to answer based ONLY on the provided context and to state clearly when the context is insufficient.
+**System prompt:** Instructs the LLM to act as a study advisor for the
+M.Sc. Computer Science program at Philipps-Universität Marburg. Five
+rules constrain the output:
+
+1. Ground every answer strictly in the provided context passages.
+2. Stay concise, precise, factually accurate.
+3. Abstain with `ABSTENTION: <reason>` when the context is insufficient.
+   An explicit clause covers the *silence-of-context* case: the model is
+   told not to generalise from the absence of a prohibition to a "Yes"
+   or from the absence of a permission to a "No" — a failure mode
+   surfaced by the Phase-12 qualitative analysis.
+4. No guessing, speculation, or outside knowledge.
+5. Plain-text output, no `[1]` / chunk-ID references for the student.
 
 **User message:** Contains the numbered context chunks followed by the question.
 

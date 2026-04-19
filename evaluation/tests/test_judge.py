@@ -111,3 +111,56 @@ class TestJudgeEmbeddingsDevice:
         make_judge("openai")
         emb_call = _stub_ragas["embeddings"].call_args
         assert emb_call.kwargs["device"] == "cuda"
+
+
+class TestMakeJudgeSeparateJudgeModel:
+    """Phase 12: ``ollama_judge_model`` splits the Ollama judge model from
+    the generator model so a larger model can be used for scoring."""
+
+    def test_ollama_judge_model_overrides_generator(self, _stub_ragas):
+        make_judge(
+            "ollama",
+            ollama_model="llama3.1:latest",
+            ollama_judge_model="qwen2.5:14b",
+        )
+        call = _stub_ragas["llm"].call_args
+        assert call.args[0] == "qwen2.5:14b"
+
+    def test_ollama_judge_model_defaults_to_generator(self, _stub_ragas):
+        make_judge(
+            "ollama",
+            ollama_model="llama3.1:latest",
+        )
+        call = _stub_ragas["llm"].call_args
+        assert call.args[0] == "llama3.1:latest"
+
+    def test_ollama_judge_model_none_falls_back(self, _stub_ragas):
+        make_judge(
+            "ollama",
+            ollama_model="llama3.1:latest",
+            ollama_judge_model=None,
+        )
+        call = _stub_ragas["llm"].call_args
+        assert call.args[0] == "llama3.1:latest"
+
+    def test_ollama_judge_model_empty_string_falls_back(self, _stub_ragas):
+        # Empty string is falsy -> same as None -> use generator model.
+        make_judge(
+            "ollama",
+            ollama_model="llama3.1:latest",
+            ollama_judge_model="",
+        )
+        call = _stub_ragas["llm"].call_args
+        assert call.args[0] == "llama3.1:latest"
+
+    def test_openai_backend_ignores_ollama_judge_model(
+        self, _stub_ragas, monkeypatch
+    ):
+        monkeypatch.setenv("OPENAI_API_KEY", "sk-test")
+        make_judge(
+            "openai",
+            ollama_model="llama3.1:latest",
+            ollama_judge_model="qwen2.5:14b",
+        )
+        call = _stub_ragas["llm"].call_args
+        assert call.args[0] == "gpt-4o-mini"

@@ -207,6 +207,35 @@ answerable question (Faithfulness, Answer Relevancy, Factual
 Correctness). Abstentions and hallucinations on unanswerable questions
 remain `NaN` on those fields and are excluded from the averages.
 
+#### Decoupling the Ollama judge from the generator
+
+By default, the Ollama judge uses the same model as the generator. For
+better-calibrated scores — especially fewer NaN Faithfulness verdicts
+on long or list-formatted answers — pair a small 8 B generator with a
+larger judge via `--ollama-judge-model`:
+
+```bash
+ollama pull qwen2.5:14b
+python -m evaluation --all --judge ollama \
+    --ollama-model llama3.1:latest \
+    --ollama-judge-model qwen2.5:14b \
+    --output-dir data/evaluation-ollama
+```
+
+The generator and judge share the GPU. With 16 GB VRAM and
+`OLLAMA_NUM_PARALLEL=2`, 8 B + 14 B at Q4 fits; larger judges (70 B)
+require CPU offloading and slow the run substantially.
+
+### Abstention-threshold selection
+
+The Level-1 threshold sweep picks the threshold that maximises **F0.5**
+(precision weighted 2× over recall). On the 25 %-unanswerable evaluation
+dataset, F1-maximisation tended to choose very aggressive thresholds
+(≥ 0.95) that traded away answers on answerable questions. F0.5 keeps
+recall near its natural ceiling while preferring a slightly less
+trigger-happy system — false abstentions dominate the user-experience
+cost more than occasional hallucinations do.
+
 ### Quick iteration
 
 For rapid iteration on the generation step:
@@ -299,8 +328,10 @@ plus a combined 100-question master set for E2E).
 
 ## Testing
 
-**674 tests** across source code and evaluation — 672 passed, 2 skipped.
-Overall coverage: **87.1 %** (3950 statements, 509 missed).
+**693 tests** across source code and evaluation — 688 passed, 5 skipped.
+Overall coverage: **87.1 %** (3950 statements, 509 missed). The 5 skips
+are integration tests that require a running Ollama server or the
+optional `faq-ao` vector store.
 
 ```bash
 # Full suite
@@ -314,7 +345,7 @@ python -m pytest -m integration
 ```
 
 <details>
-<summary>Per-module breakdown (447 source + 227 evaluation)</summary>
+<summary>Per-module breakdown (457 source + 236 evaluation)</summary>
 
 ### Source tests
 
@@ -326,11 +357,11 @@ python -m pytest -m integration
 | BM25 Retrieval       | 27    | `tests/retrieval/test_bm25.py`       |
 | Vector Retrieval     | 25    | `tests/retrieval/test_vector.py`     |
 | Hybrid Retrieval     | 26    | `tests/retrieval/test_hybrid.py`     |
-| Fusion Retrieval     | 37    | `tests/retrieval/test_fusion.py`     |
+| Fusion Retrieval     | 41    | `tests/retrieval/test_fusion.py`     |
 | Merged Retrieval     | 14    | `tests/retrieval/test_merged.py`     |
 | Generator            | 24    | `tests/generator/test_generator.py`  |
 | Data Models          | 34    | `tests/models/test_models.py`        |
-| Score Normalization  | 20    | `tests/models/test_scoring.py`       |
+| Score Normalization  | 26    | `tests/models/test_scoring.py`       |
 | Abstention Detection | 12    | `tests/abstention/test_detection.py` |
 | Server API           | 17    | `tests/server/test_api.py`           |
 | Server Models        | 15    | `tests/server/test_models.py`        |
@@ -348,13 +379,13 @@ python -m pytest -m integration
 | Generation Metrics  | 15    | `evaluation/tests/generation/test_metrics.py`   |
 | Generation Evaluate | 19    | `evaluation/tests/generation/test_evaluate.py`  |
 | Generation Combined | 15    | `evaluation/tests/generation/test_combined.py`  |
-| Judge Factory       | 8     | `evaluation/tests/test_judge.py`                |
+| Judge Factory       | 13    | `evaluation/tests/test_judge.py`                |
 | Abstention Metrics  | 10    | `evaluation/tests/abstention/test_metrics.py`   |
 | Abstention Evaluate | 12    | `evaluation/tests/abstention/test_evaluate.py`  |
 | E2E Config          | 10    | `evaluation/tests/end_to_end/test_config.py`    |
 | E2E Evaluate        | 22    | `evaluation/tests/end_to_end/test_evaluate.py`  |
 | E2E Metrics         | 19    | `evaluation/tests/end_to_end/test_metrics.py`   |
-| Utilities           | 16    | `evaluation/tests/test_utils.py`                |
+| Utilities           | 20    | `evaluation/tests/test_utils.py`                |
 
 </details>
 

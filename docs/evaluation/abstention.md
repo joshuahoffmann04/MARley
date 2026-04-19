@@ -157,19 +157,31 @@ def run_abstention_evaluation(
 Convenience function that chains Level 1 sweep -> best threshold -> full evaluation:
 
 1. Sweep Level 1 thresholds (no LLM)
-2. Find threshold that maximizes F1
+2. Find threshold that maximises F0.5
 3. Run full two-level evaluation at that threshold
 
-## Threshold Optimization
+## Threshold Optimisation
 
-The threshold is optimized by maximizing F1 on the evaluation dataset:
+The threshold is optimised by maximising **F0.5** on the evaluation
+dataset. F0.5 weights precision at twice the weight of recall:
 
 ```python
-best = max(sweep, key=lambda s: s["metrics"]["f1"])
+best = max(sweep, key=lambda s: s["metrics"]["f0_5"])
 best_threshold = best["threshold"]
 ```
 
-The default threshold in the production pipeline is 0.3 (from `models/constants.py: DEFAULT_THRESHOLD`). The evaluation sweep tests whether a different threshold would perform better on the evaluation data.
+**Why F0.5 rather than F1?** The evaluation set is 25 % unanswerable
+questions, and Level-1 abstention already reaches recall ≈ 1.0 at modest
+thresholds. Further tightening — which F1 still rewards because each
+additional correct abstention is weighted equally with precision loss —
+pushes the threshold up to 0.95–1.0 and strips the system of answers on
+answerable questions. F0.5 stops earlier, trading a marginal recall hit
+for a meaningful gain in usable coverage.
+
+The default threshold in the production pipeline is 0.3 (from
+`models/constants.py: DEFAULT_THRESHOLD`). The evaluation sweep tests
+whether a different threshold would perform better on the evaluation
+data.
 
 ## CLI Entry Point
 

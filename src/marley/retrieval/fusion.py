@@ -48,6 +48,22 @@ class FusionRetriever(Retriever):
         self._retrievers = list(retrievers)
         self._k_rrf = k_rrf
         self._weights = weights
+        self._last_sub_results: list[list[RetrievalResult]] = []
+
+    @property
+    def sub_retrievers(self) -> list[Retriever]:
+        """Read-only view of the wrapped sub-retrievers."""
+        return list(self._retrievers)
+
+    @property
+    def last_sub_results(self) -> list[list[RetrievalResult]]:
+        """Raw per-sub-retriever results from the most recent ``retrieve`` call.
+
+        Exposed so downstream code can compute a Fusion-aware confidence
+        score (see :func:`src.marley.models.scoring.compute_fusion_confidence`)
+        without repeating the sub-retriever queries.
+        """
+        return [list(rs) for rs in self._last_sub_results]
 
     def index(self, corpus: list[dict[str, Any]]) -> None:
         """Not supported — index each sub-retriever independently."""
@@ -57,10 +73,17 @@ class FusionRetriever(Retriever):
         )
 
     def retrieve(self, query: str, k: int = 5) -> list[RetrievalResult]:
-        """Retrieve top-k results by fusing ranked lists from all sub-retrievers."""
-        result_lists = [r.retrieve(query, k=k) for r in self._retrievers]
+        """Retrieve top-k results by fusing ranked lists from all sub-retrievers.
+
+        The raw sub-retriever outputs are cached on the instance and can
+        be read back via :attr:`last_sub_results`.
+        """
+        self._last_sub_results = [r.retrieve(query, k=k) for r in self._retrievers]
         return rrf_fuse(
-            result_lists, k_rrf=self._k_rrf, k=k, weights=self._weights,
+            self._last_sub_results,
+            k_rrf=self._k_rrf,
+            k=k,
+            weights=self._weights,
         )
 
     @property

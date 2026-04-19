@@ -219,3 +219,64 @@ class TestComputeAbstentionMetrics:
         assert m.false_abstention_rate == pytest.approx(0.5)
         assert m.coverage == pytest.approx(0.5)
         assert m.threshold == 0.3
+
+
+class TestAbstentionMetricsF0_5:
+    """Phase 12: F0.5 is computed and stored alongside F1.
+
+    F_beta = (1+b^2) * P * R / (b^2 * P + R); beta=0.5 weights precision 2x.
+    """
+
+    def test_f0_5_equals_precision_when_recall_matches(self):
+        # P = R = 0.5 -> F0.5 = F1 = 0.5
+        results = [
+            {"expected_abstention": True, "system_abstained": True},
+            {"expected_abstention": True, "system_abstained": False},
+            {"expected_abstention": False, "system_abstained": True},
+            {"expected_abstention": False, "system_abstained": False},
+        ]
+        m = compute_abstention_metrics(results, threshold=0.3)
+        assert m.f0_5 == pytest.approx(0.5)
+
+    def test_f0_5_favours_precision_over_recall(self):
+        # 4 correct abstentions + 4 missing -> P=1.0, R=0.5
+        # F1 = 2*1*0.5/(1+0.5) = 0.667
+        # F0.5 = 1.25*1*0.5/(0.25*1+0.5) = 0.833
+        results = [
+            {"expected_abstention": True, "system_abstained": True}
+            for _ in range(4)
+        ] + [
+            {"expected_abstention": True, "system_abstained": False}
+            for _ in range(4)
+        ]
+        m = compute_abstention_metrics(results, threshold=0.5)
+        assert m.precision == pytest.approx(1.0)
+        assert m.recall == pytest.approx(0.5)
+        assert m.f1 == pytest.approx(2 * 1.0 * 0.5 / (1.0 + 0.5))
+        assert m.f0_5 == pytest.approx(1.25 * 1.0 * 0.5 / (0.25 * 1.0 + 0.5))
+        assert m.f0_5 > m.f1  # precision-weighted metric rewards precision
+
+    def test_f0_5_penalises_low_precision(self):
+        # Low precision: 1 correct + many false abstentions
+        # P=1/5=0.2, R=1.0
+        # F1 = 2*0.2*1/1.2 = 0.333
+        # F0.5 = 1.25*0.2*1/(0.05+1) = 0.238
+        results = [
+            {"expected_abstention": True, "system_abstained": True}
+        ] + [
+            {"expected_abstention": False, "system_abstained": True}
+            for _ in range(4)
+        ]
+        m = compute_abstention_metrics(results, threshold=0.5)
+        assert m.f0_5 < m.f1  # when P < R, F0.5 is stricter than F1
+
+    def test_f0_5_zero_when_precision_and_recall_zero(self):
+        # Neither abstention nor recall: system never abstains on unanswerable
+        results = [
+            {"expected_abstention": True, "system_abstained": False}
+            for _ in range(3)
+        ]
+        m = compute_abstention_metrics(results, threshold=0.0)
+        assert m.precision == pytest.approx(1.0)  # no predictions
+        assert m.recall == pytest.approx(0.0)
+        assert m.f0_5 == pytest.approx(0.0)

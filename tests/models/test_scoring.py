@@ -7,6 +7,7 @@ import pytest
 from src.marley.models.retrieval import RetrievalResult
 from src.marley.models.scoring import (
     compute_confidence,
+    compute_fusion_confidence,
     filter_by_threshold,
     normalize_scores,
 )
@@ -81,12 +82,12 @@ class TestNormalizeRRF:
 
     def test_theoretical_max_maps_to_one(self) -> None:
         """A document ranked #1 in all retrievers has max score n/(k+1)."""
-        max_score = 2 / (60 + 1)  # 2 retrievers, k=60
+        max_score = 2 / (1 + 1)  # 2 retrievers, DEFAULT_K_RRF=1
         results = normalize_scores([_result("c1", max_score)], "rrf")
         assert results[0].score == pytest.approx(1.0)
 
     def test_partial_score(self) -> None:
-        max_score = 2 / 61
+        max_score = 2 / (1 + 1)  # DEFAULT_K_RRF=1
         half = max_score / 2
         results = normalize_scores([_result("c1", half)], "rrf")
         assert results[0].score == pytest.approx(0.5)
@@ -155,3 +156,52 @@ class TestComputeConfidence:
 
     def test_single_result(self) -> None:
         assert compute_confidence([_result("c1", 0.42)]) == pytest.approx(0.42)
+
+
+# -- Fusion-aware confidence -----------------------------------------------
+
+
+class TestComputeFusionConfidence:
+    """Phase 12: Fusion-aware confidence from sub-retriever normalised scores.
+
+    When a FusionRetriever wraps disjoint-corpus sub-retrievers, the raw
+    RRF score at the fused level is mathematically constant. These tests
+    lock in that ``compute_fusion_confidence`` works pre-fusion on the
+    sub-retriever outputs and therefore varies with the actual query.
+    """
+
+    def test_empty_sub_results_returns_zero(self) -> None:
+        assert compute_fusion_confidence([], "vector") == 0.0
+
+    def test_all_empty_sub_results_returns_zero(self) -> None:
+        assert compute_fusion_confidence([[], [], []], "vector") == 0.0
+
+    def test_vector_strategy_uses_max_of_subretriever_tops(self) -> None:
+        # Three sub-retrievers, top-1 scores 0.4 / 0.8 / 0.3.
+        sub_results = [
+            [_result("a1", 0.4), _result("a2", 0.3)],
+            [_result("b1", 0.8), _result("b2", 0.5)],
+            [_result("c1", 0.3), _result("c2", 0.1)],
+        ]
+        # Vector normalisation is identity, so the answer is plain max.
+        assert compute_fusion_confidence(sub_results, "vector") == pytest.approx(0.8)
+
+    def test_bm25_strategy_saturates_then_maxes(self) -> None:
+        # Raw BM25 = 3.0, saturation with k=1 -> 3/(3+1) = 0.75. Biggest wins.
+        sub_results = [
+            [_result("a1", 1.0)],  # 1/2 = 0.5
+            [_result("b1", 3.0)],  # 3/4 = 0.75
+        ]
+        conf = compute_fusion_confidence(sub_results, "bm25")
+        assert conf == pytest.approx(0.75)
+
+    def test_varies_per_query(self) -> None:
+        """The whole point: different queries yield different confidences."""
+        weak_query = [[_result("a1", 0.1)], [_result("b1", 0.2)]]
+        strong_query = [[_result("a1", 0.9)], [_result("b1", 0.7)]]
+        assert compute_fusion_confidence(weak_query, "vector") < compute_fusion_confidence(strong_query, "vector")
+
+    def test_skips_empty_sub_retriever(self) -> None:
+        # One empty, one with real results -> confidence from the non-empty one.
+        sub_results = [[], [_result("b1", 0.6)]]
+        assert compute_fusion_confidence(sub_results, "vector") == pytest.approx(0.6)

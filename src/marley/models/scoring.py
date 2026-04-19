@@ -86,6 +86,59 @@ def compute_confidence(results: list[RetrievalResult]) -> float:
     return max(r.score for r in results)
 
 
+def compute_fusion_confidence(
+    sub_retriever_results: list[list[RetrievalResult]],
+    sub_normalization_strategy: str,
+    *,
+    bm25_k: float = 1.0,
+) -> float:
+    """Confidence for a FusionRetriever over disjoint knowledge bases.
+
+    When each sub-retriever operates on a different corpus, every chunk
+    appears in exactly one sub-retriever's ranking. The fused RRF score
+    therefore carries no per-query variation (it equals
+    ``1/(k_rrf+1)`` for every top-1 chunk and collapses to a constant
+    after RRF normalisation). That defeats any confidence-based
+    abstention decision on top of the fused output.
+
+    The Phase-12 fix is to compute confidence *before* fusion: normalise
+    each sub-retriever's raw scores with its native strategy and take
+    the maximum confidence across sub-retrievers. A query on which at
+    least one sub-retriever is confident yields a correspondingly high
+    aggregate confidence; a query on which all sub-retrievers are weak
+    yields a low one.
+
+    Args:
+        sub_retriever_results: One raw result list per sub-retriever,
+            in the order returned by the fusion retriever's children.
+        sub_normalization_strategy: ``"bm25"``, ``"vector"``, or
+            ``"rrf"`` (for Hybrid sub-retrievers). All sub-retrievers
+            share the same strategy because a single Fusion
+            configuration uses a single retriever type.
+        bm25_k: BM25 saturation parameter (only used when the strategy
+            is ``"bm25"``).
+
+    Returns:
+        The maximum per-sub-retriever normalised top-1 score, in
+        ``[0, 1]``. Returns ``0.0`` when every sub-retriever returned an
+        empty result list.
+    """
+    if not sub_retriever_results:
+        return 0.0
+
+    confidences: list[float] = []
+    for sub in sub_retriever_results:
+        if not sub:
+            continue
+        normalised = normalize_scores(
+            sub,
+            sub_normalization_strategy,
+            bm25_k=bm25_k,
+        )
+        confidences.append(compute_confidence(normalised))
+    return max(confidences) if confidences else 0.0
+
+
 # ---------------------------------------------------------------------------
 # Internal normalization helpers
 # ---------------------------------------------------------------------------

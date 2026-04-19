@@ -20,13 +20,16 @@ from evaluation.end_to_end.config import E2EConfig
 from evaluation.judge import Judge
 from evaluation.utils import compute_abstention_metrics, load_evaluation
 from src.marley.abstention.detection import detect_abstention, extract_abstention_reason
+from src.marley.models.constants import NORMALIZATION_MAP
 from src.marley.models.generation import Generator
 from src.marley.models.retrieval import Retriever
 from src.marley.models.scoring import (
     compute_confidence,
+    compute_fusion_confidence,
     filter_by_threshold,
     normalize_scores,
 )
+from src.marley.retrieval import FusionRetriever
 
 logger = logging.getLogger(__name__)
 
@@ -71,41 +74,69 @@ def sweep_threshold(
     k: int = 5,
     thresholds: list[float] | None = None,
     normalization_params: dict | None = None,
+    fusion_sub_retriever_type: str | None = None,
 ) -> tuple[float, list[dict]]:
-    """Sweep Level 1 thresholds and return the optimal threshold.
+    """Sweep Level-1 thresholds and return the F0.5-optimal threshold.
 
-    Runs retrieval for all questions once, then tests each threshold
-    to determine which questions would trigger Level 1 abstention.
-    Selects the threshold that maximizes F1.
+    Runs retrieval for every question once, then evaluates each
+    threshold candidate against ``compute_abstention_metrics``. Selects
+    the threshold that maximises **F0.5** (precision weighted 2x over
+    recall) — on a 25 %-unanswerable dataset, F1-maximisation tends to
+    pick very aggressive thresholds, trading away answers on
+    answerable questions; F0.5 prefers a slightly less trigger-happy
+    abstention.
+
+    Fusion-aware confidence: when ``retriever`` is a
+    :class:`FusionRetriever`, per-query confidence is derived from the
+    **sub-retriever** normalised top-1 scores rather than from the
+    RRF-fused (and degenerate) score distribution. The abstention
+    decision then becomes all-or-nothing per query, gated by that
+    confidence, instead of per-chunk filtering of the fused list.
 
     No LLM calls required -- this is a retrieval-only operation.
 
     Args:
         retriever: Already-indexed retriever.
-        questions: Evaluation questions (must have 'id', 'question',
-            'expected_abstention').
-        normalization_strategy: Score normalization strategy.
+        questions: Evaluation questions (must have ``id``, ``question``,
+            ``expected_abstention``).
+        normalization_strategy: Score normalisation strategy for the
+            outer (possibly fused) result list.
         k: Number of chunks to retrieve per query.
-        thresholds: Threshold values to sweep (default: 0.0 to 1.0
-            in 0.05 steps).
-        normalization_params: Extra kwargs for normalize_scores.
+        thresholds: Threshold values to sweep (default: 0.0 to 1.0 in
+            0.05 steps).
+        normalization_params: Extra kwargs for ``normalize_scores``.
+        fusion_sub_retriever_type: Retriever type of the sub-retrievers
+            when ``retriever`` is a :class:`FusionRetriever`. Must be
+            one of ``"bm25"``, ``"vector"``, ``"hybrid"``. Ignored for
+            non-Fusion retrievers.
 
     Returns:
         Tuple of (best_threshold, sweep_results) where sweep_results
-        is a list of {threshold, metrics} dicts.
+        is a list of ``{threshold, metrics}`` dicts.
     """
     if thresholds is None:
         thresholds = [round(i * 0.05, 2) for i in range(21)]
     norm_params = normalization_params or {}
+    is_fusion = isinstance(retriever, FusionRetriever)
+    sub_strategy = (
+        NORMALIZATION_MAP[fusion_sub_retriever_type]
+        if is_fusion and fusion_sub_retriever_type
+        else None
+    )
 
-    # Pre-compute normalized scores for all questions
+    # Pre-compute normalized scores + confidence for all questions
     question_scores: list[dict] = []
     for q in questions:
         raw_results = retriever.retrieve(q["question"], k=k)
         normalized = normalize_scores(
             raw_results, normalization_strategy, **norm_params,
         )
-        confidence = compute_confidence(normalized)
+        if is_fusion and sub_strategy is not None:
+            confidence = compute_fusion_confidence(
+                retriever.last_sub_results, sub_strategy,
+            )
+        else:
+            confidence = compute_confidence(normalized)
         question_scores.append({
             "question_id": q["id"],
             "expected_abstention": q.get("expected_abstention", False),
@@ -118,8 +149,11 @@ def sweep_threshold(
     for threshold in thresholds:
         eval_results = []
         for qs in question_scores:
-            filtered = filter_by_threshold(qs["normalized_results"], threshold)
-            system_abstained = len(filtered) == 0
+            if is_fusion:
+                system_abstained = qs["confidence"] < threshold
+            else:
+                filtered = filter_by_threshold(qs["normalized_results"], threshold)
+                system_abstained = len(filtered) == 0
             eval_results.append({
                 "expected_abstention": qs["expected_abstention"],
                 "system_abstained": system_abstained,
@@ -130,8 +164,8 @@ def sweep_threshold(
             "metrics": asdict(metrics),
         })
 
-    # Find best F1
-    best = max(sweep_results, key=lambda s: s["metrics"]["f1"])
+    # Find best F0.5 (precision-weighted)
+    best = max(sweep_results, key=lambda s: s["metrics"]["f0_5"])
     return best["threshold"], sweep_results
 
 
@@ -145,6 +179,7 @@ def run_e2e_config(
     threshold: float,
     normalization_params: dict | None = None,
     progress_callback: Callable[[int, int], None] | None = None,
+    fusion_sub_retriever_type: str | None = None,
 ) -> list[E2EResult]:
     """Run the end-to-end pipeline for a single configuration.
 
@@ -181,14 +216,28 @@ def run_e2e_config(
     total = len(questions)
     results: list[E2EResult] = []
     scoring_buffer: list[dict] = []
+    is_fusion = isinstance(retriever, FusionRetriever)
+    sub_strategy = (
+        NORMALIZATION_MAP[fusion_sub_retriever_type]
+        if is_fusion and fusion_sub_retriever_type
+        else None
+    )
 
     for i, q in enumerate(questions):
         raw_results = retriever.retrieve(q["question"], k=config.k)
         normalized = normalize_scores(
             raw_results, config.normalization_strategy, **norm_params,
         )
-        confidence = compute_confidence(normalized)
-        filtered = filter_by_threshold(normalized, threshold)
+        if is_fusion and sub_strategy is not None:
+            # Fusion-aware: confidence from sub-retriever top-1 scores,
+            # decision is all-or-nothing based on that confidence.
+            confidence = compute_fusion_confidence(
+                retriever.last_sub_results, sub_strategy,
+            )
+            filtered = [] if confidence < threshold else normalized
+        else:
+            confidence = compute_confidence(normalized)
+            filtered = filter_by_threshold(normalized, threshold)
 
         if not filtered:
             # Level 1 abstention
@@ -353,6 +402,7 @@ def run_and_report(
     thresholds: list[float] | None = None,
     normalization_params: dict | None = None,
     progress_callback: Callable[[int, int], None] | None = None,
+    fusion_sub_retriever_type: str | None = None,
 ) -> dict:
     """Full pipeline: sweep threshold, run E2E evaluation, return report.
 
@@ -380,6 +430,7 @@ def run_and_report(
         k=config.k,
         thresholds=thresholds,
         normalization_params=normalization_params,
+        fusion_sub_retriever_type=fusion_sub_retriever_type,
     )
 
     # Step 2: Run full pipeline at optimal threshold (incl. RAGAS scoring)
@@ -388,6 +439,7 @@ def run_and_report(
         threshold=best_threshold,
         normalization_params=normalization_params,
         progress_callback=progress_callback,
+        fusion_sub_retriever_type=fusion_sub_retriever_type,
     )
 
     # Step 3: Compute automatic abstention + generation metrics

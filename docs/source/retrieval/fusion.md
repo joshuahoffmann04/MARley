@@ -174,3 +174,32 @@ fused = rrf_fuse([stpo_results, faq_results], weights=[2.0, 1.0], k=10)
 ```python
 from src.marley.retrieval import FusionRetriever, rrf_fuse, Retriever, RetrievalResult, load_chunks, validate_corpus
 ```
+
+---
+
+## Fusion-aware confidence
+
+The default ``compute_confidence`` (max normalised top-1 score) collapses
+to a constant for `FusionRetriever` over *disjoint* corpora:
+
+- Each chunk exists in exactly one sub-retriever's ranking.
+- The fused RRF score of a top-1 chunk is therefore ``1/(k_rrf+1)``.
+- Divided by the theoretical maximum ``n/(k_rrf+1)`` used in RRF
+  normalisation, this becomes ``1/n`` — independent of the query.
+
+That leaves Level-1 abstention with no discriminative signal.
+`compute_fusion_confidence` in `src/marley/models/scoring.py` restores
+the per-query signal by computing confidence **before** fusion:
+
+1. Take the raw sub-retriever outputs cached on
+   `FusionRetriever.last_sub_results`.
+2. Normalise each sub-retriever's results with its own native strategy
+   (`bm25`, `vector`, or `rrf` for Hybrid sub-retrievers).
+3. Return the maximum top-1 score across sub-retrievers.
+
+The fused output itself is still passed to the generator; only the
+confidence signal is computed separately. The E2E and abstention
+evaluations detect `FusionRetriever` instances and use this path
+automatically; callers building their own pipelines should prefer
+`compute_fusion_confidence` over the default when wrapping disjoint
+retrievers with Fusion.

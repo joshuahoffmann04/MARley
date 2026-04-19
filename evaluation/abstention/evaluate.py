@@ -245,8 +245,10 @@ def run_and_report(
         normalization_params=normalization_params,
     )
 
-    # Find best F1 threshold
-    best = max(sweep, key=lambda s: s["metrics"]["f1"])
+    # Find best F0.5 threshold (precision-weighted, matches sweep_threshold
+    # in evaluation/end_to_end/evaluate.py — see its docstring for the
+    # rationale against F1-maximisation on a 25 %-unanswerable dataset).
+    best = max(sweep, key=lambda s: s["metrics"]["f0_5"])
     best_threshold = best["threshold"]
 
     # Level 2 evaluation at best threshold
