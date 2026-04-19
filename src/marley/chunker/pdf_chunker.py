@@ -200,12 +200,16 @@ def _sliding_window_chunks(
             break
 
         # Advance start: keep trailing sentences summing to ~overlap_tokens.
+        # Symmetric with the forward-pass accounting above: each sentence
+        # after the first in the overlap slice contributes one extra
+        # token for the joining space.
         overlap_acc = 0
         new_start = end
         for i in range(end - 1, start, -1):
-            if overlap_acc + token_counts[i] > overlap_tokens:
+            added = token_counts[i] + (1 if i < end - 1 else 0)
+            if overlap_acc + added > overlap_tokens:
                 break
-            overlap_acc += token_counts[i]
+            overlap_acc += added
             new_start = i
 
         # Guarantee forward progress.

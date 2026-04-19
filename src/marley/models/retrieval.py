@@ -145,10 +145,13 @@ def rrf_fuse(
             ):
                 doc_map[result.chunk_id] = result
 
+    # Primary key: descending RRF score. Secondary key: ascending chunk_id.
+    # The secondary key makes the output order deterministic across runs
+    # when two documents tie on fused score (e.g. both reach rank #1 in
+    # one list and are absent from the others).
     sorted_ids = sorted(
         rrf_scores,
-        key=lambda cid: rrf_scores[cid],
-        reverse=True,
+        key=lambda cid: (-rrf_scores[cid], cid),
     )[:k]
 
     return [

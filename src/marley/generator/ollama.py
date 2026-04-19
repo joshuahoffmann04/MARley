@@ -14,6 +14,12 @@ from src.marley.generator.base import Generator
 from src.marley.generator.prompt import build_messages
 from src.marley.models.generation import GenerationResult
 
+# Generation defaults: low temperature for factual QA, and a bounded
+# output length so judge payloads stay predictable without truncating
+# legitimate enumerations (module lists, multi-point answers).
+DEFAULT_TEMPERATURE: float = 0.2
+DEFAULT_NUM_PREDICT: int = 512
+
 
 class GenerationError(RuntimeError):
     """Raised when the Ollama server fails to produce a usable response."""
@@ -26,9 +32,16 @@ class OllamaGenerator(Generator):
         self,
         model: str = "llama3.1:latest",
         base_url: str = "http://localhost:11434",
+        *,
+        temperature: float = DEFAULT_TEMPERATURE,
+        num_predict: int = DEFAULT_NUM_PREDICT,
     ) -> None:
         self._model = model
         self._client = ollama_lib.Client(host=base_url)
+        self._options: dict[str, Any] = {
+            "temperature": temperature,
+            "num_predict": num_predict,
+        }
 
     @property
     def model(self) -> str:
@@ -47,7 +60,11 @@ class OllamaGenerator(Generator):
         chunk_ids = [c["chunk_id"] for c in context if "chunk_id" in c]
 
         try:
-            response = self._client.chat(model=self.model, messages=messages)
+            response = self._client.chat(
+                model=self.model,
+                messages=messages,
+                options=self._options,
+            )
         except Exception as exc:  # network, timeout, JSON decode, etc.
             raise GenerationError(f"Ollama chat failed: {exc}") from exc
 
