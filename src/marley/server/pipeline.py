@@ -19,9 +19,11 @@ from src.marley.models.generation import Generator
 from src.marley.models.retrieval import Retriever
 from src.marley.models.scoring import (
     compute_confidence,
+    compute_fusion_confidence,
     filter_by_threshold,
     normalize_scores,
 )
+from src.marley.retrieval.fusion import FusionRetriever
 
 _LEVEL1_REASON = "retrieval confidence below threshold"
 
@@ -43,33 +45,50 @@ def run_with_abstention(
     threshold: float = DEFAULT_THRESHOLD,
     normalization_strategy: str = "vector",
     normalization_params: dict[str, Any] | None = None,
+    fusion_sub_strategy: str | None = None,
 ) -> AbstentionResult:
     """Run the full abstention-aware pipeline.
 
     Steps:
         1. Retrieve top-k chunks.
         2. Normalize scores using the specified strategy.
-        3. Compute confidence (top-1 normalized score).
-        4. Filter chunks below threshold.
-        5. If no chunks remain: abstain (Level 1).
-        6. Generate answer from filtered context.
-        7. Detect abstention in LLM output (Level 2).
-        8. Return AbstentionResult.
+        3. Compute confidence — top-1 normalized score for ordinary
+           retrievers, or the fusion-aware aggregate for a
+           :class:`FusionRetriever` (see :func:`compute_fusion_confidence`).
+        4. Level-1 abstention check:
+           - fusion: abstain iff ``confidence < threshold`` (no filter;
+             RRF scores of disjoint-KB sub-retrievers do not discriminate
+             per query, so threshold filtering on the fused output is
+             degenerate by construction);
+           - non-fusion: filter chunks by threshold and abstain iff the
+             filtered set is empty.
+        5. Generate answer from the retained context.
+        6. Detect abstention in LLM output (Level 2).
+        7. Return AbstentionResult.
 
     Args:
         query: The user question.
         retriever: Retriever instance (must be indexed).
         generator: Generator instance.
         k: Number of chunks to retrieve.
-        threshold: Minimum normalized score to keep a chunk.
-        normalization_strategy: One of 'bm25', 'vector', 'rrf'.
+        threshold: Minimum normalized score to keep a chunk (non-fusion)
+            or minimum fusion confidence to proceed (fusion).
+        normalization_strategy: One of 'bm25', 'vector', 'rrf'. For a
+            fusion retriever this governs how the fused output is
+            normalised for downstream consumers.
         normalization_params: Extra kwargs for normalize_scores
             (e.g., bm25_k, rrf_n_retrievers, rrf_k).
+        fusion_sub_strategy: Normalisation strategy of the sub-retrievers
+            when ``retriever`` is a :class:`FusionRetriever`. Required
+            to enable fusion-aware confidence; when omitted or the
+            retriever is not a FusionRetriever, confidence falls back to
+            the top-1 normalised score of the fused output.
 
     Returns:
         AbstentionResult with the pipeline outcome.
     """
     norm_params = normalization_params or {}
+    is_fusion = isinstance(retriever, FusionRetriever)
 
     # Step 1: Retrieve
     raw_results = retriever.retrieve(query, k=k)
@@ -77,23 +96,44 @@ def run_with_abstention(
     # Step 2: Normalize
     normalized = normalize_scores(raw_results, normalization_strategy, **norm_params)
 
-    # Step 3: Confidence
-    confidence = compute_confidence(normalized)
-
-    # Step 4: Filter
-    filtered = filter_by_threshold(normalized, threshold)
-
-    # Step 5: Level 1 check
-    if not filtered:
-        return AbstentionResult(
-            abstained=True,
-            level=1,
-            reason=_LEVEL1_REASON,
-            answer="",
-            confidence=confidence,
-            retrieval_results=_results_to_dicts(normalized),
-            model="",
+    # Step 3: Confidence (fusion-aware when applicable)
+    if is_fusion and fusion_sub_strategy is not None:
+        confidence = compute_fusion_confidence(
+            retriever.last_sub_results,  # type: ignore[attr-defined]
+            fusion_sub_strategy,
+            **({"bm25_k": norm_params["bm25_k"]} if "bm25_k" in norm_params else {}),
         )
+    else:
+        confidence = compute_confidence(normalized)
+
+    # Step 4: Level-1 check
+    if is_fusion and fusion_sub_strategy is not None:
+        # Fusion path: threshold on the fusion-aware confidence; retain
+        # the full fused output so Level-2 and the UI can still cite the
+        # top chunks regardless of individual RRF scores.
+        if confidence < threshold:
+            return AbstentionResult(
+                abstained=True,
+                level=1,
+                reason=_LEVEL1_REASON,
+                answer="",
+                confidence=confidence,
+                retrieval_results=_results_to_dicts(normalized),
+                model="",
+            )
+        filtered = normalized
+    else:
+        filtered = filter_by_threshold(normalized, threshold)
+        if not filtered:
+            return AbstentionResult(
+                abstained=True,
+                level=1,
+                reason=_LEVEL1_REASON,
+                answer="",
+                confidence=confidence,
+                retrieval_results=_results_to_dicts(normalized),
+                model="",
+            )
 
     # Step 6: Generate
     context = [

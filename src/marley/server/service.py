@@ -209,6 +209,15 @@ class PipelineService:
             n_retrievers = len(kbs) if strategy == "fusion" else 2
             norm_params = {"rrf_n_retrievers": n_retrievers, "rrf_k": k_rrf}
 
+        # For the fusion strategy, mirror the evaluation pipeline's
+        # confidence computation: confidence is derived from the raw
+        # per-sub-retriever scores (via compute_fusion_confidence),
+        # because the fused RRF output on disjoint KBs collapses to a
+        # per-query-constant max and therefore cannot drive abstention.
+        fusion_sub_strategy: str | None = (
+            NORMALIZATION_MAP[retriever_type] if strategy == "fusion" else None
+        )
+
         # Run pipeline
         result = run_with_abstention(
             query,
@@ -218,6 +227,7 @@ class PipelineService:
             threshold=threshold,
             normalization_strategy=norm_strategy,
             normalization_params=norm_params,
+            fusion_sub_strategy=fusion_sub_strategy,
         )
 
         # Build source references (include page metadata for PDF viewer)
