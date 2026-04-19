@@ -260,16 +260,33 @@ python -m evaluation --generation --subset 10 --distractor-levels 0,5,10 --judge
 Run once after cloning — derived files land under `data/chunks/`:
 
 ```bash
-# Extract sections and tables from the StPO PDF
-python -c "from src.marley.extractor import extract, save; save(extract())"
-
-# Chunk the extracted data (StPO + FAQ knowledge bases)
+# 1. Extract sections and tables from the StPO PDF
 python -c "
-from src.marley.chunker import chunk_stpo, save, chunk_faq, save_faq
-save(chunk_stpo(), 'data/chunks/stpo-chunks.json')
-save_faq(chunk_faq('data/knowledgebase/faq-stpo.json'), 'data/chunks/faq-stpo-chunks.json')
+from src.marley.extractor import extract, save
+save(extract('data/raw/msc-computer-science.pdf'), 'data/knowledgebase/stpo.json')
+"
+
+# 2. Chunk the extracted data (StPO + FAQ knowledge bases)
+python -c "
+from src.marley.extractor import extract
+from src.marley.chunker import chunk_stpo, save, chunk_faq, save_faq, load_faq
+
+extraction = extract('data/raw/msc-computer-science.pdf')
+save(chunk_stpo(extraction), 'data/chunks/stpo-chunks.json')
+
+faq = load_faq('data/knowledgebase/faq-stpo.json')
+save_faq(
+    chunk_faq(faq, source_file='data/knowledgebase/faq-stpo.json'),
+    'data/chunks/faq-stpo-chunks.json',
+)
 "
 ```
+
+> **Note.** The chunker entry points take typed inputs
+> (`ExtractionResult` for `chunk_stpo`, `FAQDataset` for `chunk_faq`),
+> not file paths. The snippet above uses the matching `extract(...)`
+> and `load_faq(...)` loaders to produce those inputs, mirroring the
+> production pipeline.
 
 ---
 

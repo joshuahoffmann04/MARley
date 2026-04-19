@@ -77,7 +77,7 @@ rules constrain the output:
    An explicit clause covers the *silence-of-context* case: the model is
    told not to generalise from the absence of a prohibition to a "Yes"
    or from the absence of a permission to a "No" — a failure mode
-   surfaced by the Phase-12 qualitative analysis.
+   surfaced by the qualitative analysis.
 4. No guessing, speculation, or outside knowledge.
 5. Plain-text output, no `[1]` / chunk-ID references for the student.
 

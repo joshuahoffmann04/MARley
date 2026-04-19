@@ -96,7 +96,7 @@ Insgesamt **481 gescorte Samples** über alle Configs (Ø 14.6 pro Config, min 0
 | Generation (combined) | 825 | 62 (7.5 %) | 15 (1.8 %) | 0 (0.0 %) |
 | E2E (Option-A scoped) | 481 | 23 (4.8 %) | 4 (0.8 %) | 0 (0.0 %) |
 
-**Befund:** Ollama hat ein konsistentes Problem mit Faithfulness (~5–9 % NaN). Das ist der strukturierteste RAGAS-Output (Liste von Claims + Verdicts) — `llama3.1:8B` produziert hier oft ungültiges JSON. OpenAI `gpt-4o-mini` wird das laut Phase-10-Verification deutlich besser hinbekommen (dort 3 % auf der Subset-Probe).
+**Befund:** Ollama hat ein konsistentes Problem mit Faithfulness (~5–9 % NaN). Das ist der strukturierteste RAGAS-Output (Liste von Claims + Verdicts) — `llama3.1:8B` produziert hier oft ungültiges JSON. OpenAI `gpt-4o-mini` hat das im früheren Pilot-Subset (3 % NaN-Rate) deutlich besser hinbekommen.
 
 ---
 
@@ -161,7 +161,7 @@ Insgesamt **481 gescorte Samples** über alle Configs (Ø 14.6 pro Config, min 0
 ### Die Evaluation-Pipeline
 
 - Retrieval, RRF-Tuning, Abstention, Generation, E2E — alle 5 Schritte liefern valide numerische Reports
-- 33 E2E-Configs durchgelaufen, alle JSONs populiert (inkl. `generation_metrics`-Block aus Phase 11)
+- 33 E2E-Configs durchgelaufen, alle JSONs populiert (inkl. `generation_metrics`-Block)
 - Ollama-Judge NaN-Raten sind real, aber kein Bug — bekannte Schwäche von `llama3.1:8B` beim strukturierten JSON-Output. OpenAI-Lauf wird das kompensieren.
 - Resume-Logik funktioniert (nicht getestet, aber code-reviewed — ein Abbruch wäre rekoverbar)
 

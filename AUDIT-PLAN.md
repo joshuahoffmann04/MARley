@@ -23,7 +23,7 @@
 
 ---
 
-## Phase 0 — Baseline Snapshot (serial, ~5 min)
+## Stage 0 — Baseline Snapshot (serial, ~5 min)
 
 Purpose: know what we're auditing before we audit it.
 
@@ -40,7 +40,7 @@ Deliverable: "Baseline" block filled in at the bottom of this file.
 
 ---
 
-## Phase 1 — Code Audit (parallel, 6 agents)
+## Stage 1 — Code Audit (parallel, 6 agents)
 
 Each agent owns one module. Read-only. Each agent reports in ≤200 words:
 **(a) API/contract issues, (b) dead code / TODOs / FIXMEs, (c) error-handling
@@ -66,7 +66,7 @@ Deliverable: one findings list per module, merged into "Findings & Resolutions".
 
 ---
 
-## Phase 2 — Test Audit (parallel, 2 agents)
+## Stage 2 — Test Audit (parallel, 2 agents)
 
 Purpose: verify tests actually test, not just pass.
 
@@ -91,7 +91,7 @@ Deliverable: testing section of "Findings & Resolutions".
 
 ---
 
-## Phase 3 — Evaluation Audit (serial, main session + 1 agent)
+## Stage 3 — Evaluation Audit (serial, main session + 1 agent)
 
 Purpose: make sure the numbers that will end up in the thesis hold up.
 
@@ -116,7 +116,7 @@ bottom of this file.
 
 ---
 
-## Phase 4 — Documentation Audit (parallel, 2 agents)
+## Stage 4 — Documentation Audit (parallel, 2 agents)
 
 **Agent D1 — README.md + top-level docs.**
 - Does every command in the README actually run on a fresh clone?
@@ -139,7 +139,7 @@ Deliverable: list of outdated or missing doc sections → fix-list.
 
 ---
 
-## Phase 5 — Infrastructure & Hygiene Audit (serial, main session)
+## Stage 5 — Infrastructure & Hygiene Audit (serial, main session)
 
 - `pyproject.toml` — version, name, deps, Python version bound consistent
   with `requirements.txt` and README "Prerequisites"?
@@ -158,9 +158,9 @@ Deliverable: infrastructure fix list.
 
 ---
 
-## Phase 6 — Consolidation & Fixes (serial, main session)
+## Stage 6 — Consolidation & Fixes (serial, main session)
 
-Execute fixes from Phases 1–5 in this order (lowest risk first):
+Execute fixes from stages 1–5 in this order (lowest risk first):
 
 1. Doc-only fixes (README, `docs/`).
 2. Test-only fixes (new tests, renames, fixture updates).
@@ -175,7 +175,7 @@ Each fix batch = one git commit with a descriptive message. No
 
 ---
 
-## Phase 7 — Final Verification Gate (serial, main session)
+## Stage 7 — Final Verification Gate (serial, main session)
 
 No thesis-writing starts before **all** of these are green:
 
@@ -210,7 +210,7 @@ _Populated as phases run. Template per finding:_
 
 <!-- Findings added below this line during execution. -->
 
-### Phase 1 — Code Audit (results, 2026-04-19)
+### Stage 1 — Code Audit (results, 2026-04-19)
 
 Six agents reported; every agent claim was spot-checked before recording
 here. Where an agent erred, I say so explicitly and drop the finding.
@@ -221,7 +221,7 @@ here. Where an agent erred, I say so explicitly and drop the finding.
   major. `extractor.py:580` requires `pdf_path` as a positional argument,
   but the README "Running the Evaluation" / extractor quick-start snippet
   (verify exact location in doc audit) allegedly calls it arg-less.
-  *Decision:* fix docs in Phase 4/6 (not the function signature).
+  *Decision:* fix docs in Stage 4/6 (not the function signature).
 - **F-1-02 · E-02 · Missing empty-list guard** · minor.
   `extractor.py:275` does `all_page_numbers[-1]` without checking that
   the list is non-empty. Crashes on corrupted / empty PDF.
@@ -232,7 +232,7 @@ here. Where an agent erred, I say so explicitly and drop the finding.
 - **F-1-04 · E-04 · Type-hint inconsistency on public entry points** ·
   nit. `extract_page_texts(pdf_path: Path)` vs. `extract` / `save`
   accepting `str | Path`. *Decision:* unify to `str | Path`.
-- Minor doc nits (E-05, E-07, E-08) merged into Phase 4 doc pass; E-06
+- Minor doc nits (E-05, E-07, E-08) merged into Stage 4 doc pass; E-06
   was a false positive (README ↔ code agreed).
 
 #### Chunker (src/marley/chunker/ · ~919 LOC)
@@ -256,7 +256,7 @@ here. Where an agent erred, I say so explicitly and drop the finding.
   sets have not guaranteed ordering, but the codepath only calls
   `.add()`/`.contains()` and never iterates, so there is no risk.
   Dropped.
-- C-05, C-08, C-10: pure doc nits; handled in Phase 4/6.
+- C-05, C-08, C-10: pure doc nits; handled in Stage 4/6.
 
 #### Retrieval (src/marley/retrieval/ + models/retrieval.py · ~662 LOC)
 
@@ -296,7 +296,7 @@ here. Where an agent erred, I say so explicitly and drop the finding.
   production server computes confidence differently from the eval run.
   Thesis numbers for "Fusion" cannot be replicated by pointing a user at
   the running chat server. This is the single most important finding of
-  Phase 1.
+  Stage 1.
   *Decision:* fix — teach `run_with_abstention` to accept the sub-results
   (or a flag) and call `compute_fusion_confidence` when the retriever is
   a fusion retriever. Covered by tests in `tests/models/test_scoring.py`
@@ -315,7 +315,7 @@ here. Where an agent erred, I say so explicitly and drop the finding.
   F0.5; `evaluation/tests/test_utils.py:224-282` tests it. F0.5 is real.
   Dropped.
 - Low-priority nits (A-03, A-04, A-05, A-06, A-07): doc-only; merge into
-  Phase 4/6.
+  Stage 4/6.
 
 #### Server (src/marley/server/ · ~770 LOC)
 
@@ -344,7 +344,7 @@ here. Where an agent erred, I say so explicitly and drop the finding.
   known anchor (e.g., `Path(__file__).resolve().parents[3]`).
 - S-05 (no CORS): **deferred** — single-origin deployment per thesis, so
   out of scope unless user requests.
-- S-06, S-07, S-08, S-09: doc nits / polish; merged into Phase 4/6.
+- S-06, S-07, S-08, S-09: doc nits / polish; merged into Stage 4/6.
 
 #### Pydantic models (src/marley/models/ · ~719 LOC incl. constants, scoring)
 
@@ -364,9 +364,9 @@ here. Where an agent erred, I say so explicitly and drop the finding.
 - M-02 ("`context_chunk_ids` camelCase outlier"): false positive — that
   name is snake_case. Dropped.
 - M-04, M-05, M-07, M-08, M-10: low-value style nits; merged into
-  Phase 4/6 docstring pass.
+  Stage 4/6 docstring pass.
 
-#### Cross-cutting Phase-1 summary
+#### Cross-cutting Stage-1 summary
 
 Blocker (must fix before thesis): **1** → F-1-14.
 Major: **8** → F-1-01, F-1-05, F-1-17, F-1-18, F-1-19, F-1-09\*, F-1-20, F-1-06\*.
@@ -375,7 +375,7 @@ False positives explicitly dropped: 4 (C-02, E-06, A-02, M-01, M-02).
 
 \* reclassified as minor after spot-check.
 
-### Phase 2 — Test Audit (results, 2026-04-19)
+### Stage 2 — Test Audit (results, 2026-04-19)
 
 Two agents reported. Baseline: 688 passed / 5 skipped.
 
@@ -393,7 +393,7 @@ reasons — not orphan skips:
 
 All 5 skips are acceptable. No action required.
 
-#### Blockers from Phase 2
+#### Blockers from Stage 2
 
 - **F-2-01 · T-01 · No test locks the fusion-confidence behavior in the
   server pipeline.** `tests/server/test_service.py` builds fusion
@@ -412,7 +412,7 @@ All 5 skips are acceptable. No action required.
   fixed (either implement mode or delete it); add a test on the chosen
   outcome.
 
-#### Majors from Phase 2
+#### Majors from Stage 2
 
 - **F-2-04 · T-04 · Weak confidence assertion** — `test_api.py:178-187`
   only checks `isinstance(confidence, float)`. *Decision:* fix —
@@ -457,14 +457,14 @@ All 5 skips are acceptable. No action required.
 - RAGAS mocking (ET-07) and fixture isolation (ET-08): **good**, no
   action.
 
-#### Phase 2 summary
+#### Stage 2 summary
 
 - Blockers: 4 (F-2-01, F-2-02, F-2-08, plus F-2-03 which resolves with
   F-1-18).
 - Majors: 5 (F-2-04, F-2-05, F-2-06, F-2-09, F-2-10).
 - Minor / nit: 3 (F-2-07, F-2-11, + rolled-up ET-05/ET-06).
 
-### Phase 3 — Evaluation Audit (results, 2026-04-19)
+### Stage 3 — Evaluation Audit (results, 2026-04-19)
 
 One statistical-rigor agent + main-session spot-checks of JSON ↔ analysis.
 
@@ -539,7 +539,7 @@ No JSON ↔ analysis discrepancy. Methodology findings below are separate.
   than copy-paste upstream prompts into the repo. **Dropped as a
   blocker.**
 
-### Phase 4 — Documentation Audit (results, 2026-04-19)
+### Stage 4 — Documentation Audit (results, 2026-04-19)
 
 Two agents. All findings below verified in main session before
 recording.
@@ -562,7 +562,7 @@ recording.
   matches across the repo. The flag is parsed and dropped. Merges
   with F-1-18. *Decision:* remove `--mode` from README snippets
   when the code is fixed (or remove it from the code if the README
-  is what we want to keep — TBD in Phase 6).
+  is what we want to keep — TBD in Stage 6).
 - D1-05, D1-06, D1-08, D1-09: all confirmed **correct as-is**.
   No action.
 
@@ -574,9 +574,9 @@ recording.
   each state or exemplify `k_rrf=60` (the classic literature
   default). `src/marley/models/constants.py:16-32` sets
   `DEFAULT_K_RRF = DEFAULT_K_RRF_HYBRID = DEFAULT_K_RRF_FUSION = 1`
-  from the Phase-11 sweep. Docs will contradict the thesis.
+  from the the RRF tuning sweep sweep. Docs will contradict the thesis.
   *Decision:* fix all three doc files — change numbers to 1, cite
-  `rrf-tuning.json` and the Phase-11 sweep.
+  `rrf-tuning.json` and the the RRF tuning sweep sweep.
 - **F-4-05 · D2-02 · `docs/source/abstention.md` does not describe
   the fusion-confidence asymmetry between server and eval** ·
   major. Closely related to F-1-14.
@@ -595,21 +595,21 @@ recording.
   `FusionRetriever` and `MergedRetriever` are in the puml file —
   *appears current*, but the `MergedRetriever` class was only added
   in commit 641c97d1 (2026-03-24 or later). Safe to regenerate in
-  Phase 7 as part of the final verification gate. No new finding.
+  Stage 7 as part of the final verification gate. No new finding.
 
-### Phase 3 + Phase 4 summary
+### Stage 3 + Stage 4 summary
 
 - Blockers: 3 (F-3-01 methodology doc, F-4-01, F-4-02, F-4-04). Note
   F-3-01 is a documentation blocker — the code is intentional.
 - Majors: 3 (F-3-02, F-4-05, + D1-03 rolling into F-1-18).
 - Minor / nit: 4 (F-3-03, F-3-04, F-3-05, F-4-06).
 
-### Phase 5 — Infrastructure & Hygiene (results, 2026-04-19)
+### Stage 5 — Infrastructure & Hygiene (results, 2026-04-19)
 
 - **F-5-01 · `.coverage` is tracked by git** · major. `git ls-files`
   confirms `.coverage` is in the index, despite being in `.gitignore`.
   It was added before the ignore entry existed. *Decision:* fix —
-  `git rm --cached .coverage` in Phase 6 and commit.
+  `git rm --cached .coverage` in Stage 6 and commit.
 - **F-5-02 · `.env.example` missing `OLLAMA_NUM_PARALLEL`** · minor.
   `evaluation/__main__.py:128` reads `OLLAMA_NUM_PARALLEL` but
   `.env.example` only documents `OPENAI_API_KEY`. *Decision:* fix —
@@ -635,14 +635,14 @@ recording.
   `requirements.txt`. No action needed unless the user wants to
   publish the package separately.
 
-### Phase 5 summary
+### Stage 5 summary
 
 - Major: 2 (F-5-01, F-5-04).
 - Minor / nit: 3 (F-5-02, F-5-03, F-5-05; F-5-06 is wontfix).
 
 ---
 
-## Phase 6 — Fix Plan (risk-ascending, batched commits)
+## Stage 6 — Fix Plan (risk-ascending, batched commits)
 
 Rule: every fix that could change chunk boundaries, retrieval
 ordering on tied scores, or generation output is **deferred** until
@@ -690,7 +690,7 @@ with a message describing the audit items resolved.
 
 ## Baseline
 
-_Filled at end of Phase 0 (2026-04-19)._
+_Filled at end of Stage 0 (2026-04-19)._
 
 - pytest (before audit): **688 passed, 5 skipped, 0 failed in 72.75 s**
 - validate.py (before audit): **exit 0 — but see F-0-01**; it is a module
@@ -711,13 +711,13 @@ _Filled at end of Phase 0 (2026-04-19)._
   exits 0 silently. The AUDIT-PLAN referenced running it as a script.
 - **Decision:** fix — add a minimal CLI that accepts `--steps` and exits
   non-zero on errors. Cheap and thesis-consistent.
-- **Resolution commit / note:** _tbd in Phase 6_
+- **Resolution commit / note:** _tbd in the fix stage_
 
 ---
 
 ## Verification
 
-_Filled at end of Phase 7._
+_Filled at end of Stage 7._
 
 - pytest: …
 - coverage: …

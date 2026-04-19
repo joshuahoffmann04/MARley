@@ -237,7 +237,7 @@ class TestBuildComparisonTable:
 
 
 class TestGenerationMetrics:
-    """Tests for the new Phase-11 aggregation of RAGAS scores."""
+    """Tests for the aggregation of RAGAS scores."""
 
     def test_num_scored_counts_non_nan_results(self):
         results = [

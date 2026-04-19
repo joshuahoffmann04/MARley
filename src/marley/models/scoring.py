@@ -101,7 +101,7 @@ def compute_fusion_confidence(
     after RRF normalisation). That defeats any confidence-based
     abstention decision on top of the fused output.
 
-    The Phase-12 fix is to compute confidence *before* fusion: normalise
+    The fix used here is to compute confidence *before* fusion: normalise
     each sub-retriever's raw scores with its native strategy and take
     the maximum confidence across sub-retrievers. A query on which at
     least one sub-retriever is confident yields a correspondingly high

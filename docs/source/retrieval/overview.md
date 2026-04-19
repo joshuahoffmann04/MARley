@@ -97,13 +97,13 @@ Because raw scores live on different scales, a normalization step maps them to [
 |---|---|---|---|
 | BM25 | 2.3 | 0.70 | `2.3 / (2.3 + 1.0)` — saturation compresses |
 | Vector | 0.98 | 0.98 | Identity — already calibrated |
-| RRF (k=60, 2 retrievers) | 0.0328 | 1.00 | Rank #1 in both → equals theoretical max `2/61` |
+| RRF (k=1, 2 retrievers) | 1.00 | 1.00 | Rank #1 in both → equals theoretical max `2/2` |
 
 #### Practical consequence
 
 Normalized confidences are **not comparable across retriever types**. A confidence of 0.7 from BM25 represents a very different level of certainty than 0.7 from RRF. In particular:
 
-- **RRF scores cluster near the maximum** because raw RRF values span a very narrow range (~0.015–0.033 with k=60). Any chunk ranked #1 in at least one sub-retriever will normalize close to 1.0.
+- **RRF scores cluster near the maximum** because the MARley default `k_rrf = 1` (see [Configuration Constants](#configuration-constants)) sharpens the RRF curve towards a max-join: any chunk ranked #1 in at least one sub-retriever will normalize close to 1.0.
 - **BM25 confidences are structurally lower** because the saturation function compresses the unbounded score range.
 - **Vector confidences vary naturally** with cosine similarity, producing the most discriminative spread.
 
@@ -133,7 +133,7 @@ RRF_score(d) = Σ  weight_i / (k_rrf + rank_i(d))
 - **Rank-based:** Uses rank positions, not raw scores. Avoids score normalization between retrievers with incompatible score distributions.
 - **Monotonic:** A document that improves its rank in any input list cannot decrease its fused score.
 - **Weighted:** Optional per-retriever/per-KB weights (default: uniform).
-- **k_rrf:** Smoothing constant (default: 60, from Cormack et al., 2009). A sweep over [1-100] showed no measurable impact on Recall@5 (see [rrf-tuning.md](../evaluation/rrf-tuning.md)).
+- **k_rrf:** Smoothing constant. The literature default is 60 (Cormack et al., 2009); MARley's empirical RRF sweep showed `k_rrf = 1` maximises F1@5 on every knowledge base and for both Hybrid and Fusion, so `DEFAULT_K_RRF = 1` is the MARley default (see `data/evaluation-ollama-1.0/rrf-tuning.json`). Lower `k_rrf` biases RRF towards a max-join, which rewards strong top-1 agreement more than a classic IR-literature setting.
 
 | Use Case | Class | Sub-retrievers | Purpose |
 |---|---|---|---|
@@ -150,8 +150,8 @@ Defined in `src/marley/models/constants.py`:
 | Constant | Value | Description |
 |---|---|---|
 | `DEFAULT_K` | 5 | Top-k results to return |
-| `DEFAULT_K_RRF_HYBRID` | 60 | k_rrf for HybridRetriever |
-| `DEFAULT_K_RRF_FUSION` | 60 | k_rrf for FusionRetriever |
+| `DEFAULT_K_RRF_HYBRID` | 1 | k_rrf for HybridRetriever (empirically tuned) |
+| `DEFAULT_K_RRF_FUSION` | 1 | k_rrf for FusionRetriever (empirically tuned) |
 | `CHROMADB_BATCH_SIZE` | 5000 | Max batch size for ChromaDB inserts |
 | `RETRIEVER_TYPES` | bm25, vector, hybrid | Supported retriever identifiers |
 | `STRATEGIES` | single, merged_pool, fusion | KB combination strategies |

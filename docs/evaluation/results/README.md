@@ -2,7 +2,7 @@
 
 > This directory holds the thesis-grade evaluation results once the
 > final pipeline runs complete. The tree is intentionally empty ahead
-> of those runs — prior artefacts have been cleared for Phase 11 so
+> of those runs — prior artefacts have been cleared so
 > that only the final numbers appear here.
 
 ## Pipeline configuration for the final runs

@@ -17,7 +17,7 @@ Two families of combination strategies exist:
 1. **Score fusion** normalizes and combines raw scores from multiple retrievers. This requires careful calibration because different retrievers produce scores on incompatible scales (BM25 scores are unbounded; cosine similarity lies in [-1, 1]).
 2. **Rank fusion** combines ranked lists based on rank positions rather than scores. This avoids the calibration problem entirely.
 
-MARley uses **Reciprocal Rank Fusion (RRF)**, a rank fusion method proposed by Cormack, Clarke, and Buettcher (2009). RRF assigns each document a fused score based on its rank in each input list: `score(d) = sum(1 / (k + rank_i(d)))`, where `k` is a smoothing constant (default 60). The method is simple, parameter-light, and has been shown to outperform both individual rankers and more complex fusion methods such as Condorcet voting (Cormack et al., 2009).
+MARley uses **Reciprocal Rank Fusion (RRF)**, a rank fusion method proposed by Cormack, Clarke, and Buettcher (2009). RRF assigns each document a fused score based on its rank in each input list: `score(d) = sum(1 / (k + rank_i(d)))`, where `k` is a smoothing constant. The literature default is 60; MARley's empirical RRF sweep selected `k = 1` as optimal on every knowledge base (see `data/evaluation-ollama-1.0/rrf-tuning.json`). The method is simple, parameter-light, and has been shown to outperform both individual rankers and more complex fusion methods such as Condorcet voting (Cormack et al., 2009).
 
 The HybridRetriever applies RRF to fuse BM25 and Vector results over the **same corpus** (within-KB fusion). For cross-KB fusion, see [fusion.md](fusion.md).
 
@@ -48,13 +48,13 @@ RRF_score(d) = Σ  weight_i / (k_rrf + rank_i(d))
 where:
 - `rank_i(d)` is the 1-based rank of document `d` in retriever `i`'s result list
 - `weight_i` is the per-retriever weight (default: 1.0 for all, i.e., uniform weighting)
-- `k_rrf` is a smoothing constant (default: 60, from the original RRF paper by Cormack et al., 2009)
+- `k_rrf` is a smoothing constant. MARley uses `DEFAULT_K_RRF_HYBRID = 1`, selected empirically from the RRF sweep; the classic value from the original RRF paper (Cormack et al., 2009) is 60.
 
 ### Properties
 
 - **Rank-based:** RRF uses only rank positions, not raw scores. This avoids score normalization issues between retrievers with different score scales (e.g., BM25 unbounded scores vs. cosine similarity in [-1, 1]).
 - **Complementary fusion:** Documents found by both retrievers receive scores from both lists, naturally ranking higher than documents found by only one.
-- **k_rrf smoothing:** Higher values reduce the influence of top-ranked documents relative to lower-ranked ones. The default of 60 is well-established in the literature.
+- **k_rrf smoothing:** Higher values reduce the influence of top-ranked documents relative to lower-ranked ones. The MARley default `k_rrf = 1` biases the fusion towards a max-join, which rewarded strong top-1 agreement in the RRF tuning sweep.
 
 ---
 
@@ -117,7 +117,7 @@ hybrid = HybridRetriever(
 | Parameter | Default | Description |
 |---|---|---|
 | `retrievers` | *(required)* | Tuple of exactly two `Retriever` instances. |
-| `k_rrf` | `60` | RRF smoothing constant. Higher values flatten the rank distribution. |
+| `k_rrf` | `1` (from `DEFAULT_K_RRF_HYBRID`) | RRF smoothing constant. Empirical default; higher values flatten the rank distribution. |
 | `weights` | `None` (uniform) | Optional list of two positive floats. Boosts or dampens the contribution of each retriever. |
 
 ---
@@ -128,7 +128,7 @@ hybrid = HybridRetriever(
 - Documents appearing in both result lists receive combined RRF scores.
 - The final output is sorted by RRF score descending, limited to `k` results.
 - When a document appears in both lists, the text and metadata from the **higher-scoring** source are used.
-- The `score` field in results contains the RRF fused score (not the original retriever scores). RRF scores are typically in the range 0 to ~0.03, depending on `k_rrf`.
+- The `score` field in results contains the RRF fused score (not the original retriever scores). RRF scores are bounded by `sum(weights) / (k_rrf + 1)`; with the MARley default `k_rrf = 1` and two uniformly weighted sub-retrievers this ceiling is `1.0`.
 - The `size` property returns the size of the first sub-retriever (both should contain the same corpus).
 
 ---

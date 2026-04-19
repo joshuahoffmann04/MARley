@@ -146,7 +146,7 @@ Unter den 20 schlechtesten (FC < 0.3) E2E-Antworten fanden sich **mehrere offens
 
 Das ist eine **Schwäche des `llama3.1:8B`-Judges** beim RAGAS-FactualCorrectness-Metric. Die Metric zerlegt Antwort und Referenz in Claims und vergleicht auf Deckung; der 8B-Judge scheint bei sehr knappen Antworten die Claim-Extraction inkonsistent zu machen.
 
-**Impact:** Unsere aggregierten FC-Werte sind **systematisch unterschätzt**. Der Phase-10-Subset-Vergleich zeigte bereits: OpenAI-Judge gibt bei exakt denselben Samples **höhere, konsistentere Scores** (und hat deutlich niedrigere NaN-Raten).
+**Impact:** Unsere aggregierten FC-Werte sind **systematisch unterschätzt**. Der frühere OpenAI-Pilot-Subset zeigte bereits: OpenAI-Judge gibt bei exakt denselben Samples **höhere, konsistentere Scores** (und hat deutlich niedrigere NaN-Raten).
 
 **Entscheidung:** Wird sich durch den OpenAI-Lauf automatisch beheben. Keine Pipeline-Änderung.
 
@@ -158,7 +158,7 @@ Von 23 NaN-Faithfulness-Cases (aus 481 E2E-eligible Samples):
 
 Ursache: RAGAS-Faithfulness-Metric zerlegt die Antwort in diskrete Statements und prüft jedes gegen den Kontext. Der 8B-Judge produziert bei langen Listen ungültiges JSON → NaN.
 
-**Impact:** Konsistent mit dem allgemeinen Judge-Kalibrierungsproblem. Phase-10-Subset zeigte bei OpenAI 3 % statt 8.8 %.
+**Impact:** Konsistent mit dem allgemeinen Judge-Kalibrierungsproblem. Der OpenAI-Pilot-Subset zeigte 3 % statt 8.8 %.
 
 **Entscheidung:** Siehe 2.2 — löst sich mit OpenAI.
 
@@ -298,7 +298,7 @@ Zum Festhalten — gehören nicht in den Code, sondern in die Arbeit:
 2. **`k_rrf = 1` ist optimal** in allen KBs — entgegen dem Default 60 aus der RAGAS/RRF-Literatur. Hinweis darauf, dass kurze Top-Listen aus wenigen starken Retrievern wichtiger sind als lange Tail-Mischung.
 3. **F1-basierte Threshold-Selektion neigt zu aggressiver Abstention.** Bei 25 % unbeantwortbaren Fragen im Dataset wird Recall-Maximierung zur dominanten Strategie. Precision-gewichtete Alternativen (F0.5, Youden's J) wären für Student-Facing-Bots womöglich besser.
 4. **Distraktoren-Robustheit ist höher als erwartet.** Faithfulness und Correctness degradieren nicht signifikant mit steigender Distraktoren-Zahl (0 → 10). Das Grounding-Training der 8B-Instruct-Modelle scheint robust.
-5. **Judge-Kalibrierung korreliert mit Modell-Größe.** 8B-Ollama gibt FC = 0 auf triviale korrekte Antworten; gpt-4o-mini (Phase-10-Subset) nicht. Wichtige Designentscheidung für zukünftige lokale-LLM-als-Judge-Systeme.
+5. **Judge-Kalibrierung korreliert mit Modell-Größe.** 8B-Ollama gibt FC = 0 auf triviale korrekte Antworten; gpt-4o-mini (auf dem OpenAI-Pilot-Subset) nicht. Wichtige Designentscheidung für zukünftige lokale-LLM-als-Judge-Systeme.
 
 ---
 

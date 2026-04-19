@@ -16,7 +16,7 @@ DEFAULT_K: int = 5
 DEFAULT_K_RRF: int = 1
 """General default RRF smoothing constant.
 
-Set to 1 based on the Phase-11 RRF sweep: on all three knowledge bases
+Set to 1 based on the empirical RRF sweep: on all three knowledge bases
 (stpo, faq-stpo, faq-ao) and for both Hybrid (BM25+Vector) and Fusion
 (cross-KB), k_rrf = 1 maximises F1@5. Lower k_rrf sharpens RRF towards
 a max-join, which rewards strong top-1 agreement more than the classic

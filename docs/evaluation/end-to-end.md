@@ -122,7 +122,7 @@ keep their `NaN` defaults.
 
 Every E2E configuration reports **two metric families** side by side:
 abstention decisions (deterministic) and answer quality (RAGAS).
-Phase-11 "Option A" defines the scoring scope so each score has a
+The "Option A" scoring-scope rule defines the samples that get scored so each value has a
 meaningful reference:
 
 | `expected_abstention` | `abstained` | Scored? | Why |

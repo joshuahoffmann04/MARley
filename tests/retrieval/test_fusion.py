@@ -358,7 +358,7 @@ class TestFusionRetriever:
 
 
 class TestFusionRetrieverSubResultsCache:
-    """Phase 12: FusionRetriever caches raw sub-retriever outputs so that
+    """FusionRetriever caches raw sub-retriever outputs so that
     downstream code can compute a Fusion-aware confidence without re-running
     the sub-queries."""
 

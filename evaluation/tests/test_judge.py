@@ -114,7 +114,7 @@ class TestJudgeEmbeddingsDevice:
 
 
 class TestMakeJudgeSeparateJudgeModel:
-    """Phase 12: ``ollama_judge_model`` splits the Ollama judge model from
+    """``ollama_judge_model`` splits the Ollama judge model from
     the generator model so a larger model can be used for scoring."""
 
     def test_ollama_judge_model_overrides_generator(self, _stub_ragas):

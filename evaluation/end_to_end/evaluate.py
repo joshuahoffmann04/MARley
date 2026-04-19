@@ -39,7 +39,7 @@ class E2EResult:
     """Result for a single question in a single configuration.
 
     ``faithfulness``, ``answer_relevance``, and ``correctness`` are
-    populated only for samples that satisfy the Phase-11 scoring scope
+    populated only for samples that satisfy the scoring-scope rule
     (``expected_abstention=False`` **and** ``abstained=False``). All
     other samples keep the ``NaN`` defaults so that downstream
     aggregations can exclude them cleanly.

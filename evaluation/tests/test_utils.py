@@ -222,7 +222,7 @@ class TestComputeAbstentionMetrics:
 
 
 class TestAbstentionMetricsF0_5:
-    """Phase 12: F0.5 is computed and stored alongside F1.
+    """F0.5 is computed and stored alongside F1.
 
     F_beta = (1+b^2) * P * R / (b^2 * P + R); beta=0.5 weights precision 2x.
     """

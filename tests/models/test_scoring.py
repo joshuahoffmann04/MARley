@@ -162,7 +162,7 @@ class TestComputeConfidence:
 
 
 class TestComputeFusionConfidence:
-    """Phase 12: Fusion-aware confidence from sub-retriever normalised scores.
+    """Fusion-aware confidence from sub-retriever normalised scores.
 
     When a FusionRetriever wraps disjoint-corpus sub-retrievers, the raw
     RRF score at the fused level is mathematically constant. These tests
