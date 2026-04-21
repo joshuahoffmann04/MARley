@@ -1,0 +1,257 @@
+[
+  {
+    "eval_file": "data/evaluation/evaluation-stpo.json",
+    "config": {
+      "k": 5,
+      "skip_unanswerable": true,
+      "retriever_type": "BM25Retriever",
+      "corpus_size": 153
+    },
+    "metrics": {
+      "precision_at_k": 0.11733333333333335,
+      "recall_at_k": 0.41777777777777775,
+      "mrr": 0.36022222222222217,
+      "f1_at_k": 0.17841269841269844,
+      "jaccard_at_k": 0.11136507936507942,
+      "k": 5,
+      "num_queries": 75
+    },
+    "knowledge_base": "stpo"
+  },
+  {
+    "eval_file": "data/evaluation/evaluation-faq-stpo.json",
+    "config": {
+      "k": 5,
+      "skip_unanswerable": true,
+      "retriever_type": "BM25Retriever",
+      "corpus_size": 1039
+    },
+    "metrics": {
+      "precision_at_k": 0.13066666666666665,
+      "recall_at_k": 0.4022222222222222,
+      "mrr": 0.383111111111111,
+      "f1_at_k": 0.1904232804232805,
+      "jaccard_at_k": 0.11641269841269844,
+      "k": 5,
+      "num_queries": 75
+    },
+    "knowledge_base": "faq-stpo"
+  },
+  {
+    "eval_file": "data/evaluation/evaluation-stpo.json",
+    "config": {
+      "k": 5,
+      "skip_unanswerable": true,
+      "retriever_type": "VectorRetriever",
+      "corpus_size": 153
+    },
+    "metrics": {
+      "precision_at_k": 0.1493333333333333,
+      "recall_at_k": 0.49,
+      "mrr": 0.47088888888888886,
+      "f1_at_k": 0.22126984126984126,
+      "jaccard_at_k": 0.14177777777777778,
+      "k": 5,
+      "num_queries": 75
+    },
+    "knowledge_base": "stpo"
+  },
+  {
+    "eval_file": "data/evaluation/evaluation-faq-stpo.json",
+    "config": {
+      "k": 5,
+      "skip_unanswerable": true,
+      "retriever_type": "VectorRetriever",
+      "corpus_size": 1039
+    },
+    "metrics": {
+      "precision_at_k": 0.184,
+      "recall_at_k": 0.5566666666666668,
+      "mrr": 0.5566666666666666,
+      "f1_at_k": 0.267037037037037,
+      "jaccard_at_k": 0.16963492063492064,
+      "k": 5,
+      "num_queries": 75
+    },
+    "knowledge_base": "faq-stpo"
+  },
+  {
+    "eval_file": "data/evaluation/evaluation-stpo.json",
+    "config": {
+      "k": 5,
+      "skip_unanswerable": true,
+      "retriever_type": "HybridRetriever",
+      "corpus_size": 153
+    },
+    "metrics": {
+      "precision_at_k": 0.15999999999999998,
+      "recall_at_k": 0.5400000000000001,
+      "mrr": 0.4771111111111111,
+      "f1_at_k": 0.23925925925925928,
+      "jaccard_at_k": 0.1506031746031746,
+      "k": 5,
+      "num_queries": 75
+    },
+    "knowledge_base": "stpo"
+  },
+  {
+    "eval_file": "data/evaluation/evaluation-faq-stpo.json",
+    "config": {
+      "k": 5,
+      "skip_unanswerable": true,
+      "retriever_type": "HybridRetriever",
+      "corpus_size": 1039
+    },
+    "metrics": {
+      "precision_at_k": 0.17066666666666663,
+      "recall_at_k": 0.54,
+      "mrr": 0.5077777777777778,
+      "f1_at_k": 0.251957671957672,
+      "jaccard_at_k": 0.15898412698412698,
+      "k": 5,
+      "num_queries": 75
+    },
+    "knowledge_base": "faq-stpo"
+  },
+  {
+    "strategy": "merged_pool",
+    "combination": "faq-ao+faq-stpo+stpo",
+    "config": {
+      "k": 5,
+      "retriever_type": "BM25Retriever",
+      "corpus_size": 1192,
+      "knowledge_bases": [
+        "faq-ao",
+        "faq-stpo",
+        "stpo"
+      ]
+    },
+    "metrics": {
+      "precision_at_k": 0.13866666666666666,
+      "recall_at_k": 0.2371587301587301,
+      "mrr": 0.39222222222222214,
+      "f1_at_k": 0.16838990638990628,
+      "jaccard_at_k": 0.1033496873496873,
+      "k": 5,
+      "num_queries": 75
+    }
+  },
+  {
+    "strategy": "merged_pool",
+    "combination": "faq-ao+faq-stpo+stpo",
+    "config": {
+      "k": 5,
+      "retriever_type": "VectorRetriever",
+      "corpus_size": 1192,
+      "knowledge_bases": [
+        "faq-ao",
+        "faq-stpo",
+        "stpo"
+      ]
+    },
+    "metrics": {
+      "precision_at_k": 0.24266666666666667,
+      "recall_at_k": 0.3829206349206349,
+      "mrr": 0.5604444444444444,
+      "f1_at_k": 0.2855221075221074,
+      "jaccard_at_k": 0.187921596921597,
+      "k": 5,
+      "num_queries": 75
+    }
+  },
+  {
+    "strategy": "merged_pool",
+    "combination": "faq-ao+faq-stpo+stpo",
+    "config": {
+      "k": 5,
+      "retriever_type": "HybridRetriever",
+      "corpus_size": 1192,
+      "knowledge_bases": [
+        "faq-ao",
+        "faq-stpo",
+        "stpo"
+      ]
+    },
+    "metrics": {
+      "precision_at_k": 0.19999999999999998,
+      "recall_at_k": 0.34044444444444444,
+      "mrr": 0.5066666666666667,
+      "f1_at_k": 0.2435320975320974,
+      "jaccard_at_k": 0.15552477152477154,
+      "k": 5,
+      "num_queries": 75
+    }
+  },
+  {
+    "strategy": "fusion",
+    "combination": "faq-ao+faq-stpo+stpo",
+    "config": {
+      "k": 5,
+      "retriever_type": "BM25Retriever",
+      "corpus_size": 1192,
+      "knowledge_bases": [
+        "faq-ao",
+        "faq-stpo",
+        "stpo"
+      ],
+      "k_rrf": 1
+    },
+    "metrics": {
+      "precision_at_k": 0.18133333333333332,
+      "recall_at_k": 0.322111111111111,
+      "mrr": 0.35644444444444445,
+      "f1_at_k": 0.22518451918451907,
+      "jaccard_at_k": 0.14829100529100533,
+      "k": 5,
+      "num_queries": 75
+    }
+  },
+  {
+    "strategy": "fusion",
+    "combination": "faq-ao+faq-stpo+stpo",
+    "config": {
+      "k": 5,
+      "retriever_type": "VectorRetriever",
+      "corpus_size": 1192,
+      "knowledge_bases": [
+        "faq-ao",
+        "faq-stpo",
+        "stpo"
+      ],
+      "k_rrf": 1
+    },
+    "metrics": {
+      "precision_at_k": 0.2586666666666666,
+      "recall_at_k": 0.41688888888888886,
+      "mrr": 0.5531111111111111,
+      "f1_at_k": 0.3078597698597697,
+      "jaccard_at_k": 0.20428042328042337,
+      "k": 5,
+      "num_queries": 75
+    }
+  },
+  {
+    "strategy": "fusion",
+    "combination": "faq-ao+faq-stpo+stpo",
+    "config": {
+      "k": 5,
+      "retriever_type": "HybridRetriever",
+      "corpus_size": 1192,
+      "knowledge_bases": [
+        "faq-ao",
+        "faq-stpo",
+        "stpo"
+      ],
+      "k_rrf": 1
+    },
+    "metrics": {
+      "precision_at_k": 0.25599999999999984,
+      "recall_at_k": 0.4275555555555556,
+      "mrr": 0.5075555555555555,
+      "f1_at_k": 0.3097244977244975,
+      "jaccard_at_k": 0.2036358826358827,
+      "k": 5,
+      "num_queries": 75
+    }
+  }
+]
