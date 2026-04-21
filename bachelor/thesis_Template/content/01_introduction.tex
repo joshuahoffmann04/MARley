@@ -1,0 +1,49 @@
+\chapter{Introduction}
+\label{c:intro}
+This thesis template compiles with pdflatex and biber. 
+
+\lipsum[1-2]
+
+\section{Citations}
+\label{sec:cite}
+In the latex bible~\parencite{Lamport1994_latex} there is a lot more information than can be squeezed in this template.
+
+Note: There is a difference between \texttt{cite{}} and  \texttt{parencite{}}, just not in the citation style \texttt{numeric} we use here.\footnote{Short explanation, e.g., here \url{https://www.overleaf.com/learn/latex/Articles/Getting_started_with_BibLaTeX}, accessed April 1st, 2024}
+
+\section{Tables}
+\label{sec:tables}
+The values in \autoref{tab:results:exp1} are all invented. But the table looks nice, doesn't it? And it is easy to read since it is not cluttered with vertical lines and uses horizontal lines sparingly.
+
+\begin{table}[ht]
+\centering
+\caption{Experiment 1 Results. Showing a accuracy values that where guessed by a fellow staring at the source code. Its results are completely unreliable.}
+\label{tab:results:exp1}
+\begin{tabular}{+l^c^c^c}
+\toprule\tabhead
+Parameter   & Condition 1 & Condition 2  & Condition 3\\ \midrule
+Parameter A & 123 $\pm$ 4 & 456 $\pm$ 45 & 124 $\pm$ 35 \\
+Parameter B & 789 $\pm$ 11& 612 $\pm$ 12 & 100 $\pm$ 45 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{Figures}
+\label{sec:figures}
+\autoref{fig:oneonly} is an example figure, showing the Logo of the UMR.\footnote{Corporate design of the UMR \url{https://www.uni-marburg.de/de/universitaet/presse/cd}, accessed April 1st, 2024}
+
+\begin{figure}[thb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{pics/UMRLogo.pdf}
+  \caption{Figure captions should be descriptive (ideally one gets the gist without reading the prose text in the section). This is hard here, because the figure is just a placeholder. }
+  \label{fig:oneonly}
+\end{figure}
+
+
+
+
+
+
+
+
+
