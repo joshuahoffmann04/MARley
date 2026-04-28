@@ -37,6 +37,7 @@ from evaluation.end_to_end.evaluate import (
 )
 from evaluation.judge import Judge
 from src.marley.generator.ollama import OllamaGenerator
+from src.marley.models.constants import DEFAULT_K_RRF_HYBRID
 from src.marley.models.retrieval import Retriever
 from src.marley.retrieval import (
     BM25Retriever,
@@ -68,7 +69,7 @@ def _create_retriever(
     retriever_type: str,
     tag: str,
     output_dir: Path,
-    k_rrf_hybrid: int = 60,
+    k_rrf_hybrid: int = DEFAULT_K_RRF_HYBRID,
 ) -> Retriever:
     """Create a new (unindexed) retriever instance."""
     if retriever_type == "bm25":

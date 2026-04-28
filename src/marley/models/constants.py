@@ -13,23 +13,25 @@ from __future__ import annotations
 DEFAULT_K: int = 5
 """Default number of chunks to retrieve."""
 
-DEFAULT_K_RRF: int = 1
+DEFAULT_K_RRF: int = 60
 """General default RRF smoothing constant.
 
-Set to 1 based on the empirical RRF sweep: on all three knowledge bases
-(stpo, faq-stpo, faq-ao) and for both Hybrid (BM25+Vector) and Fusion
-(cross-KB), k_rrf = 1 maximises F1@5. Lower k_rrf sharpens RRF towards
-a max-join, which rewards strong top-1 agreement more than the classic
-IR-literature default of 60.
+Set to 60 following the canonical Reciprocal Rank Fusion paper
+default (Cormack, Clarke, and Buettcher, 2009). MARley does not
+treat k_rrf as a tuned hyper-parameter in the reported evaluation
+and therefore adopts the literature-standard value rather than an
+in-house calibration. Higher values produce a softer rank-position
+weighting; lower values sharpen RRF towards a max-join over the
+sub-retrievers' reciprocal ranks.
 """
 
-DEFAULT_K_RRF_HYBRID: int = 1
+DEFAULT_K_RRF_HYBRID: int = 60
 """Default RRF smoothing constant for HybridRetriever (BM25 + Vector).
-See :data:`DEFAULT_K_RRF` for the empirical justification."""
+See :data:`DEFAULT_K_RRF` for the reference value."""
 
-DEFAULT_K_RRF_FUSION: int = 1
+DEFAULT_K_RRF_FUSION: int = 60
 """Default RRF smoothing constant for FusionRetriever (cross-KB).
-See :data:`DEFAULT_K_RRF` for the empirical justification."""
+See :data:`DEFAULT_K_RRF` for the reference value."""
 
 RETRIEVER_TYPES: list[str] = ["bm25", "vector", "hybrid"]
 """Supported retriever type identifiers."""
