@@ -1,0 +1,3854 @@
+[
+  {
+    "config": {
+      "k": 5,
+      "threshold": 0.9,
+      "normalization_strategy": "bm25",
+      "normalization_params": {}
+    },
+    "metrics": {
+      "precision": 0.352112676056338,
+      "recall": 1.0,
+      "f1": 0.5208333333333333,
+      "f0_5": 0.40453074433656955,
+      "false_abstention_rate": 0.6133333333333333,
+      "coverage": 0.29,
+      "num_correct_abstention": 25,
+      "num_incorrect_abstention": 46,
+      "num_missing_abstention": 0,
+      "num_answered": 29,
+      "num_total": 100,
+      "threshold": 0.9
+    },
+    "results": [
+      {
+        "question_id": "eval-001",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9387951462349134,
+        "answer": "The general standard program duration for the master's degree program in computer science is 4 semesters.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-002",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8793070988040019,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-003",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.913400563134617,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to fully answer the question."
+      },
+      {
+        "question_id": "eval-004",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9438127338541589,
+        "answer": "A minimum of 66 credits must have been earned.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-005",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9333365557533374,
+        "answer": "The master's thesis has a scope of 27 credits, and the final module includes an additional 3 credits for the oral defense.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-006",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9254632703398515,
+        "answer": "6 months.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-007",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9139853686903624,
+        "answer": "20%",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-008",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9151296956231623,
+        "answer": "",
+        "reason": "There is no information about the StPO recommending going abroad in any of the provided context passages."
+      },
+      {
+        "question_id": "eval-009",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9214377977459646,
+        "answer": "The module \"Project Work in Computer Science\" (CS 697) is a Compulsory module, a Practice module.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-010",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9316501854774595,
+        "answer": "The seminar module CS 610 carries 3 credits.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-011",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9199169526102303,
+        "answer": "Two subtests: Seminar lecture (weight: 1 credit) Written analysis (schriftliche Ausarbeitung) (weight: 2 credits)",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-012",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.925226912700012,
+        "answer": "According to [2], CS 681 Image Synthesis Bildsynthese is a Compulsory elective module with 9 LP, and according to [4], CS 533 Web Technologies Webtechnologien is also a Compulsory elective module with 6 LP. \n\nTherefore, at least 15 compulsory elective credits in computer science are needed.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-013",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8745473023083736,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-014",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9363716986723226,
+        "answer": "Yes, the master's thesis can be written in either German or English.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-015",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9271892611259389,
+        "answer": "The first reviewer, who is appointed by the examination committee for the examination of master's theses, submits the topic of the master's thesis to the examination committee and it is assigned by them.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-016",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9430424825291112,
+        "answer": "The examination committee has 9 members. The members consist of:\n\n* Four professors\n* One research assistant\n* Two students\nOne substitute member is elected for each member. Three of the members should come from the field of computer science, and one should come from the mathematics field.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-017",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9544495318765428,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-018",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9090865494818733,
+        "answer": "",
+        "reason": "The provided context passages do not address the question regarding when the current StPO (Strafprozessordnung, or German Code of Criminal Procedure) takes effect."
+      },
+      {
+        "question_id": "eval-019",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9086222486022943,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-020",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8966481829033881,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-021",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9196833715140638,
+        "answer": "Failed examinations may be retaken three times.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-022",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.914831860256541,
+        "answer": "",
+        "reason": "The context does not address the question of whether there is an alternative to the binding exams, such as a \"Freiversuch\"."
+      },
+      {
+        "question_id": "eval-023",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9131527701009249,
+        "answer": "According to [3] §30(2), if there has been a serious case of fraud, the right to take examinations in the degree program for which the student is enrolled is definitively lost.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-024",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8953844535577449,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-025",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9296480330330279,
+        "answer": "Oral examination (individualexamination) or in-class written examination (Klausur).",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-026",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8955345895672309,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-027",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9355082314145599,
+        "answer": "A minimum of 66 credits must have been earned.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-028",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8824556509346675,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-029",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9202822262652149,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to answer the question."
+      },
+      {
+        "question_id": "eval-030",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9001896501534397,
+        "answer": "",
+        "reason": "The provided context does not contain information about the duration of a written examination."
+      },
+      {
+        "question_id": "eval-031",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8800906852684103,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-032",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9557069648518445,
+        "answer": "Yes, the master's program in Computer Science has a structural variant.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-033",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9263865873453532,
+        "answer": "",
+        "reason": "The context does not mention a module named CS 697."
+      },
+      {
+        "question_id": "eval-034",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9400652064372117,
+        "answer": "",
+        "reason": "The context passage explicitly states that these credits \"do not count toward the 120 credits to be earned for the degree\". However, it is unclear if this applies to all conditional modules or only to Module 1."
+      },
+      {
+        "question_id": "eval-035",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8584383973136575,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-036",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9510479198739281,
+        "answer": "If the master's thesis is not submitted on time, it will be graded as \"insufficient\" (0 points) in accordance with § 28(2) of the General Regulations.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-037",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8617993503783759,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-038",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.92861636552314,
+        "answer": "",
+        "reason": "There is no information about the language in which the Diploma Supplement is issued."
+      },
+      {
+        "question_id": "eval-039",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8979146876227059,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-040",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9176894713951264,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-041",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9374351890104851,
+        "answer": "",
+        "reason": "There is no information in the provided context about the module \"Compiler Construction\" or its prerequisites and examination."
+      },
+      {
+        "question_id": "eval-042",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8566897618268242,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-043",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9423267991574998,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information about the modules related to Artificial Intelligence (AI) or their exam formats."
+      },
+      {
+        "question_id": "eval-044",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9598610548279537,
+        "answer": "The overall grade for the master's examination in points is calculated from the mean value of the module evaluations weighted by credits (LP). The master's thesis contributes to this calculation.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-045",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9191996179629242,
+        "answer": "",
+        "reason": "The context does not address what happens in case of a third failure."
+      },
+      {
+        "question_id": "eval-046",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9512877709780323,
+        "answer": "",
+        "reason": "The context does not address importing modules from other degree programs or exporting modules to those programs in detail, except for mentioning that some modules listed in Appendix 2 can be taken as part of other degree programs with the agreement of the department."
+      },
+      {
+        "question_id": "eval-047",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9510407439830119,
+        "answer": "",
+        "reason": "The context passages do not address how parental leave affects the maximum study duration and thesis deadline."
+      },
+      {
+        "question_id": "eval-048",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9573234547633177,
+        "answer": "The module handbook contains detailed module descriptions, but it does not replace the module list. The module list (Appendix 2) summarizes the modules to be completed as part of the degree program, including their allocation to various areas, prerequisites, credits, examination form, and expertise objectives.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-049",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9030760736631622,
+        "answer": "",
+        "reason": "The provided context does not address module importation and exportation."
+      },
+      {
+        "question_id": "eval-050",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9454781737553903,
+        "answer": "",
+        "reason": "The context does not address writing a thesis at a company."
+      },
+      {
+        "question_id": "eval-051",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9213227445970439,
+        "answer": "Profile modules are listed in the import module lists for specific profile areas, such as Biology and Economics. Students interested in these profile areas must register with the contact person in the Department of Mathematics and Computer Science (for Biology) or attend an information event about selecting a module (for both profile areas). The current import opportunities and allocation regulations can be found on the degree program's website or online module handbook.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-052",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8895848584085227,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-053",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9321587017859885,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to fully answer this question."
+      },
+      {
+        "question_id": "eval-054",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9421812447817153,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information regarding the consequences of failing a compulsory elective module."
+      },
+      {
+        "question_id": "eval-055",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9191656920924369,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-056",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9313530449885408,
+        "answer": "For regular exams, binding registration is required (§24(4)). The examination committee will announce deadlines and registration form no later than 4 weeks before the start of the registration period. Permission to take the exam will be denied if the registration deadline is not met or if exam permission requirements are not met.\n\nFor the thesis defense, there is no mention of a separate registration process in the provided context passages.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-057",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9414176212940465,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-058",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9579835424243714,
+        "answer": "If you get sick during the thesis writing period and during an exam in the same semester, you can request an extension of the thesis writing-time up to a maximum of 20% due to unforeseen problems. However, this does not lead to the award of additional credits.\n\nAs for the exam, if you fail it, you may repeat it once. The examination committee will ensure that you receive a new topic within six weeks of notification of the failure.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-059",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9401585420722552,
+        "answer": "",
+        "reason": "The context does not address how conditional modules affect study planning in the first semester."
+      },
+      {
+        "question_id": "eval-060",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9197024307945629,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to fully answer the question."
+      },
+      {
+        "question_id": "eval-061",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9419938020152029,
+        "answer": "Yes. According to §38(3), students who began their studies before these Degree Program and Examination Regulations came into force may take the master's examination in accordance with the examination regulations of 28 October 2015, including their amended versions of 1 June 2016 and 25 October 2017, until summer semester 2027 at the latest. The switch to these Degree Program and Examination Regulations must be applied for in writing and is irrevocable.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-062",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.943862684154899,
+        "answer": "According to [3], an internal practical module is part of the degree program area \"Practical and Seminar Modules\" and has a credit value of 9. A profile module, on the other hand, can be chosen from another scientific discipline and also has a credit value of 12. There is no information about CS 697 in the provided context passages.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-063",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9283714659451253,
+        "answer": "There are at least three compulsory elective modules in the M.Sc. Computer Science program:\n\n1. CS 533 Web Technologies (6 LP)\n2. CS 681 Image Synthesis (9 LP)\n3. CS 672 Implementation of Database Systems (9 LP)\n\nNote that there may be other compulsory modules not listed here, as the provided context only contains information about a selection of modules.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-064",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9199340190487646,
+        "answer": "You need to provide proof of a comparable domestic or foreign university degree providing professional qualifications in the field of computer science.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-065",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9514575568040914,
+        "answer": "The example sequence of the modularized program is given in the degree program curriculum, which can be viewed on the course-related website at https://www.uni-marburg.de/de/fb12/studium/studiengaenge/m-sc-informatik-In. The shortest possible degree program curriculum with content examples is presented in Appendix 1.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-066",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9129937577180388,
+        "answer": "",
+        "reason": "The provided context does not address this specific question."
+      },
+      {
+        "question_id": "eval-067",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9638057530009009,
+        "answer": "The first reviewer must be appointed by the examination committee for the examination of master's theses. The topic of the thesis is submitted to the examination committee by the first reviewer and assigned by the examination committee.\n\nThe candidate also has the right to propose the second reviewer.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-068",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9144142160578819,
+        "answer": "",
+        "reason": "The provided context does not contain information about module labels or designations such as \"theoretical (T)\"."
+      },
+      {
+        "question_id": "eval-069",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9517342110539451,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to fully answer the question."
+      },
+      {
+        "question_id": "eval-070",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9394774554189536,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-071",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9252904258641096,
+        "answer": "",
+        "reason": "There is no information provided about the consequences of exceeding the maximum study duration."
+      },
+      {
+        "question_id": "eval-072",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9045484583756973,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to compare the exam rules for oral and written exams."
+      },
+      {
+        "question_id": "eval-073",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9089329834914982,
+        "answer": "",
+        "reason": "The context does not contain sufficient information about the classification or categorization of modules, nor does it mention anything about \"exportable\" modules."
+      },
+      {
+        "question_id": "eval-074",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9013507371719784,
+        "answer": "",
+        "reason": "The context does not address whether part-time and full-time students have equal access to modules."
+      },
+      {
+        "question_id": "eval-075",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9378225354131828,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-076",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8794560324578369,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-077",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8982700351281865,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-078",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9403256230699527,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-079",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9154112883901434,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-080",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9247633895567302,
+        "answer": "",
+        "reason": "There is no information in the provided context about the average salary for M.Sc. Computer Science graduates from Marburg."
+      },
+      {
+        "question_id": "eval-081",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8958593440118946,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-082",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9433314945749945,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-083",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9502564066174282,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to specify the exact deadlines for module registration each semester."
+      },
+      {
+        "question_id": "eval-084",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9229574958947199,
+        "answer": "",
+        "reason": "The provided context does not contain information about the acceptance rate for the M.Sc. Computer Science program."
+      },
+      {
+        "question_id": "eval-085",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9408603759017036,
+        "answer": "",
+        "reason": "There is no information about importing modules from other universities, only that there may be import modules in German from bachelor's degree programs or other departments."
+      },
+      {
+        "question_id": "eval-086",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9001634975235034,
+        "answer": "",
+        "reason": "The context does not address laptop loans or any related provisions."
+      },
+      {
+        "question_id": "eval-087",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8757698313289224,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-088",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9269637833793541,
+        "answer": "",
+        "reason": "There is no information provided about online or remote study options for the M.Sc. Computer Science program in the given context passages."
+      },
+      {
+        "question_id": "eval-089",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9001634975235034,
+        "answer": "",
+        "reason": "The context does not mention anything about software licenses."
+      },
+      {
+        "question_id": "eval-090",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9355113425222255,
+        "answer": "",
+        "reason": "The provided context does not contain information about the number of students currently enrolled in the M.Sc. Computer Science program."
+      },
+      {
+        "question_id": "eval-091",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8867239737196935,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-092",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9154526458881738,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information regarding the possibility of switching between degree programs."
+      },
+      {
+        "question_id": "eval-093",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9211752144595278,
+        "answer": "",
+        "reason": "The provided context does not address whether the department offers PhD positions after the master's."
+      },
+      {
+        "question_id": "eval-094",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9369062309653631,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer the question."
+      },
+      {
+        "question_id": "eval-095",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9171162809963679,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-096",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9117807582046669,
+        "answer": "",
+        "reason": "There is no information about Professor Papenbrock's office hours in the provided context."
+      },
+      {
+        "question_id": "eval-097",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8990045007503111,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-098",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9212598189494139,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-099",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9470799939991951,
+        "answer": "",
+        "reason": "The provided context does not contain sufficient information to determine the exact date of the next semester's first lecture day."
+      },
+      {
+        "question_id": "eval-100",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8685443593622811,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      }
+    ],
+    "level1_sweep": [
+      {
+        "threshold": 0.0,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.0
+        }
+      },
+      {
+        "threshold": 0.05,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.05
+        }
+      },
+      {
+        "threshold": 0.1,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.1
+        }
+      },
+      {
+        "threshold": 0.15,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.15
+        }
+      },
+      {
+        "threshold": 0.2,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.2
+        }
+      },
+      {
+        "threshold": 0.25,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.25
+        }
+      },
+      {
+        "threshold": 0.3,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.3
+        }
+      },
+      {
+        "threshold": 0.35,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.35
+        }
+      },
+      {
+        "threshold": 0.4,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.4
+        }
+      },
+      {
+        "threshold": 0.45,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.45
+        }
+      },
+      {
+        "threshold": 0.5,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.5
+        }
+      },
+      {
+        "threshold": 0.55,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.55
+        }
+      },
+      {
+        "threshold": 0.6,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.6
+        }
+      },
+      {
+        "threshold": 0.65,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.65
+        }
+      },
+      {
+        "threshold": 0.7,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.7
+        }
+      },
+      {
+        "threshold": 0.75,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.75
+        }
+      },
+      {
+        "threshold": 0.8,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.8
+        }
+      },
+      {
+        "threshold": 0.85,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.85
+        }
+      },
+      {
+        "threshold": 0.9,
+        "metrics": {
+          "precision": 0.3684210526315789,
+          "recall": 0.28,
+          "f1": 0.3181818181818182,
+          "f0_5": 0.3465346534653465,
+          "false_abstention_rate": 0.16,
+          "coverage": 0.81,
+          "num_correct_abstention": 7,
+          "num_incorrect_abstention": 12,
+          "num_missing_abstention": 18,
+          "num_answered": 63,
+          "num_total": 100,
+          "threshold": 0.9
+        }
+      },
+      {
+        "threshold": 0.95,
+        "metrics": {
+          "precision": 0.2727272727272727,
+          "recall": 0.96,
+          "f1": 0.42477876106194684,
+          "f0_5": 0.3183023872679045,
+          "false_abstention_rate": 0.8533333333333334,
+          "coverage": 0.12,
+          "num_correct_abstention": 24,
+          "num_incorrect_abstention": 64,
+          "num_missing_abstention": 1,
+          "num_answered": 11,
+          "num_total": 100,
+          "threshold": 0.95
+        }
+      },
+      {
+        "threshold": 1.0,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 1.0
+        }
+      }
+    ],
+    "knowledge_base": "stpo"
+  },
+  {
+    "config": {
+      "k": 5,
+      "threshold": 0.95,
+      "normalization_strategy": "bm25",
+      "normalization_params": {}
+    },
+    "metrics": {
+      "precision": 0.32051282051282054,
+      "recall": 1.0,
+      "f1": 0.48543689320388356,
+      "f0_5": 0.370919881305638,
+      "false_abstention_rate": 0.7066666666666667,
+      "coverage": 0.22,
+      "num_correct_abstention": 25,
+      "num_incorrect_abstention": 53,
+      "num_missing_abstention": 0,
+      "num_answered": 22,
+      "num_total": 100,
+      "threshold": 0.95
+    },
+    "results": [
+      {
+        "question_id": "eval-001",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9609511955658884,
+        "answer": "The standard program duration is 4 semesters.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-002",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8991309525230892,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-003",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9356200559088189,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-004",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9490742488124837,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-005",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9393958803169371,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-006",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9411433607003965,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-007",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9440861154317389,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-008",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9197114894224951,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-009",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9387394406737696,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-010",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9338640192545513,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-011",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.930202784115915,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-012",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9345862119264239,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-013",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9472560635058284,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-014",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.95838024356088,
+        "answer": "Yes, the master's thesis can be written in English.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-015",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9535562151919752,
+        "answer": "The examination committee formally assigns the topic.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-016",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9597984733257164,
+        "answer": "Seven members: four professors, one research assistant, and two students.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-017",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9356048437764719,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-018",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9330303559167515,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-019",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9533508169517585,
+        "answer": "At least 5 points ('sufficient').",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-020",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.968582933793658,
+        "answer": "The grading scale from §28 of the General Regulations applies, using a points system.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-021",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9596660525312618,
+        "answer": "You can repeat a failed exam 3 times.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-022",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9582977558522798,
+        "answer": "No, there is no nonbinding examination option. Every exam attempt counts.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-023",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9391799725581045,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-024",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9691205747605177,
+        "answer": "Algorithm Engineering (CS 628) has 9 credits.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-025",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9651212247977979,
+        "answer": "The examination for Neural Networks is: Oral examination (individual) or written examination (Klausur).",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-026",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.965770124083176,
+        "answer": "Distributed Systems is classified as Practical Computer Science.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-027",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9457334647919147,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-028",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9358179990523274,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-029",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9561639843099664,
+        "answer": "",
+        "reason": "The provided context only addresses the maximum duration, not the maximum period."
+      },
+      {
+        "question_id": "eval-030",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9638088860415238,
+        "answer": "A written examination (Klausur) lasts between 60 and 120 minutes.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-031",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9199324589921865,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-032",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9628506411565659,
+        "answer": "The program has a structural variant, which is called \"einzelfach\".",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-033",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9400714562713265,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-034",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9544815079644529,
+        "answer": "",
+        "reason": "The context does not address this specific question."
+      },
+      {
+        "question_id": "eval-035",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9036505189563208,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-036",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9660794824623833,
+        "answer": "If the thesis is not submitted on time, it is automatically graded as 'insufficient' (0 points).",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-037",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8922870741645839,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-038",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.957008531684176,
+        "answer": "",
+        "reason": "The context only mentions that the StPO does not specify the language, but it also refers to rules under §35 of the General Regulations without specifying what those rules are."
+      },
+      {
+        "question_id": "eval-039",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9605713358601489,
+        "answer": "",
+        "reason": "The context does not address this specific question."
+      },
+      {
+        "question_id": "eval-040",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9327505966228578,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-041",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9468794824678377,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-042",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9186683386227523,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-043",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9436315020129775,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-044",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9598517866486599,
+        "answer": "The thesis (27 LP) is included in the credit-weighted grade calculation. The oral defense (3 LP) is also graded and included in the overall grade calculation.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-045",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.954868501469251,
+        "answer": "",
+        "reason": "The provided context only addresses the consequences of failing the thesis twice, but does not explicitly state what happens after a third attempt."
+      },
+      {
+        "question_id": "eval-046",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9459476596462032,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-047",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9487578647579611,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-048",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9602097864893512,
+        "answer": "The module list (Appendix 2) contains more general information, while the module handbook contains more detailed descriptions.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-049",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9240233583513716,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-050",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9410182745112011,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-051",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9401354900132414,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-052",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9483147236890195,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-053",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.93920360160513,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-054",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9600544629511073,
+        "answer": "Yes, you can switch to a different module. The one-time change of up to two definitively failed compulsory elective modules is permitted.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-055",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9482303194937183,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-056",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.962361238578244,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-057",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9369817936675611,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-058",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9622609045578306,
+        "answer": "If you get sick during the thesis writing period, you can return your thesis topic once and only during the first time writing the thesis. \n\nHowever, if you also get sick on an exam day, you must notify in writing without delay and submit a medical certificate. If accepted, the absence is excused and previous results are preserved.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-059",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9444719562163474,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-060",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9733341202324141,
+        "answer": "From B.Sc. Computer Science: Introduction to Bioinformatics (6 LP, P), Design and Administration of Databases (6 LP, P), Graphics Programming (9 LP, P), Advanced Module Computer Science 1-5 large (9 LP each, P), IT Security (9 LP, P), NoSQL Database Systems (6 LP, P), Computer Networks (9 LP, P), Software Design and Programming Techniques (6 LP, P), Software Quality (9 LP, P), Distributed Data Management (9 LP, P).",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-061",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9560872556614624,
+        "answer": "",
+        "reason": "The context does not address this specific question."
+      },
+      {
+        "question_id": "eval-062",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9537724313459001,
+        "answer": "The practical module (CS 697) is part of the Practical and Seminar Modules area, whereas Profile Area Modules are a separate optional study area for import modules from another scientific discipline.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-063",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9093693157079598,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-064",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9531041566639833,
+        "answer": "The examination committee decides on the comparability of your foreign degree.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-065",
+        "expected_abstention": false,
+        "system_abstained": false,
+        "abstention_level": null,
+        "confidence": 0.9562582472325731,
+        "answer": "The example curriculum in Appendix 1 shows a possible sequence of modules, but it does not necessarily reflect the actual program structure described in §6.",
+        "reason": ""
+      },
+      {
+        "question_id": "eval-066",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9518942038097403,
+        "answer": "",
+        "reason": "The context only addresses the number of credits required for the Profile Area, not whether you can take import modules from multiple profile areas simultaneously."
+      },
+      {
+        "question_id": "eval-067",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9497884883377903,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-068",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.948688382882683,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-069",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9554485072409813,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to fully answer this question."
+      },
+      {
+        "question_id": "eval-070",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9568811068330669,
+        "answer": "",
+        "reason": "The context does not contain sufficient information about specific import or CS modules relevant for combining Computer Science with Economics."
+      },
+      {
+        "question_id": "eval-071",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9179524598318822,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-072",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9505489209653107,
+        "answer": "",
+        "reason": "There is no information about how the exam rules for oral and written exams differ."
+      },
+      {
+        "question_id": "eval-073",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9388102713144802,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-074",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9178925209990724,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-075",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9633755607669928,
+        "answer": "",
+        "reason": "The context does not address what happens to grades when switching from the old regulations to the new ones."
+      },
+      {
+        "question_id": "eval-076",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8891244809183348,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-077",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9424885331044724,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-078",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.948835552254615,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-079",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9257501735774586,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-080",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9342382702594875,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-081",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9083592241304086,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-082",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9416238875980874,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-083",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9391826997523975,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-084",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.936888118058094,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-085",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9439924274407963,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-086",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9071980163377007,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-087",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8511301682116232,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-088",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9382719279584906,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-089",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9111528591668332,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-090",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9374795352032038,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-091",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9117271539766136,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-092",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.9559909667981892,
+        "answer": "",
+        "reason": "The context does not address the possibility of switching between programs."
+      },
+      {
+        "question_id": "eval-093",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9167667189846509,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-094",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9460821146576402,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-095",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9374994720914063,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-096",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9004917921408356,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-097",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9390433025135364,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-098",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.9261007028656332,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-099",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 2,
+        "confidence": 0.955157288491619,
+        "answer": "",
+        "reason": "The context does not contain sufficient information to answer this question."
+      },
+      {
+        "question_id": "eval-100",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.8959782232965439,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      }
+    ],
+    "level1_sweep": [
+      {
+        "threshold": 0.0,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.0
+        }
+      },
+      {
+        "threshold": 0.05,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.05
+        }
+      },
+      {
+        "threshold": 0.1,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.1
+        }
+      },
+      {
+        "threshold": 0.15,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.15
+        }
+      },
+      {
+        "threshold": 0.2,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.2
+        }
+      },
+      {
+        "threshold": 0.25,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.25
+        }
+      },
+      {
+        "threshold": 0.3,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.3
+        }
+      },
+      {
+        "threshold": 0.35,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.35
+        }
+      },
+      {
+        "threshold": 0.4,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.4
+        }
+      },
+      {
+        "threshold": 0.45,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.45
+        }
+      },
+      {
+        "threshold": 0.5,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.5
+        }
+      },
+      {
+        "threshold": 0.55,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.55
+        }
+      },
+      {
+        "threshold": 0.6,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.6
+        }
+      },
+      {
+        "threshold": 0.65,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.65
+        }
+      },
+      {
+        "threshold": 0.7,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.7
+        }
+      },
+      {
+        "threshold": 0.75,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.75
+        }
+      },
+      {
+        "threshold": 0.8,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.8
+        }
+      },
+      {
+        "threshold": 0.85,
+        "metrics": {
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "f0_5": 0.0,
+          "false_abstention_rate": 0.0,
+          "coverage": 1.0,
+          "num_correct_abstention": 0,
+          "num_incorrect_abstention": 0,
+          "num_missing_abstention": 25,
+          "num_answered": 75,
+          "num_total": 100,
+          "threshold": 0.85
+        }
+      },
+      {
+        "threshold": 0.9,
+        "metrics": {
+          "precision": 0.6,
+          "recall": 0.12,
+          "f1": 0.19999999999999998,
+          "f0_5": 0.3333333333333333,
+          "false_abstention_rate": 0.02666666666666667,
+          "coverage": 0.95,
+          "num_correct_abstention": 3,
+          "num_incorrect_abstention": 2,
+          "num_missing_abstention": 22,
+          "num_answered": 73,
+          "num_total": 100,
+          "threshold": 0.9
+        }
+      },
+      {
+        "threshold": 0.95,
+        "metrics": {
+          "precision": 0.359375,
+          "recall": 0.92,
+          "f1": 0.5168539325842697,
+          "f0_5": 0.409252669039146,
+          "false_abstention_rate": 0.5466666666666666,
+          "coverage": 0.36,
+          "num_correct_abstention": 23,
+          "num_incorrect_abstention": 41,
+          "num_missing_abstention": 2,
+          "num_answered": 34,
+          "num_total": 100,
+          "threshold": 0.95
+        }
+      },
+      {
+        "threshold": 1.0,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 1.0
+        }
+      }
+    ],
+    "knowledge_base": "faq-stpo"
+  },
+  {
+    "config": {
+      "k": 5,
+      "threshold": 0.0,
+      "normalization_strategy": "bm25",
+      "normalization_params": {}
+    },
+    "metrics": {
+      "precision": 0.25,
+      "recall": 1.0,
+      "f1": 0.4,
+      "f0_5": 0.29411764705882354,
+      "false_abstention_rate": 1.0,
+      "coverage": 0.0,
+      "num_correct_abstention": 25,
+      "num_incorrect_abstention": 75,
+      "num_missing_abstention": 0,
+      "num_answered": 0,
+      "num_total": 100,
+      "threshold": 0.0
+    },
+    "results": [
+      {
+        "question_id": "eval-001",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-002",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-003",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-004",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-005",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-006",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-007",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-008",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-009",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-010",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-011",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-012",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-013",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-014",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-015",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-016",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-017",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-018",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-019",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-020",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-021",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-022",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-023",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-024",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-025",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-026",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-027",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-028",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-029",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-030",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-031",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-032",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-033",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-034",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-035",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-036",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-037",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-038",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-039",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-040",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-041",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-042",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-043",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-044",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-045",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-046",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-047",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-048",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-049",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-050",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-051",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-052",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-053",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-054",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-055",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-056",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-057",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-058",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-059",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-060",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-061",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-062",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-063",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-064",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-065",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-066",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-067",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-068",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-069",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-070",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-071",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-072",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-073",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-074",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-075",
+        "expected_abstention": false,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-076",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-077",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-078",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-079",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-080",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-081",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-082",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-083",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-084",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-085",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-086",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-087",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-088",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-089",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-090",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-091",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-092",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-093",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-094",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-095",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-096",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-097",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-098",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-099",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      },
+      {
+        "question_id": "eval-100",
+        "expected_abstention": true,
+        "system_abstained": true,
+        "abstention_level": 1,
+        "confidence": 0.0,
+        "answer": "",
+        "reason": "retrieval confidence below threshold"
+      }
+    ],
+    "level1_sweep": [
+      {
+        "threshold": 0.0,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.0
+        }
+      },
+      {
+        "threshold": 0.05,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.05
+        }
+      },
+      {
+        "threshold": 0.1,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.1
+        }
+      },
+      {
+        "threshold": 0.15,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.15
+        }
+      },
+      {
+        "threshold": 0.2,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.2
+        }
+      },
+      {
+        "threshold": 0.25,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.25
+        }
+      },
+      {
+        "threshold": 0.3,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.3
+        }
+      },
+      {
+        "threshold": 0.35,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.35
+        }
+      },
+      {
+        "threshold": 0.4,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.4
+        }
+      },
+      {
+        "threshold": 0.45,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.45
+        }
+      },
+      {
+        "threshold": 0.5,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.5
+        }
+      },
+      {
+        "threshold": 0.55,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.55
+        }
+      },
+      {
+        "threshold": 0.6,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.6
+        }
+      },
+      {
+        "threshold": 0.65,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.65
+        }
+      },
+      {
+        "threshold": 0.7,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.7
+        }
+      },
+      {
+        "threshold": 0.75,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.75
+        }
+      },
+      {
+        "threshold": 0.8,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.8
+        }
+      },
+      {
+        "threshold": 0.85,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.85
+        }
+      },
+      {
+        "threshold": 0.9,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.9
+        }
+      },
+      {
+        "threshold": 0.95,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 0.95
+        }
+      },
+      {
+        "threshold": 1.0,
+        "metrics": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1": 0.4,
+          "f0_5": 0.29411764705882354,
+          "false_abstention_rate": 1.0,
+          "coverage": 0.0,
+          "num_correct_abstention": 25,
+          "num_incorrect_abstention": 75,
+          "num_missing_abstention": 0,
+          "num_answered": 0,
+          "num_total": 100,
+          "threshold": 1.0
+        }
+      }
+    ],
+    "knowledge_base": "faq-ao"
+  }
+]
