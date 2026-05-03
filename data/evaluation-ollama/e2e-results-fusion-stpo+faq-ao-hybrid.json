@@ -9,10 +9,10 @@
     "strategy": "fusion",
     "normalization_strategy": "rrf",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
-  "threshold": 0.85,
+  "threshold": 0.55,
   "level1_sweep": [
     {
       "threshold": 0.0,
@@ -204,16 +204,16 @@
     {
       "threshold": 0.55,
       "metrics": {
-        "precision": 0.2777777777777778,
-        "recall": 0.6,
-        "f1": 0.37974683544303794,
-        "f0_5": 0.3112033195020747,
-        "false_abstention_rate": 0.52,
-        "coverage": 0.46,
-        "num_correct_abstention": 15,
-        "num_incorrect_abstention": 39,
-        "num_missing_abstention": 10,
-        "num_answered": 36,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.55
       }
@@ -221,16 +221,16 @@
     {
       "threshold": 0.6,
       "metrics": {
-        "precision": 0.2711864406779661,
-        "recall": 0.64,
-        "f1": 0.38095238095238093,
-        "f0_5": 0.3065134099616858,
-        "false_abstention_rate": 0.5733333333333334,
-        "coverage": 0.41,
-        "num_correct_abstention": 16,
-        "num_incorrect_abstention": 43,
-        "num_missing_abstention": 9,
-        "num_answered": 32,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.6
       }
@@ -238,16 +238,16 @@
     {
       "threshold": 0.65,
       "metrics": {
-        "precision": 0.2711864406779661,
-        "recall": 0.64,
-        "f1": 0.38095238095238093,
-        "f0_5": 0.3065134099616858,
-        "false_abstention_rate": 0.5733333333333334,
-        "coverage": 0.41,
-        "num_correct_abstention": 16,
-        "num_incorrect_abstention": 43,
-        "num_missing_abstention": 9,
-        "num_answered": 32,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.65
       }
@@ -255,16 +255,16 @@
     {
       "threshold": 0.7,
       "metrics": {
-        "precision": 0.28125,
-        "recall": 0.72,
-        "f1": 0.4044943820224719,
-        "f0_5": 0.3202846975088968,
-        "false_abstention_rate": 0.6133333333333333,
-        "coverage": 0.36,
-        "num_correct_abstention": 18,
-        "num_incorrect_abstention": 46,
-        "num_missing_abstention": 7,
-        "num_answered": 29,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.7
       }
@@ -272,16 +272,16 @@
     {
       "threshold": 0.75,
       "metrics": {
-        "precision": 0.2714285714285714,
-        "recall": 0.76,
-        "f1": 0.39999999999999997,
-        "f0_5": 0.31147540983606553,
-        "false_abstention_rate": 0.68,
-        "coverage": 0.3,
-        "num_correct_abstention": 19,
-        "num_incorrect_abstention": 51,
-        "num_missing_abstention": 6,
-        "num_answered": 24,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.75
       }
@@ -289,16 +289,16 @@
     {
       "threshold": 0.8,
       "metrics": {
-        "precision": 0.2727272727272727,
-        "recall": 0.84,
-        "f1": 0.41176470588235287,
-        "f0_5": 0.31531531531531526,
-        "false_abstention_rate": 0.7466666666666667,
-        "coverage": 0.23,
-        "num_correct_abstention": 21,
-        "num_incorrect_abstention": 56,
-        "num_missing_abstention": 4,
-        "num_answered": 19,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.8
       }
@@ -306,16 +306,16 @@
     {
       "threshold": 0.85,
       "metrics": {
-        "precision": 0.2823529411764706,
-        "recall": 0.96,
-        "f1": 0.4363636363636364,
-        "f0_5": 0.32876712328767116,
-        "false_abstention_rate": 0.8133333333333334,
-        "coverage": 0.15,
-        "num_correct_abstention": 24,
-        "num_incorrect_abstention": 61,
-        "num_missing_abstention": 1,
-        "num_answered": 14,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.85
       }
@@ -323,16 +323,16 @@
     {
       "threshold": 0.9,
       "metrics": {
-        "precision": 0.2823529411764706,
-        "recall": 0.96,
-        "f1": 0.4363636363636364,
-        "f0_5": 0.32876712328767116,
-        "false_abstention_rate": 0.8133333333333334,
-        "coverage": 0.15,
-        "num_correct_abstention": 24,
-        "num_incorrect_abstention": 61,
-        "num_missing_abstention": 1,
-        "num_answered": 14,
+        "precision": 0.34210526315789475,
+        "recall": 0.52,
+        "f1": 0.41269841269841273,
+        "f0_5": 0.3672316384180791,
+        "false_abstention_rate": 0.3333333333333333,
+        "coverage": 0.62,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 25,
+        "num_missing_abstention": 12,
+        "num_answered": 50,
         "num_total": 100,
         "threshold": 0.9
       }
@@ -340,16 +340,16 @@
     {
       "threshold": 0.95,
       "metrics": {
-        "precision": 0.2823529411764706,
-        "recall": 0.96,
-        "f1": 0.4363636363636364,
-        "f0_5": 0.32876712328767116,
-        "false_abstention_rate": 0.8133333333333334,
-        "coverage": 0.15,
-        "num_correct_abstention": 24,
-        "num_incorrect_abstention": 61,
-        "num_missing_abstention": 1,
-        "num_answered": 14,
+        "precision": 0.3170731707317073,
+        "recall": 0.52,
+        "f1": 0.3939393939393939,
+        "f0_5": 0.34391534391534395,
+        "false_abstention_rate": 0.37333333333333335,
+        "coverage": 0.59,
+        "num_correct_abstention": 13,
+        "num_incorrect_abstention": 28,
+        "num_missing_abstention": 12,
+        "num_answered": 47,
         "num_total": 100,
         "threshold": 0.95
       }
@@ -373,24 +373,24 @@
     }
   ],
   "abstention_metrics": {
-    "precision": 0.27472527472527475,
+    "precision": 0.36231884057971014,
     "recall": 1.0,
-    "f1": 0.4310344827586208,
-    "f0_5": 0.3213367609254499,
-    "false_abstention_rate": 0.88,
-    "coverage": 0.09,
+    "f1": 0.5319148936170213,
+    "f0_5": 0.4152823920265781,
+    "false_abstention_rate": 0.5866666666666667,
+    "coverage": 0.31,
     "num_correct_abstention": 25,
-    "num_incorrect_abstention": 66,
+    "num_incorrect_abstention": 44,
     "num_missing_abstention": 0,
-    "num_answered": 9,
+    "num_answered": 31,
     "num_total": 100,
-    "threshold": 0.85
+    "threshold": 0.55
   },
   "generation_metrics": {
-    "num_scored": 9,
-    "avg_faithfulness": 0.7,
-    "avg_answer_relevance": 0.8253520966406438,
-    "avg_correctness": 0.5744444444444444
+    "num_scored": 31,
+    "avg_faithfulness": 0.5944444444444444,
+    "avg_answer_relevance": 0.6589656207042518,
+    "avg_correctness": 0.5341935483870968
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -401,11 +401,11 @@
       "reference_answer": "The standard study period (Regelstudienzeit) is 4 semesters.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "answer": "The general standard program duration for the master's degree program in computer science is 4 semesters.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "par-7-txt-1",
         "par-23-txt-2",
@@ -413,10 +413,10 @@
         "par-23-txt-1",
         "par-5-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.5,
+      "answer_relevance": 0.7040985882351816,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-002",
@@ -424,11 +424,11 @@
       "reference_answer": "Graduates receive the academic degree Master of Science (M.Sc.).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "answer": "Graduates of the master's degree program in \"Computer Science\" are awarded the academic degree of \"Master of Science (M.Sc.)\".",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "par-2-txt-1",
         "toc-txt-1",
@@ -436,10 +436,10 @@
         "par-14-txt-1",
         "appendix-1-txt-2"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.715163549767476,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-003",
@@ -449,9 +449,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5333333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to determine the total number of credits required to complete the master's program.",
+      "confidence": 0.9684979838709676,
       "retrieval_chunk_ids": [
         "par-7-txt-1",
         "appendix-2-txt-9",
@@ -459,7 +459,7 @@
         "appendix-2-tbl-appendix-2-tbl-1-9",
         "appendix-2-tbl-appendix-2-tbl-1-23"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -493,11 +493,11 @@
       "reference_answer": "The thesis module (CS 699) comprises 30 credits: 27 for the thesis and 3 for the oral defense.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "answer": "The Master's Thesis (CS 699) comprises a total of 30 credits, with 27 credits for the written thesis and 3 credits for the oral defense.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-28-txt-1",
@@ -505,10 +505,10 @@
         "par-10-txt-1",
         "par-14-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.7887260747167297,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-006",
@@ -529,7 +529,7 @@
         "par-23-txt-3"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.8560526569046566,
       "correctness": 0.67
     },
@@ -539,7 +539,7 @@
       "reference_answer": "An extension of up to 20% of the processing time is possible upon justified request.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The master's thesis deadline can be extended by up to a maximum of 20%.",
+      "answer": "The thesis writing-time can be extended by up to a maximum of 20%.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -552,8 +552,8 @@
         "par-14-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.8828642671299266,
+      "faithfulness": 0.5,
+      "answer_relevance": 0.7145994953117688,
       "correctness": 0.8
     },
     {
@@ -608,11 +608,11 @@
       "reference_answer": "The seminar module 'Selected Advanced Topics in Computer Science' (CS 610) carries 3 credits.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "answer": "The seminar module CS 610 carries 3 credits.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "appendix-2-tbl-appendix-2-tbl-1-23",
         "par-10-txt-1",
@@ -620,10 +620,10 @@
         "par-9-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.9999999999999437,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-011",
@@ -714,7 +714,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": NaN,
+      "answer_relevance": 0.7470508096742043,
       "correctness": 0.67
     },
     {
@@ -723,7 +723,7 @@
       "reference_answer": "The topic is submitted by the first reviewer and assigned by the examination committee upon the student's request.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The first reviewer, who must be appointed by the examination committee for the examination of master's theses, submits the topic to the examination committee and it is assigned by them.",
+      "answer": "The first reviewer, appointed by the examination committee, submits the topic of the master's thesis to the examination committee for assignment.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -736,9 +736,9 @@
         "appendix-2-tbl-appendix-2-tbl-1-23"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.5423387852319143,
-      "correctness": 0.67
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.8493995382229175,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-016",
@@ -746,7 +746,7 @@
       "reference_answer": "The examination committee consists of 7 members: 4 professors, 1 scientific staff member, and 2 students.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination committee has 8 members: 4 professors, 1 research assistant, and 2 students. Additionally, there is one substitute member for each of these members.",
+      "answer": "The examination committee has 8 members, consisting of:\n\n* Four professors\n* One research assistant\n* Two students\n* And one substitute member for each of these.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -759,7 +759,7 @@
         "part-IV-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.8,
+      "faithfulness": NaN,
       "answer_relevance": 0.9821623749113907,
       "correctness": 0.5
     },
@@ -794,17 +794,17 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context passages do not contain sufficient information to answer this question.",
+      "confidence": 0.961166253101737,
       "retrieval_chunk_ids": [
-        "par-23-txt-2",
         "par-24-txt-1",
+        "par-23-txt-2",
         "part-IV-txt-1",
         "par-38-txt-1",
         "par-31-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -817,9 +817,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5833333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "par-14-txt-1",
         "par-13-txt-1",
@@ -827,7 +827,7 @@
         "par-7-txt-1",
         "par-19-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -840,9 +840,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "par-28-txt-1",
         "par-4-txt-2",
@@ -850,7 +850,7 @@
         "par-14-txt-1",
         "appendix-2-txt-24"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -875,7 +875,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.9321440595839094,
+      "answer_relevance": 0.6805209424478481,
       "correctness": 0.5
     },
     {
@@ -907,22 +907,22 @@
       "reference_answer": "The exam is deemed failed and graded with 0 points ('insufficient'). In serious cases, the examination committee can exclude the student from further exams.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5333333333333333,
+      "answer": "If a candidate attempts to influence the result of a course or examination by deception or the use of unauthorized aids, the course or examination in question will be deemed failed (0 points) in accordance with § 28(2) of the General Regulations. In serious cases, the examination committee can exclude the candidate from taking further examinations such that the examination entitlement in the degree program expires.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9684979838709676,
       "retrieval_chunk_ids": [
         "par-31-txt-1",
-        "par-27-txt-1",
         "par-30-txt-1",
+        "par-27-txt-1",
         "par-4-txt-1",
         "par-8-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.5,
+      "answer_relevance": 0.6512636567605643,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-024",
@@ -930,22 +930,22 @@
       "reference_answer": "Algorithm Engineering carries 9 credits (LP).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "9",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9533577533577533,
       "retrieval_chunk_ids": [
+        "appendix-2-txt-3",
         "appendix-4-tbl-appendix-4-tbl-1-1",
         "par-4-txt-1",
-        "appendix-2-txt-3",
         "appendix-2-tbl-appendix-2-tbl-1-3",
         "par-7-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.0,
+      "answer_relevance": 0.0,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-025",
@@ -953,11 +953,11 @@
       "reference_answer": "Oral examination (individual) or written examination (Klausur).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "answer": "Oral examination (individual examination) or in-class written examination (Klausur).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "appendix-2-txt-16",
         "appendix-2-tbl-appendix-2-tbl-1-14",
@@ -965,10 +965,10 @@
         "par-16-txt-1",
         "appendix-2-txt-19"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.0,
+      "answer_relevance": 0.36976540938678637,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-026",
@@ -979,7 +979,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to determine whether CS 513 Distributed Systems is a theoretical or practical module.",
+      "abstention_reason": "The provided context passages do not explicitly classify CS 513 as either theoretical or practical.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "appendix-2-txt-7",
@@ -1001,9 +1001,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5833333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-23-txt-3",
@@ -1011,7 +1011,7 @@
         "appendix-1-tbl-appendix-1-tbl-2-1",
         "appendix-2-tbl-appendix-2-tbl-1-22"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1022,22 +1022,22 @@
       "reference_answer": "Appendix 2 lists 42 compulsory elective (WP) modules.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "Appendix 2 lists two compulsory elective modules:\n\n* CS573 Geo Databases (Geo Datenbanken)\n* CS681 Image Synthesis (Bildsynthese)\n\nNote that the question asks for \"elective\" modules, but Appendix 2 actually lists these as \"compulsory elective\" modules.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9533577533577533,
       "retrieval_chunk_ids": [
+        "par-20-txt-1",
         "appendix-2-txt-9",
         "appendix-4-txt-1",
-        "par-20-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-9",
         "appendix-2-txt-29"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.897771712363876,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-029",
@@ -1045,22 +1045,22 @@
       "reference_answer": "An individual oral exam lasts between 20 and 30 minutes.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "answer": "60 minutes.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
+        "par-24-txt-1",
         "par-23-txt-2",
         "par-22-txt-1",
-        "par-24-txt-1",
         "par-25-txt-1",
         "par-4-txt-2"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.0,
+      "answer_relevance": 0.48726085001189906,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-030",
@@ -1068,11 +1068,11 @@
       "reference_answer": "A written examination (Klausur) lasts between 60 and 120 minutes.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "answer": "60-120 minutes.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-22-txt-1",
         "appendix-4-txt-1",
@@ -1080,10 +1080,10 @@
         "appendix-2-tbl-appendix-2-tbl-1-23",
         "par-23-txt-2"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.24381732300819473,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-031",
@@ -1091,7 +1091,7 @@
       "reference_answer": "Yes, students have the right to inspect their examination documents after the results are announced.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes, according to §37 of the regulations, students can inspect their examination documents.",
+      "answer": "Yes, according to §37 of the Examination Regulations, students can inspect their examination documents.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1104,8 +1104,8 @@
         "par-32-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.7708710039777467,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.685967387762832,
       "correctness": 0.0
     },
     {
@@ -1114,11 +1114,11 @@
       "reference_answer": "Yes, the structural variant of this degree program is a one-subject master's program (Ein-Fach-Masterstudiengang).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "answer": "Yes. The master's program in Computer Science corresponds to the structural variant of a \"singlesubject-program\".",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "par-9-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-5",
@@ -1126,10 +1126,10 @@
         "par-8-txt-1",
         "appendix-4-tbl-appendix-4-tbl-1-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.23746564864804787,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-033",
@@ -1139,17 +1139,17 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not mention a module named CS 697.",
+      "confidence": 0.9457932692307692,
       "retrieval_chunk_ids": [
+        "par-9-txt-1",
         "appendix-2-txt-24",
         "par-11-txt-1",
-        "par-9-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21",
         "par-10-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1254,9 +1254,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-35-txt-1",
         "par-34-txt-1",
@@ -1264,7 +1264,7 @@
         "par-31-txt-1",
         "par-4-txt-2"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1275,10 +1275,10 @@
       "reference_answer": "Yes, a student can withdraw without reason up to the registration deadline. After registration, withdrawal generally requires a valid reason.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not address whether a withdrawal without reason is possible.",
+      "answer": "No, according to §27 Absence, withdrawal, fraud, violation of regulations (1), coursework will be deemed failed or an examination will be graded as \"insufficient\" if the candidate withdraws without good reason.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "par-27-txt-1",
@@ -1288,9 +1288,9 @@
         "par-8-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.5,
+      "answer_relevance": 0.7062480750740563,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-040",
@@ -1300,9 +1300,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5833333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "There is no mention of \"StPO\" in the provided context.",
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "par-13-txt-1",
         "par-14-txt-1",
@@ -1310,7 +1310,7 @@
         "appendix-2-txt-24",
         "par-23-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1390,11 +1390,11 @@
       "reference_answer": "The thesis module has 30 credits (27 thesis + 3 defense). The overall grade is the credit-weighted mean of all graded modules. Since Project Work (12 LP) and Independent Scientific Practice (9 LP) are ungraded, the graded total is 99 LP. Thus the thesis contributes 30/99, approximately 30.3%, of the overall grade.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "answer": "The overall grade for the master's examination is calculated from the mean value of the module evaluations weighted by credits. Modules not graded with points are not taken into account. The master's thesis must receive at least 5 points (grade of \"sufficient\") in accordance with § 28(2) of the General Regulations to be passed; otherwise, it will be graded as \"insufficient\" (0 points).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-28-txt-1",
@@ -1402,10 +1402,10 @@
         "par-23-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-23"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7198412438578362,
+      "correctness": 0.22
     },
     {
       "question_id": "eval-045",
@@ -1415,9 +1415,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not address what happens after three attempts.",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-23-txt-3",
@@ -1425,7 +1425,7 @@
         "par-30-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-22"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1436,22 +1436,22 @@
       "reference_answer": "Yes. You can import modules like Efficient Algorithms or Machine Learning from B.Sc. Data Science (Appendix 3), and certain M.Sc. CS modules like those listed in Appendix 4 can be exported to other programs.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "According to Appendix 4, Export Module List, modules can be exported to other degree programs as long as this is agreed upon with the department(s) in whose degree program(s) these modules are elective.\n\nAppendix 3 Import Module List lists the modules available for import into Computer Science, including some from B.Sc. Data Science.\n\nHowever, there is no explicit information on whether a module can be both imported and exported to/from the same program (B.Sc. Data Science).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9606894841269841,
       "retrieval_chunk_ids": [
-        "appendix-3-tbl-appendix-3-tbl-1-1",
-        "appendix-3-txt-1",
         "appendix-4-txt-1",
         "par-20-txt-1",
+        "appendix-3-tbl-appendix-3-tbl-1-1",
+        "appendix-3-txt-1",
         "par-14-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.5811594979676254,
+      "correctness": 0.57
     },
     {
       "question_id": "eval-047",
@@ -1461,9 +1461,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "abstention_level": 2,
+      "abstention_reason": "The context passages do not address the impact of parental leave on the maximum study duration or thesis deadline.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-26-txt-1",
@@ -1471,7 +1471,7 @@
         "par-23-txt-1",
         "par-25-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1482,22 +1482,22 @@
       "reference_answer": "The module list in Appendix 2 defines the formal module parameters (LP, prerequisites, exam form). The module handbook (§20) provides additional details like content, learning methods, and literature, and is published online.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "The module handbook, which will be published on the program website, contains further information with detailed module descriptions as well as the current range of import modules. The module list in Appendix 2 provides a summary of the modules to be completed as part of the degree program, including their type, allocation to areas of the degree program, prerequisites for participation, credits to be earned, and form of examination.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9606894841269841,
       "retrieval_chunk_ids": [
+        "par-20-txt-1",
         "appendix-2-txt-24",
         "appendix-4-txt-1",
-        "par-20-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21",
         "appendix-4-tbl-appendix-4-tbl-3-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.5,
+      "answer_relevance": 0.7371048106609156,
+      "correctness": 0.62
     },
     {
       "question_id": "eval-049",
@@ -1530,9 +1530,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5833333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not address writing a thesis at a company.",
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-23-txt-1",
@@ -1540,7 +1540,7 @@
         "par-14-txt-1",
         "par-21-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1551,22 +1551,22 @@
       "reference_answer": "The Profile Area is an optional part of the degree program (0 or 12 credits) defined in §6(1) and §6(4). If chosen, students take 12 credits of import modules from another scientific discipline listed in Appendix 3. §11 states that the master's program includes an internal practical module but does not define profile modules. The connection between profile modules and the import module list is established through §6(4) and Appendix 3.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "Profile modules are listed in the import module lists for each profile area, indicating that they can be imported into the respective profile.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9384615384615385,
       "retrieval_chunk_ids": [
+        "appendix-3-tbl-appendix-3-tbl-13-1",
         "appendix-2-txt-25",
         "appendix-3-txt-7",
-        "appendix-3-tbl-appendix-3-tbl-13-1",
         "appendix-3-tbl-appendix-3-tbl-5-1",
         "appendix-3-tbl-appendix-3-tbl-9-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.7170786121059095,
+      "correctness": 0.29
     },
     {
       "question_id": "eval-052",
@@ -1666,10 +1666,10 @@
       "reference_answer": "Regular exams require registration via the standard process (§24) with specific deadlines. The thesis defense is scheduled individually after thesis submission and does not follow the regular exam registration period.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer the question.",
+      "answer": "For regular exams, binding registration is required for participation (§24(4)). Students can autonomously choose between the first date and the repeat date when registering for examinations (§24(5)).\n\nFor the thesis defense, there are no specific exam registration rules mentioned. The topic of the master's thesis is submitted to the examination committee by the first reviewer and assigned by them (§23(5)).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "par-24-txt-1",
@@ -1679,9 +1679,9 @@
         "par-23-txt-2"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.7411115650336991,
+      "correctness": 0.57
     },
     {
       "question_id": "eval-057",
@@ -1712,11 +1712,11 @@
       "reference_answer": "For the exam, you must submit a medical certificate and can withdraw (§27). For the thesis, you can apply for a deadline extension of up to 20% of the processing time (§23). If the illness is prolonged, the examination committee can grant further extensions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "answer": "If you get sick during the thesis writing period, you can request an extension of up to 20% of the original time due to unforeseen problems. \n\nIf you get sick during an exam, you must submit a medical certificate from a public health officer. The examination committee will then decide on accommodations for your hardship.\n\nIn both cases, it's essential to provide suitable documentation and notify the relevant parties in a timely fashion.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "par-23-txt-2",
         "par-26-txt-1",
@@ -1724,10 +1724,10 @@
         "par-8-txt-1",
         "par-24-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7079990724754163,
+      "correctness": 0.44
     },
     {
       "question_id": "eval-059",
@@ -1737,17 +1737,17 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not address how conditional modules affect study planning in the first semester.",
+      "confidence": 0.9682539682539681,
       "retrieval_chunk_ids": [
-        "par-23-txt-1",
         "par-24-txt-1",
+        "par-23-txt-1",
         "par-4-txt-3",
         "appendix-2-txt-27",
         "par-13-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1781,22 +1781,22 @@
       "reference_answer": "Yes. §38 contains transitional provisions. Students who started under a previous StPO may switch to the current regulations or continue under the old ones, subject to specific conditions defined in the transitional provisions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "Yes, students who began their studies before these Degree Program and Examination Regulations came into force can take the master's examination in accordance with the old regulations until summer semester 2027 at the latest. They may also apply for a voluntary switch to the new regulations.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.953125,
       "retrieval_chunk_ids": [
+        "par-13-txt-1",
+        "par-31-txt-1",
         "par-29-txt-1",
         "par-38-txt-1",
-        "par-13-txt-1",
-        "par-25-txt-1",
-        "par-30-txt-1"
+        "par-25-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.30680702828083195,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-062",
@@ -1806,17 +1806,17 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not mention CS 697, nor does it provide information on the distinction between a practical module and a profile module.",
+      "confidence": 0.9533577533577533,
       "retrieval_chunk_ids": [
+        "par-9-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21",
         "par-11-txt-1",
-        "par-9-txt-1",
         "appendix-2-txt-24",
         "par-10-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1827,22 +1827,22 @@
       "reference_answer": "There are 4 compulsory (PF) modules: Project Work in Computer Science (CS 697, 12 LP), Selected Advanced Topics (Seminar, CS 610, 3 LP), Independent Scientific Practice Computer Science (9 LP), and Master's Thesis (CS 699, 30 LP). Total: 54 LP in compulsory modules.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "There is only one compulsory module mentioned, which is CS 533 Web Technologies.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9457932692307692,
       "retrieval_chunk_ids": [
+        "par-14-txt-1",
         "appendix-2-txt-24",
         "par-4-txt-3",
-        "par-14-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21",
         "par-10-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.5,
+      "answer_relevance": 0.854566548044242,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-064",
@@ -1873,22 +1873,22 @@
       "reference_answer": "§6 defines the formal program structure (module areas, credit requirements). Appendix 1 provides a recommended semester-by-semester plan that implements this structure. Following Appendix 1 is recommended but not mandatory.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "answer": "The degree program is more research oriented- and an example sequence of the modularized program is given in the degree program curriculum (cf. Appendix 1).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9533577533577533,
       "retrieval_chunk_ids": [
-        "appendix-1-tbl-appendix-1-tbl-1-1",
-        "par-6-txt-4",
         "appendix-1-tbl-appendix-1-tbl-2-1",
         "appendix-1-txt-2",
+        "appendix-1-tbl-appendix-1-tbl-1-1",
+        "par-6-txt-4",
         "appendix-1-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.44359925296351216,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-066",
@@ -1898,9 +1898,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-12-1",
         "appendix-3-txt-7",
@@ -1908,7 +1908,7 @@
         "appendix-3-tbl-appendix-3-tbl-9-1",
         "appendix-3-txt-4"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1919,22 +1919,22 @@
       "reference_answer": "The candidate proposes an adviser and a first reviewer authorized as examiner. The candidate also has the right to propose the second reviewer (§23(5)). The first reviewer must be appointed by the examination committee. The adviser and first reviewer may be the same person. The StPO does not require that the first examiner be a professor, nor does it specify that the final grade is the average of both reviewers' grades.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "answer": "The first reviewer is appointed by the examination committee for the examination of master's theses. They submit the topic of the thesis to the examination committee, which assigns it.\n\nThe candidate has the right to propose a second reviewer, but this does not establish an entitlement. The role of the second reviewer is not explicitly stated in the context passages provided.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-23-txt-1",
         "par-23-txt-2",
-        "par-16-txt-1",
         "par-24-txt-1",
-        "par-23-txt-3"
+        "par-23-txt-3",
+        "par-16-txt-1"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.5,
+      "answer_relevance": 0.6649488918478376,
+      "correctness": 0.44
     },
     {
       "question_id": "eval-068",
@@ -1968,7 +1968,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to fully answer the question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "par-8-txt-1",
@@ -2059,9 +2059,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain sufficient information to determine which of the exportable modules in Appendix 4 are classified as theoretical.",
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
         "par-30-txt-1",
@@ -2069,7 +2069,7 @@
         "appendix-4-tbl-appendix-4-tbl-3-1",
         "par-20-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2082,9 +2082,9 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not address whether part-time students have equal access to modules compared to full-time students.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-4-txt-3",
         "par-26-txt-1",
@@ -2092,7 +2092,7 @@
         "par-24-txt-1",
         "par-14-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2128,9 +2128,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5833333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain information about the tuition fee for international students.",
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "par-8-txt-1",
         "par-13-txt-1",
@@ -2138,7 +2138,7 @@
         "par-14-txt-1",
         "par-19-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2151,17 +2151,17 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain information about which professor teaches the Artificial Intelligence module.",
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "appendix-2-txt-14",
+        "appendix-2-txt-5",
         "appendix-2-txt-21",
         "appendix-2-txt-6",
-        "appendix-2-txt-5",
         "appendix-2-txt-7"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2174,9 +2174,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "There is no information in the provided context about the exact date of the next examination committee meeting.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-24-txt-1",
         "par-16-txt-1",
@@ -2184,7 +2184,7 @@
         "par-23-txt-2",
         "part-IV-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2220,9 +2220,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain information about the average salary for M.Sc. Computer Science graduates from Marburg.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-2-txt-1",
         "par-1-txt-1",
@@ -2230,7 +2230,7 @@
         "appendix-2-tbl-appendix-2-tbl-1-21",
         "par-5-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2266,9 +2266,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-2-txt-16",
         "appendix-2-tbl-appendix-2-tbl-1-14",
@@ -2276,7 +2276,7 @@
         "appendix-2-txt-14",
         "appendix-2-txt-2"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2289,9 +2289,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to specify the exact deadlines for module registration each semester.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "par-12-txt-1",
         "par-24-txt-1",
@@ -2299,7 +2299,7 @@
         "par-24-txt-2",
         "par-11-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2312,9 +2312,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain information about the acceptance rate for the M.Sc. Computer Science program.",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "par-4-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21",
@@ -2322,7 +2322,7 @@
         "par-3-txt-1",
         "par-13-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2335,17 +2335,17 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9682539682539681,
       "retrieval_chunk_ids": [
-        "appendix-3-txt-1",
         "par-4-txt-2",
-        "par-6-txt-4",
         "par-8-txt-1",
+        "appendix-3-txt-1",
+        "par-6-txt-4",
         "par-14-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2358,17 +2358,17 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "There is no information about laptop loans in the provided context.",
+      "confidence": 0.953125,
       "retrieval_chunk_ids": [
+        "par-8-txt-1",
         "par-17-txt-1",
         "par-25-txt-1",
-        "par-8-txt-1",
         "appendix-3-tbl-appendix-3-tbl-1-1",
         "par-20-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2496,9 +2496,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-1-1",
         "par-2-txt-1",
@@ -2506,7 +2506,7 @@
         "appendix-2-txt-11",
         "par-9-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2588,9 +2588,9 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain any information about Professor Papenbrock's office hours.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "par-16-txt-1",
         "par-14-txt-1",
@@ -2598,7 +2598,7 @@
         "par-25-txt-1",
         "par-24-txt-1"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2658,7 +2658,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to determine the exact date of the next semester's first lecture day.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "par-24-txt-1",

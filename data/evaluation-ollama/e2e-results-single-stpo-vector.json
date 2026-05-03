@@ -8,8 +8,8 @@
     "strategy": "single",
     "normalization_strategy": "vector",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
   "threshold": 0.45,
   "level1_sweep": [
@@ -387,9 +387,9 @@
   },
   "generation_metrics": {
     "num_scored": 31,
-    "avg_faithfulness": 0.518007662835249,
-    "avg_answer_relevance": 0.667690395012779,
-    "avg_correctness": 0.42516129032258065
+    "avg_faithfulness": 0.5222222222222223,
+    "avg_answer_relevance": 0.6510134803909986,
+    "avg_correctness": 0.48838709677419356
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -410,7 +410,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.6354568389090649,
+      "answer_relevance": 0.5799647175618875,
       "correctness": 1.0
     },
     {
@@ -430,7 +430,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 0.0,
       "answer_relevance": 0.586156732740669,
-      "correctness": 1.0
+      "correctness": 0.67
     },
     {
       "question_id": "eval-003",
@@ -441,7 +441,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to determine how many credits are required to complete the master's program.",
+      "abstention_reason": "The provided context does not contain sufficient information to determine the total number of credits required to complete the master's program.",
       "confidence": 0.5929142236709595,
       "retrieval_chunk_ids": [
         "par-4-txt-1",
@@ -538,7 +538,7 @@
         "par-23-txt-2"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
+      "faithfulness": NaN,
       "answer_relevance": 0.2184186063362953,
       "correctness": 0.67
     },
@@ -551,7 +551,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain information about the recommended semester for studying abroad.",
+      "abstention_reason": "The context passages do not mention any specific semester recommendation for studying abroad.",
       "confidence": 0.5163857936859131,
       "retrieval_chunk_ids": [
         "par-8-txt-1",
@@ -568,7 +568,7 @@
       "reference_answer": "It is a compulsory module (Pflichtmodul) classified as a practical module.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The module \"Project Work in Computer Science\" (CS 697) is a compulsory module, classified as a Practice module.",
+      "answer": "The module \"Project Work in Computer Science\" (CS 697) is a Compulsory module, classified as a Practice module.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -581,8 +581,8 @@
         "appendix-2-txt-15"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.5307832646985192,
+      "faithfulness": 0.5,
+      "answer_relevance": 0.6965152292979346,
       "correctness": 0.67
     },
     {
@@ -591,7 +591,7 @@
       "reference_answer": "The seminar module 'Selected Advanced Topics in Computer Science' (CS 610) carries 3 credits.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The seminar module CS 610 carries 3 credits.",
+      "answer": "The seminar module CS 610 \"Selected Advanced Topics in Computer Science\" carries 3 credits.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -606,7 +606,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.9999999999999437,
-      "correctness": 0.67
+      "correctness": 1.0
     },
     {
       "question_id": "eval-011",
@@ -637,7 +637,7 @@
       "reference_answer": "Students need between 51 and 66 credits in compulsory elective modules in computer science, depending on whether they study a profile area (51-54 LP with profile area, 63-66 LP without).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "A maximum of 18 credits may be earned in advanced modules, and at least one module each in Theoretical Computer Science (marked with a \"T\") and Practical Computer Science (\"P\") must be completed.",
+      "answer": "At least one module each in Theoretical Computer Science (marked with a \"T\") and Practical Computer Science (\"P\") must be completed, which is at least 12 credits.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -650,9 +650,9 @@
         "appendix-1-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.5433139262468129,
-      "correctness": 0.4
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.6594749643225523,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-013",
@@ -706,7 +706,7 @@
       "reference_answer": "The topic is submitted by the first reviewer and assigned by the examination committee upon the student's request.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination committee, through the first reviewer, assigns the topic of the master's thesis.",
+      "answer": "The examination committee assigns the topic of the master's thesis, as submitted by the first reviewer.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -716,7 +716,7 @@
         "par-23-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
+      "faithfulness": 0.5,
       "answer_relevance": 0.999999999999918,
       "correctness": 0.5
     },
@@ -726,7 +726,7 @@
       "reference_answer": "The examination committee consists of 7 members: 4 professors, 1 scientific staff member, and 2 students.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination committee has 9 members. The members consist of:\n\n* Four professors\n* One research assistant\n* Two students\n* Three substitute members (one for each member)",
+      "answer": "The examination committee has 9 members. It consists of four professors, one research assistant, and two students, each having a substitute member.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -798,7 +798,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer the question.",
+      "abstention_reason": "The provided context does not contain sufficient information to determine the specific grade required to pass a module.",
       "confidence": 0.6399273872375488,
       "retrieval_chunk_ids": [
         "par-28-txt-1",
@@ -838,7 +838,7 @@
       "reference_answer": "A failed exam can be retaken three times, for a maximum of four attempts total (one initial attempt plus three retakes).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "According to §30(2), a failed examination may be retaken three times.",
+      "answer": "According to §30 Repeating examinations, a failed examination may be retaken three times.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -852,7 +852,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.9321440595839094,
+      "answer_relevance": 0.6623112742688456,
       "correctness": 0.5
     },
     {
@@ -893,7 +893,7 @@
         "par-31-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.3333333333333333,
+      "faithfulness": 0.5,
       "answer_relevance": 0.6512636567605643,
       "correctness": 0.4
     },
@@ -916,8 +916,8 @@
         "appendix-2-txt-3"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.1329869066340318,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.0,
       "correctness": 0.67
     },
     {
@@ -926,7 +926,7 @@
       "reference_answer": "Oral examination (individual) or written examination (Klausur).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Oral examination (individual examination) or in-class written examination (Klausur).",
+      "answer": "Oral examination (individualexamination) or in class-written examination (Klausur).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -941,7 +941,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 0.0,
       "answer_relevance": 0.36976540938678637,
-      "correctness": 0.67
+      "correctness": 0.0
     },
     {
       "question_id": "eval-026",
@@ -952,7 +952,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to classify the module CS513 Distributed Systems as either theoretical or practical.",
+      "abstention_reason": "The context does not contain sufficient information to classify the module as either theoretical or practical.",
       "confidence": 0.48698365688323975,
       "retrieval_chunk_ids": [
         "appendix-2-txt-7"
@@ -971,7 +971,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not mention any prerequisites for the Master's Thesis module.",
       "confidence": 0.5978484153747559,
       "retrieval_chunk_ids": [
         "part-II-txt-1",
@@ -994,7 +994,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context passages do not contain sufficient information to answer this question.",
+      "abstention_reason": "The context passages do not provide information about the number of elective modules listed in Appendix 2.",
       "confidence": 0.6822890043258667,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
@@ -1014,7 +1014,7 @@
       "reference_answer": "An individual oral exam lasts between 20 and 30 minutes.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The maximum duration of an oral exam is 60 minutes.",
+      "answer": "The maximum duration for an individual oral examination is 20-30 minutes.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1025,9 +1025,9 @@
         "par-25-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.9353412124370267,
-      "correctness": 0.0
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.894361918056655,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-030",
@@ -1058,7 +1058,7 @@
       "reference_answer": "Yes, students have the right to inspect their examination documents after the results are announced.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes. According to §37, the rules for inspection of examination documents apply.",
+      "answer": "Yes. According to §37, the rules under this section of the General Regulations apply, which implies that students can inspect their examination documents after an exam.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1072,8 +1072,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.6313674829166577,
-      "correctness": 0.0
+      "answer_relevance": 0.4704570801502584,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-032",
@@ -1104,7 +1104,7 @@
       "reference_answer": "The practical module trains students in project work, teamwork, independent learning, project management, and documentation skills.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The practical module CS 697, also known as Project Work Computer Science, is a compulsory module that allows students to work on an extensive task from computer science in a team. The goal is for students to develop skills such as elaboration, adaptation, extension, and development of problem-relevant methods, as well as project control and monitoring methods. Students are also expected to master methods of documentation and presentation of IT projects.",
+      "answer": "The role of CS 697, Project Work Computer Science, is to enable students to work on an extensive task from computer science in a team. This includes elaboration, adaptation, extension and development of problem-relevant methods, as well as learning, planning and working independently, project control and monitoring methods, and mastering documentation and presentation of IT projects for users and third parties.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1116,9 +1116,9 @@
         "par-9-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.919035532555578,
-      "correctness": 0.6
+      "faithfulness": 0.0,
+      "answer_relevance": NaN,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-034",
@@ -1129,7 +1129,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address whether conditional modules are counted toward the 120 credits.",
+      "abstention_reason": "The provided context does not address whether conditional modules are counted towards the 120 credits.",
       "confidence": 0.47165191173553467,
       "retrieval_chunk_ids": [
         "par-10-txt-1"
@@ -1180,7 +1180,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.9387737580403707,
-      "correctness": 0.5
+      "correctness": 0.86
     },
     {
       "question_id": "eval-037",
@@ -1188,7 +1188,7 @@
       "reference_answer": "A certificate (Zeugnis), a diploma (Urkunde), a Diploma Supplement, and a Transcript of Records.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "According to §33 Certificate, a certificate is issued. Additionally, according to §34 Diploma, a diploma is issued. Furthermore, according to §35 Diploma supplement, a diploma supplement is also issued.",
+      "answer": "According to §33 Certificate, a certificate is issued. Additionally, according to §34 Diploma, a diploma is also issued. Furthermore, according to §35 Diploma supplement, a diploma supplement is issued.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1202,7 +1202,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.0,
-      "answer_relevance": 0.6499612576907285,
+      "answer_relevance": 0.6710651150924579,
       "correctness": 0.29
     },
     {
@@ -1234,10 +1234,10 @@
       "reference_answer": "Yes, a student can withdraw without reason up to the registration deadline. After registration, withdrawal generally requires a valid reason.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not explicitly address whether a student can withdraw from an exam without reason.",
+      "answer": "No. According to §27(1), coursework will be deemed failed or an examination will be graded as \"insufficient\" if the candidate withdraws without good reason from a course or examination which he or she has already started.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.6706852912902832,
       "retrieval_chunk_ids": [
         "par-27-txt-1",
@@ -1246,9 +1246,9 @@
         "par-26-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.764721317181375,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-040",
@@ -1279,7 +1279,7 @@
       "reference_answer": "Compiler Construction (CS 551) has no formal prerequisites but recommends knowledge from basic CS modules. The exam is an oral examination (individual) or written examination (Klausur).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "To take the Compiler Construction module (CS 551), you don't have any prerequisites. It's an advanced module in theoretical computer science. The module is examined through either a written examination (Klausur) or an oral examination (individual examination).",
+      "answer": "To take the module CS 551 Compiler Construction, you don't have any prerequisites. It's an advanced module in theoretical computer science. The module is examined through either a written examination (Klausur) or an oral examination (individual examination).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1292,9 +1292,9 @@
         "appendix-2-txt-26"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.7669527192544042,
-      "correctness": 0.6
+      "faithfulness": 0.75,
+      "answer_relevance": 0.7117216753398882,
+      "correctness": 0.25
     },
     {
       "question_id": "eval-042",
@@ -1305,7 +1305,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "There is no information in the provided context about which 9-credit elective modules have no prerequisites.",
+      "abstention_reason": "The provided context does not contain sufficient information to determine which 9-credit elective modules have no prerequisites.",
       "confidence": 0.49532872438430786,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-1-1",
@@ -1325,7 +1325,7 @@
       "reference_answer": "Relevant modules include Artificial Intelligence (CS 592, 6 LP), Neural Networks (CS 593, 6 LP), and Machine Learning (importable from B.Sc. Data Science, 9 LP). Exams are typically oral or written examinations.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You should take CS592 Artificial Intelligence, which is a compulsory elective module with 6 LP. The credit requirement is to earn at least 50% of the points from the weekly practice assignments and an oral presentation of the solution to at least two of the practice assignments. Testing can be either an oral examination (individualexamination) or in class-written examination (Klausur).\n\nAdditionally, you may want to consider taking CS624 as a compulsory elective module with 9 LP, which also deals with advanced topics in computer science. The credit requirement and testing formats are the same as for CS592.\n\nIt is recommended that you acquire skills preferably from the field of practical computer science, but since AI is part of both practical and theoretical computer science, this recommendation does not specify whether to take modules from one or the other area.",
+      "answer": "You can take CS592 Artificial Intelligence, which is a compulsory elective module with 6 LP (Leistungspunkte). The credit requirement is to earn at least 50 % of the points from the weekly practice assignments and an oral presentation of the solution to at least two of the practice assignments. Testing formats include oral examination or in-class written examination.\n\nAdditionally, you can take CS624, which is a compulsory elective module with 9 LP. The credit requirement is also to earn at least 50 % of the points from the weekly practice assignments and an oral presentation of the solution to at least two of the practice assignments. Testing formats include in-class written examination or oral examination.\n\nNote that you can also take other modules, but these two are specifically mentioned as related to AI.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1338,8 +1338,8 @@
         "appendix-2-txt-12"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.8,
-      "answer_relevance": 0.484554816753759,
+      "faithfulness": NaN,
+      "answer_relevance": 0.8327761497404401,
       "correctness": 0.0
     },
     {
@@ -1348,7 +1348,7 @@
       "reference_answer": "The thesis module has 30 credits (27 thesis + 3 defense). The overall grade is the credit-weighted mean of all graded modules. Since Project Work (12 LP) and Independent Scientific Practice (9 LP) are ungraded, the graded total is 99 LP. Thus the thesis contributes 30/99, approximately 30.3%, of the overall grade.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The overall grade for the master's examination in points is calculated from the mean value of the module evaluations weighted by credits (LP). Modules not graded with points are not taken into account. The overall grade must receive at least 5 points (grade of \"sufficient\") to pass the thesis, and it will be graded as \"insufficient\" (0 points) if submitted late.",
+      "answer": "The overall grade for the master's examination in points is calculated from the mean value of the module evaluations weighted by credits (LP). Modules not graded with points (ungraded) are not taken into account. The overall grade must receive at least 5 points (grade of \"sufficient\") to pass the thesis, otherwise it will be graded as \"insufficient\" (0 points).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1359,9 +1359,9 @@
         "par-23-txt-2"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
+      "faithfulness": 0.75,
       "answer_relevance": 0.6698603492904827,
-      "correctness": 0.36
+      "correctness": 0.2
     },
     {
       "question_id": "eval-045",
@@ -1394,7 +1394,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not provide sufficient information regarding the possibility of importing modules from one degree program and exporting them to another, specifically between M.Sc. Computer Science and B.Sc. Data Science.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer this question, as it only mentions importing modules into M.Sc. Computer Science and exporting modules from M.Sc. Computer Science, but does not explicitly address the possibility of both importing and exporting modules between these two programs.",
       "confidence": 0.541323721408844,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-1-1",
@@ -1417,7 +1417,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context passages do not address the impact of parental leave on maximum study duration and thesis deadlines.",
+      "abstention_reason": "The provided context passages do not address the impact of parental leave on the maximum study duration and thesis deadline.",
       "confidence": 0.5415884852409363,
       "retrieval_chunk_ids": [
         "par-26-txt-1",
@@ -1460,7 +1460,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to determine which modules can be both imported and exported.",
       "confidence": 0.591684103012085,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
@@ -1503,10 +1503,10 @@
       "reference_answer": "The Profile Area is an optional part of the degree program (0 or 12 credits) defined in §6(1) and §6(4). If chosen, students take 12 credits of import modules from another scientific discipline listed in Appendix 3. §11 states that the master's program includes an internal practical module but does not define profile modules. The connection between profile modules and the import module list is established through §6(4) and Appendix 3.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "According to §20(1), the module lists, including the import module list in Appendix 3, provide information on the type of modules, their allocation to various areas of the degree program, choices among and within modules, prerequisites for participation, credits to be earned, form of examination, assessment, and expertise objectives.",
-      "abstained": false,
-      "abstention_level": null,
-      "abstention_reason": "",
+      "answer": "",
+      "abstained": true,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.5740082263946533,
       "retrieval_chunk_ids": [
         "appendix-3-txt-7",
@@ -1516,9 +1516,9 @@
         "appendix-3-tbl-appendix-3-tbl-13-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5555555555555556,
-      "answer_relevance": 0.4722365659759406,
-      "correctness": 0.0
+      "faithfulness": NaN,
+      "answer_relevance": NaN,
+      "correctness": NaN
     },
     {
       "question_id": "eval-052",
@@ -1549,7 +1549,7 @@
       "reference_answer": "The degree requires 120 credits total: 51-66 LP in compulsory elective CS modules (depending on profile area choice), 12 LP in the practical module (Project Work), 3-6 LP in seminars, 0 or 12 LP in profile area modules, 9 LP in Independent Scientific Practice, and 30 LP in the final module (27 LP thesis + 3 LP oral defense).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The shortest possible degree program curriculum consists of 30 LP Master's Thesis and 33 LP of coursework.",
+      "answer": "The shortest possible degree program curriculum has 33 LP (thesis) + 27 LP (coursework), but it is not specified what exactly this coursework consists of.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1562,9 +1562,9 @@
         "appendix-1-txt-2"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.4967759309723842,
-      "correctness": 0.22
+      "faithfulness": 0.75,
+      "answer_relevance": 0.0,
+      "correctness": 0.2
     },
     {
       "question_id": "eval-054",
@@ -1575,7 +1575,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address this specific question.",
+      "abstention_reason": "The context does not address switching to a different module after failing a compulsory elective module.",
       "confidence": 0.6443296670913696,
       "retrieval_chunk_ids": [
         "par-30-txt-1",
@@ -1621,7 +1621,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to fully answer this question, as it only addresses general examination-related provisions and specific regulations for the master's thesis.",
+      "abstention_reason": "The provided context does not contain sufficient information to compare the exam registration rules for regular exams and the thesis defense.",
       "confidence": 0.6024702787399292,
       "retrieval_chunk_ids": [
         "par-24-txt-1",
@@ -1641,7 +1641,7 @@
       "reference_answer": "For Profile Area Biology, you can import modules from B.Sc. Biology and LAaG Biology (both Dept. 17). Available modules include Current Topics in Ecology, Animal Biology, Forensic Biology, Molecular Biology and Metabolism of Prokaryotes, Synthetic Biology, Advanced Species Knowledge in Ornithology, and Philosophy of Science, Ethics, and History of Biology, among others.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can consider combining Computer Science with Biology through the module \"Statistical Bioinformatics\" (CS 543), which is a compulsory elective module. Additionally, you may be able to import relevant modules from other departments or degree programs, such as \"Data Science in Biomedicine\" or \"Introduction to Bioinformatics\".",
+      "answer": "You can consider combining Computer Science with Biology through the following modules:\n\n* Statistical Bioinformatics (CS 543)\n* Software as a Medical Device (CS 558)\n* Data Integration Specialization module (P 6) from the Import Module List\n* Data Science in Biomedicine Specialization module (P 6) from the Import Module List",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1654,9 +1654,9 @@
         "appendix-2-tbl-appendix-2-tbl-1-18"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.3333333333333333,
-      "answer_relevance": 0.8552809567659366,
-      "correctness": 0.0
+      "faithfulness": 0.25,
+      "answer_relevance": 0.9082473543810279,
+      "correctness": 0.25
     },
     {
       "question_id": "eval-058",
@@ -1664,7 +1664,7 @@
       "reference_answer": "For the exam, you must submit a medical certificate and can withdraw (§27). For the thesis, you can apply for a deadline extension of up to 20% of the processing time (§23). If the illness is prolonged, the examination committee can grant further extensions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "If you get sick during the thesis writing period, you can request an extension of the thesis writing-time up to a maximum of 20% (§23(6)). You must submit a justified petition.\n\nIf you get sick during an exam, you must give notice in writing without delay and submit a medical certificate. The examination results already available will be recognized in this case (§27(2)).",
+      "answer": "If you get sick during the thesis writing period, you can request an extension of up to 20% of the thesis writing-time upon justified petition. This does not lead to the award of additional credits.\n\nIf you get sick during an exam, you must give notice in writing without delay and submit a medical certificate. The examination results already available will be recognized in this case.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1676,9 +1676,9 @@
         "par-25-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.4,
-      "answer_relevance": 0.6501735605744526,
-      "correctness": 0.29
+      "faithfulness": 0.5,
+      "answer_relevance": 0.79066981447233,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-059",
@@ -1706,7 +1706,7 @@
       "reference_answer": "Importable modules from B.Sc. Computer Science include: Introduction to Bioinformatics, Introduction to Cryptography, Design and Administration of Databases, Graphics Programming, IT Security, NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management, and various Advanced Modules.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The following modules from B.Sc. Computer Science can be imported as compulsory elective CS modules:\n\n* Introduction to Bioinformatics (Advanced module, P 6)\n* Design and Administration of Databases (Advanced module, P 6)\n* Graphics Programming (Advanced module, P 9)\n* Advanced Module Computer Science 1 (large) (Advanced module, P 9)\n* Advanced Module Computer Science 2 (large) (Advanced module, P 9)\n* Advanced Module Computer Science 3 (large) (Advanced module, P 9)\n* Advanced Module Computer Science 4 (large) (Advanced module, P 9)\n* Advanced Module Computer Science 5 (large) (Advanced module, P 9)\n* IT Security (Advanced module, P 9)\n* Advanced Module Computer Science 1 (small) (Advanced module, P 6)\n* Advanced Module Computer Science 2 (small) (Advanced module, P 6)\n* Advanced Module Computer Science 3 (small) (Advanced module, P 6)\n* Advanced Module Computer Science 4 (small) (Advanced module, P 6)\n* Advanced Module Computer Science 5 (small) (Advanced module, P 6)\n* NoSQL Database Systems (Advanced module, P 6)\n* Software Design and Programming Techniques (Advanced module, P 6)\n* Software Quality (Advanced module, P 9)\n* Distributed Data Management (Advanced module, P 9)\n* Computer Networks (Advanced module, P 9)",
+      "answer": "Introduction to Bioinformatics, Design and Administration of Databases, Graphics Programming, Advanced Module Computer Science 1 (large), Advanced Module Computer Science 2 (large), Advanced Module Computer Science 3 (large), Advanced Module Computer Science 4 (large), Advanced Module Computer Science 5 (large), IT Security, Advanced Module Computer Science 1 (small), Advanced Module Computer Science 2 (small), Advanced Module Computer Science 3 (small), Advanced Module Computer Science 4 (small), Advanced Module Computer Science 5 (small), NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1720,8 +1720,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": 0.0
+      "answer_relevance": 0.41492855681959356,
+      "correctness": 0.6
     },
     {
       "question_id": "eval-061",
@@ -1755,7 +1755,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not provide information about the specific characteristics of the practical module (CS 697) or profile modules, nor does it explain their differences.",
       "confidence": 0.5174190998077393,
       "retrieval_chunk_ids": [
         "par-11-txt-1",
@@ -1841,7 +1841,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not address the possibility of taking import modules from multiple profile areas simultaneously.",
+      "abstention_reason": "The context does not address the possibility of taking import modules from multiple profile areas simultaneously.",
       "confidence": 0.5442405939102173,
       "retrieval_chunk_ids": [
         "appendix-3-txt-7",
@@ -1862,7 +1862,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not address the roles of the first and second examiners in the thesis evaluation.",
       "confidence": 0.453252375125885,
       "retrieval_chunk_ids": [
         "par-16-txt-1"
@@ -1878,7 +1878,7 @@
       "reference_answer": "Theoretical (T) modules in Appendix 2 include Advanced Algorithmics, Advanced Programming Concepts, Advanced Topics in Cryptography, Algorithmic Network Analysis, Compiler Construction, Computational Complexity Theory, Formal Methods in Software Engineering, Parameterized Algorithms, and Large Specialization Modules 2-5.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The following CS modules are marked as theoretical (T):\n\n1. Efficient Algorithms Advanced module T9\n2. Introduction to Cryptography and Its Applications Advanced module T6\n3. Design and Administration of Databases Advanced module T6",
+      "answer": "The following CS modules are marked as theoretical (T):\n\n* Efficient Algorithms Advanced module T9 \n* Introduction to Cryptography and Its Applications Advanced module T6 \n* Design and Administration of Databases Advanced module T6 \n* IT Security Advanced module P9 is not a match, but Computer Science 1 (large)Advanced module P9 is also not a match. However, Computer Science 2 (small)Advanced module P6 is not a match either.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1891,9 +1891,9 @@
         "appendix-4-tbl-appendix-4-tbl-1-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.8283025569089952,
-      "correctness": 0.0
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.9071449835395383,
+      "correctness": 0.57
     },
     {
       "question_id": "eval-069",
@@ -1921,7 +1921,7 @@
       "reference_answer": "For Profile Area Economics (Volkswirtschaftslehre), the import modules come from B.Sc. Economics as listed in Appendix 3. The specific available modules are defined there. The StPO does not prescribe specific CS module pairings with economics imports. Students choose their CS compulsory elective modules independently from the list in §6(2)/Appendix 2.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "For the Profile Area Economics, you can use the following modules:\n\n* Applied Institutional Economics (export module) | Specialization module | C 6\n* Development Economics: An Introduction (export module) | Specialization module | C 6\n* Introduction to Institutional Economics (export module) | Basic Module | B 6\n* Introduction to Macroeconomics | Basic Module | A 6\n* Empirical Economic Research | Basic Module | C 6\n* Foundations of Finance (export module) | Advanced module | C 6\n\nFor the Profile Area Computer Science, you can use the following modules:\n\n* Machine Learning | Advanced module | P 9\n* Design and Administration of Databases | Advanced module | P 6\n* Software Design and Programming Techniques | Advanced module | P 6",
+      "answer": "For the Profile Area Economics, you can choose from the following modules:\n\n* Applied Institutional Economics (export module) | Specialization module | C 6\n* Development Economics: An Introduction (export module) | Specialization module | C 6\n* Introduction to Institutional Economics (export module) | Basic Module | B 6\n* Introduction to Macroeconomics | Basic Module | A 6\n* Empirical Economic Research | Basic Module | C 6\n* Foundations of Finance (export module) | Advanced module | C 6\n\nFor the Profile Area Computer Science, you can choose from the following modules:\n\n* Machine Learning | Advanced module | P 9\n* Design and Administration of Databases | Advanced module | P 6\n* Graphics Programming | Advanced module | P 9\n* IT Security | Advanced module | P 9\n* Software Quality | Advanced module | P 9\n* Distributed Data Management | Advanced module | P 9\n\nNote that the import opportunities as well as possible allocation regulations and restrictions are shown on the website for the degree program (§6[9]) or in the online module handbook linked there.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1935,7 +1935,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": 0.577386689611396,
+      "answer_relevance": 0.5773866896113962,
       "correctness": 0.0
     },
     {
@@ -2016,7 +2016,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not address whether part-time students have equal access to modules compared to full-time students.",
       "confidence": 0.5394030809402466,
       "retrieval_chunk_ids": [
         "par-26-txt-1",
@@ -2104,7 +2104,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to determine the exact date of the next examination committee meeting.",
       "confidence": 0.6156331896781921,
       "retrieval_chunk_ids": [
         "par-16-txt-1",
@@ -2195,7 +2195,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not mention any specific programming languages being taught in the Neural Networks module.",
+      "abstention_reason": "The context does not mention any specific programming languages being taught in the Neural Networks module.",
       "confidence": 0.5622757077217102,
       "retrieval_chunk_ids": [
         "appendix-2-txt-5",
@@ -2376,7 +2376,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain information about the current number of students enrolled in the M.Sc. Computer Science program.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.5176972150802612,
       "retrieval_chunk_ids": [
         "par-4-txt-1",
@@ -2560,7 +2560,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context passages do not contain any information about a computer science bachelor's program at Philipps-Universität Marburg, nor do they mention if such a program is offered in English.",
       "confidence": 0.632533073425293,
       "retrieval_chunk_ids": [
         "par-5-txt-1",

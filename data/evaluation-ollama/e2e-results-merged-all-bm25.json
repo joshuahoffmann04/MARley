@@ -10,8 +10,8 @@
     "strategy": "merged_pool",
     "normalization_strategy": "bm25",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
   "threshold": 0.95,
   "level1_sweep": [
@@ -374,24 +374,24 @@
     }
   ],
   "abstention_metrics": {
-    "precision": 0.33783783783783783,
+    "precision": 0.3472222222222222,
     "recall": 1.0,
-    "f1": 0.5050505050505051,
-    "f0_5": 0.3894080996884735,
-    "false_abstention_rate": 0.6533333333333333,
-    "coverage": 0.26,
+    "f1": 0.5154639175257731,
+    "f0_5": 0.3993610223642173,
+    "false_abstention_rate": 0.6266666666666667,
+    "coverage": 0.28,
     "num_correct_abstention": 25,
-    "num_incorrect_abstention": 49,
+    "num_incorrect_abstention": 47,
     "num_missing_abstention": 0,
-    "num_answered": 26,
+    "num_answered": 28,
     "num_total": 100,
     "threshold": 0.95
   },
   "generation_metrics": {
-    "num_scored": 26,
-    "avg_faithfulness": 0.6909722222222222,
-    "avg_answer_relevance": 0.6386584819807962,
-    "avg_correctness": 0.6103846153846154
+    "num_scored": 28,
+    "avg_faithfulness": 0.7371794871794872,
+    "avg_answer_relevance": 0.6614500799962982,
+    "avg_correctness": 0.5996428571428571
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -723,7 +723,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.5698372058176037,
+      "answer_relevance": 0.6131760889977108,
       "correctness": 0.5
     },
     {
@@ -754,7 +754,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not specify the term of office for examination committee members. It only mentions that other issues, including the term of office, are governed by § 16 of the General Regulations.",
       "confidence": 0.950110099276326,
       "retrieval_chunk_ids": [
         "par-16-txt-1"
@@ -813,19 +813,19 @@
       "reference_answer": "The StPO uses a points-based grading scale. Modules are graded on a scale where at least 5 points corresponds to 'sufficient' (passing) and 0 points corresponds to 'insufficient' (failing). The overall grade is calculated as the credit-weighted mean of module grades, converted in accordance with Column (a) in the table in §28(6) of the General Regulations.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not mention the German grading scale, only referencing a points system from the General Regulations.",
+      "answer": "The grading scale from §28 of the General Regulations applies, using a points system.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.971106924396484,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0471",
         "faq-stpo-stpo-0476"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.5,
+      "answer_relevance": 0.7907104080109902,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-021",
@@ -929,7 +929,7 @@
         "faq-stpo-stpo-0782"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.695115682442372,
       "correctness": 0.67
     },
@@ -970,7 +970,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.5571532157694253,
+      "answer_relevance": 0.5640770070599938,
       "correctness": 1.0
     },
     {
@@ -1005,7 +1005,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context only addresses the maximum duration, not the maximum period.",
+      "abstention_reason": "The provided context only addresses the maximum duration (30 minutes) but not the maximum period.",
       "confidence": 0.9557340390322958,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0290"
@@ -1072,9 +1072,9 @@
         "faq-stpo-stpo-0166"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.43572317853154335,
-      "correctness": 0.67
+      "correctness": 1.0
     },
     {
       "question_id": "eval-033",
@@ -1159,7 +1159,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.9947318448598464,
-      "correctness": 0.67
+      "correctness": 0.8
     },
     {
       "question_id": "eval-037",
@@ -1190,18 +1190,18 @@
       "reference_answer": "The StPO does not specify the language of the Diploma Supplement. It only states that the rules under §35 of the General Regulations apply.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context only mentions that the StPO does not specify the language, but it also refers to the rules under §35 of the General Regulations, without stating what these rules are.",
+      "answer": "The Diploma Supplement is issued in German, as the StPO does not specify any other language.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.9571201454546889,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0527"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.5,
+      "answer_relevance": 0.9884469865119683,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-039",
@@ -1209,7 +1209,7 @@
       "reference_answer": "Yes, a student can withdraw without reason up to the registration deadline. After registration, withdrawal generally requires a valid reason.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes, according to [2], a binding examination registration may be withdrawn without stating reasons.",
+      "answer": "Yes, you can withdraw from an exam registration (before the deadline) or register for an exam and then decide not to take it (before the withdrawal deadline), both times without giving reasons.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1220,9 +1220,9 @@
         "faq-stpo-stpo-0394"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.6980909112196948,
-      "correctness": 0.67
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7013604889420618,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-040",
@@ -1256,7 +1256,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information about the specific requirements for the \"Compiler Construction\" module.",
+      "abstention_reason": "The context does not contain sufficient information about the specific module \"Compiler Construction\".",
       "confidence": 0.9545090382613068,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0056",
@@ -1301,7 +1301,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information about the specific modules for an M.Sc. Computer Science program with a specialization in AI, nor does it mention the exam formats.",
+      "abstention_reason": "The context does not contain sufficient information about the specific modules or their exam formats for an AI specialization.",
       "confidence": 0.9527081111347562,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0190"
@@ -1343,7 +1343,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "Context does not address a third attempt.",
       "confidence": 0.9626331766618275,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0342",
@@ -1389,7 +1389,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer the question.",
+      "abstention_reason": "The provided context is silent on the topic of parental leave affecting maximum study duration and thesis deadlines.",
       "confidence": 0.9562750938023927,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383"
@@ -1405,7 +1405,7 @@
       "reference_answer": "The module list in Appendix 2 defines the formal module parameters (LP, prerequisites, exam form). The module handbook (§20) provides additional details like content, learning methods, and literature, and is published online.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The module handbook contains more detailed descriptions than the module list, but they are not the same. The module list (Appendix 2) is part of the StPO.",
+      "answer": "The module handbook contains more detailed descriptions than the module list in Appendix 2. The module list in Appendix 2 is part of the StPO, while the module handbook is published separately on the program website.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1416,8 +1416,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.8187765630050036,
-      "correctness": 0.57
+      "answer_relevance": 0.6931946130358378,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-049",
@@ -1448,18 +1448,18 @@
       "reference_answer": "§23 governs the master's thesis. It must be supervised by a first reviewer appointed by the examination committee (§23(5)). The thesis must be completed within 6 months (§23(6)). §14 governs the application of modules across degree programs (import/export) and does not contain rules about conducting a thesis at a company. The StPO does not explicitly address company-based theses.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can do your thesis in the 3rd semester if you have already earned at least 66 credits by that point. \n\nRules from §23 and §14 regarding a thesis at a company are not specified.",
-      "abstained": false,
-      "abstention_level": null,
-      "abstention_reason": "",
+      "answer": "",
+      "abstained": true,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not mention specific sections (§) or their content regarding thesis rules for companies.",
       "confidence": 0.9514219860488463,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0368"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.3333333333333333,
-      "answer_relevance": 0.0,
-      "correctness": 0.25
+      "faithfulness": NaN,
+      "answer_relevance": NaN,
+      "correctness": NaN
     },
     {
       "question_id": "eval-051",
@@ -1493,7 +1493,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address this question.",
+      "abstention_reason": "The context does not address this specific question.",
       "confidence": 0.9532865092337154,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0469"
@@ -1577,7 +1577,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer the question.",
       "confidence": 0.9687792527580948,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0400",
@@ -1617,7 +1617,7 @@
       "reference_answer": "For the exam, you must submit a medical certificate and can withdraw (§27). For the thesis, you can apply for a deadline extension of up to 20% of the processing time (§23). If the illness is prolonged, the examination committee can grant further extensions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "If you get sick during the thesis writing period, you can return your thesis topic once within that time frame. \n\nHowever, if you also get sick on an exam day, you must notify in writing without delay and submit a medical certificate. If accepted, the absence is excused and previous results are preserved.",
+      "answer": "If you get sick during the thesis writing period, you can return your thesis topic once and only during the first time writing the thesis. \n\nHowever, if you also get sick on an exam day, you must notify in writing without delay and submit a medical certificate. If accepted, the absence is excused and previous results are preserved.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1630,9 +1630,9 @@
         "faq-stpo-stpo-0447"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.25,
-      "answer_relevance": 0.8506853780189992,
-      "correctness": 0.29
+      "faithfulness": 0.8333333333333334,
+      "answer_relevance": 0.79066981447233,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-059",
@@ -1678,7 +1678,7 @@
       "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": 0.6532212227055632,
-      "correctness": 0.75
+      "correctness": 0.38
     },
     {
       "question_id": "eval-061",
@@ -1686,7 +1686,7 @@
       "reference_answer": "Yes. §38 contains transitional provisions. Students who started under a previous StPO may switch to the current regulations or continue under the old ones, subject to specific conditions defined in the transitional provisions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Yes, students who began before these regulations came into force may take the master's examination under the old regulations until summer semester 2027 at the latest.",
+      "answer": "Yes. The examination committee may issue rules for the transition period that favor a voluntary switch to these regulations (new ones).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1698,9 +1698,9 @@
         "faq-stpo-stpo-0491"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.32633820131886226,
-      "correctness": 0.5
+      "faithfulness": 0.0,
+      "answer_relevance": 0.0,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-062",
@@ -1708,7 +1708,7 @@
       "reference_answer": "The practical module (CS 697, 12 LP) is a compulsory CS module focused on project work and teamwork. Profile modules (12 LP if chosen) come from other disciplines and are imported from Appendix 3 to broaden the student's interdisciplinary knowledge. The profile area is optional.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The practical module (CS 697) is part of the Practical and Seminar Modules area, whereas Profile Area Modules are a separate optional study area for import modules from another scientific discipline.",
+      "answer": "The practical module (CS 697) is considered a practical module, whereas Profile Area Modules are optional study areas for import modules from another scientific discipline.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1718,8 +1718,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.5350791882977646,
-      "correctness": 0.0
+      "answer_relevance": 0.8567512531496498,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-063",
@@ -1750,18 +1750,18 @@
       "reference_answer": "§4(1) requires proof of a relevant bachelor's degree or comparable domestic or foreign university degree. For foreign degrees, the examination committee assesses equivalence in terms of content and scope. If equivalence is not fully established, conditional admission with additional modules (Auflagenmodule) of up to 30 credits may be imposed (§4(2)). The StPO does not mention official translations or the International Office.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not specify the additional steps needed for a foreign bachelor's degree.",
+      "answer": "The examination committee decides on the comparability of your foreign degree. \n\nIf your bachelor's degree is from a foreign university and it is comparable to a German bachelor's in CS, you need to apply for admission to the M.Sc. program as an applicant with a first academic degree (§15).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.9555670319852172,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0065"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.6241803842396908,
+      "correctness": 0.33
     },
     {
       "question_id": "eval-065",
@@ -1769,7 +1769,7 @@
       "reference_answer": "§6 defines the formal program structure (module areas, credit requirements). Appendix 1 provides a recommended semester-by-semester plan that implements this structure. Following Appendix 1 is recommended but not mandatory.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The example curriculum in Appendix 1 shows an example sequence of the modularized program, but it does not necessarily reflect the actual program structure described in §6.",
+      "answer": "The example curriculum in Appendix 1 illustrates an example sequence of the modularized program, but it does not necessarily reflect the actual program structure described in §6.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1779,8 +1779,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.7441806686496025,
-      "correctness": 0.67
+      "answer_relevance": 0.3930559960723748,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-066",
@@ -1791,7 +1791,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context only provides information about the number of credits required for one profile area, but does not address whether taking import modules from multiple profile areas is allowed.",
+      "abstention_reason": "The context only provides information about the number of credits required for one profile area, but does not address taking import modules from multiple profile areas simultaneously.",
       "confidence": 0.9528149450536558,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0119"
@@ -1807,7 +1807,7 @@
       "reference_answer": "The candidate proposes an adviser and a first reviewer authorized as examiner. The candidate also has the right to propose the second reviewer (§23(5)). The first reviewer must be appointed by the examination committee. The adviser and first reviewer may be the same person. The StPO does not require that the first examiner be a professor, nor does it specify that the final grade is the average of both reviewers' grades.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The first reviewer is authorized as an examiner, but it's not explicitly stated what role they play. The second reviewer is also an examiner.",
+      "answer": "The first reviewer is authorized as an examiner, but it's not explicitly stated what role they play. The second reviewer is also an examiner, but their specific role isn't mentioned either. However, it is mentioned that the adviser and first reviewer may be the same person, which suggests a close relationship between these roles.\n\nABSTENTION: The context does not clearly define the roles of the first and second examiners in the thesis evaluation.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1819,7 +1819,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
       "answer_relevance": 0.0,
-      "correctness": 0.25
+      "correctness": 0.33
     },
     {
       "question_id": "eval-068",
@@ -1849,7 +1849,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to fully answer the question.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
       "confidence": 0.958695687978627,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0151",
@@ -1917,7 +1917,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "There is no information about how the exam rules for oral exams differ from written exams.",
+      "abstention_reason": "There is no information about the differences between oral and written exams in the provided context.",
       "confidence": 0.9599491303726091,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0400"
@@ -1982,7 +1982,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not address what happens to grades when switching from the old to the new regulations.",
       "confidence": 0.967596600913455,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0539",
@@ -2208,7 +2208,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address taking modules from another university, only mentioning recognition of academic grades and examination results under §19 of the General Regulations.",
+      "abstention_reason": "The context does not address taking modules from another university, it only mentions recognizing credits from another university (context [3]) and importing modules from other degree programs at Philipps-Universität Marburg (context [4]).",
       "confidence": 0.9566217378537198,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0478",
@@ -2368,7 +2368,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain information about switching between degree programs.",
+      "abstention_reason": "The context does not address the possibility of switching between degree programs.",
       "confidence": 0.9599914630732597,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0935",

@@ -9,8 +9,8 @@
     "strategy": "merged_pool",
     "normalization_strategy": "rrf",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
   "threshold": 0.55,
   "level1_sweep": [
@@ -204,16 +204,16 @@
     {
       "threshold": 0.55,
       "metrics": {
-        "precision": 0.4,
-        "recall": 0.48,
-        "f1": 0.4363636363636364,
-        "f0_5": 0.41379310344827586,
-        "false_abstention_rate": 0.24,
-        "coverage": 0.7,
-        "num_correct_abstention": 12,
-        "num_incorrect_abstention": 18,
-        "num_missing_abstention": 13,
-        "num_answered": 57,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.55
       }
@@ -221,16 +221,16 @@
     {
       "threshold": 0.6,
       "metrics": {
-        "precision": 0.3870967741935484,
-        "recall": 0.48,
-        "f1": 0.42857142857142855,
-        "f0_5": 0.4026845637583893,
-        "false_abstention_rate": 0.25333333333333335,
-        "coverage": 0.69,
-        "num_correct_abstention": 12,
-        "num_incorrect_abstention": 19,
-        "num_missing_abstention": 13,
-        "num_answered": 56,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.6
       }
@@ -238,16 +238,16 @@
     {
       "threshold": 0.65,
       "metrics": {
-        "precision": 0.3870967741935484,
-        "recall": 0.48,
-        "f1": 0.42857142857142855,
-        "f0_5": 0.4026845637583893,
-        "false_abstention_rate": 0.25333333333333335,
-        "coverage": 0.69,
-        "num_correct_abstention": 12,
-        "num_incorrect_abstention": 19,
-        "num_missing_abstention": 13,
-        "num_answered": 56,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.65
       }
@@ -255,16 +255,16 @@
     {
       "threshold": 0.7,
       "metrics": {
-        "precision": 0.36585365853658536,
-        "recall": 0.6,
-        "f1": 0.4545454545454546,
-        "f0_5": 0.3968253968253968,
-        "false_abstention_rate": 0.3466666666666667,
-        "coverage": 0.59,
-        "num_correct_abstention": 15,
-        "num_incorrect_abstention": 26,
-        "num_missing_abstention": 10,
-        "num_answered": 49,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.7
       }
@@ -272,16 +272,16 @@
     {
       "threshold": 0.75,
       "metrics": {
-        "precision": 0.34782608695652173,
-        "recall": 0.64,
-        "f1": 0.4507042253521127,
-        "f0_5": 0.3827751196172248,
-        "false_abstention_rate": 0.4,
-        "coverage": 0.54,
-        "num_correct_abstention": 16,
-        "num_incorrect_abstention": 30,
-        "num_missing_abstention": 9,
-        "num_answered": 45,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.75
       }
@@ -289,16 +289,16 @@
     {
       "threshold": 0.8,
       "metrics": {
-        "precision": 0.35714285714285715,
-        "recall": 0.8,
-        "f1": 0.4938271604938272,
-        "f0_5": 0.4016064257028113,
-        "false_abstention_rate": 0.48,
-        "coverage": 0.44,
-        "num_correct_abstention": 20,
-        "num_incorrect_abstention": 36,
-        "num_missing_abstention": 5,
-        "num_answered": 39,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.8
       }
@@ -306,16 +306,16 @@
     {
       "threshold": 0.85,
       "metrics": {
-        "precision": 0.32,
-        "recall": 0.96,
-        "f1": 0.4799999999999999,
-        "f0_5": 0.36923076923076925,
-        "false_abstention_rate": 0.68,
-        "coverage": 0.25,
-        "num_correct_abstention": 24,
-        "num_incorrect_abstention": 51,
-        "num_missing_abstention": 1,
-        "num_answered": 24,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.85
       }
@@ -323,16 +323,16 @@
     {
       "threshold": 0.9,
       "metrics": {
-        "precision": 0.32,
-        "recall": 0.96,
-        "f1": 0.4799999999999999,
-        "f0_5": 0.36923076923076925,
-        "false_abstention_rate": 0.68,
-        "coverage": 0.25,
-        "num_correct_abstention": 24,
-        "num_incorrect_abstention": 51,
-        "num_missing_abstention": 1,
-        "num_answered": 24,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.9
       }
@@ -340,16 +340,16 @@
     {
       "threshold": 0.95,
       "metrics": {
-        "precision": 0.32,
-        "recall": 0.96,
-        "f1": 0.4799999999999999,
-        "f0_5": 0.36923076923076925,
-        "false_abstention_rate": 0.68,
-        "coverage": 0.25,
-        "num_correct_abstention": 24,
-        "num_incorrect_abstention": 51,
-        "num_missing_abstention": 1,
-        "num_answered": 24,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "f0_5": 0.41353383458646614,
+        "false_abstention_rate": 0.21333333333333335,
+        "coverage": 0.73,
+        "num_correct_abstention": 11,
+        "num_incorrect_abstention": 16,
+        "num_missing_abstention": 14,
+        "num_answered": 59,
         "num_total": 100,
         "threshold": 0.95
       }
@@ -373,24 +373,24 @@
     }
   ],
   "abstention_metrics": {
-    "precision": 0.36231884057971014,
+    "precision": 0.390625,
     "recall": 1.0,
-    "f1": 0.5319148936170213,
-    "f0_5": 0.4152823920265781,
-    "false_abstention_rate": 0.5866666666666667,
-    "coverage": 0.31,
+    "f1": 0.5617977528089888,
+    "f0_5": 0.44483985765124556,
+    "false_abstention_rate": 0.52,
+    "coverage": 0.36,
     "num_correct_abstention": 25,
-    "num_incorrect_abstention": 44,
+    "num_incorrect_abstention": 39,
     "num_missing_abstention": 0,
-    "num_answered": 31,
+    "num_answered": 36,
     "num_total": 100,
     "threshold": 0.55
   },
   "generation_metrics": {
-    "num_scored": 31,
-    "avg_faithfulness": 0.7083333333333333,
-    "avg_answer_relevance": 0.5951792402488216,
-    "avg_correctness": 0.45645161290322583
+    "num_scored": 36,
+    "avg_faithfulness": 0.8427083333333333,
+    "avg_answer_relevance": 0.49780557651047824,
+    "avg_correctness": 0.4986111111111111
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -401,18 +401,19 @@
       "reference_answer": "The standard study period (Regelstudienzeit) is 4 semesters.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The standard study period for the master's program is 2 years.",
+      "answer": "The standard program duration is 4 semesters.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0148"
+        "faq-stpo-stpo-0148",
+        "faq-stpo-stpo-0278"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.8183783227799258,
-      "correctness": 0.0
+      "faithfulness": 0.5,
+      "answer_relevance": 0.6985891234242619,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-002",
@@ -446,10 +447,11 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context only mentions the credit range for the Practical and Seminar Modules, but does not specify the total number of credits required to complete the master's program.",
-      "confidence": 0.7,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0089"
+        "faq-stpo-stpo-0089",
+        "faq-stpo-stpo-0557"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -466,7 +468,7 @@
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0308"
       ],
@@ -481,19 +483,20 @@
       "reference_answer": "The thesis module (CS 699) comprises 30 credits: 27 for the thesis and 3 for the oral defense.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The Master's Thesis (CS 699) has 30 credits.",
+      "answer": "The thesis module comprises 30 credits in total.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0917",
+        "faq-stpo-stpo-0333",
         "faq-stpo-stpo-0090",
-        "faq-stpo-stpo-0333"
+        "faq-stpo-stpo-0305"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.8469377631783016,
+      "faithfulness": NaN,
+      "answer_relevance": 0.9114906707262721,
       "correctness": 0.5
     },
     {
@@ -506,7 +509,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0315",
         "faq-stpo-stpo-0278"
@@ -564,18 +567,19 @@
       "reference_answer": "It is a compulsory module (Pflichtmodul) classified as a practical module.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The module \"Project Work in Computer Science\" (CS 697) is compulsory.",
+      "answer": "The module \"Project Work in Computer Science\" (CS 697) is a compulsory module.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
+        "faq-stpo-stpo-0906",
         "faq-stpo-stpo-0904",
         "faq-stpo-stpo-0909",
-        "faq-stpo-stpo-0906"
+        "faq-stpo-stpo-0905"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.5305374143787879,
       "correctness": 0.67
     },
@@ -588,7 +592,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context only mentions the credit range for the Practical and Seminar Modules, but it does not specify the number of credits for the seminar module CS 610.",
+      "abstention_reason": "The provided context only mentions the credit range for the Practical and Seminar Modules in general, but not the specific credit value of the seminar module CS 610.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0089"
@@ -650,19 +654,20 @@
       "reference_answer": "The profile area is optional. Students who choose a profile area earn 12 LP from import modules listed in Appendix 3. Students who do not choose a profile area earn 0 LP in this category.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "12 credits.",
+      "answer": "0 or 12 credits. The Profile Area is optional.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0088",
-        "faq-stpo-stpo-0119"
+        "faq-stpo-stpo-0119",
+        "faq-stpo-stpo-0092"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": NaN,
-      "correctness": 0.0
+      "faithfulness": 1.0,
+      "answer_relevance": 0.0,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-014",
@@ -677,10 +682,11 @@
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0341",
-        "faq-stpo-stpo-0340"
+        "faq-stpo-stpo-0340",
+        "faq-stpo-stpo-0303"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
+      "faithfulness": 1.0,
       "answer_relevance": 0.0,
       "correctness": 0.5
     },
@@ -700,8 +706,8 @@
         "faq-stpo-stpo-0313"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.8382720864602108,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7980682527651767,
       "correctness": 0.5
     },
     {
@@ -733,7 +739,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not contain sufficient information to answer this question.",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0238"
       ],
@@ -751,7 +757,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context passages do not address this question.",
+      "abstention_reason": "The provided context passages do not contain information about the effective date of the current StPO.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0521",
@@ -768,19 +774,20 @@
       "reference_answer": "A module is passed with at least 5 points ('sufficient') in accordance with §28(2) of the General Regulations.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "At least 5 points ('sufficient').",
+      "answer": "At least 5 points ('sufficient') in accordance with §28 (2) of the General Regulations.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0324",
-        "faq-stpo-stpo-0472"
+        "faq-stpo-stpo-0472",
+        "faq-stpo-stpo-0485"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.5819358159518148,
-      "correctness": 0.67
+      "answer_relevance": 0.0,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-020",
@@ -791,7 +798,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not mention the German grading scale, only referencing a points system based on the General Regulations.",
+      "abstention_reason": "The context does not mention the German grading scale, only referencing a points system from the General Regulations.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0471",
@@ -808,17 +815,19 @@
       "reference_answer": "A failed exam can be retaken three times, for a maximum of four attempts total (one initial attempt plus three retakes).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "You can repeat a failed exam 3 times.",
+      "answer": "You may retake a failed exam three times.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0490"
+        "faq-stpo-stpo-0490",
+        "faq-stpo-stpo-0453",
+        "faq-stpo-stpo-0403"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.9835391936042909,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.9273564925485797,
       "correctness": 0.67
     },
     {
@@ -827,19 +836,20 @@
       "reference_answer": "No, there is no provision for a nonbinding examination option (Freiversuch) in this program. §29 explicitly states that a Freiversuch is not available.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "No, there is no provision for a nonbinding examination option.",
+      "answer": "No, there is no provision for a nonbinding examination option. Every exam attempt counts.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0486",
-        "faq-stpo-stpo-0487"
+        "faq-stpo-stpo-0487",
+        "faq-stpo-stpo-0488"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.0,
-      "correctness": 0.5
+      "answer_relevance": 0.6976098673452359,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-023",
@@ -851,10 +861,11 @@
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0437",
-        "faq-stpo-stpo-0438"
+        "faq-stpo-stpo-0438",
+        "faq-stpo-stpo-0439"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
@@ -886,18 +897,20 @@
       "reference_answer": "Oral examination (individual) or written examination (Klausur).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination for Neural Networks (CS 593) is an oral examination (individual) or a written examination (Klausur).",
+      "answer": "The examination for Neural Networks is either an oral examination or a written examination (Klausur).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0780"
+        "faq-stpo-stpo-0780",
+        "faq-stpo-stpo-0778",
+        "faq-stpo-stpo-0779"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.8907927065516038,
-      "correctness": 0.0
+      "faithfulness": 0.5,
+      "answer_relevance": 0.695115682442372,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-026",
@@ -911,7 +924,8 @@
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0663"
+        "faq-stpo-stpo-0663",
+        "faq-stpo-stpo-0658"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
@@ -934,7 +948,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.5433056762696803,
+      "answer_relevance": 0.5640770070599938,
       "correctness": 1.0
     },
     {
@@ -947,7 +961,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context only mentions the number of exportable modules, but not the number of elective modules.",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0956"
       ],
@@ -965,11 +979,12 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context only mentions the duration, not the period.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0290",
-        "faq-stpo-stpo-0289"
+        "faq-stpo-stpo-0289",
+        "faq-stpo-stpo-0288"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -988,7 +1003,8 @@
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0272"
+        "faq-stpo-stpo-0272",
+        "faq-stpo-stpo-0273"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
@@ -1005,7 +1021,7 @@
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0531"
       ],
@@ -1020,7 +1036,7 @@
       "reference_answer": "Yes, the structural variant of this degree program is a one-subject master's program (Ein-Fach-Masterstudiengang).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes, the program has a structural variant called \"Ein-Fachstudium\".",
+      "answer": "The program has a structural variant, which is a \"single-subject program\".",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1029,9 +1045,9 @@
         "faq-stpo-stpo-0166"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.6601970629945085,
-      "correctness": 0.0
+      "faithfulness": 1.0,
+      "answer_relevance": 0.4794239639293358,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-033",
@@ -1062,18 +1078,18 @@
       "reference_answer": "No, conditional module credits serve to fulfill conditional requirements only and do not count toward the 120 credits.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not address whether conditional modules are counted toward the 120 credits.",
-      "confidence": 0.8333333333333333,
+      "answer": "Yes.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0469"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "answer_relevance": 0.0,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-035",
@@ -1081,18 +1097,18 @@
       "reference_answer": "There are 8 conditional modules: 5 small (6 LP each) and 3 large (9 LP each).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "There are at least two conditional modules, as the question mentions \"Conditional Module 1\" and also refers to a \"Conditional Module 1 (small)\" which implies another module with a similar name.",
+      "answer": "There are 2 conditional modules, but their sizes (small or large) and credit values are not specified.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-1000"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.9152750780682898,
-      "correctness": 0.33
+      "faithfulness": 0.0,
+      "answer_relevance": 0.0,
+      "correctness": 0.44
     },
     {
       "question_id": "eval-036",
@@ -1104,10 +1120,11 @@
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0323",
-        "faq-stpo-stpo-0370"
+        "faq-stpo-stpo-0370",
+        "faq-stpo-stpo-0360"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
@@ -1120,17 +1137,17 @@
       "reference_answer": "A certificate (Zeugnis), a diploma (Urkunde), a Diploma Supplement, and a Transcript of Records.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "A certificate (Zeugnis) is issued.",
+      "answer": "A certificate (Zeugnis) is issued upon graduation.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0519"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.44205221176227916,
+      "answer_relevance": 0.8109993442674565,
       "correctness": 0.4
     },
     {
@@ -1142,11 +1159,12 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context passages do not contain sufficient information to answer this question.",
+      "abstention_reason": "The context passages do not contain sufficient information to fully answer the question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0527",
-        "faq-stpo-stpo-0526"
+        "faq-stpo-stpo-0526",
+        "faq-stpo-stpo-0038"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -1159,18 +1177,21 @@
       "reference_answer": "Yes, a student can withdraw without reason up to the registration deadline. After registration, withdrawal generally requires a valid reason.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not address this question.",
-      "confidence": 0.8333333333333333,
+      "answer": "Yes, you can withdraw without giving reasons as long as you do so before the withdrawal deadline.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0432"
+        "faq-stpo-stpo-0432",
+        "faq-stpo-stpo-0394",
+        "faq-stpo-stpo-0384",
+        "faq-stpo-stpo-0460"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.6321598976034822,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-040",
@@ -1178,18 +1199,18 @@
       "reference_answer": "The StPO governs the academic goals, program structure, and examination procedures for the M.Sc. Computer Science program at Philipps-Universität Marburg.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer the question about the scope of the StPO.",
-      "confidence": 0.5833333333333333,
+      "answer": "The scope of the StPO is not mentioned in the provided context. ABSTENTION: The topic is simply not addressed.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0332"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.0,
+      "answer_relevance": 0.0,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-041",
@@ -1266,18 +1287,19 @@
       "reference_answer": "The thesis module has 30 credits (27 thesis + 3 defense). The overall grade is the credit-weighted mean of all graded modules. Since Project Work (12 LP) and Independent Scientific Practice (9 LP) are ungraded, the graded total is 99 LP. Thus the thesis contributes 30/99, approximately 30.3%, of the overall grade.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The thesis grade counts toward the overall grade, as it is included in the credit-weighted grade calculation.",
+      "answer": "The thesis (27 LP) is included in the credit-weighted grade calculation and is the most heavily weighted single component.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0473"
+        "faq-stpo-stpo-0473",
+        "faq-stpo-stpo-0482"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.8595613580675004,
-      "correctness": 0.44
+      "answer_relevance": 0.44262101061773323,
+      "correctness": 0.25
     },
     {
       "question_id": "eval-045",
@@ -1288,10 +1310,12 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context only addresses the situation of failing the thesis twice, but does not mention a third attempt.",
+      "abstention_reason": "Context does not address a third attempt, only two attempts are mentioned.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0342"
+        "faq-stpo-stpo-0342",
+        "faq-stpo-stpo-0497",
+        "faq-stpo-stpo-0360"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -1350,19 +1374,20 @@
       "reference_answer": "The module list in Appendix 2 defines the formal module parameters (LP, prerequisites, exam form). The module handbook (§20) provides additional details like content, learning methods, and literature, and is published online.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The module handbook contains more detailed descriptions, while the module list (Appendix 2) is a part of the StPO.",
+      "answer": "The module handbook contains more detailed descriptions than the module list, which is part of the StPO. They are not the same.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0260",
-        "faq-stpo-stpo-0265"
+        "faq-stpo-stpo-0265",
+        "faq-stpo-stpo-0105"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.7747768371692684,
-      "correctness": 0.4
+      "answer_relevance": 0.8058931495378551,
+      "correctness": 0.57
     },
     {
       "question_id": "eval-049",
@@ -1396,8 +1421,8 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not provide sufficient information about the specific rules in §23 and §14 that would apply for doing a thesis at a company.",
-      "confidence": 0.6666666666666666,
+      "abstention_reason": "The context does not provide sufficient information about the specific rules in §14 that apply for doing a thesis at a company.",
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0332"
       ],
@@ -1412,18 +1437,19 @@
       "reference_answer": "The Profile Area is an optional part of the degree program (0 or 12 credits) defined in §6(1) and §6(4). If chosen, students take 12 credits of import modules from another scientific discipline listed in Appendix 3. §11 states that the master's program includes an internal practical module but does not define profile modules. The connection between profile modules and the import module list is established through §6(4) and Appendix 3.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer the question.",
-      "confidence": 0.6666666666666666,
+      "answer": "The Profile Area consists of 12 credits of import modules from another scientific discipline, which is listed in Appendix 3 as the import module list.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0223"
+        "faq-stpo-stpo-0223",
+        "faq-stpo-stpo-0265"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.656532022063614,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-052",
@@ -1434,7 +1460,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not address this question.",
+      "abstention_reason": "The context does not address this question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0469"
@@ -1450,22 +1476,18 @@
       "reference_answer": "The degree requires 120 credits total: 51-66 LP in compulsory elective CS modules (depending on profile area choice), 12 LP in the practical module (Project Work), 3-6 LP in seminars, 0 or 12 LP in profile area modules, 9 LP in Independent Scientific Practice, and 30 LP in the final module (27 LP thesis + 3 LP oral defense).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5333333333333333,
+      "answer": "The master's thesis (30 credits) and coursework credits make up the degree.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9684979838709676,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0305",
-        "faq-stpo-stpo-0054",
-        "faq-stpo-stpo-0090",
-        "faq-stpo-stpo-0355",
-        "faq-stpo-stpo-0037"
+        "faq-stpo-stpo-0305"
       ],
-      "model": "",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "model": "llama3.1:latest",
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.7202503040343117,
+      "correctness": 0.22
     },
     {
       "question_id": "eval-054",
@@ -1479,11 +1501,14 @@
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0491"
+        "faq-stpo-stpo-0491",
+        "faq-stpo-stpo-0497",
+        "faq-stpo-stpo-0499",
+        "faq-stpo-stpo-0500"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.754793552602056,
+      "answer_relevance": 0.758390508667917,
       "correctness": 0.5
     },
     {
@@ -1565,7 +1590,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not address this specific scenario of getting sick during both the thesis writing period and an exam in the same semester.",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0443"
       ],
@@ -1583,7 +1608,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not address how conditional modules affect study planning in the first semester.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383"
@@ -1599,19 +1624,21 @@
       "reference_answer": "Importable modules from B.Sc. Computer Science include: Introduction to Bioinformatics, Introduction to Cryptography, Design and Administration of Databases, Graphics Programming, IT Security, NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management, and various Advanced Modules.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Introduction to Bioinformatics, Introduction to Cryptography and Its Applications, Design and Administration of Databases, Graphics Programming, Advanced Module Computer Science 1-5 large, IT Security, NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management.",
+      "answer": "Introduction to Bioinformatics (6 LP, P), Introduction to Cryptography and Its Applications (6 LP, T), Design and Administration of Databases (6 LP, P), Graphics Programming (9 LP, P), Advanced Module Computer Science 1-5 large (9 LP each, P), Advanced Module Computer Science 1-5 small (6 LP each, P), IT Security (9 LP, P), NoSQL Database Systems (6 LP, P), Computer Networks (9 LP, P), Software Design and Programming Techniques (6 LP, P), Software Quality (9 LP, P), Distributed Data Management (9 LP, P).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.7,
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0934",
-        "faq-stpo-stpo-0936"
+        "faq-stpo-stpo-0936",
+        "faq-stpo-stpo-0932",
+        "faq-stpo-stpo-0935"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": 0.5341851756189846,
-      "correctness": 0.76
+      "answer_relevance": NaN,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-061",
@@ -1623,7 +1650,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not address this specific question.",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0539"
       ],
@@ -1642,13 +1669,13 @@
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0178"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.3804382373804476,
+      "answer_relevance": 0.5350791882977647,
       "correctness": 0.0
     },
     {
@@ -1680,18 +1707,18 @@
       "reference_answer": "§4(1) requires proof of a relevant bachelor's degree or comparable domestic or foreign university degree. For foreign degrees, the examination committee assesses equivalence in terms of content and scope. If equivalence is not fully established, conditional admission with additional modules (Auflagenmodule) of up to 30 credits may be imposed (§4(2)). The StPO does not mention official translations or the International Office.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
-      "confidence": 0.7,
+      "answer": "The examination committee (§16) decides on the comparability of the university degree.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0065"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.42954450246100273,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-065",
@@ -1699,19 +1726,21 @@
       "reference_answer": "§6 defines the formal program structure (module areas, credit requirements). Appendix 1 provides a recommended semester-by-semester plan that implements this structure. Following Appendix 1 is recommended but not mandatory.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The example sequence of the modularized program in Appendix 1 is given as an illustration of how the program structure described in §6 can be realized.",
+      "answer": "The example sequence of the modularized program is given in the degree program curriculum in Appendix 1, which suggests that it illustrates or demonstrates the program structure described in §6.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0103",
-        "faq-stpo-stpo-0558"
+        "faq-stpo-stpo-0558",
+        "faq-stpo-stpo-0553",
+        "faq-stpo-stpo-0552"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.3333333333333333,
-      "answer_relevance": 0.5193735742864151,
-      "correctness": 0.8
+      "faithfulness": 0.8,
+      "answer_relevance": 0.4014268262805383,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-066",
@@ -1722,10 +1751,11 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address this specific question.",
-      "confidence": 0.75,
+      "abstention_reason": "The provided context does not contain sufficient information to fully answer the question.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0223"
+        "faq-stpo-stpo-0223",
+        "faq-stpo-stpo-0951"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -1738,19 +1768,19 @@
       "reference_answer": "The candidate proposes an adviser and a first reviewer authorized as examiner. The candidate also has the right to propose the second reviewer (§23(5)). The first reviewer must be appointed by the examination committee. The adviser and first reviewer may be the same person. The StPO does not require that the first examiner be a professor, nor does it specify that the final grade is the average of both reviewers' grades.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The first examiner (proposed by the candidate) reviews the thesis, and the second examiner also reviews it.",
+      "answer": "The first examiner (proposed by the candidate) is also the thesis adviser, and there is no information about the role of the second examiner.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0347",
         "faq-stpo-stpo-0309"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.6944017605104849,
-      "correctness": 0.0
+      "faithfulness": 0.5,
+      "answer_relevance": 0.0,
+      "correctness": 0.29
     },
     {
       "question_id": "eval-068",
@@ -1758,20 +1788,21 @@
       "reference_answer": "Theoretical (T) modules in Appendix 2 include Advanced Algorithmics, Advanced Programming Concepts, Advanced Topics in Cryptography, Algorithmic Network Analysis, Compiler Construction, Computational Complexity Theory, Formal Methods in Software Engineering, Parameterized Algorithms, and Large Specialization Modules 2-5.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Advanced Algorithmics, Advanced Programming Concepts, Advanced Topics in Cryptography, Algorithmic Network Analysis, Compiler Construction, Computational Complexity Theory, Formal Methods in Software Engineering, and Parameterized Algorithms.",
-      "abstained": false,
-      "abstention_level": null,
-      "abstention_reason": "",
-      "confidence": 0.75,
+      "answer": "",
+      "abstained": true,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer the question about which specific modules are marked as theoretical (T) in Appendix 2.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0120",
         "faq-stpo-stpo-0933",
-        "faq-stpo-stpo-0117"
+        "faq-stpo-stpo-0117",
+        "faq-stpo-stpo-0956"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.3585934304147486,
-      "correctness": 0.94
+      "faithfulness": NaN,
+      "answer_relevance": NaN,
+      "correctness": NaN
     },
     {
       "question_id": "eval-069",
@@ -1781,17 +1812,13 @@
       "expected_abstention": false,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not address how study abroad credits interact with the maximum study duration.",
+      "confidence": 0.953125,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0151",
-        "faq-stpo-stpo-0155",
-        "faq-stpo-stpo-0162",
-        "faq-stpo-stpo-0150",
-        "faq-stpo-stpo-0152"
+        "faq-stpo-stpo-0162"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -1806,7 +1833,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not contain sufficient information to answer this question.",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0222"
       ],
@@ -1825,7 +1852,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not address this question.",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383"
       ],
@@ -1866,12 +1893,12 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question, specifically because it only mentions how imported CS modules are classified as Practical or Theoretical, but not how exportable modules from Appendix 4 are classified.",
-      "confidence": 0.8333333333333333,
+      "abstention_reason": "The context does not address how exportable modules from Appendix 4 are classified.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0953",
-        "faq-stpo-stpo-0933",
-        "faq-stpo-stpo-0956"
+        "faq-stpo-stpo-0956",
+        "faq-stpo-stpo-0933"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -1888,7 +1915,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
-      "confidence": 0.7,
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0419"
       ],
@@ -1906,8 +1933,8 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not address what happens to grades when switching from the old to the new regulations.",
-      "confidence": 0.8333333333333333,
+      "abstention_reason": "The context does not contain sufficient information about what happens to grades when switching from the old to the new regulations.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0539"
       ],
@@ -1925,8 +1952,8 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "Information about the specific tuition fee for international students is not provided.",
-      "confidence": 0.8333333333333333,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0163"
       ],
@@ -1945,10 +1972,11 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The context does not contain sufficient information to answer the question.",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0617",
-        "faq-stpo-stpo-0618"
+        "faq-stpo-stpo-0618",
+        "faq-stpo-stpo-0624"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -1987,10 +2015,11 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not address this specific question.",
-      "confidence": 0.8333333333333333,
+      "abstention_reason": "The provided context does not contain sufficient information to answer the question.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0168"
+        "faq-stpo-stpo-0168",
+        "faq-stpo-stpo-0023"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -2007,7 +2036,7 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The provided context does not contain information about the average salary for M.Sc. Computer Science graduates from Marburg.",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0006"
       ],
@@ -2048,10 +2077,12 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
-      "confidence": 0.75,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0778"
+        "faq-stpo-stpo-0778",
+        "faq-stpo-stpo-0779",
+        "faq-stpo-stpo-0784"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -2067,10 +2098,11 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
-      "confidence": 0.7,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0187"
+        "faq-stpo-stpo-0187",
+        "faq-stpo-stpo-0182"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -2086,10 +2118,11 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain information about the acceptance rate for the M.Sc. Computer Science program.",
-      "confidence": 0.75,
+      "abstention_reason": "No information about the acceptance rate is provided in the context passages.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0014"
+        "faq-stpo-stpo-0014",
+        "faq-stpo-stpo-0141"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -2105,8 +2138,8 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not address this specific question.",
-      "confidence": 0.6666666666666666,
+      "abstention_reason": "The context does not address this specific question.",
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0220"
       ],
@@ -2170,8 +2203,8 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "There is no information about online or remote study options in the provided context.",
-      "confidence": 0.75,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0086"
       ],
@@ -2213,9 +2246,10 @@
       "abstained": true,
       "abstention_level": 2,
       "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0091"
+        "faq-stpo-stpo-0091",
+        "faq-stpo-stpo-0145"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -2230,17 +2264,13 @@
       "expected_abstention": true,
       "answer": "",
       "abstained": true,
-      "abstention_level": 1,
-      "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9533577533577533,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0037",
-        "faq-stpo-stpo-0068",
-        "faq-stpo-stpo-0093",
-        "faq-stpo-stpo-0027",
-        "faq-stpo-stpo-0288"
+        "faq-stpo-stpo-0093"
       ],
-      "model": "",
+      "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
       "correctness": NaN
@@ -2300,10 +2330,11 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
-      "confidence": 0.6666666666666666,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0564"
+        "faq-stpo-stpo-0564",
+        "faq-stpo-stpo-0562"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -2319,7 +2350,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information about a student job board.",
+      "abstention_reason": "The provided context does not contain sufficient information regarding a student job board maintained by the CS department.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0085",
@@ -2385,11 +2416,12 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
-      "confidence": 0.8333333333333333,
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0004",
-        "faq-stpo-stpo-0001"
+        "faq-stpo-stpo-0001",
+        "faq-stpo-stpo-0924"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,

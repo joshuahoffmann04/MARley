@@ -10,10 +10,10 @@
     "strategy": "fusion",
     "normalization_strategy": "rrf",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
-  "threshold": 0.85,
+  "threshold": 1.0,
   "level1_sweep": [
     {
       "threshold": 0.0,
@@ -205,16 +205,16 @@
     {
       "threshold": 0.55,
       "metrics": {
-        "precision": 0.36363636363636365,
-        "recall": 0.32,
-        "f1": 0.3404255319148936,
-        "f0_5": 0.3539823008849558,
-        "false_abstention_rate": 0.18666666666666668,
-        "coverage": 0.78,
-        "num_correct_abstention": 8,
-        "num_incorrect_abstention": 14,
-        "num_missing_abstention": 17,
-        "num_answered": 61,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.55
       }
@@ -222,16 +222,16 @@
     {
       "threshold": 0.6,
       "metrics": {
-        "precision": 0.34782608695652173,
-        "recall": 0.32,
-        "f1": 0.3333333333333333,
-        "f0_5": 0.3418803418803419,
-        "false_abstention_rate": 0.2,
-        "coverage": 0.77,
-        "num_correct_abstention": 8,
-        "num_incorrect_abstention": 15,
-        "num_missing_abstention": 17,
-        "num_answered": 60,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.6
       }
@@ -239,16 +239,16 @@
     {
       "threshold": 0.65,
       "metrics": {
-        "precision": 0.34782608695652173,
-        "recall": 0.32,
-        "f1": 0.3333333333333333,
-        "f0_5": 0.3418803418803419,
-        "false_abstention_rate": 0.2,
-        "coverage": 0.77,
-        "num_correct_abstention": 8,
-        "num_incorrect_abstention": 15,
-        "num_missing_abstention": 17,
-        "num_answered": 60,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.65
       }
@@ -256,16 +256,16 @@
     {
       "threshold": 0.7,
       "metrics": {
-        "precision": 0.3333333333333333,
-        "recall": 0.44,
-        "f1": 0.37931034482758624,
-        "f0_5": 0.3503184713375796,
-        "false_abstention_rate": 0.29333333333333333,
-        "coverage": 0.67,
-        "num_correct_abstention": 11,
-        "num_incorrect_abstention": 22,
-        "num_missing_abstention": 14,
-        "num_answered": 53,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.7
       }
@@ -273,16 +273,16 @@
     {
       "threshold": 0.75,
       "metrics": {
-        "precision": 0.3055555555555556,
-        "recall": 0.44,
-        "f1": 0.36065573770491804,
-        "f0_5": 0.3254437869822485,
-        "false_abstention_rate": 0.3333333333333333,
-        "coverage": 0.64,
-        "num_correct_abstention": 11,
-        "num_incorrect_abstention": 25,
-        "num_missing_abstention": 14,
-        "num_answered": 50,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.75
       }
@@ -290,16 +290,16 @@
     {
       "threshold": 0.8,
       "metrics": {
-        "precision": 0.3404255319148936,
-        "recall": 0.64,
-        "f1": 0.4444444444444445,
-        "f0_5": 0.3755868544600939,
-        "false_abstention_rate": 0.41333333333333333,
-        "coverage": 0.53,
-        "num_correct_abstention": 16,
-        "num_incorrect_abstention": 31,
-        "num_missing_abstention": 9,
-        "num_answered": 44,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.8
       }
@@ -307,16 +307,16 @@
     {
       "threshold": 0.85,
       "metrics": {
-        "precision": 0.3484848484848485,
-        "recall": 0.92,
-        "f1": 0.5054945054945055,
-        "f0_5": 0.397923875432526,
-        "false_abstention_rate": 0.5733333333333334,
-        "coverage": 0.34,
-        "num_correct_abstention": 23,
-        "num_incorrect_abstention": 43,
-        "num_missing_abstention": 2,
-        "num_answered": 32,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.85
       }
@@ -324,16 +324,16 @@
     {
       "threshold": 0.9,
       "metrics": {
-        "precision": 0.3484848484848485,
-        "recall": 0.92,
-        "f1": 0.5054945054945055,
-        "f0_5": 0.397923875432526,
-        "false_abstention_rate": 0.5733333333333334,
-        "coverage": 0.34,
-        "num_correct_abstention": 23,
-        "num_incorrect_abstention": 43,
-        "num_missing_abstention": 2,
-        "num_answered": 32,
+        "precision": 0.375,
+        "recall": 0.24,
+        "f1": 0.2926829268292683,
+        "f0_5": 0.33707865168539325,
+        "false_abstention_rate": 0.13333333333333333,
+        "coverage": 0.84,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 10,
+        "num_missing_abstention": 19,
+        "num_answered": 65,
         "num_total": 100,
         "threshold": 0.9
       }
@@ -341,16 +341,16 @@
     {
       "threshold": 0.95,
       "metrics": {
-        "precision": 0.3484848484848485,
-        "recall": 0.92,
-        "f1": 0.5054945054945055,
-        "f0_5": 0.397923875432526,
-        "false_abstention_rate": 0.5733333333333334,
-        "coverage": 0.34,
-        "num_correct_abstention": 23,
-        "num_incorrect_abstention": 43,
-        "num_missing_abstention": 2,
-        "num_answered": 32,
+        "precision": 0.3333333333333333,
+        "recall": 0.24,
+        "f1": 0.27906976744186046,
+        "f0_5": 0.30927835051546393,
+        "false_abstention_rate": 0.16,
+        "coverage": 0.82,
+        "num_correct_abstention": 6,
+        "num_incorrect_abstention": 12,
+        "num_missing_abstention": 19,
+        "num_answered": 63,
         "num_total": 100,
         "threshold": 0.95
       }
@@ -374,24 +374,24 @@
     }
   ],
   "abstention_metrics": {
-    "precision": 0.32894736842105265,
+    "precision": 0.3333333333333333,
     "recall": 1.0,
-    "f1": 0.4950495049504951,
-    "f0_5": 0.37993920972644374,
-    "false_abstention_rate": 0.68,
-    "coverage": 0.24,
+    "f1": 0.5,
+    "f0_5": 0.3846153846153846,
+    "false_abstention_rate": 0.6666666666666666,
+    "coverage": 0.25,
     "num_correct_abstention": 25,
-    "num_incorrect_abstention": 51,
+    "num_incorrect_abstention": 50,
     "num_missing_abstention": 0,
-    "num_answered": 24,
+    "num_answered": 25,
     "num_total": 100,
-    "threshold": 0.85
+    "threshold": 1.0
   },
   "generation_metrics": {
-    "num_scored": 24,
-    "avg_faithfulness": 0.7055555555555556,
-    "avg_answer_relevance": 0.6175437320127358,
-    "avg_correctness": 0.5579166666666667
+    "num_scored": 25,
+    "avg_faithfulness": 0.75,
+    "avg_answer_relevance": 0.6320820258667943,
+    "avg_correctness": 0.6175999999999999
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -429,7 +429,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0006",
         "par-2-txt-1",
@@ -452,13 +452,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0089",
         "par-7-txt-1",
         "appendix-2-txt-9",
-        "faq-stpo-stpo-0308",
-        "faq-stpo-stpo-0557"
+        "faq-stpo-stpo-0557",
+        "faq-stpo-stpo-0308"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -475,7 +475,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0308",
         "par-13-txt-1",
@@ -498,11 +498,11 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0917",
         "par-23-txt-2",
-        "faq-stpo-stpo-0090",
+        "faq-stpo-stpo-0333",
         "par-28-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-23"
       ],
@@ -517,7 +517,7 @@
       "reference_answer": "The processing time is 6 months from the date of topic assignment.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The processing time for the master's thesis is not explicitly stated in the provided context. However, it can be inferred that the topic should be issued in a timely manner so that there is no extension of the program duration, and the candidate should receive a new topic within six weeks of notification of failure.\n\nAs for the oral defense, the maximum time allowed is 60 minutes.\n\nThe master's thesis must be completed within a thesis writing-period of 6 months.",
+      "answer": "The processing time for the master's thesis is not explicitly stated in the provided context. However, it can be inferred that the topic should be issued in a timely manner (§23(6)) and that the candidate has 6 months to complete the thesis after the topic is issued (§23(6) and [1]).\n\nThe oral defense of the master's thesis lasts maximum 60 minutes ([5]).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -530,9 +530,9 @@
         "faq-stpo-stpo-0279"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6,
-      "answer_relevance": 0.8560526569046566,
-      "correctness": 0.5
+      "faithfulness": 0.5,
+      "answer_relevance": 0.9999999999999231,
+      "correctness": 0.57
     },
     {
       "question_id": "eval-007",
@@ -590,12 +590,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "appendix-2-tbl-appendix-2-tbl-1-21",
-        "faq-stpo-stpo-0904",
+        "faq-stpo-stpo-0906",
         "appendix-2-tbl-appendix-2-tbl-1-22",
-        "faq-stpo-stpo-0909",
+        "faq-stpo-stpo-0904",
         "appendix-2-txt-24"
       ],
       "model": "",
@@ -724,7 +724,7 @@
       "reference_answer": "The topic is submitted by the first reviewer and assigned by the examination committee upon the student's request.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination committee formally assigns the topic after receiving a proposal from the first reviewer, who submits the topic on behalf of the candidate. \n\nYou have 6 months to complete the master's thesis from the date the topic is issued.",
+      "answer": "The examination committee formally assigns the topic. \n\nYou have 6 months from the date the topic is issued to complete the master's thesis.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -737,9 +737,9 @@
         "faq-stpo-stpo-0315"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.8097875513420809,
-      "correctness": 0.0
+      "faithfulness": 0.75,
+      "answer_relevance": 0.8700960763171911,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-016",
@@ -760,7 +760,7 @@
         "faq-stpo-stpo-0239"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.9839574813060592,
       "correctness": 0.4
     },
@@ -770,10 +770,10 @@
       "reference_answer": "The term of office for examination committee members is governed by §16 of the General Regulations. The StPO does not specify the exact duration.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "answer": "The term of office, chairship, quorum and other issues are governed by § 16 of the General Regulations.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0238",
@@ -783,9 +783,9 @@
         "faq-stpo-stpo-0239"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.6209651197914395,
+      "correctness": 0.33
     },
     {
       "question_id": "eval-018",
@@ -796,13 +796,13 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0521",
-        "par-23-txt-2",
-        "faq-stpo-stpo-0524",
         "par-24-txt-1",
+        "faq-stpo-stpo-0524",
+        "par-23-txt-2",
         "faq-stpo-stpo-0403"
       ],
       "model": "llama3.1:latest",
@@ -820,7 +820,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0324",
         "par-14-txt-1",
@@ -862,7 +862,7 @@
       "reference_answer": "A failed exam can be retaken three times, for a maximum of four attempts total (one initial attempt plus three retakes).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "You may repeat a failed exam three times. \n\nA failed thesis cannot be compensated by grades from other modules.",
+      "answer": "You can repeat a failed exam three times. \n\nYou can choose to take the repeat exam even if you have not failed the first one.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -872,7 +872,7 @@
         "par-30-txt-1",
         "faq-stpo-stpo-0453",
         "par-27-txt-1",
-        "faq-stpo-stpo-0330"
+        "faq-stpo-stpo-0403"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
@@ -912,12 +912,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0437",
         "par-31-txt-1",
         "faq-stpo-stpo-0438",
-        "par-27-txt-1",
+        "par-30-txt-1",
         "faq-stpo-stpo-0439"
       ],
       "model": "",
@@ -937,16 +937,16 @@
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "appendix-4-tbl-appendix-4-tbl-1-1",
+        "appendix-2-txt-3",
         "faq-stpo-stpo-0593",
+        "appendix-4-tbl-appendix-4-tbl-1-1",
         "faq-stpo-stpo-0561",
-        "par-4-txt-1",
-        "appendix-2-txt-3"
+        "faq-stpo-stpo-0594"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.9522877664574502,
-      "correctness": 0.67
+      "answer_relevance": 0.9824617400554293,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-025",
@@ -954,7 +954,7 @@
       "reference_answer": "Oral examination (individual) or written examination (Klausur).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination for Neural Networks (CS 593) is an oral examination (individual examination) or a written examination (Klausur).",
+      "answer": "The examination for Neural Networks is: Oral examination (individual) or written examination (Klausur).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -968,8 +968,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.6833450512091566,
-      "correctness": 0.0
+      "answer_relevance": 0.695115682442372,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-026",
@@ -977,7 +977,7 @@
       "reference_answer": "Distributed Systems is classified as a practical (P) module.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Distributed Systems is classified as a Practical Computer Science module, according to [2].",
+      "answer": "Distributed Systems is classified as a Practical Computer Science module, according to passage [2].",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1014,7 +1014,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.5433056762696803,
+      "answer_relevance": 0.5640770070599938,
       "correctness": 1.0
     },
     {
@@ -1027,13 +1027,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
-        "appendix-2-txt-9",
         "faq-stpo-stpo-0956",
-        "appendix-4-txt-1",
+        "par-20-txt-1",
+        "appendix-2-txt-9",
         "faq-stpo-stpo-0560",
-        "faq-stpo-stpo-0953"
+        "appendix-4-txt-1"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -1046,22 +1046,22 @@
       "reference_answer": "An individual oral exam lasts between 20 and 30 minutes.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The maximum duration for an oral exam is 30 minutes. \n\nABSTENTION: The context does not contain sufficient information to answer this question accurately, as it asks for the \"maximum period\" which could be interpreted in different ways (e.g., time limit, calendar duration).",
+      "answer": "The maximum duration for an oral exam is not specified in the provided context. However, it does mention that individual oral examinations have a minimum duration of 20 minutes and a maximum duration of 30 minutes.\n\nABSTENTION: The context does not provide information on the maximum period for an oral exam.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0290",
-        "par-23-txt-2",
+        "par-24-txt-1",
         "faq-stpo-stpo-0289",
-        "par-22-txt-1",
+        "par-23-txt-2",
         "faq-stpo-stpo-0288"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
+      "faithfulness": 0.6666666666666666,
       "answer_relevance": 0.0,
-      "correctness": 0.5
+      "correctness": 0.8
     },
     {
       "question_id": "eval-030",
@@ -1106,7 +1106,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.6428442932891913,
+      "answer_relevance": 0.6488656841184316,
       "correctness": 0.0
     },
     {
@@ -1130,7 +1130,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.23746564864804787,
-      "correctness": 0.67
+      "correctness": 1.0
     },
     {
       "question_id": "eval-033",
@@ -1142,12 +1142,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "confidence": 0.9457932692307692,
       "retrieval_chunk_ids": [
-        "appendix-2-txt-24",
         "faq-stpo-stpo-0175",
+        "par-9-txt-1",
+        "appendix-2-txt-24",
         "faq-stpo-stpo-0909",
-        "par-11-txt-1",
         "faq-stpo-stpo-0179"
       ],
       "model": "",
@@ -1165,7 +1165,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "appendix-2-txt-27",
         "faq-stpo-stpo-0469",
@@ -1188,7 +1188,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "appendix-2-txt-9",
         "faq-stpo-stpo-1000",
@@ -1222,7 +1222,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.9947318448598464,
-      "correctness": 0.67
+      "correctness": 0.8
     },
     {
       "question_id": "eval-037",
@@ -1234,7 +1234,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0519",
         "par-14-txt-1",
@@ -1266,7 +1266,7 @@
         "faq-stpo-stpo-0038"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.8415430946627648,
       "correctness": 0.67
     },
@@ -1276,7 +1276,7 @@
       "reference_answer": "Yes, a student can withdraw without reason up to the registration deadline. After registration, withdrawal generally requires a valid reason.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes. According to [3], a binding examination registration may be withdrawn without stating reasons, provided it is done before the deadline set by the examination committee.",
+      "answer": "Yes. According to [3], you can withdraw without giving reasons as long as you do so before the withdrawal deadline.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1284,13 +1284,13 @@
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0432",
         "par-27-txt-1",
-        "faq-stpo-stpo-0384",
+        "faq-stpo-stpo-0394",
         "par-26-txt-1",
-        "faq-stpo-stpo-0385"
+        "faq-stpo-stpo-0384"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.6980909112196948,
+      "answer_relevance": 0.7629080538655684,
       "correctness": 0.0
     },
     {
@@ -1303,7 +1303,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5833333333333333,
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0332",
         "par-13-txt-1",
@@ -1395,13 +1395,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0473",
         "par-23-txt-2",
-        "faq-stpo-stpo-0463",
+        "faq-stpo-stpo-0482",
         "par-28-txt-1",
-        "faq-stpo-stpo-0482"
+        "faq-stpo-stpo-0463"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -1414,7 +1414,7 @@
       "reference_answer": "The master's thesis can only be repeated once; a second repetition is excluded (§23(8)). After a second failed attempt, the student definitively fails and loses the right to take examinations in this degree program (§31).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "A second repetition of the master's thesis is excluded, which would lead to final failure (as stated in passage [1]).",
+      "answer": "A second repetition of the master's thesis is excluded. This would lead to final failure.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1427,9 +1427,9 @@
         "faq-stpo-stpo-0360"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.37454558134472044,
-      "correctness": 0.5
+      "faithfulness": 0.5,
+      "answer_relevance": 0.6847135619163257,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-046",
@@ -1441,13 +1441,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "confidence": 0.9606894841269841,
       "retrieval_chunk_ids": [
-        "appendix-3-tbl-appendix-3-tbl-1-1",
+        "appendix-4-txt-1",
         "faq-stpo-stpo-0927",
-        "appendix-3-txt-1",
         "faq-stpo-stpo-0934",
-        "appendix-4-txt-1"
+        "par-20-txt-1",
+        "appendix-3-tbl-appendix-3-tbl-1-1"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -1464,7 +1464,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383",
         "par-23-txt-2",
@@ -1483,22 +1483,22 @@
       "reference_answer": "The module list in Appendix 2 defines the formal module parameters (LP, prerequisites, exam form). The module handbook (§20) provides additional details like content, learning methods, and literature, and is published online.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The module handbook contains more detailed descriptions than the module list, which is part of the StPO. It's published separately on the program website.",
+      "answer": "The module handbook contains more detailed descriptions than the module list, which is part of the StPO. The module handbook is published separately on the program website.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "appendix-2-txt-24",
         "faq-stpo-stpo-0260",
-        "appendix-4-txt-1",
+        "par-20-txt-1",
+        "appendix-2-txt-24",
         "faq-stpo-stpo-0265",
-        "faq-stpo-stpo-0105"
+        "appendix-4-txt-1"
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.6666666666666666,
       "answer_relevance": 0.6931946130358378,
-      "correctness": 0.4
+      "correctness": 0.33
     },
     {
       "question_id": "eval-049",
@@ -1533,7 +1533,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9760624679979518,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0332",
         "par-23-txt-2",
@@ -1556,13 +1556,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
-        "appendix-2-txt-25",
+        "appendix-3-tbl-appendix-3-tbl-13-1",
         "faq-stpo-stpo-0223",
-        "appendix-3-txt-7",
-        "faq-stpo-stpo-0927",
-        "appendix-3-tbl-appendix-3-tbl-13-1"
+        "appendix-2-txt-25",
+        "faq-stpo-stpo-0265",
+        "appendix-3-txt-7"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -1602,7 +1602,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5333333333333333,
+      "confidence": 0.9684979838709676,
       "retrieval_chunk_ids": [
         "appendix-1-tbl-appendix-1-tbl-2-1",
         "faq-stpo-stpo-0305",
@@ -1621,7 +1621,7 @@
       "reference_answer": "Yes. §30(3) explicitly permits the one-time change of up to two definitively failed compulsory elective modules. This means that if you have exhausted all repeat attempts for a compulsory elective module, you can switch to a different module instead of losing your examination rights, but this option is limited to two modules total.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Yes, the one-time change of up to two definitively failed compulsory elective modules is permitted.",
+      "answer": "Yes, according to §30(3), you are permitted to make one-time change of up to two definitively failed compulsory elective modules.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1635,8 +1635,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.4445273933516354,
-      "correctness": 0.67
+      "answer_relevance": 0.5919259589069045,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-055",
@@ -1670,7 +1670,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0392",
@@ -1717,7 +1717,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0443",
         "par-23-txt-2",
@@ -1739,13 +1739,13 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address how conditional modules affect study planning in the first semester.",
+      "abstention_reason": "The context does not contain sufficient information about how conditional modules affect study planning in the first semester.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383",
-        "par-23-txt-1",
-        "faq-stpo-stpo-0560",
         "par-24-txt-1",
+        "faq-stpo-stpo-0560",
+        "par-23-txt-1",
         "faq-stpo-stpo-1002"
       ],
       "model": "llama3.1:latest",
@@ -1763,7 +1763,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-1-1",
         "faq-stpo-stpo-0934",
@@ -1786,12 +1786,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0539",
-        "par-29-txt-1",
+        "par-13-txt-1",
         "faq-stpo-stpo-0513",
-        "par-38-txt-1",
+        "par-31-txt-1",
         "faq-stpo-stpo-0537"
       ],
       "model": "",
@@ -1809,12 +1809,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
-        "appendix-2-tbl-appendix-2-tbl-1-21",
         "faq-stpo-stpo-0178",
+        "par-9-txt-1",
+        "appendix-2-tbl-appendix-2-tbl-1-21",
         "faq-stpo-stpo-0176",
-        "par-11-txt-1",
         "faq-stpo-stpo-0195"
       ],
       "model": "",
@@ -1832,12 +1832,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "confidence": 0.9457932692307692,
       "retrieval_chunk_ids": [
-        "appendix-2-txt-24",
         "faq-stpo-stpo-0087",
+        "par-14-txt-1",
+        "appendix-2-txt-24",
         "faq-stpo-stpo-0112",
-        "par-4-txt-3",
         "faq-stpo-stpo-0492"
       ],
       "model": "",
@@ -1855,7 +1855,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.7,
+      "confidence": 0.9765625000000001,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0065",
         "par-3-txt-1",
@@ -1874,21 +1874,21 @@
       "reference_answer": "§6 defines the formal program structure (module areas, credit requirements). Appendix 1 provides a recommended semester-by-semester plan that implements this structure. Following Appendix 1 is recommended but not mandatory.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The degree program is more research oriented. An example sequence of the modularized program is given in the degree program curriculum, which is presented in Appendix 1.",
+      "answer": "The shortest possible degree program curriculum with content examples is presented in Appendix 1, but it changes after the date that the program is started or an extension. This suggests that the example curriculum in Appendix 1 may not reflect the actual program structure as described in §6 (program structure).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "appendix-1-tbl-appendix-1-tbl-1-1",
+        "appendix-1-tbl-appendix-1-tbl-2-1",
         "faq-stpo-stpo-0103",
+        "appendix-1-txt-2",
         "faq-stpo-stpo-0558",
-        "par-6-txt-4",
-        "appendix-1-tbl-appendix-1-tbl-2-1"
+        "appendix-1-tbl-appendix-1-tbl-1-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.4353409247211129,
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.0,
       "correctness": 0.4
     },
     {
@@ -1901,7 +1901,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-12-1",
         "faq-stpo-stpo-0223",
@@ -1924,7 +1924,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0347",
         "par-23-txt-1",
@@ -1947,7 +1947,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-2-tbl-appendix-2-tbl-1-2",
         "faq-stpo-stpo-0120",
@@ -1969,14 +1969,14 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "There is no information provided about how study abroad credits interact with the maximum study duration.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
-        "faq-stpo-stpo-0151",
+        "faq-stpo-stpo-0162",
         "par-8-txt-1",
         "appendix-3-txt-4",
-        "faq-stpo-stpo-0155",
-        "faq-stpo-stpo-0162"
+        "faq-stpo-stpo-0151",
+        "faq-stpo-stpo-0155"
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
@@ -1993,7 +1993,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-13-1",
         "faq-stpo-stpo-0222",
@@ -2016,7 +2016,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383",
         "par-14-txt-1",
@@ -2062,11 +2062,11 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
         "faq-stpo-stpo-0953",
-        "faq-stpo-stpo-0933",
+        "faq-stpo-stpo-0956",
         "par-30-txt-1",
         "appendix-3-txt-1"
       ],
@@ -2085,7 +2085,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0419",
         "par-4-txt-3",
@@ -2108,7 +2108,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0539",
         "par-14-txt-1",
@@ -2131,7 +2131,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0163",
         "par-8-txt-1",
@@ -2154,13 +2154,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-2-txt-14",
         "faq-stpo-stpo-0617",
-        "appendix-2-txt-21",
+        "appendix-2-txt-5",
         "faq-stpo-stpo-0618",
-        "appendix-2-txt-6"
+        "appendix-2-txt-21"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -2177,7 +2177,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0386",
         "par-24-txt-1",
@@ -2200,13 +2200,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0168",
         "par-6-txt-3",
-        "faq-stpo-stpo-0247",
+        "faq-stpo-stpo-0023",
         "par-8-txt-1",
-        "faq-stpo-stpo-0023"
+        "faq-stpo-stpo-0247"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -2223,7 +2223,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0006",
         "par-2-txt-1",
@@ -2269,7 +2269,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-2-txt-16",
         "faq-stpo-stpo-0778",
@@ -2292,13 +2292,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0187",
         "par-12-txt-1",
-        "faq-stpo-stpo-0407",
+        "faq-stpo-stpo-0182",
         "par-24-txt-1",
-        "faq-stpo-stpo-0182"
+        "faq-stpo-stpo-0407"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -2315,13 +2315,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0014",
         "par-4-txt-1",
         "appendix-2-tbl-appendix-2-tbl-1-21",
-        "faq-stpo-stpo-0021",
-        "faq-stpo-stpo-0141"
+        "faq-stpo-stpo-0141",
+        "faq-stpo-stpo-0021"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -2338,13 +2338,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
-        "appendix-3-txt-1",
         "faq-stpo-stpo-0220",
-        "faq-stpo-stpo-0041",
         "par-4-txt-2",
-        "faq-stpo-stpo-0478"
+        "faq-stpo-stpo-0041",
+        "par-8-txt-1",
+        "appendix-3-txt-1"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -2361,12 +2361,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "confidence": 0.953125,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0035",
-        "par-17-txt-1",
+        "par-8-txt-1",
         "faq-stpo-stpo-0869",
-        "par-25-txt-1",
+        "par-17-txt-1",
         "faq-stpo-stpo-0177"
       ],
       "model": "",
@@ -2407,7 +2407,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "appendix-3-txt-5",
         "faq-stpo-stpo-0086",
@@ -2453,7 +2453,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "appendix-2-txt-9",
         "faq-stpo-stpo-0091",
@@ -2476,13 +2476,13 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.5,
+      "confidence": 0.9533577533577533,
       "retrieval_chunk_ids": [
         "appendix-2-tbl-appendix-2-tbl-1-21",
+        "faq-stpo-stpo-0093",
         "faq-stpo-stpo-0037",
-        "faq-stpo-stpo-0068",
         "par-7-txt-1",
-        "faq-stpo-stpo-0093"
+        "faq-stpo-stpo-0068"
       ],
       "model": "",
       "faithfulness": NaN,
@@ -2499,7 +2499,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9838709677419354,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-1-1",
         "faq-stpo-stpo-0014",
@@ -2545,12 +2545,12 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.6666666666666666,
+      "confidence": 0.9692307692307693,
       "retrieval_chunk_ids": [
         "appendix-2-tbl-appendix-2-tbl-1-1",
         "faq-stpo-stpo-0564",
         "appendix-2-tbl-appendix-2-tbl-1-21",
-        "faq-stpo-stpo-0563",
+        "faq-stpo-stpo-0562",
         "appendix-2-txt-24"
       ],
       "model": "",
@@ -2567,7 +2567,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "There is no information in the provided context about a student job board maintained by the CS department.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 1.0,
       "retrieval_chunk_ids": [
         "appendix-1-tbl-appendix-1-tbl-1-1",
@@ -2591,7 +2591,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.75,
+      "confidence": 0.9841269841269842,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0149",
         "par-16-txt-1",
@@ -2637,7 +2637,7 @@
       "abstained": true,
       "abstention_level": 1,
       "abstention_reason": "retrieval confidence below threshold",
-      "confidence": 0.8333333333333333,
+      "confidence": 0.9919354838709679,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0004",
         "par-5-txt-1",

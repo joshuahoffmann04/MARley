@@ -10,8 +10,8 @@
     "strategy": "fusion",
     "normalization_strategy": "rrf",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
   "threshold": 0.5,
   "level1_sweep": [
@@ -374,24 +374,24 @@
     }
   ],
   "abstention_metrics": {
-    "precision": 0.5,
-    "recall": 0.92,
-    "f1": 0.647887323943662,
-    "f0_5": 0.5502392344497609,
-    "false_abstention_rate": 0.30666666666666664,
-    "coverage": 0.54,
-    "num_correct_abstention": 23,
-    "num_incorrect_abstention": 23,
-    "num_missing_abstention": 2,
-    "num_answered": 52,
+    "precision": 0.55,
+    "recall": 0.88,
+    "f1": 0.676923076923077,
+    "f0_5": 0.5945945945945945,
+    "false_abstention_rate": 0.24,
+    "coverage": 0.6,
+    "num_correct_abstention": 22,
+    "num_incorrect_abstention": 18,
+    "num_missing_abstention": 3,
+    "num_answered": 57,
     "num_total": 100,
     "threshold": 0.5
   },
   "generation_metrics": {
-    "num_scored": 52,
-    "avg_faithfulness": 0.6235507246376811,
-    "avg_answer_relevance": 0.5816838151331094,
-    "avg_correctness": 0.4671153846153846
+    "num_scored": 57,
+    "avg_faithfulness": 0.6656974969474969,
+    "avg_answer_relevance": 0.5796418755326854,
+    "avg_correctness": 0.4954385964912281
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -507,8 +507,8 @@
         "faq-stpo-stpo-0333"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.8469377631783016,
+      "faithfulness": 0.5,
+      "answer_relevance": 0.8470598592782433,
       "correctness": 0.5
     },
     {
@@ -517,7 +517,7 @@
       "reference_answer": "The processing time is 6 months from the date of topic assignment.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "You have 6 months from the date the topic is issued to complete the master's thesis. \n\nThe general standard program duration for the master's degree program in computer science is 4 semesters, and you should start working on the master's thesis in the 4th semester.\n\nABSTENTION: The context does not specify a processing time for the master's thesis.",
+      "answer": "You have 6 months to complete the master's thesis, as stated in §23(6). The topic of the thesis must be issued by the university and can be extended up to 20% if justified. \n\nThe processing time for the master's thesis is not explicitly mentioned in the provided context passages.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -530,8 +530,8 @@
         "faq-stpo-stpo-0555"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.0,
+      "faithfulness": 0.75,
+      "answer_relevance": 0.8237182475026197,
       "correctness": 0.4
     },
     {
@@ -600,7 +600,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.0,
-      "answer_relevance": 0.0,
+      "answer_relevance": NaN,
       "correctness": 0.67
     },
     {
@@ -632,7 +632,7 @@
       "reference_answer": "Two subtests: a seminar lecture (weight: 1 credit) and a written analysis (weight: 2 credits).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination for Selected Advanced Topics in Computer Science (Seminar) (CS 610) consists of two subtests: Seminar lecture (weight: 1 credit) and Written analysis (schriftliche Ausarbeitung) (weight: 2 credits).",
+      "answer": "The examination for Selected Advanced Topics in Computer Science (Seminar) consists of two subtests: Seminar lecture (weight: 1 credit) and Written analysis (schriftliche Ausarbeitung) (weight: 2 credits).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -645,9 +645,9 @@
         "appendix-2-txt-13"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.25,
-      "answer_relevance": 0.8007623618810794,
-      "correctness": 0.5
+      "faithfulness": 1.0,
+      "answer_relevance": 0.6990437003633277,
+      "correctness": 0.8
     },
     {
       "question_id": "eval-012",
@@ -655,7 +655,7 @@
       "reference_answer": "Students need between 51 and 66 credits in compulsory elective modules in computer science, depending on whether they study a profile area (51-54 LP with profile area, 63-66 LP without).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "At least one module each in Theoretical Computer Science and Practical Computer Science must be completed, but the total number of Compulsory Elective Modules in Computer Science is not explicitly stated. However, it can range from 51 to 66 credits depending on the options taken.",
+      "answer": "At least one module each in Theoretical Computer Science and Practical Computer Science must be completed, which corresponds to at least 6 credits.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -669,8 +669,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.8602539005503235,
-      "correctness": 0.57
+      "answer_relevance": 0.7995610851858842,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-013",
@@ -678,7 +678,7 @@
       "reference_answer": "The profile area is optional. Students who choose a profile area earn 12 LP from import modules listed in Appendix 3. Students who do not choose a profile area earn 0 LP in this category.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "12 credits.",
+      "answer": "0 or 12 credits. The Profile Area is optional.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -691,9 +691,9 @@
         "appendix-3-tbl-appendix-3-tbl-9-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.40033066469704276,
-      "correctness": 0.0
+      "faithfulness": 1.0,
+      "answer_relevance": 0.0,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-014",
@@ -738,7 +738,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.3333333333333333,
-      "answer_relevance": 0.6302385700244014,
+      "answer_relevance": 0.676502148677299,
       "correctness": 0.5
     },
     {
@@ -770,7 +770,7 @@
       "reference_answer": "The term of office for examination committee members is governed by §16 of the General Regulations. The StPO does not specify the exact duration.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The departmental council appoints the examination committee. \n\nABSTENTION: The provided context does not contain sufficient information to answer this question.",
+      "answer": "The departmental council appoints the examination committee (§16(1)).\n\nABSTENTION: The provided context does not contain sufficient information to answer this question.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -842,7 +842,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.718059778213501,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0471",
@@ -908,7 +908,7 @@
       "reference_answer": "The exam is deemed failed and graded with 0 points ('insufficient'). In serious cases, the examination committee can exclude the student from further exams.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "If a student is caught cheating in an exam, the course or examination in question will be deemed failed (0 points) according to § 28(2) of the General Regulations. In serious cases, the examination committee can exclude the candidate from taking further examinations, causing the examination entitlement in the degree program to expire.",
+      "answer": "If a student is caught cheating in an exam, they may be excluded from taking further exams, causing their examination entitlement to expire. In serious cases, this can happen.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -921,9 +921,9 @@
         "faq-stpo-stpo-0439"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.75,
+      "faithfulness": 0.6666666666666666,
       "answer_relevance": 0.9999999999998753,
-      "correctness": 0.4
+      "correctness": 0.33
     },
     {
       "question_id": "eval-024",
@@ -945,7 +945,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.922113792859471,
+      "answer_relevance": 0.9824617400554293,
       "correctness": 1.0
     },
     {
@@ -967,7 +967,7 @@
         "appendix-2-txt-19"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.695115682442372,
       "correctness": 0.5
     },
@@ -977,10 +977,10 @@
       "reference_answer": "Distributed Systems is classified as a practical (P) module.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to classify Distributed Systems (CS 513) as either theoretical or practical.",
+      "answer": "Distributed Systems is classified as Practical Computer Science, marked 'P'.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.7822688221931458,
       "retrieval_chunk_ids": [
         "appendix-2-txt-7",
@@ -990,9 +990,9 @@
         "appendix-2-tbl-appendix-2-tbl-1-15"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5792550290239368,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-027",
@@ -1023,10 +1023,10 @@
       "reference_answer": "Appendix 2 lists 42 compulsory elective (WP) modules.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context passages do not contain sufficient information to answer the question.",
+      "answer": "Appendix 2 lists two Conditional Modules (Auflagenmodul 4 and Auflagenmodul 5), but it is unclear how many total elective modules are listed. However, the example curriculum in [2] shows approximately 3-4 elective modules per semester for the first three semesters.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.691126823425293,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
@@ -1036,9 +1036,9 @@
         "faq-stpo-stpo-0251"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.0,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-029",
@@ -1059,7 +1059,7 @@
         "faq-stpo-stpo-0273"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
+      "faithfulness": 0.5,
       "answer_relevance": 0.9398337299554159,
       "correctness": 0.0
     },
@@ -1092,7 +1092,7 @@
       "reference_answer": "Yes, students have the right to inspect their examination documents after the results are announced.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes, the rules under §37 of the General Regulations apply regarding inspection of examination documents.",
+      "answer": "Yes. The rules under §37 of the General Regulations apply regarding inspection of examination documents.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1106,7 +1106,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.6368228865057817,
+      "answer_relevance": 0.6250204418885281,
       "correctness": 0.0
     },
     {
@@ -1115,7 +1115,7 @@
       "reference_answer": "Yes, the structural variant of this degree program is a one-subject master's program (Ein-Fach-Masterstudiengang).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Yes. The master's program in Computer Science corresponds to the structural variant of a 'single-subject program'.",
+      "answer": "The master's program in Computer Science corresponds to the structural variant of a 'single-subject program'.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1129,8 +1129,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.36963733523704484,
-      "correctness": 0.67
+      "answer_relevance": 0.43572317853154335,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-033",
@@ -1138,7 +1138,7 @@
       "reference_answer": "The practical module trains students in project work, teamwork, independent learning, project management, and documentation skills.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The internal practical module (CS 697) consists of Project Work Computer Science. It is a compulsory module with 12 LP that includes tasks such as elaboration, adaptation, extension, and development of problem-relevant methods, project control and monitoring methods, documentation, and presentation of IT projects for users and third parties.",
+      "answer": "The internal practical module, which includes Project Work Computer Science (CS 697), allows students to work on an extensive task from computer science in a team. This involves elaboration, adaptation, extension and development of problem-relevant methods, as well as learning, planning and working independently, project control and monitoring, and documentation and presentation of IT projects for users and third parties.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1151,9 +1151,9 @@
         "appendix-2-tbl-appendix-2-tbl-1-22"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.8175488128426123,
-      "correctness": 0.36
+      "faithfulness": 0.0,
+      "answer_relevance": 0.7604794574362935,
+      "correctness": 0.55
     },
     {
       "question_id": "eval-034",
@@ -1164,7 +1164,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context passages do not contain sufficient information to answer this question.",
+      "abstention_reason": "The context passages do not address whether conditional modules are counted towards the 120 credits.",
       "confidence": 0.7116146087646484,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-1000",
@@ -1184,7 +1184,7 @@
       "reference_answer": "There are 8 conditional modules: 5 small (6 LP each) and 3 large (9 LP each).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "There are two conditional modules mentioned in the context: Conditional Module 1 (small) and Conditional Module 2 (small), as well as Conditional Module 2 (large). Therefore, there are at least three conditional modules. However, it is not specified if \"Conditional Module 1 (small)\" is a separate entity or just an alternative name for one of the other two.\n\nABSTENTION: The context does not provide sufficient information to give a precise answer.",
+      "answer": "There are two conditional modules mentioned in the context: Conditional Module 1 (small) and Conditional Module 2 (small), as well as Conditional Module 2 (large). Therefore, there are at least three conditional modules. However, only two of them have specific information provided about them.\n\nThe German name for Conditional Module 2 is 'Auflagenmodul 2' (either small or large), but the context does not provide a clear distinction between the two.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1197,9 +1197,9 @@
         "faq-stpo-stpo-1031"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6,
+      "faithfulness": 0.5,
       "answer_relevance": 0.0,
-      "correctness": 0.29
+      "correctness": 0.33
     },
     {
       "question_id": "eval-036",
@@ -1222,7 +1222,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.0,
-      "correctness": 0.67
+      "correctness": 0.8
     },
     {
       "question_id": "eval-037",
@@ -1253,10 +1253,10 @@
       "reference_answer": "The StPO does not specify the language of the Diploma Supplement. It only states that the rules under §35 of the General Regulations apply.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
+      "answer": "The university does not specify the language of the Diploma Supplement.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.775422215461731,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0527",
@@ -1266,9 +1266,9 @@
         "faq-stpo-stpo-0525"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.0,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-039",
@@ -1299,7 +1299,7 @@
       "reference_answer": "The StPO governs the academic goals, program structure, and examination procedures for the M.Sc. Computer Science program at Philipps-Universität Marburg.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The StPO (Strafprozessordnung, or German Code of Criminal Procedure) does not specify the contents of the certificate (Answer from [1]) and does not specify when the certificate is issued (Answer from [5]). \n\nABSTENTION: The provided context does not contain sufficient information to answer the question about the scope of the StPO.",
+      "answer": "The StPO (Strafprozessordnung, or German Code of Criminal Procedure) does not specify the contents of the certificate (Answer from [1]) and does not specify when the certificate is issued (Answer from [5]). \n\nThe scope of the StPO is related to criminal procedure.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1312,7 +1312,7 @@
         "faq-stpo-stpo-0521"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
+      "faithfulness": 0.0,
       "answer_relevance": 0.0,
       "correctness": 0.33
     },
@@ -1322,7 +1322,7 @@
       "reference_answer": "Compiler Construction (CS 551) has no formal prerequisites but recommends knowledge from basic CS modules. The exam is an oral examination (individual) or written examination (Klausur).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "None. Skills taught in the Theoretical Computer Science module are recommended. It is tested through In-class written examination (Klausur) or oral examination (individual examination).",
+      "answer": "None. Skills taught in the Theoretical Computer Science module are recommended. It is examined through In-class written examination (Klausur) or oral examination (individual examination).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1336,8 +1336,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.0,
-      "correctness": 0.5
+      "answer_relevance": 0.4167553039517758,
+      "correctness": 0.29
     },
     {
       "question_id": "eval-042",
@@ -1348,7 +1348,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not provide sufficient information to determine which 9-credit elective modules have no prerequisites.",
       "confidence": 0.5617288947105408,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-1-1",
@@ -1368,7 +1368,7 @@
       "reference_answer": "Relevant modules include Artificial Intelligence (CS 592, 6 LP), Neural Networks (CS 593, 6 LP), and Machine Learning (importable from B.Sc. Data Science, 9 LP). Exams are typically oral or written examinations.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "To specialize in AI, you can consider taking the following modules:\n\n1. CS592 Artificial Intelligence - This is a compulsory elective module that covers advanced topics in AI.\n2. CS624 Computer Science 5 (Großes Vertiefungsmodul Informatik) - This is an advanced module that focuses on a selected specialty area of computer science, which can be tailored to AI.\n\nThe exam formats for these modules are:\n\n* CS592 Artificial Intelligence: Oral examination (individual) or written examination (Klausur)\n* CS624 Computer Science 5: In-class-written examination (Klausur) or oral examination (individualexamination)\n\nNote that the skills taught in the advanced modules, depending on the topic, are recommended for these courses.",
+      "answer": "You can take CS592 Artificial Intelligence, which is a compulsory elective module with an advanced level of practical computer science. The examination format for this module is oral examination (individual) or written examination (Klausur).\n\nAdditionally, you may want to consider taking CS624, which is also related to AI and has an advanced in-depth knowledge and skills in a selected specialty area of artificial intelligence.\n\nHowever, please note that the specific modules and their exam formats are subject to change, so it's always best to check with your study advisor for the most up-to-date information.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1381,8 +1381,8 @@
         "appendix-2-txt-7"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": 0.8072465766623732,
+      "faithfulness": 0.2857142857142857,
+      "answer_relevance": 0.6165028566439242,
       "correctness": 0.0
     },
     {
@@ -1406,7 +1406,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.578411776715933,
-      "correctness": 0.4
+      "correctness": 0.67
     },
     {
       "question_id": "eval-045",
@@ -1414,7 +1414,7 @@
       "reference_answer": "The master's thesis can only be repeated once; a second repetition is excluded (§23(8)). After a second failed attempt, the student definitively fails and loses the right to take examinations in this degree program (§31).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Failing your thesis on the third attempt leads to final failure. \n\nHowever, note that according to §30(2), you may retake failed examinations three times. Therefore, you can still try to pass your thesis a fourth time.\n\nBut failing it twice already means final failure (as per [1] and [5]).",
+      "answer": "Failing your thesis on the third attempt leads to final failure because you've exhausted all attempts to repeat it.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1428,8 +1428,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.7017363233811499,
-      "correctness": 0.44
+      "answer_relevance": 0.9900933695643408,
+      "correctness": 0.33
     },
     {
       "question_id": "eval-046",
@@ -1437,7 +1437,7 @@
       "reference_answer": "Yes. You can import modules like Efficient Algorithms or Machine Learning from B.Sc. Data Science (Appendix 3), and certain M.Sc. CS modules like those listed in Appendix 4 can be exported to other programs.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Yes, according to §14(1), modules can be imported from other degree programs as \"import modules\" if they offer the same content and examination rules, which is summarized in Appendix 3. Additionally, according to [2], additional import modules beyond the regular opportunities can be approved in individual cases with the agreement of the offering department or institution.",
+      "answer": "Yes, you can import a module from B.Sc. Data Science according to [3] and export a module to that program as long as the department agrees, which is stated in both [1] and [5].",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1450,9 +1450,9 @@
         "appendix-4-txt-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
-      "answer_relevance": 0.6684823536898566,
-      "correctness": 0.5
+      "faithfulness": 0.4,
+      "answer_relevance": 0.8947093091606475,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-047",
@@ -1463,7 +1463,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information regarding how parental leave affects the maximum study duration and thesis deadline.",
+      "abstention_reason": "The provided context does not contain sufficient information regarding how parental leave affects maximum study duration and thesis deadlines.",
       "confidence": 0.6330474615097046,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0429",
@@ -1483,10 +1483,10 @@
       "reference_answer": "The module list in Appendix 2 defines the formal module parameters (LP, prerequisites, exam form). The module handbook (§20) provides additional details like content, learning methods, and literature, and is published online.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer the question about the specific relationship between the module handbook and the module list in Appendix 2.",
+      "answer": "The module list in Appendix 2 is part of the StPO, while the module handbook contains more detailed descriptions and is published separately on the program website.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.8328500390052795,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
@@ -1496,9 +1496,9 @@
         "faq-stpo-stpo-0265"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.8435485700287012,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-049",
@@ -1509,7 +1509,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "There is no information about specific modules that can be both imported and exported.",
+      "abstention_reason": "There is no information about which modules can be both imported and exported.",
       "confidence": 0.728026270866394,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
@@ -1529,10 +1529,10 @@
       "reference_answer": "§23 governs the master's thesis. It must be supervised by a first reviewer appointed by the examination committee (§23(5)). The thesis must be completed within 6 months (§23(6)). §14 governs the application of modules across degree programs (import/export) and does not contain rules about conducting a thesis at a company. The StPO does not explicitly address company-based theses.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not provide sufficient information about specific rules for doing a thesis at a company.",
+      "answer": "The master's thesis can be written at an external institution. The topic should be issued in a timely manner such that there is no extension of the program duration. \n\nTo write the thesis at a company, you must consult the General Regulations for details on writing the thesis at an external institution.\n\nYou must submit the thesis to the examination committee or to an office designated by it in 3 printed copies as well as in digital form in accordance with the specifications of the examination committee.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.5004703402519226,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0332",
@@ -1542,9 +1542,9 @@
         "faq-stpo-stpo-0320"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.5,
+      "answer_relevance": 0.32359740553903865,
+      "correctness": 0.36
     },
     {
       "question_id": "eval-051",
@@ -1552,7 +1552,7 @@
       "reference_answer": "The Profile Area is an optional part of the degree program (0 or 12 credits) defined in §6(1) and §6(4). If chosen, students take 12 credits of import modules from another scientific discipline listed in Appendix 3. §11 states that the master's program includes an internal practical module but does not define profile modules. The connection between profile modules and the import module list is established through §6(4) and Appendix 3.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The Profile Area is optional and consists of 0 or 12 credits, which can be chosen from the import modules listed in Appendix 3. These import modules are based on other degree programs and their examination rules. The current import opportunities for each Profile Area (Geography, Mathematics, Physics) can be found on the website for the degree program or in the online module handbook linked there.",
+      "answer": "The Profile Area is optional and consists of 0 or 12 credits, which can be fulfilled by choosing import modules from another scientific discipline. The current import opportunities are shown on the website for the degree program (§6[9]) or in the online module handbook linked there.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1565,9 +1565,9 @@
         "appendix-3-tbl-appendix-3-tbl-12-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.8333333333333334,
-      "answer_relevance": 0.51097126325143,
-      "correctness": 0.44
+      "faithfulness": 1.0,
+      "answer_relevance": 0.2297243937995456,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-052",
@@ -1578,7 +1578,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address the question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.6134200096130371,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0469",
@@ -1598,7 +1598,7 @@
       "reference_answer": "The degree requires 120 credits total: 51-66 LP in compulsory elective CS modules (depending on profile area choice), 12 LP in the practical module (Project Work), 3-6 LP in seminars, 0 or 12 LP in profile area modules, 9 LP in Independent Scientific Practice, and 30 LP in the final module (27 LP thesis + 3 LP oral defense).",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The master's thesis is worth 30 credits, which includes an additional 3 credits for the oral defense. The remaining 27 credits are from coursework.",
+      "answer": "The Master's Thesis has 30 credits, but it is not clear from the provided information how many coursework credits make up the degree. However, based on the example degree program curriculum in Appendix 1, it appears that the total number of credits required for the degree is 120 LP (30 + 90).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1611,9 +1611,9 @@
         "appendix-1-tbl-appendix-1-tbl-1-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.6808252506787236,
-      "correctness": 0.18
+      "faithfulness": 0.0,
+      "answer_relevance": 0.7352908400316704,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-054",
@@ -1621,7 +1621,7 @@
       "reference_answer": "Yes. §30(3) explicitly permits the one-time change of up to two definitively failed compulsory elective modules. This means that if you have exhausted all repeat attempts for a compulsory elective module, you can switch to a different module instead of losing your examination rights, but this option is limited to two modules total.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Yes, you can switch to a different module instead of repeating. The one-time change is permitted for up to two definitively failed compulsory elective modules.",
+      "answer": "Yes. The one-time change of up to two definitively failed compulsory elective modules is permitted.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1635,7 +1635,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.6740662073412181,
+      "answer_relevance": 0.758390508667917,
       "correctness": 0.5
     },
     {
@@ -1644,10 +1644,10 @@
       "reference_answer": "For Profile Area Biology, you can import modules from B.Sc. Biology and LAaG Biology (Dept. 17). Among the profile areas, only Mathematics and Geography offer master-level source programs. Mathematics imports from M.Sc. Mathematics and M.Sc. Economic Mathematics; Geography from M.Sc. Physical Geography and M.Sc. Economic Geography. Economics and Business Administration only have bachelor-level source programs.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The following profile areas offer modules at the master's level:\n\n* Mathematics (modules like Algebraic Topology I, Differential Geometry I, etc.)\n* Economic Mathematics (modules like Financial Mathematics II, Probability Theory, etc.)\n\nNote that this information is based on context passage [2].",
-      "abstained": false,
-      "abstention_level": null,
-      "abstention_reason": "",
+      "answer": "",
+      "abstained": true,
+      "abstention_level": 2,
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.6568524241447449,
       "retrieval_chunk_ids": [
         "appendix-3-tbl-appendix-3-tbl-9-1",
@@ -1657,9 +1657,9 @@
         "faq-stpo-stpo-0097"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.6902953215453586,
-      "correctness": 0.2
+      "faithfulness": NaN,
+      "answer_relevance": NaN,
+      "correctness": NaN
     },
     {
       "question_id": "eval-056",
@@ -1670,7 +1670,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
+      "abstention_reason": "There is no information in the provided context about how the exam registration rules differ between regular exams and the thesis defense.",
       "confidence": 0.6295774579048157,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0392",
@@ -1690,7 +1690,7 @@
       "reference_answer": "For Profile Area Biology, you can import modules from B.Sc. Biology and LAaG Biology (both Dept. 17). Available modules include Current Topics in Ecology, Animal Biology, Forensic Biology, Molecular Biology and Metabolism of Prokaryotes, Synthetic Biology, Advanced Species Knowledge in Ornithology, and Philosophy of Science, Ethics, and History of Biology, among others.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can import modules from B.Sc. Biology and LAaG Biology into the Computer Science program. Some example modules for Profile Area Biology include Current Topics in Ecology, Biochemistry I, Animal Biology, Digital Light Microscopy, and more. For the complete list, see Appendix 3.\n\nIn terms of computer science modules specifically, you can take Software Evolution (CS 563) and Statistical Bioinformatics (CS 543), which are both compulsory elective modules in practical computer science.",
+      "answer": "You can import modules from B.Sc. Biology and LAaG Biology into the Computer Science program. Example modules include Current Topics in Ecology, Biochemistry I, Animal Biology, Digital Light Microscopy, and more. For the complete list, see Appendix 3.\n\nThe modules CS 563 Software Evolution and CS 543 Statistical Bioinformatics are also available as compulsory elective modules in the Computer Science program.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1703,9 +1703,9 @@
         "appendix-2-txt-22"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": 0.8413022440721454,
-      "correctness": 0.25
+      "faithfulness": 0.875,
+      "answer_relevance": 0.873381281578554,
+      "correctness": 0.33
     },
     {
       "question_id": "eval-058",
@@ -1713,7 +1713,7 @@
       "reference_answer": "For the exam, you must submit a medical certificate and can withdraw (§27). For the thesis, you can apply for a deadline extension of up to 20% of the processing time (§23). If the illness is prolonged, the examination committee can grant further extensions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You need to notify the examination committee in writing without delay for both situations. For illness-related absences, you must submit a medical certificate.\n\nFor the thesis, if it's not submitted on time, it will be graded as 'insufficient' (0 points).\n\nSince you're sick during the thesis writing period and an exam in the same semester, the rules for absence due to illness apply to both situations. You need to notify the examination committee in writing without delay and submit a medical certificate for each situation.\n\nThe overall grade for the master's examination is calculated from the mean value of the module evaluations weighted by credits (LP), but this doesn't directly address your question about failing the thesis or exams due to illness.",
+      "answer": "According to §26 Family support, accommodations for hardships and informal part-time study, if you can credibly demonstrate that you are unable to take the examination due to illness, the examination committee will provide accommodations by taking appropriate measures. \n\nAdditionally, according to §27 Absence, withdrawal, fraud, violation of regulations (2), in case of illness, a medical certificate must be submitted and notice of the reason asserted for the absence must be given in writing without delay.\n\nSo, if you get sick during the thesis writing period and an exam in the same semester, you should submit a medical certificate and notify the examination committee in writing. They will then decide on accommodations or other measures to support you.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1727,7 +1727,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": 0.5984578287025585,
+      "answer_relevance": 0.298740283086623,
       "correctness": 0.0
     },
     {
@@ -1739,7 +1739,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information about how conditional modules specifically affect study planning in the first semester.",
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
       "confidence": 0.5645762085914612,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383",
@@ -1759,7 +1759,7 @@
       "reference_answer": "Importable modules from B.Sc. Computer Science include: Introduction to Bioinformatics, Introduction to Cryptography, Design and Administration of Databases, Graphics Programming, IT Security, NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management, and various Advanced Modules.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Introduction to Bioinformatics, Introduction to Cryptography and Its Applications, Design and Administration of Databases, Graphics Programming, Advanced Module Computer Science 1-5 large, Advanced Module Computer Science 1-5 small, IT Security, NoSQL Database Systems, Computer Networks, Software Design and Programming Techniques, Software Quality, Distributed Data Management.",
+      "answer": "Introduction to Bioinformatics (6 LP, P); Introduction to Cryptography and Its Applications (6 LP, T); Design and Administration of Databases (6 LP, P); Graphics Programming (9 LP, P); Advanced Module Computer Science 1-5 large (9 LP each, P); Advanced Module Computer Science 1-5 small (6 LP each, P); IT Security (9 LP, P); NoSQL Database Systems (6 LP, P); Computer Networks (9 LP, P); Software Design and Programming Techniques (6 LP, P); Software Quality (9 LP, P); Distributed Data Management (9 LP, P).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1772,9 +1772,9 @@
         "appendix-3-txt-2"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.3946424496203484,
-      "correctness": 0.62
+      "faithfulness": NaN,
+      "answer_relevance": NaN,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-061",
@@ -1797,7 +1797,7 @@
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
       "answer_relevance": 0.3892865942665645,
-      "correctness": 0.0
+      "correctness": 0.4
     },
     {
       "question_id": "eval-062",
@@ -1805,7 +1805,7 @@
       "reference_answer": "The practical module (CS 697, 12 LP) is a compulsory CS module focused on project work and teamwork. Profile modules (12 LP if chosen) come from other disciplines and are imported from Appendix 3 to broaden the student's interdisciplinary knowledge. The profile area is optional.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The practical module (CS 697) is part of the Practical and Seminar Modules area. Profile modules are separate optional study areas for import modules from another scientific discipline, not related to the practical module.\n\nAdditionally, according to §11 of the General Regulations, with program-specific details in §6 of the StPO, there are general rules for profile modules that apply in addition to the provisions mentioned in [1].",
+      "answer": "The practical module (CS 697) is part of the Practical and Seminar Modules area. Profile modules are separate optional study areas for import modules from another scientific discipline, not related to the practical module.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1818,9 +1818,9 @@
         "faq-stpo-stpo-0180"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 0.6666666666666666,
       "answer_relevance": 0.8983385438800134,
-      "correctness": 0.29
+      "correctness": 0.33
     },
     {
       "question_id": "eval-063",
@@ -1842,7 +1842,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": 0.7332822580443601,
+      "answer_relevance": NaN,
       "correctness": 0.0
     },
     {
@@ -1874,7 +1874,7 @@
       "reference_answer": "§6 defines the formal program structure (module areas, credit requirements). Appendix 1 provides a recommended semester-by-semester plan that implements this structure. Following Appendix 1 is recommended but not mandatory.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The shortest possible degree program curriculum with content examples is presented in Appendix 1. This example curriculum changes after the date that the program is started or an extension, but it serves as a representation of the modularized program.",
+      "answer": "The shortest possible degree program curriculum with content examples is presented in Appendix 1. This example curriculum changes after the date that the program is started or an extension, and elective modules are only an example selection for which alternatives are possible.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1888,7 +1888,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.47742173592793496,
+      "answer_relevance": 0.0,
       "correctness": 0.57
     },
     {
@@ -1900,7 +1900,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address the possibility of taking import modules from multiple profile areas simultaneously.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer the question.",
       "confidence": 0.7437137365341187,
       "retrieval_chunk_ids": [
         "appendix-3-txt-7",
@@ -1920,7 +1920,7 @@
       "reference_answer": "The candidate proposes an adviser and a first reviewer authorized as examiner. The candidate also has the right to propose the second reviewer (§23(5)). The first reviewer must be appointed by the examination committee. The adviser and first reviewer may be the same person. The StPO does not require that the first examiner be a professor, nor does it specify that the final grade is the average of both reviewers' grades.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The first reviewer must be appointed by the examination committee for the examination of master's theses. The first reviewer is proposed by the candidate, but their appointment is confirmed by the examination committee.\n\nThe role of the first reviewer is not explicitly stated in the provided context. However, it can be inferred that they are involved in evaluating the thesis, as they submit the topic to the examination committee for assignment and ensure that a timely topic is issued if the candidate does not find an adviser and a first reviewer.\n\nThe second reviewer is also proposed by the candidate and has the right to evaluate the thesis.",
+      "answer": "The first reviewer must be appointed by the examination committee for the examination of master's theses. The first reviewer is proposed by the candidate, but their appointment is confirmed by the examination committee. \n\nThe first reviewer is responsible for submitting the topic of the master's thesis to the examination committee and assigning it. They also have the role of adviser.\n\nThe second reviewer is proposed by the candidate and has no further details mentioned in the context passages.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1933,9 +1933,9 @@
         "faq-stpo-stpo-0239"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": 0.6931680059701008,
-      "correctness": 0.0
+      "faithfulness": 0.5,
+      "answer_relevance": NaN,
+      "correctness": 0.4
     },
     {
       "question_id": "eval-068",
@@ -1956,7 +1956,7 @@
         "appendix-4-tbl-appendix-4-tbl-3-1"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.0,
+      "faithfulness": 0.8888888888888888,
       "answer_relevance": NaN,
       "correctness": 0.94
     },
@@ -1966,7 +1966,7 @@
       "reference_answer": "The StPO does not explicitly state that time spent abroad does not count against the maximum study duration. §5(3) mentions learning agreements with the department and host university for study abroad. Credit recognition for courses completed abroad would follow the General Regulations on recognition of achievements.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The program will recognize credits earned abroad as specified in the learning agreement. The learning agreement is binding on the parties involved.\n\nIf the examination committee requires additional coursework for admission, the degree program may be extended accordingly. A maximum of 30 credits of additional coursework and/or examination grades can be required for admission.\n\nABSTENTION: The provided context does not contain sufficient information to determine how study abroad credits interact with the maximum study duration.",
+      "answer": "The program will recognize credits earned abroad as specified in the learning agreement. The learning agreement is binding on the parties involved.\n\nIf a student earns more credits than required, it does not affect the maximum number of additional credits that can be required for admission (up to 30 credits). However, if the examination committee requires these additional credits for admission, the degree program may be extended accordingly.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1979,9 +1979,9 @@
         "faq-stpo-stpo-0037"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.0,
-      "correctness": 0.5
+      "faithfulness": 0.5,
+      "answer_relevance": 0.6322043863041927,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-070",
@@ -1989,7 +1989,7 @@
       "reference_answer": "For Profile Area Economics (Volkswirtschaftslehre), the import modules come from B.Sc. Economics as listed in Appendix 3. The specific available modules are defined there. The StPO does not prescribe specific CS module pairings with economics imports. Students choose their CS compulsory elective modules independently from the list in §6(2)/Appendix 2.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Profile Area Economics allows importing modules from the B.Sc. Macroeconomics program (Dept. 02). Relevant CS modules for combining with economics include Cloud Computing, Project Management for Software Development, Specialization Module Business Systems, and others as listed in context [4]. \n\nHowever, to determine which specific CS modules are relevant, you should check the website for the degree program or the online module handbook linked there (as mentioned in contexts [1] and [5]) for possible allocation regulations and restrictions.",
+      "answer": "The Profile Area Economics allows importing modules from the B.Sc. Macroeconomics (Dept. 02) program. The CS modules that can be imported as compulsory elective CS modules are not relevant here, but rather we need to look at the import opportunities for economics.\n\nFrom the B.Sc. Macroeconomics program, the following export modules can be imported: Applied Institutional Economics, Development Economics: An Introduction, Introduction to Institutional Economics, Introduction to Macroeconomics, Empirical Economic Research, and Foundations of Finance.\n\nTo combine CS with these economics modules, you would need to choose relevant CS modules from the list of compulsory elective CS modules. However, since we don't have a specific list of CS modules that can be combined with economics, I recommend checking the website for the degree program (§6[9]) or the online module handbook linked there for more information on import opportunities and regulations.\n\nIt's also worth noting that some of the export modules mentioned above are classified as C 6, which might have specific allocation regulations and restrictions.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -2003,7 +2003,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": NaN,
-      "answer_relevance": 0.7994939626373797,
+      "answer_relevance": 0.6101355533793426,
       "correctness": 0.0
     },
     {
@@ -2035,10 +2035,10 @@
       "reference_answer": "Oral exams last 20-30 minutes, are conducted individually, and are assessed by one examiner and one observer. Written exams (Klausur) last 60-120 minutes and can be graded by a single examiner. Both follow the same grading scale and repetition rules.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to fully answer this question.",
+      "answer": "The exam form for each module is specified in the module list. For written exams, alternatives include e-examinations and multiple-choice questions. \n\nFor oral exams, individual tests and the oral defense of the master's thesis are possible.\n\nThe main difference between oral and written exams seems to be that oral exams can take different forms (individual tests or oral defense of the master's thesis), while written exams have more specific formats (written examinations, e-examinations, multiple-choice questions, written analyses, and the master's thesis).",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.6427225470542908,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0285",
@@ -2050,7 +2050,7 @@
       "model": "llama3.1:latest",
       "faithfulness": NaN,
       "answer_relevance": NaN,
-      "correctness": NaN
+      "correctness": 0.0
     },
     {
       "question_id": "eval-073",
@@ -2061,7 +2061,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to determine which exportable modules from Appendix 4 are also classified as theoretical.",
+      "abstention_reason": "The context does not provide information about the classification of the exportable modules into theoretical or non-theoretical categories.",
       "confidence": 0.7243900895118713,
       "retrieval_chunk_ids": [
         "appendix-4-txt-1",
@@ -2084,7 +2084,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address whether part-time students have access to the same modules as full-time students.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
       "confidence": 0.6243691444396973,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0419",
@@ -2107,7 +2107,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not address what happens to your grades if you switch from the old StPO to the new one.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
       "confidence": 0.5475083589553833,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0513",
@@ -2176,7 +2176,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to determine the exact date of the next examination committee meeting.",
       "confidence": 0.6156331896781921,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0386",
@@ -2222,7 +2222,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context passages do not contain sufficient information to answer the question about the average salary for M.Sc. Computer Science graduates from Marburg.",
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
       "confidence": 0.5688406825065613,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0004",
@@ -2268,7 +2268,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not mention any specific programming languages being taught in the Neural Networks (CS 593) module.",
+      "abstention_reason": "The context does not contain sufficient information to answer the question.",
       "confidence": 0.5622757077217102,
       "retrieval_chunk_ids": [
         "appendix-2-txt-5",
@@ -2291,7 +2291,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "There is no information provided about specific deadlines for module registration each semester.",
+      "abstention_reason": "There is no information about specific deadlines for module registration each semester in the provided context passages.",
       "confidence": 0.8181196451187134,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0187",
@@ -2311,10 +2311,10 @@
       "reference_answer": "",
       "category": "unanswerable",
       "expected_abstention": true,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer the question about the acceptance rate for the M.Sc. Computer Science program.",
+      "answer": "The general admission requirement for the M.Sc. Computer Science is proof of completion of a relevant bachelor's degree program in the field of computer science or proof of a comparable domestic or foreign university degree providing professional qualifications.\n\nTo be admitted with a non-computer science degree, you need to have at least 90 credits from mathematics and computer science modules, with at least 12 credits from mathematics and 72 credits from computer science.\n\nThe entire M.Sc. Computer Science program has 120 credits in total.\n\nYes, graduates are qualified to be admitted to a doctoral degree program.\n\nABSTENTION: The acceptance rate for the M.Sc. Computer Science program is not mentioned in the provided context.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.6184658408164978,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0021",
@@ -2337,7 +2337,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not contain sufficient information regarding import modules from other universities, such as the University of Giessen.",
       "confidence": 0.6077168583869934,
       "retrieval_chunk_ids": [
         "appendix-3-txt-1",
@@ -2498,7 +2498,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer the question about switching from M.Sc. Computer Science to M.Sc. Data Science.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.5927493572235107,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0014",
@@ -2636,7 +2636,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
       "confidence": 0.6575651168823242,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0004",

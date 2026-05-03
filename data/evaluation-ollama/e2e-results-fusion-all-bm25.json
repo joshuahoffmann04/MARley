@@ -10,8 +10,8 @@
     "strategy": "fusion",
     "normalization_strategy": "rrf",
     "k": 5,
-    "k_rrf": 1,
-    "k_rrf_hybrid": 1
+    "k_rrf": 60,
+    "k_rrf_hybrid": 60
   },
   "threshold": 0.95,
   "level1_sweep": [
@@ -374,24 +374,24 @@
     }
   ],
   "abstention_metrics": {
-    "precision": 0.33783783783783783,
+    "precision": 0.352112676056338,
     "recall": 1.0,
-    "f1": 0.5050505050505051,
-    "f0_5": 0.3894080996884735,
-    "false_abstention_rate": 0.6533333333333333,
-    "coverage": 0.26,
+    "f1": 0.5208333333333333,
+    "f0_5": 0.40453074433656955,
+    "false_abstention_rate": 0.6133333333333333,
+    "coverage": 0.29,
     "num_correct_abstention": 25,
-    "num_incorrect_abstention": 49,
+    "num_incorrect_abstention": 46,
     "num_missing_abstention": 0,
-    "num_answered": 26,
+    "num_answered": 29,
     "num_total": 100,
     "threshold": 0.95
   },
   "generation_metrics": {
-    "num_scored": 26,
-    "avg_faithfulness": 0.71875,
-    "avg_answer_relevance": 0.5128402786112972,
-    "avg_correctness": 0.4646153846153846
+    "num_scored": 29,
+    "avg_faithfulness": 0.693452380952381,
+    "avg_answer_relevance": 0.5437801093822137,
+    "avg_correctness": 0.5141379310344828
   },
   "generator_model": "llama3.1:latest",
   "judge_batch_size": 20,
@@ -402,7 +402,7 @@
       "reference_answer": "The standard study period (Regelstudienzeit) is 4 semesters.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The standard study period for the master's program is 4 semesters. \n\nThe master's thesis must be completed within a thesis writing-period of 6 months.",
+      "answer": "The standard program duration is 4 semesters.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -416,8 +416,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.8499540462263168,
-      "correctness": 0.67
+      "answer_relevance": 0.6985891234242619,
+      "correctness": 1.0
     },
     {
       "question_id": "eval-002",
@@ -724,7 +724,7 @@
       "reference_answer": "The topic is submitted by the first reviewer and assigned by the examination committee upon the student's request.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination committee formally assigns the topic. \n\nYou have 6 months from the date the topic is issued to complete the master's thesis.",
+      "answer": "The examination committee formally assigns the topic, after receiving a proposal from the candidate's first reviewer.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -737,9 +737,9 @@
         "faq-stpo-stpo-0315"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.7671255261696825,
-      "correctness": 0.4
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.6516715273758006,
+      "correctness": 0.67
     },
     {
       "question_id": "eval-016",
@@ -747,7 +747,7 @@
       "reference_answer": "The examination committee consists of 7 members: 4 professors, 1 scientific staff member, and 2 students.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Seven members: four professors, one research assistant, and two students.",
+      "answer": "The examination committee has seven members: four professors, one research assistant, and two students.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -760,8 +760,8 @@
         "faq-stpo-stpo-0091"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": 0.5424429999049668,
+      "faithfulness": 1.0,
+      "answer_relevance": 0.9821623749113907,
       "correctness": 0.86
     },
     {
@@ -839,10 +839,10 @@
       "reference_answer": "The StPO uses a points-based grading scale. Modules are graded on a scale where at least 5 points corresponds to 'sufficient' (passing) and 0 points corresponds to 'insufficient' (failing). The overall grade is calculated as the credit-weighted mean of module grades, converted in accordance with Column (a) in the table in §28(6) of the General Regulations.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The grading details are defined in §28 of the General Regulations. The StPO references the General Regulations for the specific grading scale and grade descriptions.",
-      "abstained": false,
-      "abstention_level": null,
-      "abstention_reason": "",
+      "answer": "",
+      "abstained": true,
+      "abstention_level": 2,
+      "abstention_reason": "The context does not mention a specific German grading scale.",
       "confidence": 0.968582933793658,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0471",
@@ -852,9 +852,9 @@
         "appendix-2-txt-24"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.6741671320350822,
-      "correctness": 0.4
+      "faithfulness": NaN,
+      "answer_relevance": NaN,
+      "correctness": NaN
     },
     {
       "question_id": "eval-021",
@@ -885,10 +885,10 @@
       "reference_answer": "No, there is no provision for a nonbinding examination option (Freiversuch) in this program. §29 explicitly states that a Freiversuch is not available.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "Context does not address the question of whether there is an exception for a valid medical reason that would allow a student to take a nonbinding exam attempt. However, it does state that if you withdraw with a valid medical reason, your previous examination results are recognized and the attempt is not counted.",
+      "answer": "No, there is no provision for a nonbinding examination option.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.9582977558522798,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0487",
@@ -898,9 +898,9 @@
         "faq-stpo-stpo-0460"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.5,
+      "answer_relevance": 0.0,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-023",
@@ -931,7 +931,7 @@
       "reference_answer": "Algorithm Engineering carries 9 credits (LP).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Algorithm Engineering (CS 628) has 9 credits.",
+      "answer": "9 credits.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -945,7 +945,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.9522877664574502,
+      "answer_relevance": NaN,
       "correctness": 1.0
     },
     {
@@ -954,7 +954,7 @@
       "reference_answer": "Oral examination (individual) or written examination (Klausur).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The examination for Neural Networks (CS 593) is an oral examination (individual examination) or a written examination (Klausur).",
+      "answer": "The examination for Neural Networks (CS 593) is an oral examination (individual examination) or in-class written examination (Klausur).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -968,7 +968,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.8216408660069886,
+      "answer_relevance": 0.8908005342121053,
       "correctness": 0.0
     },
     {
@@ -977,7 +977,7 @@
       "reference_answer": "Distributed Systems is classified as a practical (P) module.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "Distributed Systems is classified as a Practical Computer Science module, marked 'P' for Advanced module in practical computer science.",
+      "answer": "Distributed Systems is classified as a Practical Computer Science module, marked 'P' in Appendix 2 List of modules.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -990,9 +990,9 @@
         "appendix-2-tbl-appendix-2-tbl-1-15"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
+      "faithfulness": 1.0,
       "answer_relevance": 0.6700389841821747,
-      "correctness": 0.67
+      "correctness": 1.0
     },
     {
       "question_id": "eval-027",
@@ -1046,10 +1046,10 @@
       "reference_answer": "An individual oral exam lasts between 20 and 30 minutes.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "answer": "The maximum duration for an oral exam is not specified in the provided context. However, it does provide information on the minimum duration for an oral exam, which is 20 minutes.\n\nABSTENTION: The context only mentions the minimum duration (20 minutes) and does not specify a maximum duration for an oral exam.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.9561639843099664,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0290",
@@ -1059,9 +1059,9 @@
         "faq-stpo-stpo-0288"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.0,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-030",
@@ -1115,7 +1115,7 @@
       "reference_answer": "Yes, the structural variant of this degree program is a one-subject master's program (Ein-Fach-Masterstudiengang).",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "The master's program in Computer Science corresponds to the structural variant of a 'single-subject program'. \n\nYes.",
+      "answer": "The master's program in Computer Science corresponds to the structural variant of a 'single-subject program'. \n\nYes. The thesis must address a delimited problem in the subject area of computer science.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1128,8 +1128,8 @@
         "faq-stpo-stpo-0353"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.5,
-      "answer_relevance": 0.43572317853154335,
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.27829279226821674,
       "correctness": 0.67
     },
     {
@@ -1164,7 +1164,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not explicitly state whether conditional modules are counted towards the 120 total credits.",
+      "abstention_reason": "The context does not explicitly address whether conditional modules are counted toward the 120 total.",
       "confidence": 0.9544815079644529,
       "retrieval_chunk_ids": [
         "appendix-2-txt-27",
@@ -1207,7 +1207,7 @@
       "reference_answer": "If the thesis is not submitted by the deadline (including any approved extension), it is graded as 'insufficient' (0 points) in accordance with §28(2) of the General Regulations.",
       "category": "direct",
       "expected_abstention": false,
-      "answer": "If the thesis is not submitted on time, it will be graded as \"insufficient\" (0 points) in accordance with § 28(2) of the General Regulations.",
+      "answer": "If the master's thesis is not submitted on time, it will be graded as \"insufficient\" (0 points) in accordance with § 28(2) of the General Regulations.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1221,8 +1221,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.0,
-      "correctness": 0.67
+      "answer_relevance": 0.9387737580403707,
+      "correctness": 0.86
     },
     {
       "question_id": "eval-037",
@@ -1256,7 +1256,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer this question.",
       "confidence": 0.957008531684176,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0527",
@@ -1391,7 +1391,7 @@
       "reference_answer": "The thesis module has 30 credits (27 thesis + 3 defense). The overall grade is the credit-weighted mean of all graded modules. Since Project Work (12 LP) and Independent Scientific Practice (9 LP) are ungraded, the graded total is 99 LP. Thus the thesis contributes 30/99, approximately 30.3%, of the overall grade.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The thesis (27 LP) is included in the credit-weighted grade calculation. The oral defense (3 LP) is also graded and included in the overall grade calculation. \n\nABSTENTION: I don't have information on how the thesis contributes to the overall grade, only that it is included in the calculation.",
+      "answer": "The thesis (27 LP) is included in the credit-weighted grade calculation. The oral defense (3 LP) is also graded and included in the overall grade calculation. \n\nThe overall grade must receive at least 5 points (grade of \"sufficient\") for the thesis to be passed. If the overall grade does not meet this requirement, it will be graded as \"insufficient\" (0 points).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1404,9 +1404,9 @@
         "faq-stpo-stpo-0482"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.0,
-      "correctness": 0.25
+      "faithfulness": 1.0,
+      "answer_relevance": 0.5002052961288245,
+      "correctness": 0.22
     },
     {
       "question_id": "eval-045",
@@ -1417,7 +1417,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not contain sufficient information to answer this question.",
       "confidence": 0.954868501469251,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0342",
@@ -1437,7 +1437,7 @@
       "reference_answer": "Yes. You can import modules like Efficient Algorithms or Machine Learning from B.Sc. Data Science (Appendix 3), and certain M.Sc. CS modules like those listed in Appendix 4 can be exported to other programs.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can import the modules \"Efficient Algorithms\" and \"Machine Learning\" from B.Sc. Data Science as compulsory elective CS modules.\n\nImport modules for compulsory elective CS come from several degree programs, including B.Sc. Data Science.\n\nThe current import opportunities are always published on the program website of the department offering the module as an export option. \n\nYou can import a module from B.Sc. Data Science but it is not specified if you can also export a module to that program.",
+      "answer": "According to [2], Efficient Algorithms (9 LP, T) and Machine Learning (9 LP, P) can be imported as compulsory elective CS modules from B.Sc. Data Science.\n\nTo answer your question about importing and exporting modules: ABSTENTION: The context does not contain sufficient information to fully answer the question.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1450,9 +1450,9 @@
         "faq-stpo-stpo-0945"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": 0.38748808520473427,
-      "correctness": 0.29
+      "faithfulness": 0.6666666666666666,
+      "answer_relevance": 0.0,
+      "correctness": 0.8
     },
     {
       "question_id": "eval-047",
@@ -1463,7 +1463,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context passages do not address the impact of parental leave on the maximum study duration and thesis deadline.",
+      "abstention_reason": "The provided context passages do not address the impact of parental leave on maximum study duration and thesis deadlines.",
       "confidence": 0.9510407439830119,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0383",
@@ -1483,7 +1483,7 @@
       "reference_answer": "The module list in Appendix 2 defines the formal module parameters (LP, prerequisites, exam form). The module handbook (§20) provides additional details like content, learning methods, and literature, and is published online.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The module handbook contains more detailed descriptions of the modules, whereas the module list (Appendix 2) provides a concise overview of the modules. The module list is part of the StPO.",
+      "answer": "The module list in Appendix 2 is part of the StPO, while the module handbook contains more detailed descriptions and is published separately on the program website.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1497,8 +1497,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 1.0,
-      "answer_relevance": 0.7747768371692684,
-      "correctness": 0.33
+      "answer_relevance": 0.8435485700287012,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-049",
@@ -1621,7 +1621,7 @@
       "reference_answer": "Yes. §30(3) explicitly permits the one-time change of up to two definitively failed compulsory elective modules. This means that if you have exhausted all repeat attempts for a compulsory elective module, you can switch to a different module instead of losing your examination rights, but this option is limited to two modules total.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Yes. The one-time change of up to two definitively failed compulsory elective modules is permitted.",
+      "answer": "Yes. According to passage [2], the one-time change of up to two definitively failed compulsory elective modules is permitted.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1635,7 +1635,7 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.6614997729078883,
+      "answer_relevance": 0.6518039928765265,
       "correctness": 0.5
     },
     {
@@ -1667,10 +1667,10 @@
       "reference_answer": "Regular exams require registration via the standard process (§24) with specific deadlines. The thesis defense is scheduled individually after thesis submission and does not follow the regular exam registration period.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The provided context passages do not contain sufficient information to fully answer this question, as they only address general examination-related provisions, master's thesis requirements, and procedures for requesting inspection of exam papers.",
+      "answer": "The exam registration rules are the same for both regular exams and the thesis defense. According to §24(4), binding registration is required for participation in an examination, and the examination committee will announce the deadlines and the form of registration in an appropriate manner no later than 4 weeks before the start of the registration period. This applies to all types of examinations, including the thesis defense.\n\nNote that the thesis defense has its own specific rules regarding proposal of advisers and reviewers (§23(5)), but this does not affect the exam registration process.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.962361238578244,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0400",
@@ -1680,9 +1680,9 @@
         "faq-stpo-stpo-0533"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 0.5,
+      "answer_relevance": 0.7411115650336991,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-057",
@@ -1713,7 +1713,7 @@
       "reference_answer": "For the exam, you must submit a medical certificate and can withdraw (§27). For the thesis, you can apply for a deadline extension of up to 20% of the processing time (§23). If the illness is prolonged, the examination committee can grant further extensions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can return the thesis topic and get a new one only if you did not make use of this option when writing the master's thesis for the first time. \n\nIf you are sick on the exam day, you must notify in writing without delay and submit a medical certificate. If accepted, the absence is excused and previous results are preserved.\n\nThe rules regarding sickness during the thesis writing period and an exam in the same semester are not explicitly mentioned in the provided context passages.",
+      "answer": "If you get sick during the thesis writing period and also have to take an exam in the same semester, the rule about notifying in writing without delay and submitting a medical certificate (as stated in [5]) applies. This is because this rule does not specify any restrictions on its applicability based on whether it's related to the thesis or an exam.\n\nHowever, if you are unable to complete your thesis due to illness, you should check with the examination committee about possible extensions of the thesis writing-time (up to 20% as stated in [2]).",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1726,9 +1726,9 @@
         "faq-stpo-stpo-0443"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 1.0,
-      "answer_relevance": 0.0,
-      "correctness": 0.29
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.8271633788918433,
+      "correctness": 0.0
     },
     {
       "question_id": "eval-059",
@@ -1762,7 +1762,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer the question about which specific modules from B.Sc. Computer Science can be imported as compulsory elective CS modules.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.9733341202324141,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0934",
@@ -1782,7 +1782,7 @@
       "reference_answer": "Yes. §38 contains transitional provisions. Students who started under a previous StPO may switch to the current regulations or continue under the old ones, subject to specific conditions defined in the transitional provisions.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "Yes, students who began before these Degree Program and Examination Regulations came into force may take the master's examination in accordance with the examination regulations of 28 October 2015, including their amended versions of 1 June 2016 and 25 October 2017, until summer semester of 2027 at the latest.",
+      "answer": "Yes, students who began before these Degree Program and Examination Regulations came into force may take the master's examination in accordance with the examination regulations of 28 October 2015, including their amended versions of 1 June 2016 and 25 October 2017, until summer semester of 2027 at the latest. The examination committee may issue rules for this transition period that favor a voluntary switch to these Degree Program and Examination Regulations.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1795,8 +1795,8 @@
         "faq-stpo-stpo-0544"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.75,
-      "answer_relevance": 0.2179175370036812,
+      "faithfulness": 0.3333333333333333,
+      "answer_relevance": 0.29564203424621033,
       "correctness": 0.0
     },
     {
@@ -1805,10 +1805,10 @@
       "reference_answer": "The practical module (CS 697, 12 LP) is a compulsory CS module focused on project work and teamwork. Profile modules (12 LP if chosen) come from other disciplines and are imported from Appendix 3 to broaden the student's interdisciplinary knowledge. The profile area is optional.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "",
-      "abstained": true,
-      "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to fully answer the question.",
+      "answer": "The practical module is part of the Practical and Seminar Modules area, whereas Profile Area Modules are a separate optional study area for import modules from another scientific discipline.",
+      "abstained": false,
+      "abstention_level": null,
+      "abstention_reason": "",
       "confidence": 0.9537724313459001,
       "retrieval_chunk_ids": [
         "appendix-2-tbl-appendix-2-tbl-1-21",
@@ -1818,9 +1818,9 @@
         "faq-stpo-stpo-0265"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": NaN,
-      "answer_relevance": NaN,
-      "correctness": NaN
+      "faithfulness": 1.0,
+      "answer_relevance": 0.3804382373804476,
+      "correctness": 0.33
     },
     {
       "question_id": "eval-063",
@@ -1851,7 +1851,7 @@
       "reference_answer": "§4(1) requires proof of a relevant bachelor's degree or comparable domestic or foreign university degree. For foreign degrees, the examination committee assesses equivalence in terms of content and scope. If equivalence is not fully established, conditional admission with additional modules (Auflagenmodule) of up to 30 credits may be imposed (§4(2)). The StPO does not mention official translations or the International Office.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You need to provide proof of completion of a relevant bachelor's degree program in computer science or a comparable domestic or foreign university degree providing professional qualifications (§4 Access requirements). The examination committee may also decide on the comparability of your foreign degree (§16).",
+      "answer": "You need to provide proof of completion of a relevant bachelor's degree program in computer science or a comparable domestic or foreign university degree providing professional qualifications (§4 Access requirements). The examination committee may also request additional information about your degree.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1874,7 +1874,7 @@
       "reference_answer": "§6 defines the formal program structure (module areas, credit requirements). Appendix 1 provides a recommended semester-by-semester plan that implements this structure. Following Appendix 1 is recommended but not mandatory.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The degree program curriculum in Appendix 1 contains an example sequence of the modularized program, which corresponds to the description of the program structure in §6.",
+      "answer": "The degree program curriculum in Appendix 1 contains an example sequence of the modularized program, which corresponds to the information given in §6 Degree programs: structure, contents, curriculum and information.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1888,8 +1888,8 @@
       ],
       "model": "llama3.1:latest",
       "faithfulness": 0.5,
-      "answer_relevance": 0.5331553792996372,
-      "correctness": 0.0
+      "answer_relevance": 0.5701980780627568,
+      "correctness": 0.5
     },
     {
       "question_id": "eval-066",
@@ -1920,7 +1920,7 @@
       "reference_answer": "The candidate proposes an adviser and a first reviewer authorized as examiner. The candidate also has the right to propose the second reviewer (§23(5)). The first reviewer must be appointed by the examination committee. The adviser and first reviewer may be the same person. The StPO does not require that the first examiner be a professor, nor does it specify that the final grade is the average of both reviewers' grades.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "The first reviewer (proposed by the candidate) must be appointed by the examination committee for the examination of master's theses. The topic of the master's thesis is submitted to the examination committee by the first reviewer and assigned by the examination committee.\n\nAs for the second reviewer, the candidate has the right to propose them, but it is not specified what role they play in the evaluation process.",
+      "answer": "The first reviewer proposed by the candidate must be appointed by the examination committee for the examination of master's theses. The topic of the master's thesis is submitted to the examination committee by the first reviewer and assigned by the examination committee.\n\nThe second reviewer can also be proposed by the candidate, but this proposal does not establish an entitlement; the second reviewer is not mentioned as having any specific role in the evaluation process.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -1933,9 +1933,9 @@
         "faq-stpo-stpo-0329"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.4085413349739044,
-      "correctness": 0.44
+      "faithfulness": 0.75,
+      "answer_relevance": 0.7186382973884063,
+      "correctness": 0.36
     },
     {
       "question_id": "eval-068",
@@ -1989,7 +1989,7 @@
       "reference_answer": "For Profile Area Economics (Volkswirtschaftslehre), the import modules come from B.Sc. Economics as listed in Appendix 3. The specific available modules are defined there. The StPO does not prescribe specific CS module pairings with economics imports. Students choose their CS compulsory elective modules independently from the list in §6(2)/Appendix 2.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can use import modules with content or methodological relevance to CS for the Compulsory Elective Modules area (0-66 credits possible). \n\nThe required CS modules for admission with at least 36 credits are: Algorithms and data structures, declarative programming, object-oriented programming, and systems software and computer communications.\n\nFor combining CS with economics, you should check the website of the degree program or the online module handbook linked there to see which import opportunities and possible allocation regulations and restrictions apply.",
+      "answer": "Based on the provided information, you can use import modules for the Compulsory Elective Modules area in Computer Science (0-66 credits possible). \n\nTo combine CS with Economics, you should check the website of the department offering the module as an export option. They will have specific information and advising offerings regarding combination rules, prerequisites, and recommendations for participation.\n\nThe required CS modules for admission with at least 36 credits are Algorithms and data structures, declarative programming, object-oriented programming, and systems software and computer communications.\n\nIf a module you want is full, placements are allocated according to §13, which includes priority groups and lottery-based selection.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -2002,8 +2002,8 @@
         "faq-stpo-stpo-0052"
       ],
       "model": "llama3.1:latest",
-      "faithfulness": 0.6666666666666666,
-      "answer_relevance": 0.6176130035973159,
+      "faithfulness": NaN,
+      "answer_relevance": 0.5672897240271556,
       "correctness": 0.0
     },
     {
@@ -2038,7 +2038,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "Insufficient information in provided context.",
+      "abstention_reason": "The context does not contain sufficient information to fully answer the question.",
       "confidence": 0.9505489209653107,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0400",
@@ -2104,7 +2104,7 @@
       "reference_answer": "Under the transitional provisions (§38), grades from modules completed under the old StPO are generally transferred. The examination committee determines which completed modules are equivalent under the new regulations.",
       "category": "multi-source",
       "expected_abstention": false,
-      "answer": "You can switch to the new regulations. If you do, your grades will be recalculated according to the new regulations.\n\nHowever, it's not clear what exactly this means for your specific situation. The context only mentions that the examination committee may issue rules for the transition period and that the switch must be applied for in writing. It does not provide further information on how grades would be affected by a switch from the old to the new regulations.",
+      "answer": "You can switch to the new regulations. If you do so, your grades will be recalculated according to the new regulations.\n\nHowever, it's not clear what exactly this means for your grades. The context only mentions that you may switch, but does not provide further information on how your grades would be affected by such a switch.",
       "abstained": false,
       "abstention_level": null,
       "abstention_reason": "",
@@ -2291,7 +2291,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not specify semester-specific deadlines for completing individual modules.",
       "confidence": 0.9502564066174282,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0407",
@@ -2498,7 +2498,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The context does not address switching between degree programs.",
       "confidence": 0.9559909667981892,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0935",
@@ -2659,7 +2659,7 @@
       "answer": "",
       "abstained": true,
       "abstention_level": 2,
-      "abstention_reason": "The context does not contain sufficient information to answer this question.",
+      "abstention_reason": "The provided context does not contain sufficient information to answer this question.",
       "confidence": 0.955157288491619,
       "retrieval_chunk_ids": [
         "faq-stpo-stpo-0398",
